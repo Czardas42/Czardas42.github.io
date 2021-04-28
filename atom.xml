@@ -1,0 +1,1367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://Czardas42.github.io/</id>
+    <title>Czardas</title>
+    <updated>2021-04-28T13:02:57.839Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://Czardas42.github.io/"/>
+    <link rel="self" href="https://Czardas42.github.io/atom.xml"/>
+    <subtitle>Think Different</subtitle>
+    <logo>https://Czardas42.github.io/images/avatar.png</logo>
+    <icon>https://Czardas42.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2021, Czardas</rights>
+    <entry>
+        <title type="html"><![CDATA[2021.04.27：K8s 性能测试]]></title>
+        <id>https://Czardas42.github.io/post/20210427_ks8_openfaas_test/</id>
+        <link href="https://Czardas42.github.io/post/20210427_ks8_openfaas_test/">
+        </link>
+        <updated>2021-04-27T12:50:07.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1-分布式负载测试web测试应用的pod负载变化">1. 分布式负载测试：web测试应用的pod负载变化</h2>
+<p><strong>准备</strong></p>
+<h3 id="a-部署web应用">a. 部署Web应用</h3>
+<h3 id="b-部署locust测试工具">b. 部署Locust（测试工具）</h3>
+<h3 id="c-配置traefik监控-可用prometheus">c. 配置Traefik（监控） 可用Prometheus</h3>
+<p></br></br><br>
+<strong>测试方法</strong><br>
+打开<a href="http://traefik.locust.io">http://traefik.locust.io</a>页面，点击Edit输入伪造的用户数和用户每秒发送的请求个数，点击Start Swarming就可以开始测试了。</p>
+<p>在测试过程中调整sample-webapp的pod个数（默认设置了1个pod），观察pod的负载变化情况。<br>
+从一段时间的观察中可以看到负载被平均分配给了3个pod.<br>
+在locust的页面中可以实时观察也可以下载测试结果。</p>
+<p></br></br><br>
+<strong>【参考】</strong><br>
+<a href="https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/distributed-load-test.html">https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/distributed-load-test.html</a><br>
+</br></br></p>
+<h2 id="2-网络延迟测试通过不同方式访问web测试应用">2. 网络延迟测试：通过不同方式访问web测试应用</h2>
+<p><strong>测试场景</strong><br>
+场景一、 Kubernetes集群node节点上通过Cluster IP访问sample-webapp<br>
+场景二、Kubernetes集群内部通过service访问sample-webapp<br>
+场景三、在公网上通过traefik ingress访问sample-webapp<br>
+</br></br><br>
+<strong>测试结果</strong><br>
+在这三种场景下的响应时间测试结果如下：<br>
+Kubernetes集群node节点上通过Cluster IP方式访问：2ms<br>
+Kubernetes集群内部通过service访问：6ms<br>
+Kubernetes集群外部通过traefik ingress暴露的地址访问：110ms<br>
+注意：执行测试的node节点/Pod与serivce所在的pod的距离（是否在同一台主机上），对前两个场景可以能会有一定影响。<br>
+</br></br><br>
+<strong>【参考】</strong><br>
+<a href="https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html">https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html</a><br>
+</br></br></p>
+<h2 id="3-网络性能测试暂时不考虑">3. 网络性能测试(暂时不考虑)</h2>
+<p>网络使用flannel的vxlan模式。<br>
+使用iperf进行测试。</p>
+<p>使用Flannel的vxlan模式实现每个pod一个IP的方式，会比宿主机直接互联的网络性能损耗30%～40%，符合网上流传的测试结论。而flannel的host-gw模式比起宿主机互连的网络性能损耗大约是10%。</p>
+<p>Vxlan会有一个封包解包的过程，所以会对网络性能造成较大的损耗，而host-gw模式是直接使用路由信息，网络损耗小。<br>
+<strong>【参考】</strong><br>
+<a href="https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html">https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html</a><br>
+</br></br></p>
+<h2 id="4-不同type的资源类型api请求耗时分布测试暂时不考虑">4. 不同type的资源类型API请求耗时分布测试(暂时不考虑)</h2>
+</br>
+**【参考】**
+<https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html>
+<https://supereagle.github.io/2017/03/09/kubemark/>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[2021.04.27：Grafana监控平台部署（对于K8s集群各节点）]]></title>
+        <id>https://Czardas42.github.io/post/20210427_grafana/</id>
+        <link href="https://Czardas42.github.io/post/20210427_grafana/">
+        </link>
+        <updated>2021-04-27T03:26:39.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>监控内容：各节点CPU使用率、磁盘、内存、磁盘IO读写、网络IO速率</strong><br>
+</br></br><br>
+<strong>监控平台截图：</strong><br>
+<img src="https://Czardas42.github.io//post-images/1619580572559.jpg" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="1"><img src="https://Czardas42.github.io//post-images/1619580593621.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://Czardas42.github.io//post-images/1619580606902.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://Czardas42.github.io//post-images/1619580616167.jpg" alt="" loading="lazy"></figure>
+<p><img src="https://Czardas42.github.io//post-images/1619580630042.jpg" alt="" loading="lazy"><br>
+</br></br><br>
+<strong>对应JSON文件如下：</strong></p>
+<pre><code>{
+  &quot;__inputs&quot;: [
+    {
+      &quot;name&quot;: &quot;DS_FAAS&quot;,
+      &quot;label&quot;: &quot;faas&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;datasource&quot;,
+      &quot;pluginId&quot;: &quot;prometheus&quot;,
+      &quot;pluginName&quot;: &quot;Prometheus&quot;
+    }
+  ],
+  &quot;__requires&quot;: [
+    {
+      &quot;type&quot;: &quot;grafana&quot;,
+      &quot;id&quot;: &quot;grafana&quot;,
+      &quot;name&quot;: &quot;Grafana&quot;,
+      &quot;version&quot;: &quot;4.6.3&quot;
+    },
+    {
+      &quot;type&quot;: &quot;panel&quot;,
+      &quot;id&quot;: &quot;graph&quot;,
+      &quot;name&quot;: &quot;Graph&quot;,
+      &quot;version&quot;: &quot;&quot;
+    },
+    {
+      &quot;type&quot;: &quot;datasource&quot;,
+      &quot;id&quot;: &quot;prometheus&quot;,
+      &quot;name&quot;: &quot;Prometheus&quot;,
+      &quot;version&quot;: &quot;1.0.0&quot;
+    }
+  ],
+  &quot;annotations&quot;: {
+    &quot;list&quot;: [
+      {
+        &quot;builtIn&quot;: 1,
+        &quot;datasource&quot;: &quot;-- Grafana --&quot;,
+        &quot;enable&quot;: true,
+        &quot;hide&quot;: true,
+        &quot;iconColor&quot;: &quot;rgba(0, 211, 255, 1)&quot;,
+        &quot;name&quot;: &quot;Annotations &amp; Alerts&quot;,
+        &quot;type&quot;: &quot;dashboard&quot;
+      }
+    ]
+  },
+  &quot;editable&quot;: true,
+  &quot;gnetId&quot;: null,
+  &quot;graphTooltip&quot;: 0,
+  &quot;hideControls&quot;: false,
+  &quot;id&quot;: null,
+  &quot;links&quot;: [],
+  &quot;rows&quot;: [
+    {
+      &quot;collapse&quot;: false,
+      &quot;height&quot;: &quot;250px&quot;,
+      &quot;panels&quot;: [
+        {
+          &quot;aliasColors&quot;: {},
+          &quot;bars&quot;: true,
+          &quot;dashLength&quot;: 10,
+          &quot;dashes&quot;: false,
+          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
+          &quot;fill&quot;: 1,
+          &quot;id&quot;: 11,
+          &quot;legend&quot;: {
+            &quot;alignAsTable&quot;: true,
+            &quot;avg&quot;: false,
+            &quot;current&quot;: false,
+            &quot;max&quot;: false,
+            &quot;min&quot;: false,
+            &quot;show&quot;: true,
+            &quot;total&quot;: false,
+            &quot;values&quot;: false
+          },
+          &quot;lines&quot;: true,
+          &quot;linewidth&quot;: 1,
+          &quot;links&quot;: [],
+          &quot;nullPointMode&quot;: &quot;null&quot;,
+          &quot;percentage&quot;: false,
+          &quot;pointradius&quot;: 5,
+          &quot;points&quot;: false,
+          &quot;renderer&quot;: &quot;flot&quot;,
+          &quot;seriesOverrides&quot;: [],
+          &quot;spaceLength&quot;: 10,
+          &quot;span&quot;: 4,
+          &quot;stack&quot;: false,
+          &quot;steppedLine&quot;: false,
+          &quot;targets&quot;: [
+            {
+              &quot;expr&quot;: &quot;100 - (avg by(instance) (irate(node_cpu_seconds_total{mode=\&quot;idle\&quot;, job=\&quot;master_node_exporter_metrics\&quot;}[5m])) * 100) &quot;,
+              &quot;format&quot;: &quot;time_series&quot;,
+              &quot;intervalFactor&quot;: 2,
+              &quot;refId&quot;: &quot;A&quot;
+            }
+          ],
+          &quot;thresholds&quot;: [],
+          &quot;timeFrom&quot;: &quot;1h&quot;,
+          &quot;timeShift&quot;: null,
+          &quot;title&quot;: &quot;Master CPU使用率&quot;,
+          &quot;tooltip&quot;: {
+            &quot;shared&quot;: true,
+            &quot;sort&quot;: 0,
+            &quot;value_type&quot;: &quot;individual&quot;
+          },
+          &quot;type&quot;: &quot;graph&quot;,
+          &quot;xaxis&quot;: {
+            &quot;buckets&quot;: null,
+            &quot;mode&quot;: &quot;time&quot;,
+            &quot;name&quot;: null,
+            &quot;show&quot;: true,
+            &quot;values&quot;: []
+          },
+          &quot;yaxes&quot;: [
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            },
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            }
+          ]
+        },
+        {
+          &quot;aliasColors&quot;: {},
+          &quot;bars&quot;: true,
+          &quot;dashLength&quot;: 10,
+          &quot;dashes&quot;: false,
+          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
+          &quot;fill&quot;: 1,
+          &quot;id&quot;: 13,
+          &quot;legend&quot;: {
+            &quot;alignAsTable&quot;: true,
+            &quot;avg&quot;: false,
+            &quot;current&quot;: false,
+            &quot;max&quot;: false,
+            &quot;min&quot;: false,
+            &quot;show&quot;: true,
+            &quot;total&quot;: false,
+            &quot;values&quot;: false
+          },
+          &quot;lines&quot;: true,
+          &quot;linewidth&quot;: 1,
+          &quot;links&quot;: [],
+          &quot;nullPointMode&quot;: &quot;null&quot;,
+          &quot;percentage&quot;: false,
+          &quot;pointradius&quot;: 5,
+          &quot;points&quot;: false,
+          &quot;renderer&quot;: &quot;flot&quot;,
+          &quot;seriesOverrides&quot;: [],
+          &quot;spaceLength&quot;: 10,
+          &quot;span&quot;: 4,
+          &quot;stack&quot;: false,
+          &quot;steppedLine&quot;: false,
+          &quot;targets&quot;: [
+            {
+              &quot;expr&quot;: &quot;100 - (avg by(instance) (irate(node_cpu_seconds_total{mode=\&quot;idle\&quot;, job=\&quot;slave-0001_node_exporter_metrics\&quot;}[5m])) * 100) &quot;,
+              &quot;format&quot;: &quot;time_series&quot;,
+              &quot;intervalFactor&quot;: 2,
+              &quot;refId&quot;: &quot;A&quot;
+            }
+          ],
+          &quot;thresholds&quot;: [],
+          &quot;timeFrom&quot;: &quot;1h&quot;,
+          &quot;timeShift&quot;: null,
+          &quot;title&quot;: &quot;Slave-0001 CPU使用率&quot;,
+          &quot;tooltip&quot;: {
+            &quot;shared&quot;: true,
+            &quot;sort&quot;: 0,
+            &quot;value_type&quot;: &quot;individual&quot;
+          },
+          &quot;type&quot;: &quot;graph&quot;,
+          &quot;xaxis&quot;: {
+            &quot;buckets&quot;: null,
+            &quot;mode&quot;: &quot;time&quot;,
+            &quot;name&quot;: null,
+            &quot;show&quot;: true,
+            &quot;values&quot;: []
+          },
+          &quot;yaxes&quot;: [
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            },
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            }
+          ]
+        },
+        {
+          &quot;aliasColors&quot;: {},
+          &quot;bars&quot;: true,
+          &quot;dashLength&quot;: 10,
+          &quot;dashes&quot;: false,
+          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
+          &quot;fill&quot;: 1,
+          &quot;id&quot;: 14,
+          &quot;legend&quot;: {
+            &quot;alignAsTable&quot;: true,
+            &quot;avg&quot;: false,
+            &quot;current&quot;: false,
+            &quot;max&quot;: false,
+            &quot;min&quot;: false,
+            &quot;show&quot;: true,
+            &quot;total&quot;: false,
+            &quot;values&quot;: false
+          },
+          &quot;lines&quot;: true,
+          &quot;linewidth&quot;: 1,
+          &quot;links&quot;: [],
+          &quot;nullPointMode&quot;: &quot;null&quot;,
+          &quot;percentage&quot;: false,
+          &quot;pointradius&quot;: 5,
+          &quot;points&quot;: false,
+          &quot;renderer&quot;: &quot;flot&quot;,
+          &quot;seriesOverrides&quot;: [],
+          &quot;spaceLength&quot;: 10,
+          &quot;span&quot;: 4,
+          &quot;stack&quot;: false,
+          &quot;steppedLine&quot;: false,
+          &quot;targets&quot;: [
+            {
+              &quot;expr&quot;: &quot;100 - (avg by(instance) (irate(node_cpu_seconds_total{mode=\&quot;idle\&quot;, job=\&quot;slave-0002_node_exporter_metrics\&quot;}[5m])) * 100) &quot;,
+              &quot;format&quot;: &quot;time_series&quot;,
+              &quot;intervalFactor&quot;: 2,
+              &quot;refId&quot;: &quot;A&quot;
+            }
+          ],
+          &quot;thresholds&quot;: [],
+          &quot;timeFrom&quot;: &quot;1h&quot;,
+          &quot;timeShift&quot;: null,
+          &quot;title&quot;: &quot;Slave-0002 CPU使用率&quot;,
+          &quot;tooltip&quot;: {
+            &quot;shared&quot;: true,
+            &quot;sort&quot;: 0,
+            &quot;value_type&quot;: &quot;individual&quot;
+          },
+          &quot;type&quot;: &quot;graph&quot;,
+          &quot;xaxis&quot;: {
+            &quot;buckets&quot;: null,
+            &quot;mode&quot;: &quot;time&quot;,
+            &quot;name&quot;: null,
+            &quot;show&quot;: true,
+            &quot;values&quot;: []
+          },
+          &quot;yaxes&quot;: [
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            },
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            }
+          ]
+        }
+      ],
+      &quot;repeat&quot;: null,
+      &quot;repeatIteration&quot;: null,
+      &quot;repeatRowId&quot;: null,
+      &quot;showTitle&quot;: false,
+      &quot;title&quot;: &quot;Dashboard Row&quot;,
+      &quot;titleSize&quot;: &quot;h6&quot;
+    },
+    {
+      &quot;collapse&quot;: false,
+      &quot;height&quot;: 250,
+      &quot;panels&quot;: [
+        {
+          &quot;aliasColors&quot;: {},
+          &quot;bars&quot;: false,
+          &quot;dashLength&quot;: 10,
+          &quot;dashes&quot;: false,
+          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
+          &quot;fill&quot;: 1,
+          &quot;id&quot;: 2,
+          &quot;legend&quot;: {
+            &quot;alignAsTable&quot;: true,
+            &quot;avg&quot;: false,
+            &quot;current&quot;: false,
+            &quot;max&quot;: false,
+            &quot;min&quot;: false,
+            &quot;show&quot;: true,
+            &quot;total&quot;: false,
+            &quot;values&quot;: false
+          },
+          &quot;lines&quot;: true,
+          &quot;linewidth&quot;: 1,
+          &quot;links&quot;: [],
+          &quot;nullPointMode&quot;: &quot;null&quot;,
+          &quot;percentage&quot;: false,
+          &quot;pointradius&quot;: 5,
+          &quot;points&quot;: false,
+          &quot;renderer&quot;: &quot;flot&quot;,
+          &quot;seriesOverrides&quot;: [],
+          &quot;spaceLength&quot;: 10,
+          &quot;span&quot;: 6,
+          &quot;stack&quot;: false,
+          &quot;steppedLine&quot;: false,
+          &quot;targets&quot;: [
+            {
+              &quot;expr&quot;: &quot;(node_filesystem_size_bytes{fstype=~\&quot;xfs|ext4\&quot;} - node_filesystem_free_bytes) / node_filesystem_size_bytes&quot;,
+              &quot;format&quot;: &quot;time_series&quot;,
+              &quot;intervalFactor&quot;: 2,
+              &quot;refId&quot;: &quot;A&quot;
+            }
+          ],
+          &quot;thresholds&quot;: [],
+          &quot;timeFrom&quot;: &quot;1h&quot;,
+          &quot;timeShift&quot;: null,
+          &quot;title&quot;: &quot;各节点磁盘使用率&quot;,
+          &quot;tooltip&quot;: {
+            &quot;shared&quot;: true,
+            &quot;sort&quot;: 0,
+            &quot;value_type&quot;: &quot;individual&quot;
+          },
+          &quot;transparent&quot;: false,
+          &quot;type&quot;: &quot;graph&quot;,
+          &quot;xaxis&quot;: {
+            &quot;buckets&quot;: null,
+            &quot;mode&quot;: &quot;time&quot;,
+            &quot;name&quot;: null,
+            &quot;show&quot;: true,
+            &quot;values&quot;: []
+          },
+          &quot;yaxes&quot;: [
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            },
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            }
+          ]
+        },
+        {
+          &quot;aliasColors&quot;: {},
+          &quot;bars&quot;: false,
+          &quot;dashLength&quot;: 10,
+          &quot;dashes&quot;: false,
+          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
+          &quot;fill&quot;: 1,
+          &quot;hideTimeOverride&quot;: false,
+          &quot;id&quot;: 1,
+          &quot;legend&quot;: {
+            &quot;alignAsTable&quot;: true,
+            &quot;avg&quot;: false,
+            &quot;current&quot;: false,
+            &quot;max&quot;: false,
+            &quot;min&quot;: false,
+            &quot;rightSide&quot;: false,
+            &quot;show&quot;: true,
+            &quot;total&quot;: false,
+            &quot;values&quot;: false
+          },
+          &quot;lines&quot;: true,
+          &quot;linewidth&quot;: 1,
+          &quot;links&quot;: [],
+          &quot;nullPointMode&quot;: &quot;null&quot;,
+          &quot;percentage&quot;: false,
+          &quot;pointradius&quot;: 5,
+          &quot;points&quot;: false,
+          &quot;renderer&quot;: &quot;flot&quot;,
+          &quot;seriesOverrides&quot;: [],
+          &quot;spaceLength&quot;: 10,
+          &quot;span&quot;: 6,
+          &quot;stack&quot;: false,
+          &quot;steppedLine&quot;: false,
+          &quot;targets&quot;: [
+            {
+              &quot;expr&quot;: &quot;(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes&quot;,
+              &quot;format&quot;: &quot;time_series&quot;,
+              &quot;intervalFactor&quot;: 2,
+              &quot;refId&quot;: &quot;A&quot;
+            }
+          ],
+          &quot;thresholds&quot;: [],
+          &quot;timeFrom&quot;: &quot;1h&quot;,
+          &quot;timeShift&quot;: null,
+          &quot;title&quot;: &quot;各节点内存使用率&quot;,
+          &quot;tooltip&quot;: {
+            &quot;shared&quot;: true,
+            &quot;sort&quot;: 0,
+            &quot;value_type&quot;: &quot;individual&quot;
+          },
+          &quot;type&quot;: &quot;graph&quot;,
+          &quot;xaxis&quot;: {
+            &quot;buckets&quot;: null,
+            &quot;mode&quot;: &quot;time&quot;,
+            &quot;name&quot;: null,
+            &quot;show&quot;: true,
+            &quot;values&quot;: []
+          },
+          &quot;yaxes&quot;: [
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            },
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            }
+          ]
+        }
+      ],
+      &quot;repeat&quot;: null,
+      &quot;repeatIteration&quot;: null,
+      &quot;repeatRowId&quot;: null,
+      &quot;showTitle&quot;: false,
+      &quot;title&quot;: &quot;Dashboard Row&quot;,
+      &quot;titleSize&quot;: &quot;h6&quot;
+    },
+    {
+      &quot;collapse&quot;: false,
+      &quot;height&quot;: 278,
+      &quot;panels&quot;: [
+        {
+          &quot;aliasColors&quot;: {},
+          &quot;bars&quot;: false,
+          &quot;dashLength&quot;: 10,
+          &quot;dashes&quot;: false,
+          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
+          &quot;fill&quot;: 1,
+          &quot;id&quot;: 4,
+          &quot;legend&quot;: {
+            &quot;alignAsTable&quot;: true,
+            &quot;avg&quot;: false,
+            &quot;current&quot;: false,
+            &quot;max&quot;: false,
+            &quot;min&quot;: false,
+            &quot;show&quot;: true,
+            &quot;total&quot;: false,
+            &quot;values&quot;: false
+          },
+          &quot;lines&quot;: true,
+          &quot;linewidth&quot;: 2,
+          &quot;links&quot;: [],
+          &quot;nullPointMode&quot;: &quot;null&quot;,
+          &quot;percentage&quot;: false,
+          &quot;pointradius&quot;: 5,
+          &quot;points&quot;: false,
+          &quot;renderer&quot;: &quot;flot&quot;,
+          &quot;seriesOverrides&quot;: [],
+          &quot;spaceLength&quot;: 10,
+          &quot;span&quot;: 6,
+          &quot;stack&quot;: false,
+          &quot;steppedLine&quot;: false,
+          &quot;targets&quot;: [
+            {
+              &quot;expr&quot;: &quot;irate(node_disk_read_bytes_total{}[5m]) / 1024 / 1024&quot;,
+              &quot;format&quot;: &quot;time_series&quot;,
+              &quot;intervalFactor&quot;: 2,
+              &quot;refId&quot;: &quot;A&quot;
+            }
+          ],
+          &quot;thresholds&quot;: [],
+          &quot;timeFrom&quot;: &quot;1h&quot;,
+          &quot;timeShift&quot;: null,
+          &quot;title&quot;: &quot;各节点磁盘IO读速率(MiB/s)&quot;,
+          &quot;tooltip&quot;: {
+            &quot;shared&quot;: true,
+            &quot;sort&quot;: 0,
+            &quot;value_type&quot;: &quot;individual&quot;
+          },
+          &quot;type&quot;: &quot;graph&quot;,
+          &quot;xaxis&quot;: {
+            &quot;buckets&quot;: null,
+            &quot;mode&quot;: &quot;time&quot;,
+            &quot;name&quot;: null,
+            &quot;show&quot;: true,
+            &quot;values&quot;: []
+          },
+          &quot;yaxes&quot;: [
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            },
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            }
+          ]
+        },
+        {
+          &quot;aliasColors&quot;: {},
+          &quot;bars&quot;: false,
+          &quot;dashLength&quot;: 10,
+          &quot;dashes&quot;: false,
+          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
+          &quot;fill&quot;: 1,
+          &quot;id&quot;: 3,
+          &quot;legend&quot;: {
+            &quot;alignAsTable&quot;: true,
+            &quot;avg&quot;: false,
+            &quot;current&quot;: false,
+            &quot;max&quot;: false,
+            &quot;min&quot;: false,
+            &quot;show&quot;: true,
+            &quot;total&quot;: false,
+            &quot;values&quot;: false
+          },
+          &quot;lines&quot;: true,
+          &quot;linewidth&quot;: 1,
+          &quot;links&quot;: [],
+          &quot;nullPointMode&quot;: &quot;null&quot;,
+          &quot;percentage&quot;: false,
+          &quot;pointradius&quot;: 5,
+          &quot;points&quot;: false,
+          &quot;renderer&quot;: &quot;flot&quot;,
+          &quot;seriesOverrides&quot;: [],
+          &quot;spaceLength&quot;: 10,
+          &quot;span&quot;: 6,
+          &quot;stack&quot;: false,
+          &quot;steppedLine&quot;: false,
+          &quot;targets&quot;: [
+            {
+              &quot;expr&quot;: &quot;irate(node_disk_written_bytes_total{}[5m]) / 1024 / 1024&quot;,
+              &quot;format&quot;: &quot;time_series&quot;,
+              &quot;intervalFactor&quot;: 2,
+              &quot;refId&quot;: &quot;A&quot;
+            }
+          ],
+          &quot;thresholds&quot;: [],
+          &quot;timeFrom&quot;: &quot;1h&quot;,
+          &quot;timeShift&quot;: null,
+          &quot;title&quot;: &quot;各节点磁盘IO写速率(MiB/s)&quot;,
+          &quot;tooltip&quot;: {
+            &quot;shared&quot;: true,
+            &quot;sort&quot;: 0,
+            &quot;value_type&quot;: &quot;individual&quot;
+          },
+          &quot;type&quot;: &quot;graph&quot;,
+          &quot;xaxis&quot;: {
+            &quot;buckets&quot;: null,
+            &quot;mode&quot;: &quot;time&quot;,
+            &quot;name&quot;: null,
+            &quot;show&quot;: true,
+            &quot;values&quot;: []
+          },
+          &quot;yaxes&quot;: [
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            },
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            }
+          ]
+        }
+      ],
+      &quot;repeat&quot;: null,
+      &quot;repeatIteration&quot;: null,
+      &quot;repeatRowId&quot;: null,
+      &quot;showTitle&quot;: false,
+      &quot;title&quot;: &quot;Dashboard Row&quot;,
+      &quot;titleSize&quot;: &quot;h6&quot;
+    },
+    {
+      &quot;collapse&quot;: false,
+      &quot;height&quot;: 250,
+      &quot;panels&quot;: [
+        {
+          &quot;aliasColors&quot;: {},
+          &quot;bars&quot;: false,
+          &quot;dashLength&quot;: 10,
+          &quot;dashes&quot;: false,
+          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
+          &quot;fill&quot;: 1,
+          &quot;id&quot;: 6,
+          &quot;legend&quot;: {
+            &quot;alignAsTable&quot;: true,
+            &quot;avg&quot;: false,
+            &quot;current&quot;: false,
+            &quot;max&quot;: false,
+            &quot;min&quot;: false,
+            &quot;rightSide&quot;: true,
+            &quot;show&quot;: true,
+            &quot;total&quot;: false,
+            &quot;values&quot;: false
+          },
+          &quot;lines&quot;: true,
+          &quot;linewidth&quot;: 1,
+          &quot;links&quot;: [],
+          &quot;nullPointMode&quot;: &quot;null&quot;,
+          &quot;percentage&quot;: false,
+          &quot;pointradius&quot;: 5,
+          &quot;points&quot;: false,
+          &quot;renderer&quot;: &quot;flot&quot;,
+          &quot;seriesOverrides&quot;: [],
+          &quot;spaceLength&quot;: 10,
+          &quot;span&quot;: 12,
+          &quot;stack&quot;: false,
+          &quot;steppedLine&quot;: false,
+          &quot;targets&quot;: [
+            {
+              &quot;expr&quot;: &quot;irate(node_network_transmit_bytes_total{job=\&quot;master_node_exporter_metrics\&quot;}[5m]) / 1024 / 1024&quot;,
+              &quot;format&quot;: &quot;time_series&quot;,
+              &quot;intervalFactor&quot;: 2,
+              &quot;refId&quot;: &quot;A&quot;
+            }
+          ],
+          &quot;thresholds&quot;: [],
+          &quot;timeFrom&quot;: &quot;1h&quot;,
+          &quot;timeShift&quot;: null,
+          &quot;title&quot;: &quot;Master 网络IO速率:出速率(MiB/s)&quot;,
+          &quot;tooltip&quot;: {
+            &quot;shared&quot;: true,
+            &quot;sort&quot;: 0,
+            &quot;value_type&quot;: &quot;individual&quot;
+          },
+          &quot;type&quot;: &quot;graph&quot;,
+          &quot;xaxis&quot;: {
+            &quot;buckets&quot;: null,
+            &quot;mode&quot;: &quot;time&quot;,
+            &quot;name&quot;: null,
+            &quot;show&quot;: true,
+            &quot;values&quot;: []
+          },
+          &quot;yaxes&quot;: [
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            },
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            }
+          ]
+        }
+      ],
+      &quot;repeat&quot;: null,
+      &quot;repeatIteration&quot;: null,
+      &quot;repeatRowId&quot;: null,
+      &quot;showTitle&quot;: false,
+      &quot;title&quot;: &quot;Dashboard Row&quot;,
+      &quot;titleSize&quot;: &quot;h6&quot;
+    },
+    {
+      &quot;collapse&quot;: false,
+      &quot;height&quot;: 250,
+      &quot;panels&quot;: [
+        {
+          &quot;aliasColors&quot;: {},
+          &quot;bars&quot;: false,
+          &quot;dashLength&quot;: 10,
+          &quot;dashes&quot;: false,
+          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
+          &quot;fill&quot;: 1,
+          &quot;id&quot;: 5,
+          &quot;legend&quot;: {
+            &quot;alignAsTable&quot;: true,
+            &quot;avg&quot;: false,
+            &quot;current&quot;: false,
+            &quot;max&quot;: false,
+            &quot;min&quot;: false,
+            &quot;rightSide&quot;: true,
+            &quot;show&quot;: true,
+            &quot;total&quot;: false,
+            &quot;values&quot;: false
+          },
+          &quot;lines&quot;: true,
+          &quot;linewidth&quot;: 1,
+          &quot;links&quot;: [],
+          &quot;nullPointMode&quot;: &quot;null&quot;,
+          &quot;percentage&quot;: false,
+          &quot;pointradius&quot;: 5,
+          &quot;points&quot;: false,
+          &quot;renderer&quot;: &quot;flot&quot;,
+          &quot;seriesOverrides&quot;: [],
+          &quot;spaceLength&quot;: 10,
+          &quot;span&quot;: 12,
+          &quot;stack&quot;: false,
+          &quot;steppedLine&quot;: false,
+          &quot;targets&quot;: [
+            {
+              &quot;expr&quot;: &quot;irate(node_network_receive_bytes_total{job=\&quot;master_node_exporter_metrics\&quot;}[5m]) / 1024 / 1024&quot;,
+              &quot;format&quot;: &quot;time_series&quot;,
+              &quot;intervalFactor&quot;: 2,
+              &quot;refId&quot;: &quot;A&quot;
+            }
+          ],
+          &quot;thresholds&quot;: [],
+          &quot;timeFrom&quot;: &quot;1h&quot;,
+          &quot;timeShift&quot;: null,
+          &quot;title&quot;: &quot;Master 网络IO速率:入速率(MiB/s)&quot;,
+          &quot;tooltip&quot;: {
+            &quot;shared&quot;: true,
+            &quot;sort&quot;: 0,
+            &quot;value_type&quot;: &quot;individual&quot;
+          },
+          &quot;type&quot;: &quot;graph&quot;,
+          &quot;xaxis&quot;: {
+            &quot;buckets&quot;: null,
+            &quot;mode&quot;: &quot;time&quot;,
+            &quot;name&quot;: null,
+            &quot;show&quot;: true,
+            &quot;values&quot;: []
+          },
+          &quot;yaxes&quot;: [
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            },
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            }
+          ]
+        }
+      ],
+      &quot;repeat&quot;: null,
+      &quot;repeatIteration&quot;: null,
+      &quot;repeatRowId&quot;: null,
+      &quot;showTitle&quot;: false,
+      &quot;title&quot;: &quot;Dashboard Row&quot;,
+      &quot;titleSize&quot;: &quot;h6&quot;
+    },
+    {
+      &quot;collapse&quot;: false,
+      &quot;height&quot;: 250,
+      &quot;panels&quot;: [
+        {
+          &quot;aliasColors&quot;: {},
+          &quot;bars&quot;: false,
+          &quot;dashLength&quot;: 10,
+          &quot;dashes&quot;: false,
+          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
+          &quot;fill&quot;: 1,
+          &quot;id&quot;: 7,
+          &quot;legend&quot;: {
+            &quot;alignAsTable&quot;: true,
+            &quot;avg&quot;: false,
+            &quot;current&quot;: false,
+            &quot;max&quot;: false,
+            &quot;min&quot;: false,
+            &quot;rightSide&quot;: true,
+            &quot;show&quot;: true,
+            &quot;total&quot;: false,
+            &quot;values&quot;: false
+          },
+          &quot;lines&quot;: true,
+          &quot;linewidth&quot;: 1,
+          &quot;links&quot;: [],
+          &quot;nullPointMode&quot;: &quot;null&quot;,
+          &quot;percentage&quot;: false,
+          &quot;pointradius&quot;: 5,
+          &quot;points&quot;: false,
+          &quot;renderer&quot;: &quot;flot&quot;,
+          &quot;seriesOverrides&quot;: [],
+          &quot;spaceLength&quot;: 10,
+          &quot;span&quot;: 12,
+          &quot;stack&quot;: false,
+          &quot;steppedLine&quot;: false,
+          &quot;targets&quot;: [
+            {
+              &quot;expr&quot;: &quot;irate(node_network_receive_bytes_total{job=\&quot;slave-0001_node_exporter_metrics\&quot;}[5m]) / 1024 / 1024&quot;,
+              &quot;format&quot;: &quot;time_series&quot;,
+              &quot;intervalFactor&quot;: 2,
+              &quot;refId&quot;: &quot;A&quot;
+            }
+          ],
+          &quot;thresholds&quot;: [],
+          &quot;timeFrom&quot;: &quot;1h&quot;,
+          &quot;timeShift&quot;: null,
+          &quot;title&quot;: &quot;Slave-0001 网络IO速率:入速率(MiB/s)&quot;,
+          &quot;tooltip&quot;: {
+            &quot;shared&quot;: true,
+            &quot;sort&quot;: 0,
+            &quot;value_type&quot;: &quot;individual&quot;
+          },
+          &quot;type&quot;: &quot;graph&quot;,
+          &quot;xaxis&quot;: {
+            &quot;buckets&quot;: null,
+            &quot;mode&quot;: &quot;time&quot;,
+            &quot;name&quot;: null,
+            &quot;show&quot;: true,
+            &quot;values&quot;: []
+          },
+          &quot;yaxes&quot;: [
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            },
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            }
+          ]
+        }
+      ],
+      &quot;repeat&quot;: null,
+      &quot;repeatIteration&quot;: null,
+      &quot;repeatRowId&quot;: null,
+      &quot;showTitle&quot;: false,
+      &quot;title&quot;: &quot;Dashboard Row&quot;,
+      &quot;titleSize&quot;: &quot;h6&quot;
+    },
+    {
+      &quot;collapse&quot;: false,
+      &quot;height&quot;: 250,
+      &quot;panels&quot;: [
+        {
+          &quot;aliasColors&quot;: {},
+          &quot;bars&quot;: false,
+          &quot;dashLength&quot;: 10,
+          &quot;dashes&quot;: false,
+          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
+          &quot;fill&quot;: 1,
+          &quot;id&quot;: 8,
+          &quot;legend&quot;: {
+            &quot;alignAsTable&quot;: true,
+            &quot;avg&quot;: false,
+            &quot;current&quot;: false,
+            &quot;max&quot;: false,
+            &quot;min&quot;: false,
+            &quot;rightSide&quot;: true,
+            &quot;show&quot;: true,
+            &quot;total&quot;: false,
+            &quot;values&quot;: false
+          },
+          &quot;lines&quot;: true,
+          &quot;linewidth&quot;: 1,
+          &quot;links&quot;: [],
+          &quot;nullPointMode&quot;: &quot;null&quot;,
+          &quot;percentage&quot;: false,
+          &quot;pointradius&quot;: 5,
+          &quot;points&quot;: false,
+          &quot;renderer&quot;: &quot;flot&quot;,
+          &quot;seriesOverrides&quot;: [],
+          &quot;spaceLength&quot;: 10,
+          &quot;span&quot;: 12,
+          &quot;stack&quot;: false,
+          &quot;steppedLine&quot;: false,
+          &quot;targets&quot;: [
+            {
+              &quot;expr&quot;: &quot;irate(node_network_transmit_bytes_total{job=\&quot;slave-0001_node_exporter_metrics\&quot;}[5m]) / 1024 / 1024&quot;,
+              &quot;format&quot;: &quot;time_series&quot;,
+              &quot;intervalFactor&quot;: 2,
+              &quot;refId&quot;: &quot;A&quot;
+            }
+          ],
+          &quot;thresholds&quot;: [],
+          &quot;timeFrom&quot;: &quot;1h&quot;,
+          &quot;timeShift&quot;: null,
+          &quot;title&quot;: &quot;Slave-0001 网络IO速率:出速率(MiB/s)&quot;,
+          &quot;tooltip&quot;: {
+            &quot;shared&quot;: true,
+            &quot;sort&quot;: 0,
+            &quot;value_type&quot;: &quot;individual&quot;
+          },
+          &quot;type&quot;: &quot;graph&quot;,
+          &quot;xaxis&quot;: {
+            &quot;buckets&quot;: null,
+            &quot;mode&quot;: &quot;time&quot;,
+            &quot;name&quot;: null,
+            &quot;show&quot;: true,
+            &quot;values&quot;: []
+          },
+          &quot;yaxes&quot;: [
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            },
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            }
+          ]
+        }
+      ],
+      &quot;repeat&quot;: null,
+      &quot;repeatIteration&quot;: null,
+      &quot;repeatRowId&quot;: null,
+      &quot;showTitle&quot;: false,
+      &quot;title&quot;: &quot;Dashboard Row&quot;,
+      &quot;titleSize&quot;: &quot;h6&quot;
+    },
+    {
+      &quot;collapse&quot;: false,
+      &quot;height&quot;: 250,
+      &quot;panels&quot;: [
+        {
+          &quot;aliasColors&quot;: {},
+          &quot;bars&quot;: false,
+          &quot;dashLength&quot;: 10,
+          &quot;dashes&quot;: false,
+          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
+          &quot;fill&quot;: 1,
+          &quot;id&quot;: 9,
+          &quot;legend&quot;: {
+            &quot;alignAsTable&quot;: true,
+            &quot;avg&quot;: false,
+            &quot;current&quot;: false,
+            &quot;max&quot;: false,
+            &quot;min&quot;: false,
+            &quot;rightSide&quot;: true,
+            &quot;show&quot;: true,
+            &quot;total&quot;: false,
+            &quot;values&quot;: false
+          },
+          &quot;lines&quot;: true,
+          &quot;linewidth&quot;: 1,
+          &quot;links&quot;: [],
+          &quot;nullPointMode&quot;: &quot;null&quot;,
+          &quot;percentage&quot;: false,
+          &quot;pointradius&quot;: 5,
+          &quot;points&quot;: false,
+          &quot;renderer&quot;: &quot;flot&quot;,
+          &quot;seriesOverrides&quot;: [],
+          &quot;spaceLength&quot;: 10,
+          &quot;span&quot;: 12,
+          &quot;stack&quot;: false,
+          &quot;steppedLine&quot;: false,
+          &quot;targets&quot;: [
+            {
+              &quot;expr&quot;: &quot;irate(node_network_receive_bytes_total{job=\&quot;slave-0002_node_exporter_metrics\&quot;}[5m]) / 1024 / 1024&quot;,
+              &quot;format&quot;: &quot;time_series&quot;,
+              &quot;intervalFactor&quot;: 2,
+              &quot;refId&quot;: &quot;A&quot;
+            }
+          ],
+          &quot;thresholds&quot;: [],
+          &quot;timeFrom&quot;: &quot;1h&quot;,
+          &quot;timeShift&quot;: null,
+          &quot;title&quot;: &quot;Slave-0002 网络IO速率:入速率(MiB/s)&quot;,
+          &quot;tooltip&quot;: {
+            &quot;shared&quot;: true,
+            &quot;sort&quot;: 0,
+            &quot;value_type&quot;: &quot;individual&quot;
+          },
+          &quot;type&quot;: &quot;graph&quot;,
+          &quot;xaxis&quot;: {
+            &quot;buckets&quot;: null,
+            &quot;mode&quot;: &quot;time&quot;,
+            &quot;name&quot;: null,
+            &quot;show&quot;: true,
+            &quot;values&quot;: []
+          },
+          &quot;yaxes&quot;: [
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            },
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            }
+          ]
+        }
+      ],
+      &quot;repeat&quot;: null,
+      &quot;repeatIteration&quot;: null,
+      &quot;repeatRowId&quot;: null,
+      &quot;showTitle&quot;: false,
+      &quot;title&quot;: &quot;Dashboard Row&quot;,
+      &quot;titleSize&quot;: &quot;h6&quot;
+    },
+    {
+      &quot;collapse&quot;: false,
+      &quot;height&quot;: 250,
+      &quot;panels&quot;: [
+        {
+          &quot;aliasColors&quot;: {},
+          &quot;bars&quot;: false,
+          &quot;dashLength&quot;: 10,
+          &quot;dashes&quot;: false,
+          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
+          &quot;fill&quot;: 1,
+          &quot;id&quot;: 10,
+          &quot;legend&quot;: {
+            &quot;alignAsTable&quot;: true,
+            &quot;avg&quot;: false,
+            &quot;current&quot;: false,
+            &quot;max&quot;: false,
+            &quot;min&quot;: false,
+            &quot;rightSide&quot;: true,
+            &quot;show&quot;: true,
+            &quot;total&quot;: false,
+            &quot;values&quot;: false
+          },
+          &quot;lines&quot;: true,
+          &quot;linewidth&quot;: 1,
+          &quot;links&quot;: [],
+          &quot;nullPointMode&quot;: &quot;null&quot;,
+          &quot;percentage&quot;: false,
+          &quot;pointradius&quot;: 5,
+          &quot;points&quot;: false,
+          &quot;renderer&quot;: &quot;flot&quot;,
+          &quot;seriesOverrides&quot;: [],
+          &quot;spaceLength&quot;: 10,
+          &quot;span&quot;: 12,
+          &quot;stack&quot;: false,
+          &quot;steppedLine&quot;: false,
+          &quot;targets&quot;: [
+            {
+              &quot;expr&quot;: &quot;irate(node_network_transmit_bytes_total{job=\&quot;slave-0002_node_exporter_metrics\&quot;}[5m]) / 1024 / 1024&quot;,
+              &quot;format&quot;: &quot;time_series&quot;,
+              &quot;intervalFactor&quot;: 2,
+              &quot;refId&quot;: &quot;A&quot;
+            }
+          ],
+          &quot;thresholds&quot;: [],
+          &quot;timeFrom&quot;: &quot;1h&quot;,
+          &quot;timeShift&quot;: null,
+          &quot;title&quot;: &quot;Slave-0002 网络IO速率:出速率(MiB/s)&quot;,
+          &quot;tooltip&quot;: {
+            &quot;shared&quot;: true,
+            &quot;sort&quot;: 0,
+            &quot;value_type&quot;: &quot;individual&quot;
+          },
+          &quot;type&quot;: &quot;graph&quot;,
+          &quot;xaxis&quot;: {
+            &quot;buckets&quot;: null,
+            &quot;mode&quot;: &quot;time&quot;,
+            &quot;name&quot;: null,
+            &quot;show&quot;: true,
+            &quot;values&quot;: []
+          },
+          &quot;yaxes&quot;: [
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            },
+            {
+              &quot;format&quot;: &quot;short&quot;,
+              &quot;label&quot;: null,
+              &quot;logBase&quot;: 1,
+              &quot;max&quot;: null,
+              &quot;min&quot;: null,
+              &quot;show&quot;: true
+            }
+          ]
+        }
+      ],
+      &quot;repeat&quot;: null,
+      &quot;repeatIteration&quot;: null,
+      &quot;repeatRowId&quot;: null,
+      &quot;showTitle&quot;: false,
+      &quot;title&quot;: &quot;Dashboard Row&quot;,
+      &quot;titleSize&quot;: &quot;h6&quot;
+    },
+    {
+      &quot;collapse&quot;: false,
+      &quot;height&quot;: 250,
+      &quot;panels&quot;: [],
+      &quot;repeat&quot;: null,
+      &quot;repeatIteration&quot;: null,
+      &quot;repeatRowId&quot;: null,
+      &quot;showTitle&quot;: false,
+      &quot;title&quot;: &quot;Dashboard Row&quot;,
+      &quot;titleSize&quot;: &quot;h6&quot;
+    },
+    {
+      &quot;collapse&quot;: false,
+      &quot;height&quot;: 250,
+      &quot;panels&quot;: [],
+      &quot;repeat&quot;: null,
+      &quot;repeatIteration&quot;: null,
+      &quot;repeatRowId&quot;: null,
+      &quot;showTitle&quot;: false,
+      &quot;title&quot;: &quot;Dashboard Row&quot;,
+      &quot;titleSize&quot;: &quot;h6&quot;
+    },
+    {
+      &quot;collapse&quot;: false,
+      &quot;height&quot;: 250,
+      &quot;panels&quot;: [],
+      &quot;repeat&quot;: null,
+      &quot;repeatIteration&quot;: null,
+      &quot;repeatRowId&quot;: null,
+      &quot;showTitle&quot;: false,
+      &quot;title&quot;: &quot;Dashboard Row&quot;,
+      &quot;titleSize&quot;: &quot;h6&quot;
+    }
+  ],
+  &quot;schemaVersion&quot;: 14,
+  &quot;style&quot;: &quot;dark&quot;,
+  &quot;tags&quot;: [],
+  &quot;templating&quot;: {
+    &quot;list&quot;: []
+  },
+  &quot;time&quot;: {
+    &quot;from&quot;: &quot;now-6h&quot;,
+    &quot;to&quot;: &quot;now&quot;
+  },
+  &quot;timepicker&quot;: {
+    &quot;refresh_intervals&quot;: [
+      &quot;5s&quot;,
+      &quot;10s&quot;,
+      &quot;30s&quot;,
+      &quot;1m&quot;,
+      &quot;5m&quot;,
+      &quot;15m&quot;,
+      &quot;30m&quot;,
+      &quot;1h&quot;,
+      &quot;2h&quot;,
+      &quot;1d&quot;
+    ],
+    &quot;time_options&quot;: [
+      &quot;5m&quot;,
+      &quot;15m&quot;,
+      &quot;1h&quot;,
+      &quot;6h&quot;,
+      &quot;12h&quot;,
+      &quot;24h&quot;,
+      &quot;2d&quot;,
+      &quot;7d&quot;,
+      &quot;30d&quot;
+    ]
+  },
+  &quot;timezone&quot;: &quot;&quot;,
+  &quot;title&quot;: &quot;Kubernetes&quot;,
+  &quot;version&quot;: 7
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[2021.04.26：Kubernetes安装踩坑记录]]></title>
+        <id>https://Czardas42.github.io/post/20210426_kubernetes/</id>
+        <link href="https://Czardas42.github.io/post/20210426_kubernetes/">
+        </link>
+        <updated>2021-04-26T08:30:35.000Z</updated>
+        <content type="html"><![CDATA[<p>🤡🤡🤡🤡🤡🤡</p>
+<h3 id="1-error-kubeletversionthe-kubelet-version-is-higher-than-the-control-plane-version-this-is-not-a-supportted-version-skew-and-may-lead-to-a-malfunctional-cluster">1. 【ERROR KubeletVersion】：the kubelet version is higher than the control plane version. This is not a supportted version skew and may lead to a malfunctional cluster.</h3>
+<figure data-type="image" tabindex="1"><img src="https://Czardas42.github.io//post-images/1619426268228.jpg" alt="" loading="lazy"></figure>
+<p>版本不匹配的问题，需要重新安装 kubelet kubeadm kubectl(与Kubernetes版本一致)</p>
+<p>Kubernetes版本：<br>
+<img src="https://Czardas42.github.io//post-images/1619426325673.png" alt="" loading="lazy"></p>
+<p><strong>【解决方法】</strong></p>
+<pre><code>yum -y remove kubelet kubeadm kubectl
+yum -y install kubelet-1.20.5 kubeadm-1.20.5 kubectl-1.20.5
+</code></pre>
+<p>【参考】<br>
+<a href="https://www.cnblogs.com/siren27/p/10211920.html">https://www.cnblogs.com/siren27/p/10211920.html</a></p>
+<p><br/><br/></p>
+<h3 id="2-解决安装k8s时flannel镜像拉取失败的问题">2. 解决安装K8S时flannel镜像拉取失败的问题</h3>
+<figure data-type="image" tabindex="2"><img src="https://Czardas42.github.io//post-images/1619425933210.jpg" alt="" loading="lazy"></figure>
+<p><strong>【解决方法】</strong></p>
+<pre><code>curl -O https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+sed -i 's/quay.io\/coreos/registry.cn-beijing.aliyuncs.com\/imcto/g' kube-flannel.yml
+docker pull registry.cn-hangzhou.aliyuncs.com/k8sos/flannel:v0.13.1-rc2
+</code></pre>
+<pre><code>vim kube-flannel.yml
+</code></pre>
+<p><strong>修改kube-flannel.yml将里面使用的官方镜像的名字改为自己拉取的镜像名称</strong><br>
+即：image: registry.cn-hangzhou.aliyuncs.com/k8sos/flannel:v0.13.1-rc2</p>
+<p><strong>安装flannel</strong></p>
+<pre><code>kubectl apply -f kube-flannel.yml
+</code></pre>
+<p>【参考】<br>
+<a href="https://blog.csdn.net/telundusiji/article/details/114033799">https://blog.csdn.net/telundusiji/article/details/114033799</a></p>
+<p><br/><br/></p>
+<h3 id="3-unable-to-connect-to-the-server-x509-certificate-signed-by-unknown-authority">3. Unable to connect to the server: x509: certificate signed by unknown authority</h3>
+<p><strong>【解决方法】</strong></p>
+<p>原因在于<code>kubeadm init</code>命令之后的执行三条命令：</p>
+<pre><code>mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+</code></pre>
+<p>这几个命令会创建一个目录，并复制几个配置文件，重新创建集群时，<strong>这个目录还是存在的</strong>，需要在执行这几个命令前先执行<code>rm -rf $HOME/.kube</code>命令删除这个目录，最后解决了这个问题</p>
+<p><strong>正确操作：</strong></p>
+<pre><code>kubeadm reset
+rm -rf $HOME/.kube
+</code></pre>
+<p><strong>然后再进行init：</strong><br>
+<code>kubeadm init --config kubeadm.yaml --ignore-preflight-errors=Swap</code><br>
+或者<br>
+<code>kubeadm init --kubernetes-version=v1.20.5 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --ignore-preflight-errors=Swap</code></p>
+<p>【参考】<br>
+<a href="https://blog.csdn.net/woay2008/article/details/93250137">https://blog.csdn.net/woay2008/article/details/93250137</a><br>
+<a href="https://blog.csdn.net/curry10086/article/details/107579113?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;spm=1001.2101.3001.4242">https://blog.csdn.net/curry10086/article/details/107579113?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;spm=1001.2101.3001.4242</a></p>
+<p><br/><br/></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[写在最前面]]></title>
+        <id>https://Czardas42.github.io/post/at_first/</id>
+        <link href="https://Czardas42.github.io/post/at_first/">
+        </link>
+        <updated>2021-04-26T03:22:54.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="have-a-try">have a try😀😀😀</h1>
+]]></content>
+    </entry>
+</feed>
