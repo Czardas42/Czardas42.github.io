@@ -9,7 +9,7 @@
 <meta name="description" content="Think Different">
 <meta name="theme-color" content="#343a40">
 <title>2021.04.27：K8s 性能测试 | Czardas</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1619614974311">
+<link rel="shortcut icon" href="/favicon.ico?v=1619668743244">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -263,7 +263,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">4</span>
+        <span class="site-item-stat-count">6</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -682,6 +682,10 @@ Kubernetes集群外部通过traefik ingress暴露的地址访问：110ms<br>
   </div>
   <div class="nav">
     <div class="nav-prev">
+      
+        <i class="fa fa-chevron-left"></i>
+        <a class="nav-pc-next" title="可信计算" href="https://Czardas42.github.io/post/ke-xin-ji-suan/">可信计算</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="可信计算" href="https://Czardas42.github.io/post/ke-xin-ji-suan/">上一篇</a>
       
     </div>
     <div class="nav-next">
@@ -1145,6 +1149,77 @@ Kubernetes集群外部通过traefik ingress暴露的地址访问：110ms<br>
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/openfaas_project_notes/"" data-c="
+          &lt;h1 id=&#34;1-kubernetes&#34;&gt;1. Kubernetes&lt;/h1&gt;
+&lt;h2 id=&#34;11-架构节点工作负载&#34;&gt;1.1 架构(节点)，工作负载&lt;/h2&gt;
+&lt;h3 id=&#34;nodes&#34;&gt;nodes：&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/zh/docs/concepts/architecture/nodes/&#34;&gt;https://kubernetes.io/zh/docs/concepts/architecture/nodes/&lt;/a&gt;&lt;br&gt;
+&lt;/br&gt;&lt;/p&gt;
+&lt;h3 id=&#34;pods&#34;&gt;Pods：&lt;/h3&gt;
+&lt;p&gt;Pod 是可以在 Kubernetes 中创建和管理的、最小的可部署的计算单元。&lt;br&gt;
+&lt;a href=&#34;https://kubernetes.io/zh/docs/concepts/workloads/&#34;&gt;https://kubernetes.io/zh/docs/concepts/workloads/&lt;/a&gt;&lt;br&gt;
+&lt;/br&gt;&lt;/p&gt;
+&lt;h2 id=&#34;12-服务-负载均衡和联网&#34;&gt;1.2 服务、负载均衡和联网&lt;/h2&gt;
+&lt;h3 id=&#34;使用-service-连接到应用&#34;&gt;使用 Service 连接到应用:&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;可结合Prometheus部署过程进行阐述&lt;/strong&gt;&lt;br&gt;
+&lt;a href=&#34;https://kubernetes.io/zh/docs/concepts/services-networking/connect-applications-service/&#34;&gt;https://kubernetes.io/zh/docs/concepts/services-networking/connect-applications-service/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;用-kubectl-扩缩应用程序deployment副本数&#34;&gt;用 kubectl 扩缩应用程序(Deployment副本数)：&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;可结合正确删除pod的方法进行阐述&lt;/strong&gt;&lt;br&gt;
+在之前的模块中，我们创建了一个 Deployment，然后通过 Service让其可以开放访问。Deployment 仅为跑这个应用程序创建了一个 Pod。 当流量增加时，我们需要扩容应用程序满足用户需求。&lt;br&gt;
+&lt;a href=&#34;https://kubernetes.io/zh/docs/tutorials/kubernetes-basics/scale/scale-intro/&#34;&gt;https://kubernetes.io/zh/docs/tutorials/kubernetes-basics/scale/scale-intro/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/br&gt;&lt;/br&gt;&lt;/p&gt;
+&lt;h1 id=&#34;2-openfaas&#34;&gt;2. OpenFaaS&lt;/h1&gt;
+&lt;h2 id=&#34;21-layers-and-responsibilities-工作流程&#34;&gt;2.1 Layers and responsibilities 工作流程&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.openfaas.com/architecture/stack/#openfaas-stack&#34;&gt;https://docs.openfaas.com/architecture/stack/#openfaas-stack&lt;/a&gt;&lt;br&gt;
+&lt;/br&gt;&lt;/p&gt;
+&lt;h2 id=&#34;22-架构gateway&#34;&gt;2.2 架构&amp;amp;Gateway&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.openfaas.com/architecture/gateway/&#34;&gt;https://docs.openfaas.com/architecture/gateway/&lt;/a&gt;&lt;br&gt;
+&lt;/br&gt;&lt;/p&gt;
+&lt;h2 id=&#34;23-watchdog工作原理-函数请求处理流程详解&#34;&gt;2.3 Watchdog工作原理&amp;amp; 函数请求处理流程详解&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.openfaas.com/architecture/watchdog/&#34;&gt;https://docs.openfaas.com/architecture/watchdog/&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://blog.csdn.net/weixin_38616705/article/details/107385293&#34;&gt;https://blog.csdn.net/weixin_38616705/article/details/107385293&lt;/a&gt;&lt;br&gt;
+&lt;/br&gt;&lt;/p&gt;
+&lt;h2 id=&#34;24-自动缩放工作原理冷启动43&#34;&gt;2.4 自动缩放工作原理&amp;amp;冷启动（4.3）&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.openfaas.com/architecture/autoscaling/&#34;&gt;https://docs.openfaas.com/architecture/autoscaling/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/br&gt;&lt;/br&gt;&lt;/p&gt;
+&lt;h1 id=&#34;3-prometheusgrafana&#34;&gt;3. Prometheus&amp;amp;Grafana&lt;/h1&gt;
+&lt;h2 id=&#34;31-yml文件配置结合prometheus配置过程&#34;&gt;3.1 yml文件配置(结合Prometheus配置过程)&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_29278805/article/details/112493314?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;amp;spm=1001.2101.3001.4242&#34;&gt;https://blog.csdn.net/weixin_29278805/article/details/112493314?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;amp;spm=1001.2101.3001.4242&lt;/a&gt;&lt;br&gt;
+&lt;/br&gt;&lt;/p&gt;
+&lt;h2 id=&#34;32-promql语法以及实验使用示例&#34;&gt;3.2 PromQL语法以及实验使用示例&lt;/h2&gt;
+&lt;p&gt;Prometheus内置的数据查询语言，其提供对时间序列数据丰富的查询，聚合以及逻辑运算能力的支持。并且被广泛应用在Prometheus的日常应用当中，包括对数据查询、可视化、告警处理当中。&lt;br&gt;
+&lt;a href=&#34;https://yunlzheng.gitbook.io/prometheus-book/parti-prometheus-ji-chu/promql/prometheus-query-language&#34;&gt;https://yunlzheng.gitbook.io/prometheus-book/parti-prometheus-ji-chu/promql/prometheus-query-language&lt;/a&gt;&lt;br&gt;
+&lt;/br&gt;&lt;/br&gt;&lt;/p&gt;
+&lt;h1 id=&#34;4-实验&#34;&gt;4. 实验&lt;/h1&gt;
+&lt;h2 id=&#34;41-控制变量-相关性&#34;&gt;4.1 控制变量 &amp;amp; 相关性&lt;/h2&gt;
+&lt;h2 id=&#34;42-压力测试&#34;&gt;4.2 压力测试&lt;/h2&gt;
+&lt;h2 id=&#34;43-冷热启动&#34;&gt;4.3 冷热启动&lt;/h2&gt;
+&lt;p&gt;&lt;/br&gt;&lt;/br&gt;&lt;/p&gt;
+&lt;h1 id=&#34;5-其他&#34;&gt;5. 其他&lt;/h1&gt;
+&lt;h2 id=&#34;51-vpc对等连接涉及计网相关知识&#34;&gt;5.1 VPC对等连接(涉及计网相关知识)&lt;/h2&gt;
+&lt;p&gt;对等连接(peer-to-peer，简写为 P2P)是指两个主机在通信时并不区分哪一个是服务请求方还是服务提供方。&lt;br&gt;
+只要两个主机都运行了对等连接软件（P2P 软件），它们就可以进行平等的、对等连接通信。&lt;br&gt;
+&lt;a href=&#34;https://support.huaweicloud.com/usermanual-vpc/vpc_peering_0000.html&#34;&gt;https://support.huaweicloud.com/usermanual-vpc/vpc_peering_0000.html&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://www.cnblogs.com/liuawen/p/11930142.html#2_134&#34;&gt;https://www.cnblogs.com/liuawen/p/11930142.html#2_134&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://www.nowcoder.com/questionTerminal/f14684caf72042a2a747f5d7df32670b&#34;&gt;https://www.nowcoder.com/questionTerminal/f14684caf72042a2a747f5d7df32670b&lt;/a&gt;&lt;br&gt;
+&lt;/br&gt;&lt;/br&gt;&lt;/p&gt;
+">云计算大作业知识点</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/ke-xin-ji-suan/"" data-c="
+          &lt;h1 id=&#34;安全含义&#34;&gt;安全含义&lt;/h1&gt;
+&lt;p&gt;CIA：机密， 完整，可用&lt;br&gt;
+在信息安全等级保护工作中，根据信息系统的机密性（Confidentiality）、完整性（Integrity）、可用性（Availability）来划分信息系统的安全等级，三个性质简称CIA&lt;/p&gt;
+&lt;h1 id=&#34;信息安全五性&#34;&gt;信息安全五性：&lt;/h1&gt;
+&lt;p&gt;事前可验证性&lt;br&gt;
+事后不可否认性&lt;br&gt;
+CIA&lt;/p&gt;
+&lt;h1 id=&#34;可信-约等于-安全-可靠&#34;&gt;可信 约等于 安全 + 可靠&lt;/h1&gt;
+">可信计算</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/20210427_ks8_openfaas_test/"" data-c="
