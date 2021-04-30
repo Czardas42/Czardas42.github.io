@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Czardas42.github.io/</id>
     <title>Czardas</title>
-    <updated>2021-04-30T01:25:29.949Z</updated>
+    <updated>2021-04-30T13:39:08.702Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Czardas42.github.io/"/>
     <link rel="self" href="https://Czardas42.github.io/atom.xml"/>
@@ -16,338 +16,650 @@
         <link href="https://Czardas42.github.io/post/chapter4/">
         </link>
         <updated>2021-04-29T06:25:20.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="42-字符串处理">4.2 字符串处理</h1>
-<h2 id="1-特殊乘法">1. 特殊乘法</h2>
-<h3 id="题目描述">题目描述：</h3>
-<p>写个算法，对2个小于1000000000的输入，求结果。 特殊乘法举例：123 * 45 = 1<em>4 +1</em>5 +2<em>4 +2</em>5 +3<em>4+3</em>5</p>
-<h3 id="要点">要点：</h3>
+        <content type="html"><![CDATA[<h1 id="42-字符串处理"><strong>4.2 字符串处理</strong></h1>
+<h2 id="1-特殊乘法"><strong>1. 特殊乘法</strong></h2>
+<h3 id="题目描述"><strong>题目描述</strong></h3>
+<p>写个算法，对2个小于1000000000的输入，求结果。 特殊乘法举例：123 * <em>45 = 1<strong>4 +1</strong>5 +2<strong>4 +2</strong>5 +3**4+3</em>5</p>
+<h3 id="要点"><strong>要点</strong></h3>
 <ol>
-<li>char和int类型的转换：<code>int((str1[i]-'0')*(str2[j]-'0'))</code></li>
-<li>用字符串处理数字的思路</li>
+<li>
+<p><code>char</code>和<code>int</code>类型的转换：<code>int((str1[i]-'0')*(str2[j]-'0'))</code></p>
+</li>
+<li>
+<p>用字符串处理数字的思路</p>
+</li>
 </ol>
-<h3 id="提交地址">提交地址：</h3>
+<h3 id="提交地址">提交地址</h3>
 <p><a href="https://www.nowcoder.com/practice/a5edebf0622045468436c74c3a34240f?tpId=60&amp;tqId=29490&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/a5edebf0622045468436c74c3a34240f?tpId=60&amp;tqId=29490&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码">代码：</h3>
-<pre><code>#include &lt;iostream&gt;
+<h3 id="代码">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+
 #include &lt;cstdio&gt;
+
 #include &lt;string&gt;
+
+
 
 using namespace std;
 
-int main()
-{
-    string str1, str2;
-    while(cin &gt;&gt; str1 &gt;&gt; str2)
-    {
-        int count = 0;
-        for (int i=0; i&lt;str1.size(); i++)
-        {
-            for (int j=0; j&lt;str2.size(); j++)
-            {
-                count = count + int((str1[i]-'0')*(str2[j]-'0'));
-            }
-        }
-        cout &lt;&lt; count &lt;&lt; endl;
-    }
-}
 
+
+int main()
+
+{
+
+​    string str1, str2;
+
+​    while(cin &gt;&gt; str1 &gt;&gt; str2)
+
+​    {
+
+​        int count = 0;
+
+​        for (int i=0; i&lt;str1.size(); i++)
+
+​        {
+
+​            for (int j=0; j&lt;str2.size(); j++)
+
+​            {
+
+​                count = count + int((str1[i]-'0')*(str2[j]-'0'));
+
+​            }
+
+​        }
+
+​        cout &lt;&lt; count &lt;&lt; endl;
+
+​    }
+
+}
 </code></pre>
-</br>
-<h2 id="2-密码翻译">2.  密码翻译</h2>
-<h3 id="题目描述-2">题目描述：</h3>
+<h2 id="2-密码翻译"><strong>2.  密码翻译</strong></h2>
+<h3 id="题目描述-2"><strong>题目描述</strong></h3>
 <p>在情报传递过程中，为了防止情报被截获，往往需要对情报用一定的方式加密，简单的加密算法虽然不足以完全避免情报被破译，但仍然能防止情报被轻易的识别。我们给出一种最简的的加密方法，对给定的一个字符串，把其中从a-y,A-Y的字母用其后继字母替代，把z和Z用a和A替代，则可得到一个简单的加密字符串。</p>
-<h3 id="要点-2">要点：</h3>
+<h3 id="要点-2"><strong>要点</strong></h3>
 <ol>
-<li>C++的if语句不可以使用连等，需要用<code>&amp;&amp;</code>分开表示：<code>if ((int('a')&lt;=num &amp;&amp; num&lt;=int('z')) || (int('A')&lt;=num &amp;&amp; num&lt;=int('Z')))</code></li>
-<li>用ASCII码鉴别字符</li>
-<li>强制类型转换：<code>char()</code>和<code>int()</code></li>
-<li>要求整行输入，需要用到<code>getline(cin, str)</code></li>
+<li>
+<p>C++的if语句不可以使用连等，需要用<code>&amp;&amp;</code>分开表示：<code>if ((int('a')&lt;=num &amp;&amp; num&lt;=int('z')) || (int('A')&lt;=num &amp;&amp; num&lt;=int('Z')))</code></p>
+</li>
+<li>
+<p>用ASCII码鉴别字符</p>
+</li>
+<li>
+<p>强制类型转换：<code>char()</code>和<code>int()</code></p>
+</li>
+<li>
+<p>要求整行输入，需要用到<code>getline(cin, str)</code></p>
+</li>
 </ol>
 <h3 id="提交地址-2">提交地址：</h3>
 <p><a href="https://www.nowcoder.com/practice/a5edebf0622045468436c74c3a34240f?tpId=60&amp;tqId=29490&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/a5edebf0622045468436c74c3a34240f?tpId=60&amp;tqId=29490&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-2">代码：</h3>
-<pre><code>#include &lt;iostream&gt;
+<h3 id="代码-2"><strong>代码</strong></h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
 #include &lt;string&gt;
 
 using namespace std;
 
 int main()
+
 {
-    string str;
-    while(getline(cin, str))
-    {
-        for(int i=0; i&lt;str.size(); i++)
-        {
-            int num = int(str[i]);
-            if ((int('a')&lt;=num &amp;&amp; num&lt;=int('z')) || (int('A')&lt;=num &amp;&amp; num&lt;=int('Z')))
-            {
-                if (str[i] == 'z')
-                {
-                    str[i] == 'a';
-                }
-                else if(str[i] == 'Z')
-                {
-                    str[i] == 'A';
-                }
-                else
-                {
-                    str[i] = char(int(str[i]) + 1);
-                }
-                
-            }
-        }
-        cout &lt;&lt; str &lt;&lt; endl;
-    }
+
+​    string str;
+
+​    while(getline(cin, str))
+
+​    {
+
+​        for(int i=0; i&lt;str.size(); i++)
+
+​        {
+
+​            int num = int(str[i]);
+
+​            if ((int('a')&lt;=num &amp;&amp; num&lt;=int('z')) || (int('A')&lt;=num &amp;&amp; num&lt;=int('Z')))
+
+​            {
+
+​                if (str[i] == 'z')
+
+​                {
+
+​                    str[i] == 'a';
+
+​                }
+
+​                else if(str[i] == 'Z')
+
+​                {
+
+​                    str[i] == 'A';
+
+​                }
+
+​                else
+
+​                {
+
+​                    str[i] = char(int(str[i]) + 1);
+
+​                }
+
+​                
+
+​            }
+
+​        }
+
+​        cout &lt;&lt; str &lt;&lt; endl;
+
+​    }
+
 }
 </code></pre>
-</br>
-<h2 id="3-简单密码">3.  简单密码</h2>
-<h3 id="题目描述-3">题目描述：</h3>
+<h2 id="3-简单密码"><strong>3.  简单密码</strong></h2>
+<h3 id="题目描述-3">题目描述</h3>
 <p>Julius Caesar曾经使用过一种很简单的密码。 对于明文中的每个字符，将它用它字母表中后5位对应的字符来代替，这样就得到了密文。 比如字符A用F来代替。如下是密文和明文中字符的对应关系。 密文 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 明文 V W X Y Z A B C D E F G H I J K L M N O P Q R S T U 你的任务是对给定的密文进行解密得到明文。 你需要注意的是，密文中出现的字母都是大写字母。密文中也包括非字母的字符，对这些字符不用进行解码。</p>
-<h3 id="要点-3">要点：</h3>
-<p><strong>循环平移类问题</strong><br>
-id：差量，从零开始<br>
-begin：初始量<br>
-公式1：<code>初始量 +（id + 平移量）% 个数</code><br>
-公式2：<code>初始量 +（id - 平移量 + 个数）% 个数</code><br>
-例如本题，A-Z每个字母取其前五的字母：<br>
-<code>str[i] = char(int('A') + (int(str[i])-int('A')-5+26)%26);</code></p>
-<h3 id="提交地址-3">提交地址：</h3>
+<h3 id="要点-3"><strong>要点</strong></h3>
+<p><strong>循环平移类问题</strong></p>
+<p>id：差量，从零开始</p>
+<p>begin：初始量</p>
+<p>公式1：<code>初始量 +（id + 平移量）% 个数</code></p>
+<p>公式2：<code>初始量 +（id - 平移量 + 个数）% 个数</code></p>
+<p>例如本题，A-Z每个字母取其前五的字母：</p>
+<pre><code>str[i] = char(int('A') + (int(str[i])-int('A')-5+26)%26);
+</code></pre>
+<h3 id="提交地址-3"><strong>提交地址</strong></h3>
 <p><a href="https://www.nowcoder.com/practice/ff99c43dd07f4e95a8f2f5448da3772a?tpId=61&amp;tqId=29562&amp;tPage=4&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/ff99c43dd07f4e95a8f2f5448da3772a?tpId=61&amp;tqId=29562&amp;tPage=4&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-3">代码：</h3>
-<pre><code>#include &lt;iostream&gt;
+<h3 id="代码-3"><strong>代码</strong></h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
 #include &lt;string&gt;
 
 using namespace std;
 
 int main()
+
 {
-    string str;
-    while (getline(cin, str))
-    {
-        if (str == &quot;START&quot; || str == &quot;END&quot;)
-            continue;
-        else if(str == &quot;ENDOFINPUT&quot;)
-            break;
-        else
-        {
-            for(int i=0; i&lt;str.size(); i++)
-            {
-                if (int('A') &lt;= int(str[i]) &amp;&amp; int(str[i])&lt;= int('Z'))
-                {
-                    str[i] = char(int('A') + (int(str[i])-int('A')-5+26)%26);
-                }
-            }
-            cout &lt;&lt; str &lt;&lt; endl;
-        }
-    }
+
+​    string str;
+
+​    while (getline(cin, str))
+
+​    {
+
+​        if (str == &quot;START&quot; || str == &quot;END&quot;)
+
+​            continue;
+
+​        else if(str == &quot;ENDOFINPUT&quot;)
+
+​            break;
+
+​        else
+
+​        {
+
+​            for(int i=0; i&lt;str.size(); i++)
+
+​            {
+
+​                if (int('A') &lt;= int(str[i]) &amp;&amp; int(str[i])&lt;= int('Z'))
+
+​                {
+
+​                    str[i] = char(int('A') + (int(str[i])-int('A')-5+26)%26);
+
+​                }
+
+​            }
+
+​            cout &lt;&lt; str &lt;&lt; endl;
+
+​        }
+
+​    }
+
 }
 </code></pre>
-</br>
-<h2 id="4-统计字符">4.  统计字符</h2>
-<h3 id="题目描述-4">题目描述：</h3>
+<h2 id="4-统计字符"><strong>4.  统计字符</strong></h2>
+<h3 id="题目描述-4">题目描述</h3>
 <p>统计一个给定字符串中指定的字符出现的次数。</p>
-<h3 id="要点-4">要点：</h3>
+<h3 id="要点-4">要点</h3>
 <ol>
-<li>数组清零/初始化方法：（cstring库）<br>
-<code>memset(number, 0, sizeof(number));</code></li>
-<li>统计/计数问题思路：<strong>先全部计数，再按照要求输出即可</strong></li>
+<li>数组清零/初始化方法：（<code>cstring</code>库）</li>
 </ol>
-<h3 id="提交地址-4">提交地址：</h3>
+<p>​     <code>memset(number, 0, sizeof(number));</code></p>
+<ol start="2">
+<li>统计/计数问题思路：<strong><strong>先全部计数，再按照要求输出即可</strong></strong></li>
+</ol>
+<h3 id="提交地址-4">提交地址</h3>
 <p><a href="https://www.nowcoder.com/practice/4ec4325634634193a7cd6798037697a8?tpId=63&amp;tqId=29574&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F9001&amp;qru=%2Fta%2Fzju-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/4ec4325634634193a7cd6798037697a8?tpId=63&amp;tqId=29574&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F9001&amp;qru=%2Fta%2Fzju-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-4">代码：</h3>
-<pre><code>#include &lt;iostream&gt;
+<h3 id="代码-4">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
 #include &lt;string&gt;
 #include &lt;cstring&gt;
+using namespace std;
 
+int main()
+
+{
+
+​    string str1, str2;
+
+​    int number[128];
+
+​    
+
+​    while(getline(cin, str1))
+
+​    {
+
+​        if (str1 == &quot;#&quot;)
+
+​            break;
+
+​        else
+
+​        {
+
+​            getline(cin, str2);
+
+​            memset(number, 0, sizeof(number));
+
+​            for (int i=0; i&lt;str2.size(); i++)
+
+​            {
+
+​                number[int(str2[i])]++;
+
+​            }
+
+​            for (int j=0; j&lt;str1.size(); j++)
+
+​            {
+
+​                
+
+​                cout &lt;&lt; str1[j] &lt;&lt; &quot; &quot;&lt;&lt; number[int(str1[j])] &lt;&lt; endl;
+
+​            }
+
+​        }
+
+​        
+
+​    }
+
+}
+</code></pre>
+<h2 id="5-字母统计"><strong>5.  字母统计</strong></h2>
+<h3 id="题目描述-5"><strong>题目描述</strong></h3>
+<p>输入一行字符串，计算其中A-Z大写字母出现的次数</p>
+<h3 id="要点-5"><strong>要点</strong></h3>
+<p>与前一题思路类似</p>
+<h3 id="提交地址-5"><strong>提交地址</strong></h3>
+<p><a href="https://www.nowcoder.com/practice/de7bf0945c1c4bd1aa9d49573b831f3c?tpId=62&amp;tqId=29470&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F2002&amp;qru=%2Fta%2Fsju-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/de7bf0945c1c4bd1aa9d49573b831f3c?tpId=62&amp;tqId=29470&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F2002&amp;qru=%2Fta%2Fsju-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-5"><strong>代码</strong></h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+
+#include &lt;cstdio&gt;
+
+#include &lt;string&gt;
+
+#include &lt;cstring&gt;
+
+using namespace std;
+
+int main()
+
+{
+
+​    string str;
+
+​    int count[26];
+
+​    while (getline(cin, str))
+
+​    {
+
+​        memset(count, 0, sizeof(count));
+
+​        for (int i=0; i&lt;str.size(); i++)
+
+​        {
+
+​            if ('A'&lt;=str[i] &amp;&amp; str[i]&lt;='Z')
+
+​            {
+
+​                 count[int(str[i]-'A')]++;
+
+​            }   
+
+​        }   
+
+​        for (int j=0; j&lt;26; j++)
+
+​        {
+
+​            cout &lt;&lt; char(int('A'+j)) &lt;&lt; &quot;:&quot; &lt;&lt; count[j] &lt;&lt; endl;
+
+​        }
+
+​    }
+
+}
+
+</code></pre>
+<h2 id="6-skew数"><strong>6.  skew数</strong></h2>
+<h3 id="题目描述-6"><strong>题目描述</strong></h3>
+<p>在 skew binary 表示中，第 k 位的值 x[k] 表示 x[k]×(2^(k+1)-1)。每个位上的可能数字是 0 或 1，最后面一个非零位可以是 2，例如，10120(skew) = 1×(2^5-1) + 0×(2^4-1) + 1×(2^3-1) + 2×(2^2-1) + 0×(2^1-1) = 31 + 0 + 7 + 6 + 0 = 44。前十个 skew 数是 0、1、2、10、11、12、20、100、101、以及 102。</p>
+<h3 id="要点-6"><strong>要点</strong></h3>
+<p>次幂函数</p>
+<pre><code>#include &lt;math.h&gt;
+pow(a, b)
+</code></pre>
+<h3 id="提交地址-6"><strong>提交地址</strong></h3>
+<p><a href="https://www.nowcoder.com/practice/5928127cc6604129923346e955e75984?tpId=61&amp;tqId=29517&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/5928127cc6604129923346e955e75984?tpId=61&amp;tqId=29517&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-6"><strong>代码</strong></h3>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+#include &lt;math.h&gt;
+using namespace std;
+
+int main()
+
+{
+
+​    string str;
+
+​    while (cin&gt;&gt;str)
+
+​    {
+
+​        int sum = 0;
+
+​        for(int i=0; i&lt;str.size(); i++)
+
+​        {
+
+​            int id = str.size() - i;
+
+​            sum += int(str[i] - '0') * (pow(2, id)-1);
+
+​        }
+
+​        cout &lt;&lt; sum &lt;&lt; endl;
+
+​    }
+
+}
+</code></pre>
+<h2 id="7-单词替换"><strong>7.  单词替换</strong></h2>
+<h3 id="题目描述-7"><strong>题目描述</strong></h3>
+<p>输入一个字符串，以回车结束（字符串长度&lt;=100）。该字符串由若干个单词组成，单词之间用一个空格隔开，所有单词区分大小写。现需要将其中的某个单词替换成另一个单词，并输出替换之后的字符串。</p>
+<h3 id="要点-7"><strong>要点</strong></h3>
+<ol>
+<li><strong>坑：可能需要替换的单词是其他单词的前缀或者后缀或者中间一部分</strong></li>
+</ol>
+<p>​    <strong>解决方法：在句子、被替换词、替换词的前后都加上空格，保证不会产生查找错误</strong></p>
+<ol start="2">
+<li>
+<p>查找字符串中特定字符或者子串的方法(所有位置)</p>
+<pre><code class="language-C++">int position = 0;
+
+while((position=line.find(str1,position))!=string::npos)
+
+ {
+
+​         //line.erase(position, str1.size());
+
+​         //line.insert(position, str2);
+
+​         line.replace(position,str1.length(),str2);
+
+​         position++;
+
+}
+</code></pre>
+</li>
+<li>
+<p>string类型基本操作</p>
+</li>
+</ol>
+<pre><code>erase(起始位置，长度)
+insert(起始位置，长度)
+replace(起始位置，长度，替换结果)
+substr(起始位置，长度)
+</code></pre>
+<h3 id="提交地址-7"><strong>提交地址</strong></h3>
+<p><a href="https://www.nowcoder.com/practice/5b58a04679d5419caf62c2b238e5c9c7?tpId=61&amp;tqId=29518&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/5b58a04679d5419caf62c2b238e5c9c7?tpId=61&amp;tqId=29518&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-7"><strong>代码</strong></h3>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int main()
+
+{
+
+​    string line;
+
+​    while (getline(cin, line))
+
+​    {
+
+​        line = line;
+
+​        string str1, str2;
+
+​        cin &gt;&gt; str1 &gt;&gt; str2;
+
+​        line = ' ' + line + ' ';
+
+​        str1 = ' ' + str1 + ' ';
+
+​        str2 = ' ' + str2 + ' ';
+
+​        
+
+​        int position = 0;
+
+​        while((position=line.find(str1,position))!=string::npos)
+
+​        {
+
+​            //line.erase(position, str1.size());
+
+​            //line.insert(position, str2);
+
+​            line.replace(position,str1.length(),str2);
+
+​            position++;
+
+​        }
+
+​        
+
+​        cout &lt;&lt; line.substr(1, line.size()-2) &lt;&lt; endl;
+
+​    }
+
+}
+</code></pre>
+<h2 id="8-首字母大写"><strong>8.  首字母大写</strong></h2>
+<h3 id="题目描述-8"><strong>题目描述</strong></h3>
+<p>对一个字符串中的所有单词，如果单词的首字母不是大写字母，则把单词的首字母变成大写字母。 在字符串中，单词之间通过空白符分隔，空白符包括：空格(' ')、制表符('\t')、回车符('\r')、换行符('\n')。</p>
+<h3 id="要点-8"><strong>要点</strong></h3>
+<p>句首和其他位置要分开讨论</p>
+<p>其他位置可以根据空白符确定</p>
+<h3 id="提交地址-8"><strong>提交地址</strong></h3>
+<p><a href="https://www.nowcoder.com/practice/91f9c70e7b6f4c0ab23744055632467a?tpId=61&amp;tqId=29529&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/91f9c70e7b6f4c0ab23744055632467a?tpId=61&amp;tqId=29529&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-8"><strong>代码</strong></h3>
+<pre><code class="language-C++">#include&lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
+
+int main(){
+
+​    string s;
+
+​    getline(cin,s);
+
+​    for(int i=0;i&lt;s.length();i++){
+
+​        if(i==0)
+
+​            s[i]=toupper(s[i]);
+
+​        else{
+
+​            if(s[i-1]==' '||s[i-1]=='\t'||s[i-1]=='\r'||s[i-1]=='\n')
+
+​                s[i]=toupper(s[i]);
+
+​        }
+
+​    }
+
+​    cout&lt;&lt;s&lt;&lt;endl;
+
+}
+</code></pre>
+<h2 id="9-浮点数加法"><strong>9.  浮点数加法</strong></h2>
+<h3 id="题目描述-9"><strong>题目描述</strong></h3>
+<p>对求2个浮点数相加的和 题目中输入输出中出现浮点数都有如下的形式： P1P2...Pi.Q1Q2...Qj 对于整数部分，P1P2...Pi是一个非负整数 对于小数部分，Qj不等于0</p>
+<h3 id="要点-9"><strong>要点</strong></h3>
+<ol>
+<li>
+<p><strong>整数和小数部分位数均可能不相等，所以都需要需要补0，可以分开操作</strong></p>
+</li>
+<li>
+<p>绝对值函数：<code>#include &lt;cmath&gt;</code>  <code>int c = abs(a + b)</code></p>
+</li>
+<li>
+<p>加法进位操作</p>
+<p>变量：两个加数，加数结果（中间变量），一个位结果，一个进位变量</p>
+<pre><code class="language-C++">int add = int((str1[i]-'0') + (str2[i]-'0'));
+result[i] = char('0' + (add + temp)%10);    
+temp = (add + temp)/10;
+</code></pre>
+</li>
+</ol>
+<h3 id="提交地址-9"><strong>提交地址</strong></h3>
+<p><a href="https://www.nowcoder.com/practice/ddec753f446e4ba4944e35378ba635c8?tpId=40&amp;rp=1&amp;ru=%2Fta%2Fkaoyan&amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/ddec753f446e4ba4944e35378ba635c8?tpId=40&amp;rp=1&amp;ru=%2Fta%2Fkaoyan&amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-9"><strong>代码</strong></h3>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
 using namespace std;
 
 int main()
 {
     string str1, str2;
-    int number[128];
-    
-    while(getline(cin, str1))
+    while(cin &gt;&gt; str1)
     {
-        if (str1 == &quot;#&quot;)
-            break;
+        cin &gt;&gt; str2;
+        int flag1 = str1.find('.') + 1; //str1整数长度
+        int flag11 = str1.size() - flag1; //str1小数长度
+        int flag2 = str2.find('.') + 1;
+        int flag22 = str2.size() - flag2;
+        int time1 = abs(flag1 - flag2); //str1和str2整数部分差值
+        int time2 = abs(flag11 - flag22); //str1和str2小数部分差值
+        //整数部分补0
+        if (flag1 &gt; flag2)
+        {
+            for(int i=0; i&lt;time1; i++)
+                str2 = '0' + str2;
+        }
         else
         {
-            getline(cin, str2);
-            memset(number, 0, sizeof(number));
-            for (int i=0; i&lt;str2.size(); i++)
-            {
-                number[int(str2[i])]++;
+            for(int i=0; i&lt;time1; i++)
+                str1 = '0' + str1;
+        }
+        //小数部分补0
+        if (flag11 &gt; flag22)
+        {
+            for(int i=0; i&lt;time2; i++)
+                str2 = str2 + '0';
+        }
+        else
+        {
+            for(int i=0; i&lt;time2; i++)
+                str1 = str1 + '0';
+        }
+        //预存结果格式
+        //注意：此处并没有考虑最高位进位的问题，用例中也没有出现
+        string result = str1;
+        int temp = 0;
+        for (int i=str1.size()-1; i&gt;=0; i--)
+        {
+            if (str1[i] != '.')
+            {   //经典加法操作
+                int add = int((str1[i]-'0') + (str2[i]-'0'));
+                result[i] = char('0' + (add + temp)%10);    
+                temp = (add + temp)/10;
             }
-            for (int j=0; j&lt;str1.size(); j++)
-            {
-                
-                cout &lt;&lt; str1[j] &lt;&lt; &quot; &quot;&lt;&lt; number[int(str1[j])] &lt;&lt; endl;
-            }
         }
-        
+        cout &lt;&lt; result &lt;&lt; endl;
     }
 }
 </code></pre>
-</br>
-<h2 id="5-统计字符">5.  统计字符</h2>
-<h3 id="题目描述-5">题目描述：</h3>
-<p>输入一行字符串，计算其中A-Z大写字母出现的次数</p>
-<h3 id="要点-5">要点：</h3>
-<p>与前一题思路类似</p>
-<h3 id="提交地址-5">提交地址：</h3>
-<p><a href="https://www.nowcoder.com/practice/de7bf0945c1c4bd1aa9d49573b831f3c?tpId=62&amp;tqId=29470&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F2002&amp;qru=%2Fta%2Fsju-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/de7bf0945c1c4bd1aa9d49573b831f3c?tpId=62&amp;tqId=29470&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F2002&amp;qru=%2Fta%2Fsju-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-5">代码：</h3>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;string&gt;
-#include &lt;cstring&gt;
-
-using namespace std;
-
-int main()
-{
-    string str;
-    int count[26];
-    while (getline(cin, str))
-    {
-        memset(count, 0, sizeof(count));
-        for (int i=0; i&lt;str.size(); i++)
-        {
-            if ('A'&lt;=str[i] &amp;&amp; str[i]&lt;='Z')
-            {
-                 count[int(str[i]-'A')]++;
-            }   
-        }
-        
-        for (int j=0; j&lt;26; j++)
-        {
-            cout &lt;&lt; char(int('A'+j)) &lt;&lt; &quot;:&quot; &lt;&lt; count[j] &lt;&lt; endl;
-        }
-    }
-}
-</code></pre>
-</br>
-<h2 id="6-skew数">6.  skew数</h2>
-<h3 id="题目描述-6">题目描述：</h3>
-<p>在 skew binary 表示中，第 k 位的值 x[k] 表示 x[k]×(2^(k+1)-1)。每个位上的可能数字是 0 或 1，最后面一个非零位可以是 2，例如，10120(skew) = 1×(2^5-1) + 0×(2^4-1) + 1×(2^3-1) + 2×(2^2-1) + 0×(2^1-1) = 31 + 0 + 7 + 6 + 0 = 44。前十个 skew 数是 0、1、2、10、11、12、20、100、101、以及 102。</p>
-<h3 id="要点-6">要点：</h3>
-<p>次幂函数<br>
-<code>#include &lt;math.h&gt;</code><br>
-<code>pow(a, b)</code></p>
-<h3 id="提交地址-6">提交地址：</h3>
-<p><a href="https://www.nowcoder.com/practice/5928127cc6604129923346e955e75984?tpId=61&amp;tqId=29517&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/5928127cc6604129923346e955e75984?tpId=61&amp;tqId=29517&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-6">代码：</h3>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;string&gt;
-#include &lt;math.h&gt;
-
-using namespace std;
-
-int main()
-{
-    string str;
-    while (cin&gt;&gt;str)
-    {
-        int sum = 0;
-        for(int i=0; i&lt;str.size(); i++)
-        {
-            int id = str.size() - i;
-            sum += int(str[i] - '0') * (pow(2, id)-1);
-        }
-        cout &lt;&lt; sum &lt;&lt; endl;
-    }
-}
-</code></pre>
-</br>
-<h2 id="7-单词替换">7.  单词替换</h2>
-<h3 id="题目描述-7">题目描述：</h3>
-<p>输入一个字符串，以回车结束（字符串长度&lt;=100）。该字符串由若干个单词组成，单词之间用一个空格隔开，所有单词区分大小写。现需要将其中的某个单词替换成另一个单词，并输出替换之后的字符串。</p>
-<h3 id="要点-7">要点：</h3>
+<h2 id="10-后缀字串排序"><strong>10.  后缀字串排序</strong></h2>
+<h3 id="题目描述-10"><strong>题目描述</strong></h3>
+<p>对于一个字符串，将其后缀子串进行排序，例如grain 其子串有： grain rain ain in n 然后对各子串按字典顺序排序，即： ain,grain,in,n,rain</p>
+<h3 id="要点-10"><strong>要点</strong></h3>
 <ol>
-<li><strong>坑：可能需要替换的单词是其他单词的前缀或者后缀或者中间一部分</strong><br>
-<strong>解决方法：在句子、被替换词、替换词的前后都加上空格，保证不会产生查找错误</strong></li>
-<li>查找字符串中特定字符或者子串的方法(所有位置)</li>
+<li>
+<p>两个步骤：得到所有后缀子串，排序输出</p>
+</li>
+<li>
+<p><strong>得到所有后缀子串方法</strong></p>
+<p>使用<code>str.substr(起始位, 长度)</code>函数</p>
+<p>从单词最后一位开始遍历，同时增加长度</p>
+</li>
+<li>
+<p><strong>排序函数</strong></p>
+<p><code>void sort (RandomAccessIterator first, RandomAccessIterator last, Compare comp);</code></p>
+<p>（1）第一个参数first：是要排序的数组的起始地址。</p>
+<p>（2）第二个参数last：是结束的地址（<strong>最后一个数据的后一个数据的地址</strong>）</p>
+<p>（3）第三个参数comp是排序的方法：可以是从升序也可是降序。如果第三个参数不写，则默认的排序方法是从小到大排序。降序：<code>cmp</code>。</p>
+</li>
 </ol>
-<pre><code>int position = 0;
-while((position=line.find(str1,position))!=string::npos)
- {
-         //line.erase(position, str1.size());
-         //line.insert(position, str2);
-         line.replace(position,str1.length(),str2);
-         position++;
-}
-</code></pre>
-<ol start="3">
-<li>string类型基本操作<br>
-<code>erase(起始位置，长度)</code><br>
-<code>insert(起始位置，长度)</code><br>
-<code>replace(起始位置，长度，替换结果)</code><br>
-<code>substr(起始位置，长度)</code></li>
-</ol>
-<h3 id="提交地址-7">提交地址：</h3>
-<p><a href="https://www.nowcoder.com/practice/5b58a04679d5419caf62c2b238e5c9c7?tpId=61&amp;tqId=29518&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/5b58a04679d5419caf62c2b238e5c9c7?tpId=61&amp;tqId=29518&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-7">代码：</h3>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;string&gt;
+<h3 id="提交地址-10"><strong>提交地址</strong></h3>
+<p><a href="https://www.nowcoder.com/practice/f89f96ea3145418b8e6c3eb75773f65a?tpId=40&amp;rp=1&amp;ru=%2Fta%2Fkaoyan&amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/f89f96ea3145418b8e6c3eb75773f65a?tpId=40&amp;rp=1&amp;ru=%2Fta%2Fkaoyan&amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-10"><strong>代码</strong></h3>
+<pre><code class="language-C++">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
-
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
 using namespace std;
 
 int main()
 {
-    string line;
-    while (getline(cin, line))
+    string str;
+    while(cin &gt;&gt; str)
     {
-        line = line;
-        string str1, str2;
-        cin &gt;&gt; str1 &gt;&gt; str2;
-        line = ' ' + line + ' ';
-        str1 = ' ' + str1 + ' ';
-        str2 = ' ' + str2 + ' ';
-        
-        int position = 0;
-        while((position=line.find(str1,position))!=string::npos)
+        string sub[50];//50对于用例够了
+        //得到后缀子串
+        for (int i=str.size()-1, j=1; i&gt;=0; i--, j++)
         {
-            //line.erase(position, str1.size());
-            //line.insert(position, str2);
-            line.replace(position,str1.length(),str2);
-            position++;
+            sub[i] = str.substr(i,j);
         }
-        
-        cout &lt;&lt; line.substr(1, line.size()-2) &lt;&lt; endl;
+        //排序
+        sort(sub, sub+str.size());//记住！！！！！
+        for (int i=0; i&lt;str.size(); i++)
+            cout &lt;&lt; sub[i] &lt;&lt; endl;
     }
-}
-</code></pre>
-</br>
-<h2 id="8-首字母大写">8.  首字母大写</h2>
-<h3 id="题目描述-8">题目描述：</h3>
-<p>对一个字符串中的所有单词，如果单词的首字母不是大写字母，则把单词的首字母变成大写字母。 在字符串中，单词之间通过空白符分隔，空白符包括：空格(' ')、制表符('\t')、回车符('\r')、换行符('\n')。</p>
-<h3 id="要点-8">要点：</h3>
-<p>句首和其他位置要分开讨论<br>
-其他位置可以根据空白符确定</p>
-<h3 id="提交地址-8">提交地址：</h3>
-<p><a href="https://www.nowcoder.com/practice/91f9c70e7b6f4c0ab23744055632467a?tpId=61&amp;tqId=29529&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/91f9c70e7b6f4c0ab23744055632467a?tpId=61&amp;tqId=29529&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-8">代码：</h3>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;string&gt;
-using namespace std;
-int main(){
-    string s;
-    getline(cin,s);
-    for(int i=0;i&lt;s.length();i++){
-        if(i==0)
-            s[i]=toupper(s[i]);
-        else{
-            if(s[i-1]==' '||s[i-1]=='\t'||s[i-1]=='\r'||s[i-1]=='\n')
-                s[i]=toupper(s[i]);
-        }
-    }
-    cout&lt;&lt;s&lt;&lt;endl;
+    
 }
 </code></pre>
 ]]></content>
