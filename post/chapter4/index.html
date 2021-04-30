@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="世界那么大，我想去看看">
 <meta name="theme-color" content="#343a40">
-<title>2021.04.27：K8s 性能测试 | Czardas</title>
+<title>第四章 字符串 | Czardas</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1619743346090">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="2021.04.27：K8s 性能测试" />
-  <meta name="keywords" content="日常学习&踩坑" />
+  <meta name="description" content="第四章 字符串" />
+  <meta name="keywords" content="机试准备" />
 </head>
 
 <body>
@@ -294,18 +294,72 @@
   <div class="toc-wrapper auto-number auto"
     id="toc_wrapper">
     <ul class="markdownIt-TOC">
-<li>
+<li><a href="#42-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86">4.2 字符串处理</a>
 <ul>
-<li><a href="#1-%E5%88%86%E5%B8%83%E5%BC%8F%E8%B4%9F%E8%BD%BD%E6%B5%8B%E8%AF%95web%E6%B5%8B%E8%AF%95%E5%BA%94%E7%94%A8%E7%9A%84pod%E8%B4%9F%E8%BD%BD%E5%8F%98%E5%8C%96">1. 分布式负载测试：web测试应用的pod负载变化</a>
+<li><a href="#1-%E7%89%B9%E6%AE%8A%E4%B9%98%E6%B3%95">1. 特殊乘法</a>
 <ul>
-<li><a href="#a-%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8">a. 部署Web应用</a></li>
-<li><a href="#b-%E9%83%A8%E7%BD%B2locust%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7">b. 部署Locust（测试工具）</a></li>
-<li><a href="#c-%E9%85%8D%E7%BD%AEtraefik%E7%9B%91%E6%8E%A7-%E5%8F%AF%E7%94%A8prometheus">c. 配置Traefik（监控） 可用Prometheus</a></li>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0">题目描述：</a></li>
+<li><a href="#%E8%A6%81%E7%82%B9">要点：</a></li>
+<li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80">提交地址：</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码：</a></li>
 </ul>
 </li>
-<li><a href="#2-%E7%BD%91%E7%BB%9C%E5%BB%B6%E8%BF%9F%E6%B5%8B%E8%AF%95%E9%80%9A%E8%BF%87%E4%B8%8D%E5%90%8C%E6%96%B9%E5%BC%8F%E8%AE%BF%E9%97%AEweb%E6%B5%8B%E8%AF%95%E5%BA%94%E7%94%A8">2. 网络延迟测试：通过不同方式访问web测试应用</a></li>
-<li><a href="#3-%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E6%9A%82%E6%97%B6%E4%B8%8D%E8%80%83%E8%99%91">3. 网络性能测试(暂时不考虑)</a></li>
-<li><a href="#4-%E4%B8%8D%E5%90%8Ctype%E7%9A%84%E8%B5%84%E6%BA%90%E7%B1%BB%E5%9E%8Bapi%E8%AF%B7%E6%B1%82%E8%80%97%E6%97%B6%E5%88%86%E5%B8%83%E6%B5%8B%E8%AF%95%E6%9A%82%E6%97%B6%E4%B8%8D%E8%80%83%E8%99%91">4. 不同type的资源类型API请求耗时分布测试(暂时不考虑)</a></li>
+<li><a href="#2-%E5%AF%86%E7%A0%81%E7%BF%BB%E8%AF%91">2.  密码翻译</a>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2">题目描述：</a></li>
+<li><a href="#%E8%A6%81%E7%82%B9-2">要点：</a></li>
+<li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80-2">提交地址：</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-2">代码：</a></li>
+</ul>
+</li>
+<li><a href="#3-%E7%AE%80%E5%8D%95%E5%AF%86%E7%A0%81">3.  简单密码</a>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-3">题目描述：</a></li>
+<li><a href="#%E8%A6%81%E7%82%B9-3">要点：</a></li>
+<li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80-3">提交地址：</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-3">代码：</a></li>
+</ul>
+</li>
+<li><a href="#4-%E7%BB%9F%E8%AE%A1%E5%AD%97%E7%AC%A6">4.  统计字符</a>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-4">题目描述：</a></li>
+<li><a href="#%E8%A6%81%E7%82%B9-4">要点：</a></li>
+<li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80-4">提交地址：</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-4">代码：</a></li>
+</ul>
+</li>
+<li><a href="#5-%E7%BB%9F%E8%AE%A1%E5%AD%97%E7%AC%A6">5.  统计字符</a>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-5">题目描述：</a></li>
+<li><a href="#%E8%A6%81%E7%82%B9-5">要点：</a></li>
+<li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80-5">提交地址：</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-5">代码：</a></li>
+</ul>
+</li>
+<li><a href="#6-skew%E6%95%B0">6.  skew数</a>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-6">题目描述：</a></li>
+<li><a href="#%E8%A6%81%E7%82%B9-6">要点：</a></li>
+<li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80-6">提交地址：</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-6">代码：</a></li>
+</ul>
+</li>
+<li><a href="#7-%E5%8D%95%E8%AF%8D%E6%9B%BF%E6%8D%A2">7.  单词替换</a>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-7">题目描述：</a></li>
+<li><a href="#%E8%A6%81%E7%82%B9-7">要点：</a></li>
+<li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80-7">提交地址：</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-7">代码：</a></li>
+</ul>
+</li>
+<li><a href="#8-%E9%A6%96%E5%AD%97%E6%AF%8D%E5%A4%A7%E5%86%99">8.  首字母大写</a>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-8">题目描述：</a></li>
+<li><a href="#%E8%A6%81%E7%82%B9-8">要点：</a></li>
+<li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80-8">提交地址：</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-8">代码：</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -573,8 +627,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://Czardas42.github.io/post/20210427_ks8_openfaas_test/">
-      2021.04.27：K8s 性能测试
+    <a class="post-title-link" href="https://Czardas42.github.io/post/chapter4/">
+      第四章 字符串
     </a>
   </h1>
   <div class="post-meta">
@@ -582,7 +636,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-04-27 20:50:07">2021-04-27</span>
+      <span class="publish-time" data-t="2021-04-29 14:25:20">2021-04-29</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -591,8 +645,8 @@
       <span class="pc-show language" data-lan="category-in">分类于</span>
       
       
-      <a href="https://Czardas42.github.io/tag/daily_record/">
-        <span>日常学习&amp;踩坑</span>
+      <a href="https://Czardas42.github.io/tag/ programming_tests/">
+        <span>机试准备</span>
       </a>
       
       
@@ -601,61 +655,351 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>3<span class="language" data-lan="minute">分钟</span></span>
+      <span>10<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>548<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>2021<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h2 id="1-分布式负载测试web测试应用的pod负载变化">1. 分布式负载测试：web测试应用的pod负载变化</h2>
-<p><strong>准备</strong></p>
-<h3 id="a-部署web应用">a. 部署Web应用</h3>
-<h3 id="b-部署locust测试工具">b. 部署Locust（测试工具）</h3>
-<h3 id="c-配置traefik监控-可用prometheus">c. 配置Traefik（监控） 可用Prometheus</h3>
-<p></br></br><br>
-<strong>测试方法</strong><br>
-打开<a href="http://traefik.locust.io">http://traefik.locust.io</a>页面，点击Edit输入伪造的用户数和用户每秒发送的请求个数，点击Start Swarming就可以开始测试了。</p>
-<p>在测试过程中调整sample-webapp的pod个数（默认设置了1个pod），观察pod的负载变化情况。<br>
-从一段时间的观察中可以看到负载被平均分配给了3个pod.<br>
-在locust的页面中可以实时观察也可以下载测试结果。</p>
-<p></br></br><br>
-<strong>【参考】</strong><br>
-<a href="https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/distributed-load-test.html">https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/distributed-load-test.html</a><br>
-</br></br></p>
-<h2 id="2-网络延迟测试通过不同方式访问web测试应用">2. 网络延迟测试：通过不同方式访问web测试应用</h2>
-<p><strong>测试场景</strong><br>
-场景一、 Kubernetes集群node节点上通过Cluster IP访问sample-webapp<br>
-场景二、Kubernetes集群内部通过service访问sample-webapp<br>
-场景三、在公网上通过traefik ingress访问sample-webapp<br>
-</br></br><br>
-<strong>测试结果</strong><br>
-在这三种场景下的响应时间测试结果如下：<br>
-Kubernetes集群node节点上通过Cluster IP方式访问：2ms<br>
-Kubernetes集群内部通过service访问：6ms<br>
-Kubernetes集群外部通过traefik ingress暴露的地址访问：110ms<br>
-注意：执行测试的node节点/Pod与serivce所在的pod的距离（是否在同一台主机上），对前两个场景可以能会有一定影响。<br>
-</br></br><br>
-<strong>【参考】</strong><br>
-<a href="https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html">https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html</a><br>
-</br></br></p>
-<h2 id="3-网络性能测试暂时不考虑">3. 网络性能测试(暂时不考虑)</h2>
-<p>网络使用flannel的vxlan模式。<br>
-使用iperf进行测试。</p>
-<p>使用Flannel的vxlan模式实现每个pod一个IP的方式，会比宿主机直接互联的网络性能损耗30%～40%，符合网上流传的测试结论。而flannel的host-gw模式比起宿主机互连的网络性能损耗大约是10%。</p>
-<p>Vxlan会有一个封包解包的过程，所以会对网络性能造成较大的损耗，而host-gw模式是直接使用路由信息，网络损耗小。<br>
-<strong>【参考】</strong><br>
-<a href="https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html">https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html</a><br>
-</br></br></p>
-<h2 id="4-不同type的资源类型api请求耗时分布测试暂时不考虑">4. 不同type的资源类型API请求耗时分布测试(暂时不考虑)</h2>
+              <h1 id="42-字符串处理">4.2 字符串处理</h1>
+<h2 id="1-特殊乘法">1. 特殊乘法</h2>
+<h3 id="题目描述">题目描述：</h3>
+<p>写个算法，对2个小于1000000000的输入，求结果。 特殊乘法举例：123 * 45 = 1<em>4 +1</em>5 +2<em>4 +2</em>5 +3<em>4+3</em>5</p>
+<h3 id="要点">要点：</h3>
+<ol>
+<li>char和int类型的转换：<code>int((str1[i]-'0')*(str2[j]-'0'))</code></li>
+<li>用字符串处理数字的思路</li>
+</ol>
+<h3 id="提交地址">提交地址：</h3>
+<p><a href="https://www.nowcoder.com/practice/a5edebf0622045468436c74c3a34240f?tpId=60&amp;tqId=29490&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/a5edebf0622045468436c74c3a34240f?tpId=60&amp;tqId=29490&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码">代码：</h3>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int main()
+{
+    string str1, str2;
+    while(cin &gt;&gt; str1 &gt;&gt; str2)
+    {
+        int count = 0;
+        for (int i=0; i&lt;str1.size(); i++)
+        {
+            for (int j=0; j&lt;str2.size(); j++)
+            {
+                count = count + int((str1[i]-'0')*(str2[j]-'0'));
+            }
+        }
+        cout &lt;&lt; count &lt;&lt; endl;
+    }
+}
+
+</code></pre>
 </br>
-**【参考】**
-<https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html>
-<https://supereagle.github.io/2017/03/09/kubemark/>
+<h2 id="2-密码翻译">2.  密码翻译</h2>
+<h3 id="题目描述-2">题目描述：</h3>
+<p>在情报传递过程中，为了防止情报被截获，往往需要对情报用一定的方式加密，简单的加密算法虽然不足以完全避免情报被破译，但仍然能防止情报被轻易的识别。我们给出一种最简的的加密方法，对给定的一个字符串，把其中从a-y,A-Y的字母用其后继字母替代，把z和Z用a和A替代，则可得到一个简单的加密字符串。</p>
+<h3 id="要点-2">要点：</h3>
+<ol>
+<li>C++的if语句不可以使用连等，需要用<code>&amp;&amp;</code>分开表示：<code>if ((int('a')&lt;=num &amp;&amp; num&lt;=int('z')) || (int('A')&lt;=num &amp;&amp; num&lt;=int('Z')))</code></li>
+<li>用ASCII码鉴别字符</li>
+<li>强制类型转换：<code>char()</code>和<code>int()</code></li>
+<li>要求整行输入，需要用到<code>getline(cin, str)</code></li>
+</ol>
+<h3 id="提交地址-2">提交地址：</h3>
+<p><a href="https://www.nowcoder.com/practice/a5edebf0622045468436c74c3a34240f?tpId=60&amp;tqId=29490&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/a5edebf0622045468436c74c3a34240f?tpId=60&amp;tqId=29490&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-2">代码：</h3>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int main()
+{
+    string str;
+    while(getline(cin, str))
+    {
+        for(int i=0; i&lt;str.size(); i++)
+        {
+            int num = int(str[i]);
+            if ((int('a')&lt;=num &amp;&amp; num&lt;=int('z')) || (int('A')&lt;=num &amp;&amp; num&lt;=int('Z')))
+            {
+                if (str[i] == 'z')
+                {
+                    str[i] == 'a';
+                }
+                else if(str[i] == 'Z')
+                {
+                    str[i] == 'A';
+                }
+                else
+                {
+                    str[i] = char(int(str[i]) + 1);
+                }
+                
+            }
+        }
+        cout &lt;&lt; str &lt;&lt; endl;
+    }
+}
+</code></pre>
+</br>
+<h2 id="3-简单密码">3.  简单密码</h2>
+<h3 id="题目描述-3">题目描述：</h3>
+<p>Julius Caesar曾经使用过一种很简单的密码。 对于明文中的每个字符，将它用它字母表中后5位对应的字符来代替，这样就得到了密文。 比如字符A用F来代替。如下是密文和明文中字符的对应关系。 密文 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 明文 V W X Y Z A B C D E F G H I J K L M N O P Q R S T U 你的任务是对给定的密文进行解密得到明文。 你需要注意的是，密文中出现的字母都是大写字母。密文中也包括非字母的字符，对这些字符不用进行解码。</p>
+<h3 id="要点-3">要点：</h3>
+<p><strong>循环平移类问题</strong><br>
+id：差量，从零开始<br>
+begin：初始量<br>
+公式1：<code>初始量 +（id + 平移量）% 个数</code><br>
+公式2：<code>初始量 +（id - 平移量 + 个数）% 个数</code><br>
+例如本题，A-Z每个字母取其前五的字母：<br>
+<code>str[i] = char(int('A') + (int(str[i])-int('A')-5+26)%26);</code></p>
+<h3 id="提交地址-3">提交地址：</h3>
+<p><a href="https://www.nowcoder.com/practice/ff99c43dd07f4e95a8f2f5448da3772a?tpId=61&amp;tqId=29562&amp;tPage=4&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/ff99c43dd07f4e95a8f2f5448da3772a?tpId=61&amp;tqId=29562&amp;tPage=4&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-3">代码：</h3>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int main()
+{
+    string str;
+    while (getline(cin, str))
+    {
+        if (str == &quot;START&quot; || str == &quot;END&quot;)
+            continue;
+        else if(str == &quot;ENDOFINPUT&quot;)
+            break;
+        else
+        {
+            for(int i=0; i&lt;str.size(); i++)
+            {
+                if (int('A') &lt;= int(str[i]) &amp;&amp; int(str[i])&lt;= int('Z'))
+                {
+                    str[i] = char(int('A') + (int(str[i])-int('A')-5+26)%26);
+                }
+            }
+            cout &lt;&lt; str &lt;&lt; endl;
+        }
+    }
+}
+</code></pre>
+</br>
+<h2 id="4-统计字符">4.  统计字符</h2>
+<h3 id="题目描述-4">题目描述：</h3>
+<p>统计一个给定字符串中指定的字符出现的次数。</p>
+<h3 id="要点-4">要点：</h3>
+<ol>
+<li>数组清零/初始化方法：（cstring库）<br>
+<code>memset(number, 0, sizeof(number));</code></li>
+<li>统计/计数问题思路：<strong>先全部计数，再按照要求输出即可</strong></li>
+</ol>
+<h3 id="提交地址-4">提交地址：</h3>
+<p><a href="https://www.nowcoder.com/practice/4ec4325634634193a7cd6798037697a8?tpId=63&amp;tqId=29574&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F9001&amp;qru=%2Fta%2Fzju-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/4ec4325634634193a7cd6798037697a8?tpId=63&amp;tqId=29574&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F9001&amp;qru=%2Fta%2Fzju-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-4">代码：</h3>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+
+using namespace std;
+
+int main()
+{
+    string str1, str2;
+    int number[128];
+    
+    while(getline(cin, str1))
+    {
+        if (str1 == &quot;#&quot;)
+            break;
+        else
+        {
+            getline(cin, str2);
+            memset(number, 0, sizeof(number));
+            for (int i=0; i&lt;str2.size(); i++)
+            {
+                number[int(str2[i])]++;
+            }
+            for (int j=0; j&lt;str1.size(); j++)
+            {
+                
+                cout &lt;&lt; str1[j] &lt;&lt; &quot; &quot;&lt;&lt; number[int(str1[j])] &lt;&lt; endl;
+            }
+        }
+        
+    }
+}
+</code></pre>
+</br>
+<h2 id="5-统计字符">5.  统计字符</h2>
+<h3 id="题目描述-5">题目描述：</h3>
+<p>输入一行字符串，计算其中A-Z大写字母出现的次数</p>
+<h3 id="要点-5">要点：</h3>
+<p>与前一题思路类似</p>
+<h3 id="提交地址-5">提交地址：</h3>
+<p><a href="https://www.nowcoder.com/practice/de7bf0945c1c4bd1aa9d49573b831f3c?tpId=62&amp;tqId=29470&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F2002&amp;qru=%2Fta%2Fsju-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/de7bf0945c1c4bd1aa9d49573b831f3c?tpId=62&amp;tqId=29470&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F2002&amp;qru=%2Fta%2Fsju-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-5">代码：</h3>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+
+using namespace std;
+
+int main()
+{
+    string str;
+    int count[26];
+    while (getline(cin, str))
+    {
+        memset(count, 0, sizeof(count));
+        for (int i=0; i&lt;str.size(); i++)
+        {
+            if ('A'&lt;=str[i] &amp;&amp; str[i]&lt;='Z')
+            {
+                 count[int(str[i]-'A')]++;
+            }   
+        }
+        
+        for (int j=0; j&lt;26; j++)
+        {
+            cout &lt;&lt; char(int('A'+j)) &lt;&lt; &quot;:&quot; &lt;&lt; count[j] &lt;&lt; endl;
+        }
+    }
+}
+</code></pre>
+</br>
+<h2 id="6-skew数">6.  skew数</h2>
+<h3 id="题目描述-6">题目描述：</h3>
+<p>在 skew binary 表示中，第 k 位的值 x[k] 表示 x[k]×(2^(k+1)-1)。每个位上的可能数字是 0 或 1，最后面一个非零位可以是 2，例如，10120(skew) = 1×(2^5-1) + 0×(2^4-1) + 1×(2^3-1) + 2×(2^2-1) + 0×(2^1-1) = 31 + 0 + 7 + 6 + 0 = 44。前十个 skew 数是 0、1、2、10、11、12、20、100、101、以及 102。</p>
+<h3 id="要点-6">要点：</h3>
+<p>次幂函数<br>
+<code>#include &lt;math.h&gt;</code><br>
+<code>pow(a, b)</code></p>
+<h3 id="提交地址-6">提交地址：</h3>
+<p><a href="https://www.nowcoder.com/practice/5928127cc6604129923346e955e75984?tpId=61&amp;tqId=29517&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/5928127cc6604129923346e955e75984?tpId=61&amp;tqId=29517&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-6">代码：</h3>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+#include &lt;math.h&gt;
+
+using namespace std;
+
+int main()
+{
+    string str;
+    while (cin&gt;&gt;str)
+    {
+        int sum = 0;
+        for(int i=0; i&lt;str.size(); i++)
+        {
+            int id = str.size() - i;
+            sum += int(str[i] - '0') * (pow(2, id)-1);
+        }
+        cout &lt;&lt; sum &lt;&lt; endl;
+    }
+}
+</code></pre>
+</br>
+<h2 id="7-单词替换">7.  单词替换</h2>
+<h3 id="题目描述-7">题目描述：</h3>
+<p>输入一个字符串，以回车结束（字符串长度&lt;=100）。该字符串由若干个单词组成，单词之间用一个空格隔开，所有单词区分大小写。现需要将其中的某个单词替换成另一个单词，并输出替换之后的字符串。</p>
+<h3 id="要点-7">要点：</h3>
+<ol>
+<li><strong>坑：可能需要替换的单词是其他单词的前缀或者后缀或者中间一部分</strong><br>
+<strong>解决方法：在句子、被替换词、替换词的前后都加上空格，保证不会产生查找错误</strong></li>
+<li>查找字符串中特定字符或者子串的方法(所有位置)</li>
+</ol>
+<pre><code>int position = 0;
+while((position=line.find(str1,position))!=string::npos)
+ {
+         //line.erase(position, str1.size());
+         //line.insert(position, str2);
+         line.replace(position,str1.length(),str2);
+         position++;
+}
+</code></pre>
+<ol start="3">
+<li>string类型基本操作<br>
+<code>erase(起始位置，长度)</code><br>
+<code>insert(起始位置，长度)</code><br>
+<code>replace(起始位置，长度，替换结果)</code><br>
+<code>substr(起始位置，长度)</code></li>
+</ol>
+<h3 id="提交地址-7">提交地址：</h3>
+<p><a href="https://www.nowcoder.com/practice/5b58a04679d5419caf62c2b238e5c9c7?tpId=61&amp;tqId=29518&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/5b58a04679d5419caf62c2b238e5c9c7?tpId=61&amp;tqId=29518&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-7">代码：</h3>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int main()
+{
+    string line;
+    while (getline(cin, line))
+    {
+        line = line;
+        string str1, str2;
+        cin &gt;&gt; str1 &gt;&gt; str2;
+        line = ' ' + line + ' ';
+        str1 = ' ' + str1 + ' ';
+        str2 = ' ' + str2 + ' ';
+        
+        int position = 0;
+        while((position=line.find(str1,position))!=string::npos)
+        {
+            //line.erase(position, str1.size());
+            //line.insert(position, str2);
+            line.replace(position,str1.length(),str2);
+            position++;
+        }
+        
+        cout &lt;&lt; line.substr(1, line.size()-2) &lt;&lt; endl;
+    }
+}
+</code></pre>
+</br>
+<h2 id="8-首字母大写">8.  首字母大写</h2>
+<h3 id="题目描述-8">题目描述：</h3>
+<p>对一个字符串中的所有单词，如果单词的首字母不是大写字母，则把单词的首字母变成大写字母。 在字符串中，单词之间通过空白符分隔，空白符包括：空格(' ')、制表符('\t')、回车符('\r')、换行符('\n')。</p>
+<h3 id="要点-8">要点：</h3>
+<p>句首和其他位置要分开讨论<br>
+其他位置可以根据空白符确定</p>
+<h3 id="提交地址-8">提交地址：</h3>
+<p><a href="https://www.nowcoder.com/practice/91f9c70e7b6f4c0ab23744055632467a?tpId=61&amp;tqId=29529&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/91f9c70e7b6f4c0ab23744055632467a?tpId=61&amp;tqId=29529&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-8">代码：</h3>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
+int main(){
+    string s;
+    getline(cin,s);
+    for(int i=0;i&lt;s.length();i++){
+        if(i==0)
+            s[i]=toupper(s[i]);
+        else{
+            if(s[i-1]==' '||s[i-1]=='\t'||s[i-1]=='\r'||s[i-1]=='\n')
+                s[i]=toupper(s[i]);
+        }
+    }
+    cout&lt;&lt;s&lt;&lt;endl;
+}
+</code></pre>
 
             </div>
             
@@ -668,7 +1012,7 @@ Kubernetes集群外部通过traefik ingress暴露的地址访问：110ms<br>
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://Czardas42.github.io/post/20210427_ks8_openfaas_test/" title="2021.04.27：K8s 性能测试">https://Czardas42.github.io/post/20210427_ks8_openfaas_test/</a>
+      <a href="https://Czardas42.github.io/post/chapter4/" title="第四章 字符串">https://Czardas42.github.io/post/chapter4/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -677,21 +1021,17 @@ Kubernetes集群外部通过traefik ingress暴露的地址访问：110ms<br>
   </ul>
   <div class="tags">
     
-      <a href="https://Czardas42.github.io/tag/daily_record/"># 日常学习&amp;踩坑</a>
+      <a href="https://Czardas42.github.io/tag/ programming_tests/"># 机试准备</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="可信计算" href="https://Czardas42.github.io/post/Trusted_Computing/">可信计算</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="可信计算" href="https://Czardas42.github.io/post/Trusted_Computing/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="2021.04.27：Grafana监控平台部署（对于K8s集群各节点）" href="https://Czardas42.github.io/post/20210427_grafana/">2021.04.27：Grafana监控平台部署（对于K8s集群各节点）</a>
-        <a class="nav-mobile-next" title="2021.04.27：Grafana监控平台部署（对于K8s集群各节点）" href="https://Czardas42.github.io/post/20210427_grafana/">下一篇</a>
+        <a class="nav-pc-next" title="云计算大作业知识点" href="https://Czardas42.github.io/post/openfaas_project_notes/">云计算大作业知识点</a>
+        <a class="nav-mobile-next" title="云计算大作业知识点" href="https://Czardas42.github.io/post/openfaas_project_notes/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
