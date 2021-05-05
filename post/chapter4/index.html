@@ -9,7 +9,7 @@
 <meta name="description" content="世界那么大，我想去看看">
 <meta name="theme-color" content="#343a40">
 <title>Chapter4 字符串：4.2 字符串处理 | Czardas</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1620035533682">
+<link rel="shortcut icon" href="/favicon.ico?v=1620200214997">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -276,19 +276,19 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">8</span>
+        <span class="site-item-stat-count">11</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="">
-        <span class="site-item-stat-count">3</span>
+        <span class="site-item-stat-count">4</span>
         <span class="site-item-stat-name language" data-lan="category">分类</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="/tags/">
-        <span class="site-item-stat-count">3</span>
+        <span class="site-item-stat-count">4</span>
         <span class="site-item-stat-name language" data-lan="tag">标签</span>
       </a>
     </div>
@@ -1833,6 +1833,142 @@ int main()
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/vpc_p2p/"" data-c="
+          &lt;h4 id=&#34;概念&#34;&gt;概念&lt;/h4&gt;
+&lt;p&gt;对等连接是指两个VPC之间的网络连接。可以使用私有IP地址在两个VPC之间进行通信，就像两个VPC在同一个网络中一样。同一区域内，可以在自己的VPC之间创建对等连接，也可以在自己的VPC与其他帐户的VPC之间创建对等连接。不同区域间的VPC之间不能创建对等连接。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620200083815.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;约束与限制&#34;&gt;约束与限制&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;有重叠子网网段的VPC建立的对等连接，可能不生效。&lt;/li&gt;
+&lt;li&gt;两个VPC之间不能同时建立多个VPC对等连接。&lt;/li&gt;
+&lt;li&gt;不同区域的VPC不能创建对等连接。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;路由配置&#34;&gt;路由配置&lt;/h4&gt;
+&lt;p&gt;如图1所示，VPC1和VPC2需要通过添加路由来建立对等关系。对等连接路由配置如图2所示，配置完成后，VPC1和VPC2就建立了对等关系，可以相互通信。&lt;/p&gt;
+&lt;p&gt;指向整个VPC的对等连接的路由配置，目的地址为对端VPC的CIDR，下一跳地址为对等连接ID。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;无类域间路由（Classless Inter-Domain Routing，CIDR）可以将路由集中起来，在路由表中更灵活地定义地址。它不区分 A 类、B 类、C 类地址，而是使用 CIDR 前缀的值指定地址中作为网络 ID 的位数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620200105962.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620200120934.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;操作流程以跨用户为例&#34;&gt;操作流程（以跨用户为例）&lt;/h4&gt;
+&lt;p&gt;跨帐户创建VPC对等连接时，一端VPC发起创建对等连接请求，对等连接状态为待接受。待对方接受该创建请求后，对等连接状态变为已接受，请求方和接受方须分别配置对等连接路由信息，才能使两个VPC互通。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620200145251.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;a href=&#34;https://support.huaweicloud.com/usermanual-vpc/zh-cn_topic_0046655038.html&#34;&gt;https://support.huaweicloud.com/usermanual-vpc/zh-cn_topic_0046655038.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;&lt;strong&gt;实验过程中搭建K8s集群所用到VPC对等连接操作实例&lt;/strong&gt;&lt;/u&gt;&lt;/p&gt;
+">VPC对等连接</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/openfaas/"" data-c="
+          &lt;h4 id=&#34;layers-工作流程&#34;&gt;Layers &amp;amp; 工作流程&lt;/h4&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620199885176.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;无服务器函数变得简单&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;推荐的部署OpenFaaS平台都是Kubernetes&lt;/li&gt;
+&lt;li&gt;OpenFaaS Cloud建立在OpenFaaS的基础上，可通过GitHub.com或自行托管的GitLab交付GitOps&lt;/li&gt;
+&lt;li&gt;NATS提供异步执行和排队&lt;/li&gt;
+&lt;li&gt;Prometheus提供指标并通过AlertManager启用自动缩放&lt;/li&gt;
+&lt;li&gt;容器注册表包含每个可以通过API部署在OpenFaaS上的不可变工件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620199913601.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;可以通过其REST API，CLI或UI来访问网关。所有服务或功能都会暴露默认路由，但是自定义域也可以用于每个端点。&lt;/p&gt;
+&lt;h4 id=&#34;gateway&#34;&gt;Gateway&lt;/h4&gt;
+&lt;p&gt;OpenFaaS的Gateway是一个golang实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;UI&lt;/li&gt;
+&lt;li&gt;部署函数&lt;/li&gt;
+&lt;li&gt;监控&lt;/li&gt;
+&lt;li&gt;自动伸缩&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620199930497.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。&lt;/p&gt;
+&lt;p&gt;Gateway是OpenFaaS最为重要的一个组件。Gateway本质上就是一个rest转发服务，一个一个的handler，每个模块之间的耦合性不是很高，可以很容易的去拆卸，自定义实现相应的模块。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;源码解读：https://zhuanlan.zhihu.com/p/41056766&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;watchdog&#34;&gt;watchdog&lt;/h4&gt;
+&lt;p&gt;watchdog提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从API网关来的HTTP请求，然后调用程序。watchdog是一个小型的Golang服务&lt;/p&gt;
+&lt;p&gt;下图展示了它是如何工作的：&lt;/p&gt;
+&lt;p&gt;一个小型的web服务，可以为每个传入的HTTP请求分配所需要的进程。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620199949953.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;每个函数都需要嵌入这个二进制文件并将其作为&lt;code&gt;ENTRYPOINT&lt;/code&gt; 或 &lt;code&gt;CMD&lt;/code&gt;，实际上是把它作为容器的初始化进程。一旦进程被创建分支，watchdog就会通过&lt;code&gt;stdin&lt;/code&gt; 传递HTTP请求并从&lt;code&gt;stdout&lt;/code&gt;中读取HTTP响应。这意味着程序无需知道web和HTTP的任何信息。&lt;/p&gt;
+&lt;h4 id=&#34;of-watchdog&#34;&gt;of-watchdog&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;of-watchdog&lt;/code&gt;项目于2017年10月启动，该组件适合在生产中使用，并且是&lt;a href=&#34;https://github.com/openfaas&#34;&gt;openfaas&lt;/a&gt; GitHub组织的一部分。&lt;/p&gt;
+&lt;p&gt;of-watchdog是函数和微服务之间的&lt;strong&gt;反向代理&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;of-watchdog的默认模式是http模式，部署服务时of-watchdog会fork一个进程（假设为进程A），进程A会监听一个端口，of-wahtchdog收到的所有请求都会转发到进程A监听的端口，HTTP模式的官方架构图如下：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620199965913.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;如图所示，代码是在右侧的child里面执行的，这个child从3000端口收到of-watchdog转发过来的外部请求，然后内部处理掉。&lt;/p&gt;
+&lt;p&gt;主要区别在于：经典的看门狗会为每个请求派生一个进程，以提供最高级别的可移植性，&lt;strong&gt;但是of-watchdog启用了一种&lt;code&gt;http&lt;/code&gt;模式，在该模式下，该进程可以重复使用，以抵消分叉的延迟&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;of-watchdog的优点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一，并发性能和吞吐量最优；&lt;/li&gt;
+&lt;li&gt;第二，相比watchdog，对内存的使用更高效；&lt;/li&gt;
+&lt;li&gt;第三，建好的数据库连接可以反复使用；&lt;/li&gt;
+&lt;li&gt;第四，容器操作系统的临时文件夹(/tmp/目录)，是所有请求共用的，例如可以做临时缓存用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;函数调用流程&#34;&gt;函数调用流程&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_38616705/article/details/107385293&#34;&gt;https://blog.csdn.net/weixin_38616705/article/details/107385293&lt;/a&gt;&lt;/p&gt;
+">OpenFaaS</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/kubernetes/"" data-c="
+          &lt;h3 id=&#34;整体架构&#34;&gt;整体架构&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620199629518.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;Kubernetes属于主从分布式架构，主要由Master Node和Worker Node组成，以及包括客户端命令行工具kubectl和其它附加项。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;**Master Node：**作为控制节点，对集群进行调度管理；Master Node由API Server、Scheduler、Cluster State Store和Controller-Manger Server所组成&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;**Worker Node：**作为真正的工作节点，运行业务应用的容器；Worker Node包含kubelet、kube proxy和Container Runtime&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;**kubectl：**用于通过命令行与API Server进行交互，而对Kubernetes进行操作，实现在集群中进行各种资源的增删改查等操作&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;master-node&#34;&gt;Master Node&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620199664616.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;1-api-serverapi服务器&#34;&gt;1. &lt;strong&gt;API Server（API服务器）&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;API Server主要用来处理REST的操作，确保它们生效，并执行相关业务逻辑，以及更新etcd（或者其他存储）中的相关对象。&lt;/p&gt;
+&lt;h4 id=&#34;2-cluster-state-store集群状态存储&#34;&gt;2. &lt;strong&gt;Cluster state store（集群状态存储）&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;Kubernetes默认使用etcd作为集群整体存储。集群的所有状态都存储在etcd实例中，并具有监控的能力，因此当etcd中的信息发生变化时，就能够快速的通知集群中相关的组件。&lt;/p&gt;
+&lt;h4 id=&#34;3-controller-manager-server控制管理服务器&#34;&gt;3. &lt;strong&gt;Controller-Manager Server（控制管理服务器）&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;Controller-Manager Serve用于执行大部分的集群层次的功能，它既执行生命周期功能(例如：命名空间创建和生命周期、事件垃圾收集、已终止垃圾收集、级联删除垃圾收集、node垃圾收集)，也执行API业务逻辑（例如：pod的弹性扩容）。&lt;/p&gt;
+&lt;h4 id=&#34;4-scheduler调度器&#34;&gt;4. &lt;strong&gt;Scheduler（调度器）&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;scheduler组件为容器自动选择运行的主机。依据请求资源的可用性，服务请求的质量等约束条件，scheduler监控未绑定的pod，并将其绑定至特定的node节点。&lt;/p&gt;
+&lt;h3 id=&#34;worker-node&#34;&gt;Worker Node&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620199680953.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;1-kubelet&#34;&gt;1. kubelet&lt;/h4&gt;
+&lt;p&gt;kubelet负责管理pods和它们上面的容器，images镜像、volumes、etc。&lt;/p&gt;
+&lt;h4 id=&#34;2-kube-proxy&#34;&gt;2. kube-proxy&lt;/h4&gt;
+&lt;p&gt;kube proxy负责为Pod创建代理服务；引到访问至服务；并实现服务到Pod的路由和转发，以及通过应用的负载均衡。每一个Node都会运行一个kube-proxy，kube proxy通过iptables规则引导访问至服务IP，并将重定向至正确的后端应用，通过这种方式kube-proxy提供了一个高可用的负载均衡解决方案。&lt;/p&gt;
+&lt;h4 id=&#34;3-container-runtime&#34;&gt;3. Container Runtime&lt;/h4&gt;
+&lt;p&gt;每一个Node都会运行一个Container Runtime，其负责下载镜像和运行容器。kubelet使用Unix socket之上的gRPC框架与容器运行时进行通信，kubelet作为客户端，而CRI shim作为服务器。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620199694750.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;4-fluentd-elasticsearch&#34;&gt;4. &lt;strong&gt;Fluentd-elasticsearch&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;提供集群日志采集、存储与查询&lt;/p&gt;
+&lt;h3 id=&#34;pod&#34;&gt;Pod&lt;/h3&gt;
+&lt;h4 id=&#34;1-定义&#34;&gt;1. 定义&lt;/h4&gt;
+&lt;p&gt;**Pod是可以在 Kubernetes 中创建和管理的、最小的可部署的计算单元。**Pod的设计理念是支持多个容器在一个Pod中共享网络地址和文件系统，可以通过进程间通信和文件共享这种简单高效的方式组合完成服务。&lt;/p&gt;
+&lt;h4 id=&#34;2-pod的调度方法&#34;&gt;2. Pod的调度方法&lt;/h4&gt;
+&lt;p&gt;Scheduler负责根据调度策略自动将Pod部署到合适Node中，调度策略分为预选策略和优选策略，Pod的整个调度过程分为两步：&lt;/p&gt;
+&lt;p&gt;1）预选Node：遍历集群中所有的Node，按照具体的预选策略筛选出符合要求的Node列表。如没有Node符合预选策略规则，该Pod就会被挂起，直到集群中出现符合要求的Node。&lt;/p&gt;
+&lt;p&gt;2）优选Node：预选Node列表的基础上，按照优选策略为待选的Node进行打分和排序，从中获取最优Node。&lt;/p&gt;
+&lt;h3 id=&#34;deployment-service-job&#34;&gt;Deployment &amp;amp; Service &amp;amp; Job&lt;/h3&gt;
+&lt;h4 id=&#34;1-部署deployment&#34;&gt;1. 部署(Deployment)&lt;/h4&gt;
+&lt;p&gt;部署表示用户对K8s集群的一次更新操作。可以是创建一个新的服务，更新一个新的服务，也可以是滚动升级一个服务。滚动升级一个服务，实际是创建一个新的RS，然后逐渐将新RS中副本数增加到理想状态，将旧RS中的副本数减小到0的复合操作。&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;&lt;strong&gt;删除pod的正确方法&lt;/strong&gt;&lt;/u&gt;&lt;/p&gt;
+&lt;h4 id=&#34;2-服务service&#34;&gt;2. 服务（Service）&lt;/h4&gt;
+&lt;p&gt;一个Pod只是一个运行服务的实例，随时可能在一个节点上停止，在另一个节点以一个新的IP启动一个新的Pod，因此不能以确定的IP和端口号提供服务。要稳定地提供服务需要服务发现和负载均衡能力。服务发现完成的工作，是针对客户端访问的服务，找到对应的的后端服务实例。在K8s集群中，客户端需要访问的服务就是Service对象。每个Service会对应一个集群内部有效的虚拟IP，集群内部通过虚拟IP访问一个服务。&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;&lt;strong&gt;结合Prometheus部署&lt;/strong&gt;&lt;/u&gt;&lt;/p&gt;
+&lt;h4 id=&#34;3-任务job&#34;&gt;3. 任务（Job）&lt;/h4&gt;
+&lt;p&gt;Job是K8s用来控制批处理型任务的API对象。Job 会创建一个或者多个 Pods，并将继续重试 Pods 的执行，直到指定数量的 Pods 成功终止。 随着 Pods 成功结束，Job 跟踪记录成功完成的 Pods 个数。 当数量达到指定的成功个数阈值时，任务（即 Job）结束。 删除 Job 的操作会清除所创建的全部 Pods。&lt;/p&gt;
+">Kubernetes</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/A_Little_Story/"" data-c="
