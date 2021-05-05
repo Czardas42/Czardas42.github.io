@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Czardas42.github.io/</id>
     <title>Czardas</title>
-    <updated>2021-05-05T07:37:18.681Z</updated>
+    <updated>2021-05-05T07:55:23.866Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Czardas42.github.io/"/>
     <link rel="self" href="https://Czardas42.github.io/atom.xml"/>
@@ -10,6 +10,990 @@
     <logo>https://Czardas42.github.io/images/avatar.png</logo>
     <icon>https://Czardas42.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Czardas</rights>
+    <entry>
+        <title type="html"><![CDATA[Chapter6数学问题：6.3质数]]></title>
+        <id>https://Czardas42.github.io/post/chapter6_6.3/</id>
+        <link href="https://Czardas42.github.io/post/chapter6_6.3/">
+        </link>
+        <updated>2021-05-05T07:52:58.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="判断记录质数的方法">判断/记录质数的方法</h2>
+<ol>
+<li><code>sqrt(n)</code></li>
+<li>素数筛法</li>
+</ol>
+<h2 id="1-素数判定">1.  素数判定</h2>
+<h3 id="题目描述"><strong>题目描述</strong></h3>
+<p>给定一个数n，要求判断其是否为素数（0,1，负数都是非素数）。</p>
+<h3 id="要点"><strong>要点</strong></h3>
+<p>对于负数、0、1要特别处理</p>
+<h3 id="提交地址">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/5fd9c28b1ce746dd99287a04d8fa9002?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/5fd9c28b1ce746dd99287a04d8fa9002?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+using namespace std;
+
+int main()
+{
+    int num;
+    while (cin &gt;&gt; num)
+    {
+        if (num&lt;=1)
+        {
+            cout &lt;&lt; &quot;no&quot; &lt;&lt; endl;
+            continue;
+        }
+        
+        bool flag = true;
+        for (int i=num-1; i&gt;=sqrt(num); i--)
+        {
+            if (num % i ==0)
+            {
+                flag = false;
+                break;
+            }
+        }
+        
+        if (flag == true)
+        {
+            cout &lt;&lt; &quot;yes&quot; &lt;&lt; endl;
+        }
+        else
+        {
+            cout &lt;&lt; &quot;no&quot; &lt;&lt; endl;
+        }
+    }
+}
+</code></pre>
+<h2 id="2-素数">2.  素数</h2>
+<h3 id="题目描述-2"><strong>题目描述</strong></h3>
+<p>输入一个整数n(2&lt;=n&lt;=10000)，要求输出所有从1到这个整数之间(不包括1和这个整数)个位为1的素数，如果没有则输出-1。</p>
+<h3 id="要点-2"><strong>要点</strong></h3>
+<p>方法一：穷举</p>
+<p><strong>方法二【素数筛法】：找到一个素数，就要标记其所有倍数为非负数无需再针对每个数字进行判断</strong></p>
+<p><strong>（实际操作中，只需从平方开始标记即可）</strong></p>
+<h3 id="提交地址-2">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/7f4be54b37a04fdaa4ee545819151114?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/7f4be54b37a04fdaa4ee545819151114?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码穷举">代码（穷举）</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+int main()
+{
+    int range;
+    while (cin &gt;&gt; range)
+    {
+        if (range &lt;= 11)
+        {
+            cout &lt;&lt; &quot;-1&quot; &lt;&lt; endl;
+            continue;
+        }
+        
+        for (int num =11; num&lt;range; num++)
+        {
+            bool flag = true;
+            for (int i=num-1; i&gt;=sqrt(num); i--)
+            {
+                if (num % i == 0)
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            
+            if ((flag == true) &amp;&amp; (num%10 == 1))
+            {
+                if (num == 11)
+                    cout &lt;&lt; num;
+                else
+                    cout &lt;&lt; &quot; &quot; &lt;&lt; num ;
+            }
+        }
+        cout &lt;&lt; endl;
+    }
+    
+    return 0;
+}
+</code></pre>
+<h3 id="代码素数筛法">代码（素数筛法）</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int main()
+{
+    int range;
+    while (cin &gt;&gt; range)
+    {
+        if (range &lt;=11)
+        {
+            cout &lt;&lt; &quot;-1\n&quot;;
+            break;
+        }
+        
+        bool num[10000];
+        vector&lt;int&gt; prime;
+        //初始化
+        num[0] = false;
+        num[1] = false;
+        for (int i=2; i&lt;10000; i++)
+            num[i] = true;
+        
+        for (int temp=2; temp&lt;range; temp++)
+        {           
+            if (num[temp] == true)
+            {
+                prime.push_back(temp);//加入素数组
+                //标记之后temp的倍数不是素数
+                for (int j=temp*temp; j&lt;range; j=j+temp)
+                    num[j] = false;
+            }
+        }
+        
+        //输出
+        for (int i=0; i&lt;prime.size(); i++)
+        {
+            if(prime[i] % 10 == 1)
+            {
+                if (prime[i] == 11)
+                    cout &lt;&lt; prime[i];
+                else                
+                    cout &lt;&lt; &quot; &quot; &lt;&lt; prime[i];
+            }
+        }
+        cout &lt;&lt; endl;        
+    }
+    
+    return 0;
+}
+</code></pre>
+<h2 id="3-prime-number">3.  Prime Number</h2>
+<h3 id="题目描述-3"><strong>题目描述</strong></h3>
+<p>Output the k-th prime number.</p>
+<h3 id="要点-3"><strong>要点</strong></h3>
+<ol>
+<li>素数筛法</li>
+<li>提前存好10000个素数：范围开到1000000就够用，或者可以记录素数个数</li>
+<li><strong>适当可以使用void函数，让main函数看起来更加简洁</strong></li>
+</ol>
+<h3 id="提交地址-3">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/c5f8688cea8a4a9a88edbd67d1358415?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/c5f8688cea8a4a9a88edbd67d1358415?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int order;
+vector&lt;int&gt; prime;
+const int range = 1000000;
+
+void Initial()
+{
+    bool num[range];
+    for (int i=0; i&lt;range; i++)
+        num[i] = true;
+    num[0] = false;
+    num[1] = false;
+    
+    for (int temp=0; temp&lt;range; temp++)
+    {
+        if (num[temp] == true)
+        {
+            prime.push_back(temp);
+            
+            for (int j=temp*temp; j&lt;range; j=j+temp)
+                num[j] = false;
+        }
+    }
+};
+
+int main()
+{
+    Initial();      
+    while (cin &gt;&gt; order)
+    {
+        cout &lt;&lt; prime[order-1] &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Chapter6数学问题：6.2 最大公约数和最小公倍数]]></title>
+        <id>https://Czardas42.github.io/post/chapter6_6.2/</id>
+        <link href="https://Czardas42.github.io/post/chapter6_6.2/">
+        </link>
+        <updated>2021-05-05T07:51:36.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="辗转相除法">辗转相除法</h2>
+<h2 id="1-最大公约数">1.  最大公约数</h2>
+<h3 id="题目描述"><strong>题目描述</strong></h3>
+<p>输入两个正整数，求其最大公约数。</p>
+<h3 id="要点"><strong>要点</strong></h3>
+<p>递归实现辗转相除法GCD</p>
+<h3 id="提交地址">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/20216f2c84bc438eb5ef05e382536fd3?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/20216f2c84bc438eb5ef05e382536fd3?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int GCD(int a, int b)
+{
+    if(a%b == 0) //a可以整除b：b是最大公约数
+    {
+        return b;
+    }
+    else
+    {
+        return GCD(b, a%b);
+    }
+}
+
+int main()
+{
+    int num1, num2;
+    while(cin &gt;&gt; num1 &gt;&gt; num2)
+    {
+        cout &lt;&lt; GCD(num1, num2) &lt;&lt; endl;
+    }
+    
+    return 0;
+}
+</code></pre>
+<h2 id="2-最小公倍数">2.  最小公倍数</h2>
+<h3 id="题目描述-2"><strong>题目描述</strong></h3>
+<p>输入两个正整数，求其最小公约数。</p>
+<h3 id="要点-2"><strong>要点</strong></h3>
+<ol>
+<li>
+<p><strong>最小公倍数 = 两数乘积 / 最大公约数</strong></p>
+</li>
+<li>
+<p>递归实现辗转相除法</p>
+</li>
+</ol>
+<h3 id="提交地址-2">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/22948c2cad484e0291350abad86136c3?tpId=37&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/22948c2cad484e0291350abad86136c3?tpId=37&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-2">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int GCD(int a, int b)
+{
+    if(a%b == 0)
+    {
+        return b;
+    }
+    else
+    {
+        return GCD(b, a%b);
+    }
+}
+
+int main()
+{
+    int num1, num2;
+    while (cin &gt;&gt; num1 &gt;&gt; num2)
+    {
+        int temp = num1 * num2;
+        int result = temp / GCD(num1, num2);
+        cout &lt;&lt; result &lt;&lt; endl;
+    }
+}
+</code></pre>
+<h2 id="3-最简真分数">3.  最简真分数</h2>
+<h3 id="题目描述-3"><strong>题目描述</strong></h3>
+<p>给出n个正整数，任取两个数分别作为分子和分母组成最简真分数，编程求共有几个这样的组合。</p>
+<h3 id="要点-3"><strong>要点</strong></h3>
+<ol>
+<li>
+<p><strong>最简真分数：分子&lt;分母；分子分母最大公约数为1</strong></p>
+</li>
+<li>
+<p>因为真分数的要求，最终结果/2</p>
+</li>
+</ol>
+<h3 id="提交地址-3">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/1f1db273eeb745c6ac83e91ff14d2ec9?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/1f1db273eeb745c6ac83e91ff14d2ec9?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-3">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int GCD(int a, int b)
+{
+    if(a%b == 0)
+        return b;
+    else
+        return GCD(b, a%b);
+};
+
+int main()
+{
+    int count;
+    while(cin &gt;&gt; count)
+    {
+        if (count == 0)
+            break;
+        //存入数据
+        vector&lt;int&gt; number;
+        int num;
+        for (int i=0; i&lt;count; i++)
+        {
+            cin &gt;&gt; num;
+            number.push_back(num);
+        }
+        //遍历
+        int result = 0;
+        for (int i=0; i&lt;number.size(); i++)
+        {
+            for (int j=0; j&lt;number.size(); j++)
+            {
+                int temp = GCD(number[i], number[j]);
+                if (temp==1)
+                {//两数最大公约数是1
+                    result++;
+                }
+            }
+        }
+        cout &lt;&lt; result/2 &lt;&lt; endl;  //真分数&lt;1,所以结果/2         
+    }
+    
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Chapter6数学问题：6.1 进制转换]]></title>
+        <id>https://Czardas42.github.io/post/chapter6_6.1/</id>
+        <link href="https://Czardas42.github.io/post/chapter6_6.1/">
+        </link>
+        <updated>2021-05-05T07:48:49.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="进制转换原理">进制转换原理</h2>
+<h2 id="1-二进制数">1.  二进制数</h2>
+<h3 id="题目描述"><strong>题目描述</strong></h3>
+<p>大家都知道，数据在计算机里中存储是以二进制的形式存储的。 有一天，小明学了C语言之后，他想知道一个类型为unsigned int 类型的数字，存储在计算机中的二进制串是什么样子的。 你能帮帮小明吗？并且，小明不想要二进制串中前面的没有意义的0串，即要去掉前导0。</p>
+<h3 id="要点"><strong>要点</strong></h3>
+<ol>
+<li>进制转换标准公式</li>
+<li>以及while循环判断条件<code>while (num != 0)</code></li>
+</ol>
+<h3 id="提交地址">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/103dd589fed14457a673c613d8de3841?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/103dd589fed14457a673c613d8de3841?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int main()
+{
+    int num;
+    while (cin &gt;&gt; num)
+    {
+        string result = &quot;&quot;;
+        
+        while (num != 0)
+        {
+            int temp = num % 2;
+            char num_now = char('0'+temp);
+            result = num_now + result;
+            num = num / 2;
+        }
+        
+        cout  &lt;&lt; result &lt;&lt; endl;
+    }
+}
+</code></pre>
+<h2 id="2-进制转换">2. <strong>进制转换</strong></h2>
+<h3 id="题目描述-2"><strong>题目描述</strong></h3>
+<p>将一个长度最多为30位数字的十进制非负整数转换为二进制数输出。</p>
+<h3 id="要点-2"><strong>要点</strong></h3>
+<ol>
+<li>
+<p>数字长度：https://www.runoob.com/cplusplus/cpp-data-types.html</p>
+<table>
+<thead>
+<tr>
+<th>unsigned long int</th>
+<th>0 到 18,446,744,073,709,551,615（20位）</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<p><strong>超过20位的数字运算就只能通过字符串实现</strong></p>
+</li>
+<li>
+<p>字符串类型计算乘除法的方法：模仿手动计算</p>
+</li>
+<li>
+<p><strong>从第一个非0位开始输出：</strong></p>
+<p>设置flag，在第一次遇到非0时将其变为true；</p>
+<p>提前获得非0位的编号</p>
+</li>
+</ol>
+<h3 id="提交地址-2">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-2">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+char GetTemp(string num)//取得字符串num的%2结果
+{   //num%2结果 = num最后一位%2的结果
+    int temp0 = int(num[num.size()-1] - '0') % 2;
+    char temp = char(temp0 + '0');
+    return temp;
+};
+
+string GetNum(string num)//取得字符串num的/2结果
+{
+    int m = 0;
+    string result = num;
+    for (int i=0; i&lt;num.size(); i++)
+    {   //模仿手动计算除法的过程
+        int num_now = int(num[i] - '0') + m*10;
+        result[i] = char(num_now / 2 + '0');
+        m = num_now % 2;
+    }
+    
+    return result;
+};
+
+int main()
+{
+    string num;
+    while (cin &gt;&gt; num)
+    {
+        string result = &quot;&quot;;
+        
+        //flag：和num位数相同的全零串
+        string flag = num;
+        for (int i=0; i&lt;flag.size(); i++)
+            flag[i] = '0';
+        
+        while(num != flag)
+        {
+            result = GetTemp(num) + result;
+            num = GetNum(num);
+        }
+
+        //输出：从首个非零位开始
+        bool flag2 = false;
+        for (int j=0; j&lt;result.size(); j++)
+        {
+            if (result[j] != '0')
+                flag2 = true;
+            
+            if (flag2 == true)
+                cout &lt;&lt; result[j];
+        }
+        cout &lt;&lt; endl;        
+    }
+}
+</code></pre>
+<h2 id="3-十进制vs二进制">3. <strong>十进制VS二进制</strong></h2>
+<h3 id="题目描述-3"><strong>题目描述</strong></h3>
+<p>对于一个十进制数A，将A转换为二进制数，然后按位逆序排列，再转换为十进制数B，我们称B为A的二进制逆序数。   例如对于十进制数173，它的二进制形式为10101101，逆序排列得到10110101，其十进制数为181，181即为173的二进制逆序数。</p>
+<p><strong>注意：一个1000位(即10^999)以内的十进制数。</strong></p>
+<h3 id="要点-3"><strong>要点</strong></h3>
+<ol>
+<li>
+<p><strong>法一：字符串类型的加法，乘法，除法，取余</strong></p>
+</li>
+<li>
+<p><strong>法二：大数进制转换</strong></p>
+<p>参考：<a href="https://blog.csdn.net/StrongerL/article/details/92702052">https://blog.csdn.net/StrongerL/article/details/92702052</a></p>
+</li>
+</ol>
+<h3 id="提交地址-3">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-3">代码</h3>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Chapter5数据结构一：5.3 栈]]></title>
+        <id>https://Czardas42.github.io/post/chapter5-5.3/</id>
+        <link href="https://Czardas42.github.io/post/chapter5-5.3/">
+        </link>
+        <updated>2021-05-05T07:45:56.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="栈的基本操作">栈的基本操作</h2>
+<p>只能在栈顶进行操作</p>
+<p>重点用于处理逆序问题</p>
+<h2 id="1-zero-complexity-transposition逆序输出">1.  Zero-complexity Transposition（逆序输出）</h2>
+<h3 id="题目描述"><strong>题目描述</strong></h3>
+<p>You are given a sequence of integer numbers. Zero-complexity transposition of the sequence is the reverse of this sequence. Your task is to write a program that prints zero-complexity transposition of the given sequence.</p>
+<h3 id="要点"><strong>要点</strong></h3>
+<ol>
+<li>利用栈的结构完成逆序输出</li>
+</ol>
+<h3 id="提交地址">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/c54775799f634c72b447ef31eb36e975?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/c54775799f634c72b447ef31eb36e975?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;stack&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int main()
+{
+    int count;
+    stack&lt;int&gt; record;
+    
+    while(cin &gt;&gt; count)
+    {
+        int num;
+        for (int i=0; i&lt;count; i++)
+        {
+            cin &gt;&gt; num;
+            record.push(num);
+        }
+        
+        for (int i=0; i&lt;count; i++)
+        {
+            if (record.empty())
+            {
+                cout &lt;&lt; record.top() &lt;&lt; endl;
+                record.pop();
+            }
+            else
+            {
+                cout &lt;&lt; record.top() &lt;&lt; &quot; &quot;;
+                record.pop();
+            }          
+        }    
+    }
+}
+</code></pre>
+<h2 id="2-括号序列">2. <strong>括号序列</strong></h2>
+<h3 id="题目描述-2"><strong>题目描述</strong></h3>
+<p>给出一个仅包含字符'(',')','{','}','['和']',的字符串，判断给出的字符串是否是合法的括号序列<br>
+括号必须以正确的顺序关闭，&quot;()&quot;和&quot;()[]{}&quot;都是合法的括号序列，但&quot;(]&quot;和&quot;([)]&quot;不合法。</p>
+<h3 id="要点-2"><strong>要点</strong></h3>
+<ol>
+<li>利用栈的结构完成序号匹配（思想参考编译原理）</li>
+<li>若符合规则，就将一对符号弹出</li>
+</ol>
+<h3 id="提交地址-2">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/6235a76b1e404f748f7c820583125c50?tpId=8&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/6235a76b1e404f748f7c820583125c50?tpId=8&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-2">代码</h3>
+<pre><code class="language-c++">class Solution {
+public:
+    /**
+     * 
+     * @param s string字符串 
+     * @return bool布尔型
+     */
+    bool isValid(string s) {
+        // write code here
+        stack&lt;char&gt; record;
+        for (int i=0; i&lt;s.size(); i++)
+        {
+            int temp = s[i];
+            if (!record.empty())
+            {                
+                int symbol = record.top();
+                if (  (temp==')' &amp;&amp; symbol=='(')
+                    ||(temp==']' &amp;&amp; symbol=='[')
+                    ||(temp=='}' &amp;&amp; symbol=='{')
+                   )
+                {
+                    record.pop();
+                }
+                else
+                {
+                    record.push(temp);
+                }
+                   
+            }
+            else
+            {
+                record.push(temp);
+            }           
+        }
+        
+        if (record.empty())
+            return true;
+        else
+            return false;
+    }
+};
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Chapter5数据结构一：5.2 队列]]></title>
+        <id>https://Czardas42.github.io/post/chapter5_5.2/</id>
+        <link href="https://Czardas42.github.io/post/chapter5_5.2/">
+        </link>
+        <updated>2021-05-05T07:45:56.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="队列基本操作">队列基本操作</h2>
+<h2 id="1-约瑟夫问题">1. <strong>约瑟夫问题</strong></h2>
+<h3 id="题目描述"><strong>题目描述</strong></h3>
+<p>编号为 1 到 n的 n个人围成一圈。从编号为 11 的人开始报数，报到 m的人离开。</p>
+<p>下一个人继续从 11 开始报数。</p>
+<p>n-1轮结束以后，只剩下一个人，问最后留下的这个人编号是多少？</p>
+<h3 id="要点"><strong>要点</strong></h3>
+<ol>
+<li>利用队列模拟的思想</li>
+<li>不需循环列表也可以完成</li>
+</ol>
+<h3 id="提交地址">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/41c399fdb6004b31a6cbb047c641ed8a?tpId=196&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/41c399fdb6004b31a6cbb047c641ed8a?tpId=196&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-c++">class Solution {
+public:
+    /**
+     * @param n int整型 
+     * @param m int整型 
+     * @return int整型
+     */
+    int ysf(int n, int m) {
+        // write code here
+        queue&lt;int&gt; line;
+        //全部入队
+        for (int i=1; i&lt;=n; i++)
+        {
+            line.push(i);
+        }
+        //开始模拟
+        for (int j=1; j&lt;n; j++)//n-1轮游戏
+        {
+            for (int i=1; i&lt;m; i++)
+            {
+                int temp = line.front();
+                line.pop();
+                line.push(temp);
+            }
+            line.pop();
+        }
+        
+        return line.front();
+    }
+};
+</code></pre>
+<h2 id="2-猫狗收容所">2. <strong>猫狗收容所</strong></h2>
+<h3 id="题目描述-2"><strong>题目描述</strong></h3>
+<p>有家动物收容所只收留猫和狗，但有特殊的收养规则，收养人有两种收养方式，第一种为直接收养所有动物中最早进入收容所的，第二种为选择收养的动物类型（猫或狗），并收养该种动物中最早进入收容所的。</p>
+<p>给定一个操作序列int[][2] ope(C++中为vector<vector>)代表所有事件。若第一个元素为1，则代表有动物进入收容所，第二个元素为动物的编号，正数代表狗，负数代表猫；若第一个元素为2，则代表有人收养动物，第二个元素若为0，则采取第一种收养方式，若为1，则指定收养狗，若为-1则指定收养猫。请按顺序返回收养的序列。若出现不合法的操作，即没有可以符合领养要求的动物，则将这次领养操作忽略。</p>
+<h3 id="要点-2"><strong>要点</strong></h3>
+<ol>
+<li>利用两个队列分别记录猫狗</li>
+<li>animal结构体：<strong>记录type和时间tag</strong></li>
+<li><strong>注意讨论收养时猫狗列表可能为空的情况</strong></li>
+</ol>
+<h3 id="提交地址-2">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/6235a76b1e404f748f7c820583125c50?tpId=8&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/6235a76b1e404f748f7c820583125c50?tpId=8&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-2">代码</h3>
+<pre><code class="language-c++">class CatDogAsylum {
+public:
+    struct animal
+    {
+        int type;
+        int order;
+        animal(int t, int o)
+        {
+            type = t;
+            order = o;
+        }
+    };
+    vector&lt;int&gt; asylum(vector&lt;vector&lt;int&gt; &gt; ope) 
+    {
+        // write code here
+        queue&lt;animal&gt; cats, dogs;
+        int order = 0;
+        vector&lt;int&gt; result;
+        for (int i=0; i&lt;ope.size(); i++)
+        {
+            vector&lt;int&gt; item = ope[i];
+            int method = item[0];
+            int type = item[1];
+            
+            if (method == 1) //有动物进入
+            {
+                if (type &gt; 0) //狗
+                {
+                    order++;
+                    dogs.push(animal(type, order));
+                }
+                else if (type &lt; 0) //猫
+                {
+                    order++;
+                    cats.push(animal(type, order));
+                }
+            }
+            else if (method == 2) //有人收养
+            {
+                animal dog = dogs.front();
+                animal cat = cats.front();
+                
+                if (type == 0) //直接收养最早进入的
+                {
+                    if (dog.order&lt;cat.order &amp;&amp; !dogs.empty() &amp;&amp; !cats.empty())
+                    {
+                        result.push_back(dog.type);
+                        dogs.pop();
+                    }
+                    else if (dog.order&gt;cat.order &amp;&amp; !dogs.empty() &amp;&amp; !cats.empty())
+                    {
+                        result.push_back(cat.type);
+                        cats.pop();
+                    }
+                    else if (dogs.empty())
+                    {
+                        result.push_back(cat.type);
+                        cats.pop();
+                    }
+                    else if (cats.empty())
+                    {
+                        result.push_back(dog.type);
+                        dogs.pop();
+                    }
+                }
+                else if (type == 1 &amp;&amp; !dogs.empty()) //指定收养狗
+                {
+                    result.push_back(dog.type);
+                    dogs.pop();
+                }
+                else if (type == -1 &amp;&amp; !cats.empty()) //指定收养猫
+                {
+                    result.push_back(cat.type);
+                    cats.pop();
+                }
+            }
+        }
+        return result;
+    }
+};
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Chapter5数据结构一：5.1 向量]]></title>
+        <id>https://Czardas42.github.io/post/chapter5_5.1/</id>
+        <link href="https://Czardas42.github.io/post/chapter5_5.1/">
+        </link>
+        <updated>2021-05-05T07:44:06.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="向量基本操作">向量基本操作</h2>
+<h2 id="完数与盈数"><strong>完数与盈数</strong></h2>
+<h3 id="题目描述"><strong>题目描述</strong></h3>
+<p>一个数如果恰好等于它的各因子（该数本身除外）子和，如：6=3+2+1，则称其为“完数”；若因子之和大于该数，则称其为“盈数”。求出2 到60 之间所有“完数”和“盈数”，并以如下形式输出： E: e1 e2 e3 ......(ei 为完数) G: g1 g2 g3 ......(gi 为盈数)</p>
+<h3 id="要点"><strong>要点</strong></h3>
+<ol>
+<li><code>vector.pop_back()</code>是弹出最后一个元素</li>
+<li>vector遍历方法：<code>vector.size()</code></li>
+<li>求因子的方法：<code>num % i == 0</code></li>
+</ol>
+<h3 id="提交地址">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/df0d850e41894d06a165bf445ec8a8b4?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/df0d850e41894d06a165bf445ec8a8b4?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int Sum(int num)
+{
+    int sum = 0;
+    for (int i=1; i&lt;num; i++)
+    {
+        if (num % i == 0)
+        {
+            sum += i;
+        }
+    }
+    return sum;
+};
+
+int main()
+{
+    vector&lt;int&gt; E, G;
+    for (int i=2; i&lt;=60; i++)
+    {
+        int sum = Sum(i);
+        if (i == sum)
+        {   
+            E.push_back(i);
+        }
+        else if (i &lt; sum)
+        {
+            G.push_back(i);
+        }
+    }
+    //输出E
+    cout &lt;&lt; &quot;E:&quot;;
+    for (int j=0; j&lt;E.size(); j++)
+    {
+        cout &lt;&lt; &quot; &quot; &lt;&lt; E[j];
+    }
+    //输出G
+    cout &lt;&lt; &quot; G:&quot;;
+    for (int j=0; j&lt;G.size(); j++)
+    {
+        cout &lt;&lt; &quot; &quot; &lt;&lt; G[j];
+    }
+    cout &lt;&lt; endl;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Chapter4字符串：4.3 字符串匹配]]></title>
+        <id>https://Czardas42.github.io/post/chapter4_4.3/</id>
+        <link href="https://Czardas42.github.io/post/chapter4_4.3/">
+        </link>
+        <updated>2021-05-05T07:40:00.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="kmp算法">KMP算法</h2>
+<h2 id="1-string-matching"><strong>1. String Matching</strong></h2>
+<h3 id="题目描述"><strong>题目描述</strong></h3>
+<p>Finding all occurrences of a pattern in a text is a problem that arises frequently in text-editing programs.   Typically,the text is a document being edited,and the pattern searched for is a particular word supplied by the user.    We assume that the text is an array T[1..n] of length n and that the pattern is an array P[1..m] of length m&lt;=n.We further assume that the elements of P and T are all alphabets(∑={a,b...,z}).The character arrays P and T are often called strings of characters.    We say that pattern P occurs with shift s in the text T if 0&lt;=s&lt;=n and T[s+1..s+m] = P[1..m](that is if T[s+j]=P[j],for 1&lt;=j&lt;=m).    If P occurs with shift s in T,then we call s a valid shift;otherwise,we calls a invalid shift.   Your task is to calculate the number of vald shifts for the given text T and p attern P.</p>
+<h3 id="要点"><strong>要点</strong></h3>
+<ol>
+<li>
+<p><strong>KMP算法</strong>，nextTable构建方式 <strong>（两个函数）</strong></p>
+</li>
+<li>
+<p>返回第一个匹配子串/返回全部匹配子串个数</p>
+</li>
+</ol>
+<h3 id="提交地址">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/00438b0bc9384ceeb65613346b42e88a?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/00438b0bc9384ceeb65613346b42e88a?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int text[1000000];
+int pattern[1000000];
+int nextTable[1000000];
+
+void getNextTable(string pattern)
+{
+    int m = pattern.size();
+    nextTable[0] = -1;
+    int i=0, j=-1;
+    while(i &lt; m)
+    {
+        if (j == -1 || pattern[i] == pattern[j])
+        {
+            i++;
+            j++;
+            nextTable[i] = j;
+        }
+        else
+        {
+            j = nextTable[j];
+        }
+    }
+};
+
+int kmp(string text, string pattern)
+{
+    int m = text.size();
+    int n = pattern.size();
+    getNextTable(pattern);
+    
+    int count = 0;
+    int i = 0;
+    int j = 0;
+
+    while(i &lt; m)
+    {
+        //匹配
+        if ((j == -1) || (text[i] == pattern[j]))
+        {
+            i++;
+            j++;
+        }
+        else
+        {
+            j = nextTable[j];
+        }
+        
+        //判断
+        if(j == n)
+        {
+            count++;
+            j = nextTable[j];
+        }
+    }
+    
+    return count;
+};
+
+int main()
+{
+    string text, pattern;
+    while(cin &gt;&gt; text &gt;&gt; pattern)
+    {
+        int count = kmp(text,pattern);
+        cout &lt;&lt; count &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre>
+<h2 id="2-字符串匹配">2. 字符串匹配</h2>
+<h3 id="题目描述-2"><strong>题目描述</strong></h3>
+<p>读入数据string[ ]，然后读入一个短字符串。要求查找string[ ]中和短字符串的所有匹配，输出行号、匹配字符串。匹配时不区分大小写，并且可以有一个用中括号表示的模式匹配。如“aa[123]bb”，就是说aa1bb、aa2bb、aa3bb都算匹配。</p>
+<h3 id="要点-2"><strong>要点</strong></h3>
+<ol>
+<li>
+<p>注意：题目要求的是完全匹配，即长度完全一样，忽略大小写</p>
+</li>
+<li>
+<p>可以使用<strong>正则表达式</strong></p>
+<p><code>#include &lt;regex&gt;</code></p>
+<p><code>regex r(st[0], regex::icase); // regex::icase 不区分大小写,建立正则表达式</code></p>
+<p><code>regex_match(st[i], r)</code></p>
+</li>
+</ol>
+<h3 id="提交地址-2">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/fbdc522ef958455687654b38a4ca01e0?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/fbdc522ef958455687654b38a4ca01e0?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-2">代码</h3>
+<pre><code class="language-C++">#include &lt;cstdio&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;regex&gt;
+
+using namespace std;
+string st[1001];
+
+int main () {
+    int n;
+    scanf(&quot;%d &quot;, &amp;n);
+    for (int i=1; i&lt;=n; ++i)
+        getline(cin, st[i]);
+    getline(cin, st[0]);
+    regex r(st[0], regex::icase);  // regex::icase 不区分大小写
+    for (int i=1; i&lt;=n; ++i)
+        if (regex_match(st[i], r))  // 这是完全匹配，部分匹配用regex_search
+            cout &lt;&lt; i &lt;&lt; ' ' &lt;&lt; st[i] &lt;&lt; endl;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[VPC对等连接]]></title>
         <id>https://Czardas42.github.io/post/vpc_p2p/</id>
@@ -153,2351 +1137,6 @@
 <p><u><strong>结合Prometheus部署</strong></u></p>
 <h4 id="3-任务job">3. 任务（Job）</h4>
 <p>Job是K8s用来控制批处理型任务的API对象。Job 会创建一个或者多个 Pods，并将继续重试 Pods 的执行，直到指定数量的 Pods 成功终止。 随着 Pods 成功结束，Job 跟踪记录成功完成的 Pods 个数。 当数量达到指定的成功个数阈值时，任务（即 Job）结束。 删除 Job 的操作会清除所创建的全部 Pods。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[A Little Story（短篇  比尔博.巴金斯相关）]]></title>
-        <id>https://Czardas42.github.io/post/A_Little_Story/</id>
-        <link href="https://Czardas42.github.io/post/A_Little_Story/">
-        </link>
-        <updated>2021-05-03T08:48:04.000Z</updated>
-        <content type="html"><![CDATA[</br>
-<h2 id="part-1">Part 1</h2>
-<p><em><strong>一切辉煌的，卑微的，欢乐的，悲伤的事物终将陨灭，唯有故事和歌谣能在时光的洪流中静静流淌。</strong></em><br>
-　　<br>
-　　瑞文戴尔医治创伤，瑞文戴尔忘记痛苦。<br>
-　　最近这里越来越安静了。好吧，是一直都很安静。但从未像现在这样，没有言语，没有欢笑，没有精灵长袍划过地面时的沙沙声，没有吟咏诗歌的甜美嗓音。只有落了一地的红叶和蜿蜒附着在墙上的藤蔓。<br>
-　　这让我不禁怀疑，这一切在不久之后都会消失殆尽，就像他们从未存在过一般。瑞文戴尔终将成为古老歌谣中的传奇——那最后的避难所。<br>
-　　风有时会穿过隐匿的谷隙，送来远方的讯息。它托起地上的落叶，让他们旋腾着放飞，又悄然无声的下落，划过耳畔，只余一声叹息。不过无论怎样，这里依旧是美丽的，非常美丽——但是哀伤。很少的时候我会突发奇想，觉得或许这两者本身就是休戚与共的，因美丽而变得哀伤，又因哀伤更为美丽。<br>
-　　<br>
-　　瑞文戴尔遗忘了时光，然而时光的印记依旧显露在我的面容上。<br>
-　　我老了。<br>
-　　<br>
-　　某一天的清晨，当我睁开双眼的瞬间，一个来自心底的声音告诉我。<br>
-　　你已经老了。<br>
-　　我再也无法背上旅行包，遮上斗篷，去探寻高山裂谷间的天地。是时候该坐下来，在火炉旁喝杯热茶了。每天我都会从房间出发，把我的书夹在臂下，一路漫步到Lord Erlond家一处偏僻的阳台上去。我坚信那里会给予我创作的灵感，每天皆是如此。<br>
-　　还有，我称呼它为“我的小阳台”。<br>
-　　<br>
-　　告别是生命的永恒主题，在蒙福之地之外的大地上，没有人能抗拒它，即使是精灵。我们只能匆忙起身，告别一张张熟悉的面孔，独自踏上旅程。或如有的时候，是我们站在这里，目送他们步步远去。<br>
-　　<br>
-　　一天又一天，我穿过长长的步廊，去往我的小阳台。我的手指不再圆润灵活，我的步伐不再飞扬灵健，精灵们依旧微笑着和我道早安。<br>
-　　一天又一天，我穿过长长的步廊，去往我的小阳台。执着拐杖，蹒跚地走在阳光的影子上。四周静悄悄的，连鸟儿也不愿再尽情地歌唱，生怕叨扰这美丽的哀伤。<br>
-　　他们都走了，离开这里，前往灰港，离开中土，奔向大海的那方。<br>
-　　直到有一天，我抬头望见Lindir亲切的脸庞。<br>
-　　“早安，Bilbo。”他如是说。<br>
-　　“早安，Lindir。”我笑着向他鞠了一躬。<br>
-　　精灵的离去时我感到哀伤，再也没有什么比老友的笑容更能使人舒畅的了。<br>
-　　“Well，你今天是否有兴致听我念念书的新进展呢？”<br>
-　　“我——很遗憾，Bilbo。”Lindir抿了抿唇，目光欢欣而又哀伤。<br>
-　　“为什么不呢？我正要给你看看老Bilbo最得意的那几段呐。为什么呢，Lindir？”<br>
-　　“因为...我要离开了...”<br>
-　　<br>
-　　我沉默下来，再度被寂寞所笼罩。精灵注定不属于这里。数千年的阅历使他们变得智慧，沧桑，而那绵长的记忆又时刻折磨着他们。当形体逐渐被时光的洪流所侵蚀时，精灵注定会从此扬帆远航。向西，向西，去往那处没有悲伤的土地。<br>
-　　<br>
-　　静默的气氛让Lindir不安起来。哦善良的Lindir，总是不忍心让我这个老家伙悲伤。<br>
-　　“你知道的，Bilbo老友。我的心没有一时一刻没有在呼唤着大海。更重要的是，我相信...我有种预感，你我终究会在大海边重逢。”<br>
-　　“喔，那可真是谢谢你的消息啦。我会从今天开始抓紧造船的。”我佯装生气地用拐杖敲了敲地砖，恶狠狠地说。<br>
-　　精灵一向对外界的时间流逝感知不大，对人事亦是如此。我只希望，这个苍老的、坏脾气的霍比特人能让精灵在漫长的纪元之中偶然间忆起，哪怕只是拐杖敲在地上的砰砰声。<br>
-　　也许在许多许多年之后，在阿门洲的某个美丽的角落，我的身影会从他们记忆的缝隙中闪过。<br>
-　　<br>
-　　“喂，你还记得那个半身人吗？”<br>
-　　“你是说那个别扭的、坏脾气的老Bilbo？喔，他可是个厉害的霍比特人！”<br>
-　　“我依稀记得我们还一起作过诗歌呐。啊，瑞文戴尔的欢乐时光。”<br>
-　　<br>
-　　“你知道吗，我真想念他。”<br>
-　　然后，我希望他们能微笑着吟诵出我的故事和歌谣。一切辉煌的，卑微的，欢乐的，悲伤的事物终将陨灭，唯有故事和歌谣能在时光的洪流中静静流淌。<br>
-　　<br>
-　　“我没有在开玩笑”，Lindir半蹲下来，注视着我的眼睛，“我知道，我就是知道——不论世事如何变迁，不论沧海多少次变为桑田，我们终将团聚于大海彼岸，在维拉膝边聆听一如的智言。在那时，伊露维塔的子女和埃尔达的其他所有美好生灵，都将领悟到这万物存在的真谛。于浩大之中，于须臾之间。至于你，Bilbo老友。别担心，我们还会再见的，就在不久的将来。”<br>
-　　“无论怎样”，我轻笑出声，“请记住我的故事，老Bilbo的历险故事。”<br>
-　　“当然啦，我亲爱的Bilbo。我会在大海彼岸吟唱你的旅歌，直到你我重聚之时。待到那时，你便可以亲自向维林诺的居民讲述你的小故事。”他向前倾来，指尖搭上我的肩膀，平和的声音传入耳畔。<br>
-　　“精灵对告别这类事情可不怎么擅长。所以...再会。再会了，Bilbo。”Lindir那温暖的手掌轻拍了拍我的肩，然后他站起来，右手抚上心口，朝我微微鞠躬。<br>
-　　“别了，Bilbo老爷。我将顺从内心的呼唤，前往那极西之地，并在海鸥的飞鸣中期待与您的重逢。”<br>
-　　然后，我松开了拐杖，张开双臂，接受了一个来自精灵的拥抱，一个来自老朋友的拥抱。<br>
-　　我听见自己说：“别担心我，吾友。我还硬朗着呐，况且我的书还需要尽快完成。当你登上灰港的白船时，记得多写几首诗，回来拿给我欣赏欣赏。”<br>
-　　说着，我轻拍了拍他的背。<br>
-　　“我会的。”Lindir笑了。接着便转过身，向谷口走去，他的族人在那里等待着他。长长的袍子在地上画出了一道悠扬的弧线。渐渐地，嗒嗒的脚步声也消失了。<br>
-　　他走了。<br>
-　　再然后啊，老Bilbo就拾起他的拐杖，夹着他还未完成的书，继续哼着歌向他的小阳台漫步而去。<br>
-　　<br>
-　　大路长呀长，<br>
-　　从家门口伸呀伸。<br>
-　　大路已走远，<br>
-　　让别人快跟上！<br>
-　　去踏上新旅程！<br>
-　　我这双累累脚，<br>
-　　要往那旅店走，<br>
-　　好好睡一觉。<br>
-　　<br>
-　　这世上的告别并非都是悲伤的。我知道，这次就不是。</p>
-</br>
-<h2 id="part-2">Part 2</h2>
-<p><strong><em>“所有的战争，英雄和无所畏惧的行动，并不比每天的平凡生活更</em>具有价值和值得称颂。”</strong><br>
-　　                                                                        <em><strong>——TRR.托尔金</strong></em><br>
-　　<br>
-　　就是第三纪元末的一个普普通通的下午，我依旧坐在扶椅上，思索着故事的结尾。一个动人又不落俗套的结尾。<br>
-　　岁月在我身上留下的痕迹愈来愈明显。我的双眼开始昏花，耳朵也听不见远处的溪水声了。有时，我正执着笔思索，意识就开始变得模糊，字迹好像重叠了一般，就这么睡了过去。<br>
-　　唤醒我的是指尖摩挲纸卷时的沙沙声。此时正值黄昏，夕阳刚好映在我的面颊上。那光芒让我无法张开双眸。<br>
-　　所以我开口问道：“谁在那里？Lindir，Aragon，还是...Frodo？<br>
-　　好啦，不要嘲笑我老糊涂了。我当然知道他们不可能出现。但是这是种习惯，人老了之后都会有的习惯：总会觉得生活就保存在记忆中的状态，熟悉的人们永远围绕在自己身旁。恍惚之间，还是会叫出思念之人的名字。<br>
-　　<br>
-　　我极力想睁开双眼，看见在那日落的光辉中，Lord Erlond侧身站在那里，饶有兴致地读着书摊开的那一页。<br>
-　　尽管我是个老霍比特人啦，不过被别人发现在写书时睡着可不是什么特别光彩的事。我尴尬极了，讷讷道：“能在这宁静的黄昏遇见您真是我的荣幸，my lord。”<br>
-　　“哦，Bilbo，你醒了。我进来时你正睡得香呐。”Lord Erlond冲我温和一笑，“还有，你不会介意我偷瞟了几眼你的书吧？”<br>
-　　“当然不会，my lord。”我松了口气，期待道，“事实上，我正打算去找您呢。我总是不能思考出一个好的结尾。”<br>
-　　或许说，有那么一个还不错的，就是那个我在离开袋底洞时想到的。可是它太直白了，缺少诗意。“老霍比特人从此幸福的生活了下去。”我总觉得缺失了什么。<br>
-　　<br>
-　　“Well .我相信你会的，Bilbo总是会为他的故事安排一个妙极了的结尾。”Lord Erlond笑着回答。<br>
-　　黄昏的最后一缕阳光缠绕着他的发梢。这位历尽沧桑的领主大人依旧睿智而又肃穆，周身萦绕着淡淡的微光。但他不再流露出悲伤，眼神中的丝缕笑意也流淌入我心间。<br>
-　　我知道有些事情发生了，一些好的、非常好的事情发生了。<br>
-　　于是我开口询问：“有什么好消息吗，my lord？”<br>
-　　“当然啦，我亲爱的Bilbo。”Erlond抿唇答道，“Frodo马上就要回来了。”<br>
-　　“Frodo！是...是Frodo！”<br>
-　　我简直不敢相信自己的耳朵。My dear Frodo，勇敢的Frodo就要回来了。<br>
-　　“所以说，他的任务完成了？已经摧...嗯...摧毁了那枚戒指？”我不能停止发问。<br>
-　　“没错。他现在身在米纳斯提力斯。还有，我将要动身去那里，去祝贺刚铎的人皇。”<br>
-　　“人皇？”我诧异道，“那一定是个大人物啦。”<br>
-　　“哦，Bilbo。”Erlond摇头失笑道，“你认识他的。他的子民又称其为'Elessar'，意为'精灵宝石'。”<br>
-　　“Aragon！我就知道是他。”我掩口大叫，随后便开心地笑出了声。“好小子，他倒是有出息。还有Frodo，他怎么样啦？”<br>
-　　“我相信他已经成为了诸多领主和将军最为敬重的人物，即使他的功绩不被众人所知。”Lord Erlond颔首道，“Frodo也会参加庆功宴，然后他将归来，途经这里，返回夏尔。你愿意和我们一起去米纳斯提力斯吗，Bilbo？”<br>
-　　我勾着嘴角摇了摇头，说：“我老啦，不想再参加热闹的场面了。况且我的书尚未写完，还要抓紧时间赶工呐。等到Frodo归来时，我要把我的书和其他物什统统转交给他。从那之后，我就可以天天和您一起边喝热茶边聊天啦。”<br>
-　　“真是个好想法，Bilbo。”Lord Erlond哑然失笑。<br>
-　　他踌躇了一会儿，再次低沉开口：“恐怕我有些事情要告诉你，关于Frodo的。”<br>
-　　“你知道，他曾被戒灵所伤。我或许可以医治好皮肤上的疤痕，却无法根除毒咒对他的影响。Frodo必须随我们乘船西渡，惟有那处不休之地可以治愈他的痛苦。如若他坚持留在这里，日久经年，他终会厌倦，动身前往维林诺。所以我会建议他早下决断。如果Frodo决定离开，你愿同他一同启程吗，Bilbo？”<br>
-　　我静默了。<br>
-　　<br>
-　　恍惚间，我忆起了夏尔绿油油的嫩草地，和远处的几缕炊烟。Frodo一定很想家。他可是一个居家型的人。可怜的孩子，他却永不可能与他挚爱的土地长长久久安稳地生活下去。他注定饱受磨难，也注定会以只身之力抗击邪恶，推动众人命运的齿轮。<br>
-　　如果我可以陪伴在他身旁，或多或少能给予他一些安慰吧。<br>
-　　于是我轻叹道：“我还从未见过大海呢，那一定是另一场非凡的经历。告诉他，my lord。告诉Frodo，我将和你们一道，渡船西去。他或许会跟随我离去，这会使他不再动摇。所以烦请您转告他，明年的这个时候，我将在夏尔边界的白桦林里等待他。您也将同我一道吗，my lord？”<br>
-　　“我会的。”Lord Erlond颔首，周身的气息又流露出美丽的哀伤，“至尊之戒已被摧毁。正如我们所料，精灵三戒的力量也随之泯灭，瑞文戴尔和罗立斯洛安也不再受其庇护。如若精灵长久地逗留在这里，我们的形体将逐渐承载不了灵魂的炙热以及回忆的沉重。我们必将从此地扬帆远航，在瓦尔妲的光芒下歌唱。”<br>
-　　<br>
-　　和精灵的交流总是很愉悦，但却哀伤，美丽又哀伤。<br>
-　　我扭了扭手指，开口道：“伟大的一天，my lord。请想一想开心的事吧。嗯，我在想...你想要看一看我的书吗？”<br>
-　　Erlond用他那双饱含岁月漩涡的眼眸凝视着我，轻笑出声：“为什么不呢，亲爱的Bilbo？让我看看你的书吧。”<br>
-　　我起身将书递给他，然后重新缩回到椅子里，抱着我那杯尚未凉透的茶，眺望瑞文戴尔最西处与天空交汇的地方。夕阳西下去，只余一道狭长的金黄色剪影。<br>
-　　海的那一头，究竟是怎样的呢？<br>
-　　<br>
-　　Lord Erlond静静地翻着书卷。直到夜幕降临，留守的精灵为我们点上支支跳动着橘黄色火焰的蜡烛。<br>
-　　终于，他合上了书。<br>
-　　“它怎么样？”我有些期待地询问，却又害怕得知答案。<br>
-　　“精彩极了，Bilbo老爷，即使以精灵的标准来看。我现在开始理解你为什么想不好结尾了，要给这么棒的故事写结尾，可真要花费些脑筋呀。”<br>
-　　“你能喜欢它真是太好了，my lord。”我松了口气，就又兴奋地扭动起来。<br>
-　　“让我猜猜，你最喜欢哪一段？矮人们闯进袋底洞的大门？还是我和Gollum在黑暗中的猜谜游戏？啊哈，我知道了。一定是我们乘着木桶漂流的情节！狼狈又好笑，我当时可被淹个够呛呀，不是吗？”<br>
-　　Lord Erlond以微笑回应我，他摇了摇头，叹道：“都不是，Bilbo。我喜欢你的开头。'There was a Hobbit live in a hole......'这是多么可爱的开头啊。”<br>
-　　我有些难以置信地望着他，失声道：“为什么？那段文字只是我的铺陈性描述呀。你难道不喜欢黑暗中惊险刺激的谜语吗？”<br>
-　　<br>
-　　“我己经目睹过太多的沧桑迁变，人世无常。”<br>
-　　他注视着天边刚刚升起的暮星，低声凝喃，“在我看来，这世上所有的战争，英雄和无所畏惧的行动，并不比每天的平凡生活更具有价值和值得称颂。但是我们的灵魂不甘于此，总是想多看一些，在多看一些。灵魂的炽焰——那一如注入我们体内的不灭之火，让我们渴望创造，渴望跋涉于崇山峻岭之中，渴望到达世界之巅。我们一路上见了很多，也做了很多。好的、坏的，无论如何，他们使我们的存在有意义。我认为独一之神的深意便在于此。然而美丽总是伴随着哀伤，即使是再璀璨耀人的珠宝也会消蚀，再美丽的花儿也会枯萎，再伟大的城池也会弥散在时间的铁蹄下。世事如此，循环往复。经年之后，纵使是最极致的美丽，或是最无法治愈的哀伤也无法使我清晰铭记。惟有那火炉旁的温暖，老友的欢笑和动人的诗篇能够抚慰内心的疲倦。现在我最大的愿望——我所想过的最美好的事，就是大家欢聚在一起，我们所有人。舒舒服服地依偎在暖炉旁，讲故事，说笑话，或许再来一顿丰盛的晚宴。而你的故事开头，Bilbo。它使我重新忆起了这种感觉。一种大多数时刻会被我们遗忘，却最为我们需要的感觉。”<br>
-　　<br>
-　　我的大脑思考着Erlond的话，胸中有什么呼之欲出。<br>
-　　Lord Erlond轻轻把书放回原处，转身与踱步而去。<br>
-　　再然后啊，我听见自己开口说，声音无比清晰地回荡在墙壁间。<br>
-　　“我刚刚为我的书想到了一个再合适不过的结局，您想听听吗，my lord？”<br>
-　　Erlond顿住了，转身浅笑着看着我。<br>
-　　“从此，那个霍比特人过上了幸福快乐的生活，直到他的灵魂不再受形体的束缚，自由自在地畅游在山丘和原野之间。他化为一阵清风，萦绕在他的老友们之间，让他们欢笑，直到永远。”<br>
-　　Lord Erlond眼中星光闪烁，他开口道：“这真是个好结局，Bilbo老友。”<br>
-　　说罢，便抬步离开了我的小阳台。<br>
-　　<br>
-　　良久，我伫立在那里，无声地笑了起来。<br>
-　　I know, I know. And I will tell this to my dear Frodo.</p>
-</br>
-<h2 id="part-3">Part 3</h2>
-<p><em><strong>我又忆起了那段疯狂的时光，那段跟着矮人到处乱跑的疯狂时光。看着晓雾弥散，孤山耸立在遥远的北方，还有那锤子敲敲打打的撞击声。</strong></em><br>
-　　<br>
-　　我对时间的概念又开始模糊了。记不清这是上午还是傍晚，记不清我是否吃了第二顿午饭，记不清在我榻前晃变的许多面孔。<br>
-　　也许是个黄昏吧，我缓缓睁开了眼。听见门外那海鸥归巢时的低鸣。和精灵呆在一起总是会让人忽略时光的流动，更不要说在这极西之地，这受维拉福祉的阿门州。<br>
-　　阿瑞恩驭着阿纳消失在了地平线，埃兰迪尔扬帆起航，而那金黄的余晖依旧萦绕在身旁。我嗅着海风咸咸的味道，从榻上坐了起来。<br>
-　　我的时刻到了，是时候告别了。<br>
-　　<br>
-　　半掩着的圆木门被轻轻推开，吱呀吱呀地响。我看见Frodo踱了进来，他身上沾染了大海的味道，衣衫微拂。他转过身，合上门，静默着褪下外衣，慢步走到我身旁。<br>
-　　“Bilbo，你醒了。”他涩然开口，眼睛里闪着美丽却又忧伤的光，“我刚刚准备了丰盛的晚饭呐，用泰勒瑞精灵密不外传的佐料腌制的烤鱼，我可是缠着Lindir好久他才答应帮我找的呢。来吧，Bilbo，你一定会爱上它的。”<br>
-　　Frodo总是那么善解人意，我的好孩子。我们拥有这种无需言语的默契，用闲聊的口吻谈论死亡，就好像我只是要再去参加一次冒险一样。<br>
-　　我望着Frodo酌着些许悲伤的浅笑，开口道：“啊，Frodo。只碰我们两个怎么消受得了如此美味的鱼？Gandalf呢，我的老朋友们呢？”<br>
-　　“就快了，Bilbo。他们就快到了。”Frodo轻声对我说，忽而又轻笑出声，“哦，我的老Bilbo。你总是那么心急，有没有恶龙在后面追着你跑。”<br>
-　　啊，恶龙。好久没有听到过这个词了。我又忆起了那段疯狂的时光，那段跟着矮人到处乱跑的疯狂时光。看着晓雾弥散，孤山耸立在遥远的北方，还有那锤子敲敲打打的撞击声。片刻间，我仿佛又听到索林·橡木盾雄厚的嗓音哼唱的古老歌谣。<br>
-　　那是多久以前的事啊。自从到达维林诺，Frodo和我就同泰勒瑞精灵一起居住在海边。泰勒瑞族非常热情，他们赠予我们食物以及衣物，帮助我们搭建属于霍比特人的家。<br>
-　　<br>
-　　“哈，阿门州的袋底洞。你又创造了一个奇迹，Bilbo。”我犹记得Gandalf如是说， “不过，为什么你和Frodo都不愿随我一起前往罗瑞恩花园呢？据我所知，一般的霍比特人可不会舍弃美丽无比的花园，却选择把房子建在大海边上呀。”<br>
-　　“才不是呢，Gandalf。我毕竟只是广阔天地中的一个小人物，然而这世界却大得很呐。这是你告诉我的，你还记得吗？”<br>
-　　我咧嘴笑着，下意识的想掏出上衣口袋里的烟斗。却过了好久才想起来，我已经把他们赠给了Marry和Pipin。没准他们现在就躺在夏尔明媚的阳光下，抽着南区最好的烟草聊大天呢。<br>
-　　维林诺土地上的所有植物都在雅凡娜的荣光下繁茂生长，但是我永远不会再见到那连片的烟草地了。<br>
-　　“好吧，我很高兴你还记得我说过的话。但是这和罗瑞恩花园有什么关系呢，我亲爱的Bilbo？”<br>
-　　Gandalf和我倚在海边的一块岩石旁，看那翻滚着的白色浪花洗刷着白色的沙滩。在阳光的照耀下，每一粒细沙折射出粲然的白光。泰勒瑞精灵在远处嬉戏玩耍，他们银色的长发沐浴在金黄的温暖之下，灿灿生辉。<br>
-　　“我只是个小人物，Gandalf。但我曾经和三只食人妖整夜周旋，我曾经在瑞文戴尔驻足，我曾经与八脚蜘蛛搏斗，我曾经只身深入伊鲁柏和恶龙交涉，我曾经加入五军之战，与精灵一起战斗。我已经目睹过世界上为数不多的奇迹，作为一个霍比特人，我已见识了太多，是时候该休息了。Come on，Gandalf，想象一下。一个霍比特人，住在维拉们的花园里，这该有多么荒谬呀！”<br>
-　　Gandalf望着海的那头——他挚爱的中土，陷入了沉思。<br>
-　　<br>
-　　就这样，我们沉默着坐在海边的岩石上，聆听海鸥诉说那彼岸的故事。<br>
-　　瞟了瞟Gandalf慈祥的面孔，我突然有些局促不安，开口道：“当然，我老啦，走不动啦。只期盼着能坐在炉火旁，听亲爱的Frodo念诗歌给我听。天气好的时候，我们聚到外面来，躺在这里聊天。说累了，就阖上眼，在精灵歌谣的陪伴下入睡。Frodo总是呆呆地望着海岸线，哦对了，有一次他还和我开玩笑说也许Sam就过来陪他了呢。”<br>
-　　我们都大笑起来，Gandalf爽朗地嚷道：“对此我毫不怀疑。Samwise Gamgee，那个呆头呆脑却蕴藏着非凡勇气的霍比特人。也许哪天头脑一热，就追随他的主人渡海而来了。”<br>
-　　说罢，他站起身来，拍了拍原本就没有一粒灰尘的白袍，叹了口气说：“我真希望维林诺可以种出夏尔南区的烟草，但是谁知道呢，现在我只剩一把空烟斗啦。”说着，他就转了身朝提里安城的方向走去。<br>
-　　不到片刻，Gandalf沧桑却不显衰老的声音就又传了过来：“一切都会变得越来越好的，老友。只是可怜的老Gandalf还是有事忙。等着我，Bilbo。晚上咱们还要开怀畅饮哩。”<br>
-　　我仰面躺在岩石上，随口应答道：“All right，Gandalf，你说什么就是什么吧。”<br>
-　　然后啊，我就数着天上的云朵，双目阖合，继续我的小憩。</p>
-</br>
-<h2 id="part-4">Part 4</h2>
-<p><em><strong>Once upon a time, there was a Hobbit lived in a hole.</strong></em><br>
-　　<br>
-　　“Bilbo，Bilbo。醒醒。”朦胧间，我听到Frodo急切的声音。<br>
-　　我努力地想睁开双眼，却发现自己并没有躺在海边的小丘上，而是蜷缩在炉火边，身上还盖着我旧时的旅行斗篷。<br>
-　　我摇了摇头，感觉一切似真似幻。果真是做梦了吗？梦到了刚到维林诺不久的日子里的一段普普通通的回忆。我再度眨了眨眼，困惑地望向Frodo。<br>
-　　Frodo帮我捻好衣角，又向炉火中添了几把柴火。他蹲下来轻声对我说：“他们马上就到了，Bilbo...Lord Erlond，Lindir和Gandalf，我刚从送信的诺多精灵处得知。再坚持一会儿，Bilbo...他们就要来了。”Frodo嗓音沙哑。<br>
-　　我慈爱地注视着我亲爱的Frodo，笑着开了口：“不要悲伤，我的孩子。老Bilbo的冒险故事也许会在这里结束，我却马上就要踏上新的旅途了。是的，Frodo。我可以感受到它，我的灵魂生来便如此，无拘无束，自由自在。到了现在...啊...我要加入新的旅途啦...你还记得我告诉过你的那个故事结尾吗，Frodo？”<br>
-　　“当然。”Frodo低喃道，“从此，那个霍比特人过上了幸福快乐的生活，直到他的灵魂不再受形体的束缚，自由自在地畅游在山丘和原野之间。他化为一阵清风，萦绕在他的老友们之间，让他们欢笑，直到永远。”<br>
-　　“对啊...”我轻叹出声，“多么完美的结局，不是吗？”<br>
-　　<br>
-　　这时，门外传来了脚步声，属于霍比特人的圆圆的门吱呀呀地打开，Gandalf慈祥的面孔再度出现在我眼前。跟在他后面的，还有Lord Erlond，Lindir和我所有的挚友们。<br>
-　　他们都来到这里，他们都到此与我告别。<br>
-　　我半卧在摇椅上，凝视着他们的脸庞。看他们以微笑回应我，眼神中流露出的不舍之意。 还有，那淡淡的忧伤。<br>
-　　没有眼泪，没有挽歌。我们以微笑告别，仿佛我只是要出趟远门，要到那一望无际的原野中游荡。<br>
-　　<br>
-　　我感觉到我的意识正一丝一缕地游离躯干，乘着海风，飞往大海的那边。<br>
-　　于是阖眼，轻叹。<br>
-　　往事如影随行。<br>
-　　<br>
-　　“你我终究会在大海彼岸重逢。”<br>
-　　<br>
-　　“我己经目睹过太多的沧桑迁变，人世无常。”<br>
-　　<br>
-　　“我老啦，走不动啦。只期盼着能坐在炉火旁，听亲爱的Frodo念诗歌给我听。”<br>
-　　<br>
-　　“经年之后，纵使是最极致的美丽，或是最无法治愈的哀伤也无法使我清晰铭记。惟有那火炉旁的温暖，老友的欢笑和动人的诗篇能够抚慰内心的疲倦。”<br>
-　　<br>
-　　“我真希望维林诺可以种出夏尔南区的烟草，但是谁知道呢，现在我只剩一把空烟斗啦。”<br>
-　　<br>
-　　“我所想过的最美好的事，就是大家欢聚在一起，我们所有人。舒舒服服地依偎在暖炉旁，讲故事，说笑话，或许再来一顿丰盛的晚宴。”<br>
-　　<br>
-　　“无论怎样，请记住我的故事，老Bilbo的历险故事。”<br>
-　　<br>
-　　恍惚间，我看见了湛蓝苍穹之下，一碧万顷的大海；我看见灰港岸边停靠着的美丽白船；我看见清澈梦幻的小溪从幽谷流出，满载着精灵的欢笑；我看见北部那雄廓的大荒野，骏马疾驰其间；我看见云雾散尽后的孤山，渡鸦从裂隙飞过，敲响了国王之石下的锁眼。<br>
-　　<br>
-　　但是，这些都不是我的终点。哦，傻傻的老Bilbo怎能忘记？就在那中土的西边，有一片嫩绿的土地。<br>
-　　没有一望无际的荒野，没有高峰如云的山峰，没有充满魔法的溪泉，也没有阳光下银灿灿的沙滩。它的绿绵绵延延，每当清晨的第一缕阳光照耀大地，山丘上不知名的野花就会争发幽香。我怎能忘记我的故乡——夏尔。<br>
-　　<br>
-　　于是我再度开口，低沉地询问Frodo：“我亲爱的孩子，how about listen to a story，Eh？”<br>
-　　“当然啦，Bilbo。我已经好久没听过你讲故事了。”Frodo温柔的回应。<br>
-　　所以人们都坐了下来，准备听老Bilbo最后一遍讲述他的小故事。<br>
-　　<br>
-　　我合上眼，清了清嗓子，开口讲：<br>
-　　“Once upon a time, there was a Hobbit lived in a hole.”<br>
-　　<br>
-　　夏尔清晰地展现在我眼前。清晨，诺克牵着他的羊沿着临水路遛早，老农夫卡顿的女儿小玫打开了小酒馆的门，边擦杯子边倚在门边眺望Samwise·Gamgee修剪袋底洞的小花园。<br>
-　　<br>
-　　“不是那种让人恶心的洞，脏兮兮湿乎乎的，长满了虫子，透着一股子泥腥味。”<br>
-　　<br>
-　　老吹号家的公鸡开始打鸣了，远处传来傲娇家叮叮咣咣的做饭声。图克家的小孩乘着小船，幻想着去边境之外冒险。<br>
-　　<br>
-　　“也不是那种满是沙子的洞，干巴巴光秃秃的，没好地方坐，也没好东西吃。”<br>
-　　<br>
-　　山迪曼在炫耀自己昨天淘到了一箱棒极了的烟草，罗贝拉·巴金斯还在千方百计地往裙兜中塞我的银汤勺。老诺克单肩背着满满的酒桶，走到半路被迎接Gandalf的小孩子们撞倒，索性坐在地上痛饮。<br>
-　　<br>
-　　“这是一个霍比特人的洞，而霍比特人的洞就意味着舒适。”<br>
-　　<br>
-　　在东边的树林中，Frodo正聚精会神地看着诗集。Gandalf驾着破破旧旧的马车姗姗来迟，哼着歌儿去往袋底洞的方向。孩子们追随着Gandalf的烟火，图伏特老爹在旁边看着傻笑。月光下，我捧着酒杯，在嬉闹声中开怀大笑。霍比特人的歌声冲出烟囱，直达云霄。<br>
-　　<br>
-　　“突然有一天啊，这个霍比特人在一位巫师的忽悠下，稀里糊涂地和矮人踏上了一段改变他一生的旅程。<br>
-　　<br>
-　　他和三只食人妖在篝火旁聊天，绞尽脑汁地营救矮人伙伴。<br>
-　　他深入哥布林的洞穴，在黑暗中与Gollum猜谜。<br>
-　　他在幽暗密林遭遇了大蜘蛛，用宝剑'刺钉'再度营救伙伴。<br>
-　　他用木酒桶帮助矮人们逃离精灵王的府邸，却被河水淹了个够呛。<br>
-　　他在伊鲁柏中吵醒了恶龙，用魔力指环躲避Smaug的追杀。<br>
-　　他与精灵一起对抗奥克斯大军，目睹过巨鹰的雄壮美丽。<br>
-　　<br>
-　　再后来啊，他与巫师踏上曾走过的路，穿过茂密的森林，廖廓的原野以及幽静的河谷，回到他们最初离开的地方。<br>
-　　这个霍比特人又住回了他的老屋，常常在炉火旁等待老友们的光临。他就这样幸福快乐地生活了下去，直到他的灵魂不再受形体的束缚，自由自在地畅游在山丘和原野之间。他化为一阵清风，萦绕在他的老友们之间，让他们欢笑，直到最后的最后。<br>
-　　<br>
-　　他的名字，叫做Bilbo Baggins。”<br>
-　　<br>
-　　“这真是个好故事，Bilbo。”Frodo笑着对我说，“这是我所听到过的最好的故事，真的。”<br>
-　　“当然，我轻笑出声，“这可是我的小故事。”最后一眼望了望我挚爱的世界。<br>
-　　<br>
-　　是啊，my dear Frodo。我感觉意识逐渐模糊，灵魂也摆脱了形体的束缚，乘着海风飞向我心心念念的地方。<br>
-　　<br>
-　　My dear Frodo，我们终将成为故事。</p>
-<p></br></p>
-<p><strong>The End.</strong></p>
-<p></br></br></p>
-<p><em>故事完结于2015年3月</em></p>
-<p><em>最初发表在霍比特人吧</em></p>
-<p><em>最后一次编辑于2020.3.23下午</em></p>
-<p><em>于2020.05.05决定为这篇文再留下些痕迹</em></p>
-<p><em>2021.05.03 发表在自己的博客</em></p>
-<p><em><strong>跨越五年时光</strong></em><br>
-<em><strong>追求独特 热爱平凡</strong></em></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Chapter4 字符串：4.2 字符串处理]]></title>
-        <id>https://Czardas42.github.io/post/chapter4/</id>
-        <link href="https://Czardas42.github.io/post/chapter4/">
-        </link>
-        <updated>2021-04-29T06:25:20.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="1-特殊乘法"><strong>1. 特殊乘法</strong></h2>
-<h3 id="题目描述"><strong>题目描述</strong></h3>
-<p>写个算法，对2个小于1000000000的输入，求结果。 特殊乘法举例：123 * <em>45 = 1<strong>4 +1</strong>5 +2<strong>4 +2</strong>5 +3**4+3</em>5</p>
-<h3 id="要点"><strong>要点</strong></h3>
-<ol>
-<li>
-<p><code>char</code>和<code>int</code>类型的转换：<code>int((str1[i]-'0')*(str2[j]-'0'))</code></p>
-</li>
-<li>
-<p>用字符串处理数字的思路</p>
-</li>
-</ol>
-<h3 id="提交地址">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/a5edebf0622045468436c74c3a34240f?tpId=60&amp;tqId=29490&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/a5edebf0622045468436c74c3a34240f?tpId=60&amp;tqId=29490&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码">代码</h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-
-#include &lt;cstdio&gt;
-
-#include &lt;string&gt;
-
-
-
-using namespace std;
-
-
-
-int main()
-
-{
-
-​    string str1, str2;
-
-​    while(cin &gt;&gt; str1 &gt;&gt; str2)
-
-​    {
-
-​        int count = 0;
-
-​        for (int i=0; i&lt;str1.size(); i++)
-
-​        {
-
-​            for (int j=0; j&lt;str2.size(); j++)
-
-​            {
-
-​                count = count + int((str1[i]-'0')*(str2[j]-'0'));
-
-​            }
-
-​        }
-
-​        cout &lt;&lt; count &lt;&lt; endl;
-
-​    }
-
-}
-</code></pre>
-<h2 id="2-密码翻译"><strong>2.  密码翻译</strong></h2>
-<h3 id="题目描述-2"><strong>题目描述</strong></h3>
-<p>在情报传递过程中，为了防止情报被截获，往往需要对情报用一定的方式加密，简单的加密算法虽然不足以完全避免情报被破译，但仍然能防止情报被轻易的识别。我们给出一种最简的的加密方法，对给定的一个字符串，把其中从a-y,A-Y的字母用其后继字母替代，把z和Z用a和A替代，则可得到一个简单的加密字符串。</p>
-<h3 id="要点-2"><strong>要点</strong></h3>
-<ol>
-<li>
-<p>C++的if语句不可以使用连等，需要用<code>&amp;&amp;</code>分开表示：<code>if ((int('a')&lt;=num &amp;&amp; num&lt;=int('z')) || (int('A')&lt;=num &amp;&amp; num&lt;=int('Z')))</code></p>
-</li>
-<li>
-<p>用ASCII码鉴别字符</p>
-</li>
-<li>
-<p>强制类型转换：<code>char()</code>和<code>int()</code></p>
-</li>
-<li>
-<p>要求整行输入，需要用到<code>getline(cin, str)</code></p>
-</li>
-</ol>
-<h3 id="提交地址-2">提交地址：</h3>
-<p><a href="https://www.nowcoder.com/practice/a5edebf0622045468436c74c3a34240f?tpId=60&amp;tqId=29490&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/a5edebf0622045468436c74c3a34240f?tpId=60&amp;tqId=29490&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-2"><strong>代码</strong></h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;string&gt;
-
-using namespace std;
-
-int main()
-
-{
-
-​    string str;
-
-​    while(getline(cin, str))
-
-​    {
-
-​        for(int i=0; i&lt;str.size(); i++)
-
-​        {
-
-​            int num = int(str[i]);
-
-​            if ((int('a')&lt;=num &amp;&amp; num&lt;=int('z')) || (int('A')&lt;=num &amp;&amp; num&lt;=int('Z')))
-
-​            {
-
-​                if (str[i] == 'z')
-
-​                {
-
-​                    str[i] == 'a';
-
-​                }
-
-​                else if(str[i] == 'Z')
-
-​                {
-
-​                    str[i] == 'A';
-
-​                }
-
-​                else
-
-​                {
-
-​                    str[i] = char(int(str[i]) + 1);
-
-​                }
-
-​                
-
-​            }
-
-​        }
-
-​        cout &lt;&lt; str &lt;&lt; endl;
-
-​    }
-
-}
-</code></pre>
-<h2 id="3-简单密码"><strong>3.  简单密码</strong></h2>
-<h3 id="题目描述-3">题目描述</h3>
-<p>Julius Caesar曾经使用过一种很简单的密码。 对于明文中的每个字符，将它用它字母表中后5位对应的字符来代替，这样就得到了密文。 比如字符A用F来代替。如下是密文和明文中字符的对应关系。 密文 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 明文 V W X Y Z A B C D E F G H I J K L M N O P Q R S T U 你的任务是对给定的密文进行解密得到明文。 你需要注意的是，密文中出现的字母都是大写字母。密文中也包括非字母的字符，对这些字符不用进行解码。</p>
-<h3 id="要点-3"><strong>要点</strong></h3>
-<p><strong>循环平移类问题</strong></p>
-<p>id：差量，从零开始</p>
-<p>begin：初始量</p>
-<p>公式1：<code>初始量 +（id + 平移量）% 个数</code></p>
-<p>公式2：<code>初始量 +（id - 平移量 + 个数）% 个数</code></p>
-<p>例如本题，A-Z每个字母取其前五的字母：</p>
-<pre><code>str[i] = char(int('A') + (int(str[i])-int('A')-5+26)%26);
-</code></pre>
-<h3 id="提交地址-3"><strong>提交地址</strong></h3>
-<p><a href="https://www.nowcoder.com/practice/ff99c43dd07f4e95a8f2f5448da3772a?tpId=61&amp;tqId=29562&amp;tPage=4&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/ff99c43dd07f4e95a8f2f5448da3772a?tpId=61&amp;tqId=29562&amp;tPage=4&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-3"><strong>代码</strong></h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;string&gt;
-
-using namespace std;
-
-int main()
-
-{
-
-​    string str;
-
-​    while (getline(cin, str))
-
-​    {
-
-​        if (str == &quot;START&quot; || str == &quot;END&quot;)
-
-​            continue;
-
-​        else if(str == &quot;ENDOFINPUT&quot;)
-
-​            break;
-
-​        else
-
-​        {
-
-​            for(int i=0; i&lt;str.size(); i++)
-
-​            {
-
-​                if (int('A') &lt;= int(str[i]) &amp;&amp; int(str[i])&lt;= int('Z'))
-
-​                {
-
-​                    str[i] = char(int('A') + (int(str[i])-int('A')-5+26)%26);
-
-​                }
-
-​            }
-
-​            cout &lt;&lt; str &lt;&lt; endl;
-
-​        }
-
-​    }
-
-}
-</code></pre>
-<h2 id="4-统计字符"><strong>4.  统计字符</strong></h2>
-<h3 id="题目描述-4">题目描述</h3>
-<p>统计一个给定字符串中指定的字符出现的次数。</p>
-<h3 id="要点-4">要点</h3>
-<ol>
-<li>数组清零/初始化方法：（<code>cstring</code>库）</li>
-</ol>
-<p>​     <code>memset(number, 0, sizeof(number));</code></p>
-<ol start="2">
-<li>统计/计数问题思路：<strong><strong>先全部计数，再按照要求输出即可</strong></strong></li>
-</ol>
-<h3 id="提交地址-4">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/4ec4325634634193a7cd6798037697a8?tpId=63&amp;tqId=29574&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F9001&amp;qru=%2Fta%2Fzju-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/4ec4325634634193a7cd6798037697a8?tpId=63&amp;tqId=29574&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F9001&amp;qru=%2Fta%2Fzju-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-4">代码</h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;string&gt;
-#include &lt;cstring&gt;
-using namespace std;
-
-int main()
-
-{
-
-​    string str1, str2;
-
-​    int number[128];
-
-​    
-
-​    while(getline(cin, str1))
-
-​    {
-
-​        if (str1 == &quot;#&quot;)
-
-​            break;
-
-​        else
-
-​        {
-
-​            getline(cin, str2);
-
-​            memset(number, 0, sizeof(number));
-
-​            for (int i=0; i&lt;str2.size(); i++)
-
-​            {
-
-​                number[int(str2[i])]++;
-
-​            }
-
-​            for (int j=0; j&lt;str1.size(); j++)
-
-​            {
-
-​                
-
-​                cout &lt;&lt; str1[j] &lt;&lt; &quot; &quot;&lt;&lt; number[int(str1[j])] &lt;&lt; endl;
-
-​            }
-
-​        }
-
-​        
-
-​    }
-
-}
-</code></pre>
-<h2 id="5-字母统计"><strong>5.  字母统计</strong></h2>
-<h3 id="题目描述-5"><strong>题目描述</strong></h3>
-<p>输入一行字符串，计算其中A-Z大写字母出现的次数</p>
-<h3 id="要点-5"><strong>要点</strong></h3>
-<p>与前一题思路类似</p>
-<h3 id="提交地址-5"><strong>提交地址</strong></h3>
-<p><a href="https://www.nowcoder.com/practice/de7bf0945c1c4bd1aa9d49573b831f3c?tpId=62&amp;tqId=29470&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F2002&amp;qru=%2Fta%2Fsju-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/de7bf0945c1c4bd1aa9d49573b831f3c?tpId=62&amp;tqId=29470&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F2002&amp;qru=%2Fta%2Fsju-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-5"><strong>代码</strong></h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-
-#include &lt;cstdio&gt;
-
-#include &lt;string&gt;
-
-#include &lt;cstring&gt;
-
-using namespace std;
-
-int main()
-
-{
-
-​    string str;
-
-​    int count[26];
-
-​    while (getline(cin, str))
-
-​    {
-
-​        memset(count, 0, sizeof(count));
-
-​        for (int i=0; i&lt;str.size(); i++)
-
-​        {
-
-​            if ('A'&lt;=str[i] &amp;&amp; str[i]&lt;='Z')
-
-​            {
-
-​                 count[int(str[i]-'A')]++;
-
-​            }   
-
-​        }   
-
-​        for (int j=0; j&lt;26; j++)
-
-​        {
-
-​            cout &lt;&lt; char(int('A'+j)) &lt;&lt; &quot;:&quot; &lt;&lt; count[j] &lt;&lt; endl;
-
-​        }
-
-​    }
-
-}
-
-</code></pre>
-<h2 id="6-skew数"><strong>6.  skew数</strong></h2>
-<h3 id="题目描述-6"><strong>题目描述</strong></h3>
-<p>在 skew binary 表示中，第 k 位的值 x[k] 表示 x[k]×(2^(k+1)-1)。每个位上的可能数字是 0 或 1，最后面一个非零位可以是 2，例如，10120(skew) = 1×(2^5-1) + 0×(2^4-1) + 1×(2^3-1) + 2×(2^2-1) + 0×(2^1-1) = 31 + 0 + 7 + 6 + 0 = 44。前十个 skew 数是 0、1、2、10、11、12、20、100、101、以及 102。</p>
-<h3 id="要点-6"><strong>要点</strong></h3>
-<p>次幂函数</p>
-<pre><code>#include &lt;math.h&gt;
-pow(a, b)
-</code></pre>
-<h3 id="提交地址-6"><strong>提交地址</strong></h3>
-<p><a href="https://www.nowcoder.com/practice/5928127cc6604129923346e955e75984?tpId=61&amp;tqId=29517&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/5928127cc6604129923346e955e75984?tpId=61&amp;tqId=29517&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-6"><strong>代码</strong></h3>
-<pre><code class="language-C++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;string&gt;
-#include &lt;math.h&gt;
-using namespace std;
-
-int main()
-
-{
-
-​    string str;
-
-​    while (cin&gt;&gt;str)
-
-​    {
-
-​        int sum = 0;
-
-​        for(int i=0; i&lt;str.size(); i++)
-
-​        {
-
-​            int id = str.size() - i;
-
-​            sum += int(str[i] - '0') * (pow(2, id)-1);
-
-​        }
-
-​        cout &lt;&lt; sum &lt;&lt; endl;
-
-​    }
-
-}
-</code></pre>
-<h2 id="7-单词替换"><strong>7.  单词替换</strong></h2>
-<h3 id="题目描述-7"><strong>题目描述</strong></h3>
-<p>输入一个字符串，以回车结束（字符串长度&lt;=100）。该字符串由若干个单词组成，单词之间用一个空格隔开，所有单词区分大小写。现需要将其中的某个单词替换成另一个单词，并输出替换之后的字符串。</p>
-<h3 id="要点-7"><strong>要点</strong></h3>
-<ol>
-<li><strong>坑：可能需要替换的单词是其他单词的前缀或者后缀或者中间一部分</strong></li>
-</ol>
-<p>​    <strong>解决方法：在句子、被替换词、替换词的前后都加上空格，保证不会产生查找错误</strong></p>
-<ol start="2">
-<li>
-<p>查找字符串中特定字符或者子串的方法(所有位置)</p>
-<pre><code class="language-C++">int position = 0;
-
-while((position=line.find(str1,position))!=string::npos)
-
- {
-
-​         //line.erase(position, str1.size());
-
-​         //line.insert(position, str2);
-
-​         line.replace(position,str1.length(),str2);
-
-​         position++;
-
-}
-</code></pre>
-</li>
-<li>
-<p>string类型基本操作</p>
-</li>
-</ol>
-<pre><code>erase(起始位置，长度)
-insert(起始位置，长度)
-replace(起始位置，长度，替换结果)
-substr(起始位置，长度)
-</code></pre>
-<h3 id="提交地址-7"><strong>提交地址</strong></h3>
-<p><a href="https://www.nowcoder.com/practice/5b58a04679d5419caf62c2b238e5c9c7?tpId=61&amp;tqId=29518&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/5b58a04679d5419caf62c2b238e5c9c7?tpId=61&amp;tqId=29518&amp;tPage=1&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-7"><strong>代码</strong></h3>
-<pre><code class="language-C++">#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;cstdio&gt;
-
-using namespace std;
-
-int main()
-
-{
-
-​    string line;
-
-​    while (getline(cin, line))
-
-​    {
-
-​        line = line;
-
-​        string str1, str2;
-
-​        cin &gt;&gt; str1 &gt;&gt; str2;
-
-​        line = ' ' + line + ' ';
-
-​        str1 = ' ' + str1 + ' ';
-
-​        str2 = ' ' + str2 + ' ';
-
-​        
-
-​        int position = 0;
-
-​        while((position=line.find(str1,position))!=string::npos)
-
-​        {
-
-​            //line.erase(position, str1.size());
-
-​            //line.insert(position, str2);
-
-​            line.replace(position,str1.length(),str2);
-
-​            position++;
-
-​        }
-
-​        
-
-​        cout &lt;&lt; line.substr(1, line.size()-2) &lt;&lt; endl;
-
-​    }
-
-}
-</code></pre>
-<h2 id="8-首字母大写"><strong>8.  首字母大写</strong></h2>
-<h3 id="题目描述-8"><strong>题目描述</strong></h3>
-<p>对一个字符串中的所有单词，如果单词的首字母不是大写字母，则把单词的首字母变成大写字母。 在字符串中，单词之间通过空白符分隔，空白符包括：空格(' ')、制表符('\t')、回车符('\r')、换行符('\n')。</p>
-<h3 id="要点-8"><strong>要点</strong></h3>
-<p>句首和其他位置要分开讨论</p>
-<p>其他位置可以根据空白符确定</p>
-<h3 id="提交地址-8"><strong>提交地址</strong></h3>
-<p><a href="https://www.nowcoder.com/practice/91f9c70e7b6f4c0ab23744055632467a?tpId=61&amp;tqId=29529&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/91f9c70e7b6f4c0ab23744055632467a?tpId=61&amp;tqId=29529&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F1002&amp;qru=%2Fta%2Fpku-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-8"><strong>代码</strong></h3>
-<pre><code class="language-C++">#include&lt;iostream&gt;
-#include&lt;string&gt;
-using namespace std;
-
-int main(){
-
-​    string s;
-
-​    getline(cin,s);
-
-​    for(int i=0;i&lt;s.length();i++){
-
-​        if(i==0)
-
-​            s[i]=toupper(s[i]);
-
-​        else{
-
-​            if(s[i-1]==' '||s[i-1]=='\t'||s[i-1]=='\r'||s[i-1]=='\n')
-
-​                s[i]=toupper(s[i]);
-
-​        }
-
-​    }
-
-​    cout&lt;&lt;s&lt;&lt;endl;
-
-}
-</code></pre>
-<h2 id="9-浮点数加法"><strong>9.  浮点数加法</strong></h2>
-<h3 id="题目描述-9"><strong>题目描述</strong></h3>
-<p>对求2个浮点数相加的和 题目中输入输出中出现浮点数都有如下的形式： P1P2...Pi.Q1Q2...Qj 对于整数部分，P1P2...Pi是一个非负整数 对于小数部分，Qj不等于0</p>
-<h3 id="要点-9"><strong>要点</strong></h3>
-<ol>
-<li>
-<p><strong>整数和小数部分位数均可能不相等，所以都需要需要补0，可以分开操作</strong></p>
-</li>
-<li>
-<p>绝对值函数：<code>#include &lt;cmath&gt;</code>  <code>int c = abs(a + b)</code></p>
-</li>
-<li>
-<p>加法进位操作</p>
-<p>变量：两个加数，加数结果（中间变量），一个位结果，一个进位变量</p>
-<pre><code class="language-C++">int add = int((str1[i]-'0') + (str2[i]-'0'));
-result[i] = char('0' + (add + temp)%10);    
-temp = (add + temp)/10;
-</code></pre>
-</li>
-</ol>
-<h3 id="提交地址-9"><strong>提交地址</strong></h3>
-<p><a href="https://www.nowcoder.com/practice/ddec753f446e4ba4944e35378ba635c8?tpId=40&amp;rp=1&amp;ru=%2Fta%2Fkaoyan&amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/ddec753f446e4ba4944e35378ba635c8?tpId=40&amp;rp=1&amp;ru=%2Fta%2Fkaoyan&amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-9"><strong>代码</strong></h3>
-<pre><code class="language-C++">#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;cstdio&gt;
-#include &lt;cmath&gt;
-using namespace std;
-
-int main()
-{
-    string str1, str2;
-    while(cin &gt;&gt; str1)
-    {
-        cin &gt;&gt; str2;
-        int flag1 = str1.find('.') + 1; //str1整数长度
-        int flag11 = str1.size() - flag1; //str1小数长度
-        int flag2 = str2.find('.') + 1;
-        int flag22 = str2.size() - flag2;
-        int time1 = abs(flag1 - flag2); //str1和str2整数部分差值
-        int time2 = abs(flag11 - flag22); //str1和str2小数部分差值
-        //整数部分补0
-        if (flag1 &gt; flag2)
-        {
-            for(int i=0; i&lt;time1; i++)
-                str2 = '0' + str2;
-        }
-        else
-        {
-            for(int i=0; i&lt;time1; i++)
-                str1 = '0' + str1;
-        }
-        //小数部分补0
-        if (flag11 &gt; flag22)
-        {
-            for(int i=0; i&lt;time2; i++)
-                str2 = str2 + '0';
-        }
-        else
-        {
-            for(int i=0; i&lt;time2; i++)
-                str1 = str1 + '0';
-        }
-        //预存结果格式
-        //注意：此处并没有考虑最高位进位的问题，用例中也没有出现
-        string result = str1;
-        int temp = 0;
-        for (int i=str1.size()-1; i&gt;=0; i--)
-        {
-            if (str1[i] != '.')
-            {   //经典加法操作
-                int add = int((str1[i]-'0') + (str2[i]-'0'));
-                result[i] = char('0' + (add + temp)%10);    
-                temp = (add + temp)/10;
-            }
-        }
-        cout &lt;&lt; result &lt;&lt; endl;
-    }
-}
-</code></pre>
-<h2 id="10-后缀字串排序"><strong>10.  后缀字串排序</strong></h2>
-<h3 id="题目描述-10"><strong>题目描述</strong></h3>
-<p>对于一个字符串，将其后缀子串进行排序，例如grain 其子串有： grain rain ain in n 然后对各子串按字典顺序排序，即： ain,grain,in,n,rain</p>
-<h3 id="要点-10"><strong>要点</strong></h3>
-<ol>
-<li>
-<p>两个步骤：得到所有后缀子串，排序输出</p>
-</li>
-<li>
-<p><strong>得到所有后缀子串方法</strong></p>
-<p>使用<code>str.substr(起始位, 长度)</code>函数</p>
-<p>从单词最后一位开始遍历，同时增加长度</p>
-</li>
-<li>
-<p><strong>排序函数</strong></p>
-<p><code>void sort (RandomAccessIterator first, RandomAccessIterator last, Compare comp);</code></p>
-<p>（1）第一个参数first：是要排序的数组的起始地址。</p>
-<p>（2）第二个参数last：是结束的地址（<strong>最后一个数据的后一个数据的地址</strong>）</p>
-<p>（3）第三个参数comp是排序的方法：可以是从升序也可是降序。如果第三个参数不写，则默认的排序方法是从小到大排序。降序：<code>cmp</code>。</p>
-</li>
-</ol>
-<h3 id="提交地址-10"><strong>提交地址</strong></h3>
-<p><a href="https://www.nowcoder.com/practice/f89f96ea3145418b8e6c3eb75773f65a?tpId=40&amp;rp=1&amp;ru=%2Fta%2Fkaoyan&amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/f89f96ea3145418b8e6c3eb75773f65a?tpId=40&amp;rp=1&amp;ru=%2Fta%2Fkaoyan&amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-10"><strong>代码</strong></h3>
-<pre><code class="language-C++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;string&gt;
-#include &lt;algorithm&gt;
-using namespace std;
-
-int main()
-{
-    string str;
-    while(cin &gt;&gt; str)
-    {
-        string sub[50];//50对于用例够了
-        //得到后缀子串
-        for (int i=str.size()-1, j=1; i&gt;=0; i--, j++)
-        {
-            sub[i] = str.substr(i,j);
-        }
-        //排序
-        sort(sub, sub+str.size());//记住！！！！！
-        for (int i=0; i&lt;str.size(); i++)
-            cout &lt;&lt; sub[i] &lt;&lt; endl;
-    }
-    
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[云计算大作业知识点]]></title>
-        <id>https://Czardas42.github.io/post/openfaas_project_notes/</id>
-        <link href="https://Czardas42.github.io/post/openfaas_project_notes/">
-        </link>
-        <updated>2021-04-29T03:53:46.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="1-kubernetes">1. Kubernetes</h1>
-<h2 id="11-架构节点工作负载">1.1 架构(节点)，工作负载</h2>
-<h3 id="nodes">nodes：</h3>
-<p><a href="https://kubernetes.io/zh/docs/concepts/architecture/nodes/">https://kubernetes.io/zh/docs/concepts/architecture/nodes/</a><br>
-</br></p>
-<h3 id="pods">Pods：</h3>
-<p>Pod 是可以在 Kubernetes 中创建和管理的、最小的可部署的计算单元。<br>
-<a href="https://kubernetes.io/zh/docs/concepts/workloads/">https://kubernetes.io/zh/docs/concepts/workloads/</a><br>
-</br></p>
-<h2 id="12-服务-负载均衡和联网">1.2 服务、负载均衡和联网</h2>
-<h3 id="使用-service-连接到应用">使用 Service 连接到应用:</h3>
-<p><strong>可结合Prometheus部署过程进行阐述</strong><br>
-<a href="https://kubernetes.io/zh/docs/concepts/services-networking/connect-applications-service/">https://kubernetes.io/zh/docs/concepts/services-networking/connect-applications-service/</a></p>
-<h3 id="用-kubectl-扩缩应用程序deployment副本数">用 kubectl 扩缩应用程序(Deployment副本数)：</h3>
-<p><strong>可结合正确删除pod的方法进行阐述</strong><br>
-在之前的模块中，我们创建了一个 Deployment，然后通过 Service让其可以开放访问。Deployment 仅为跑这个应用程序创建了一个 Pod。 当流量增加时，我们需要扩容应用程序满足用户需求。<br>
-<a href="https://kubernetes.io/zh/docs/tutorials/kubernetes-basics/scale/scale-intro/">https://kubernetes.io/zh/docs/tutorials/kubernetes-basics/scale/scale-intro/</a></p>
-<p></br></br></p>
-<h1 id="2-openfaas">2. OpenFaaS</h1>
-<h2 id="21-layers-and-responsibilities-工作流程">2.1 Layers and responsibilities 工作流程</h2>
-<p><a href="https://docs.openfaas.com/architecture/stack/#openfaas-stack">https://docs.openfaas.com/architecture/stack/#openfaas-stack</a><br>
-</br></p>
-<h2 id="22-架构gateway">2.2 架构&amp;Gateway</h2>
-<p><a href="https://docs.openfaas.com/architecture/gateway/">https://docs.openfaas.com/architecture/gateway/</a><br>
-</br></p>
-<h2 id="23-watchdog工作原理-函数请求处理流程详解">2.3 Watchdog工作原理&amp; 函数请求处理流程详解</h2>
-<p><a href="https://docs.openfaas.com/architecture/watchdog/">https://docs.openfaas.com/architecture/watchdog/</a><br>
-<a href="https://blog.csdn.net/weixin_38616705/article/details/107385293">https://blog.csdn.net/weixin_38616705/article/details/107385293</a><br>
-</br></p>
-<h2 id="24-自动缩放工作原理冷启动43">2.4 自动缩放工作原理&amp;冷启动（4.3）</h2>
-<p><a href="https://docs.openfaas.com/architecture/autoscaling/">https://docs.openfaas.com/architecture/autoscaling/</a></p>
-<p></br></br></p>
-<h1 id="3-prometheusgrafana">3. Prometheus&amp;Grafana</h1>
-<h2 id="31-yml文件配置结合prometheus配置过程">3.1 yml文件配置(结合Prometheus配置过程)</h2>
-<p><a href="https://blog.csdn.net/weixin_29278805/article/details/112493314?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;spm=1001.2101.3001.4242">https://blog.csdn.net/weixin_29278805/article/details/112493314?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;spm=1001.2101.3001.4242</a><br>
-</br></p>
-<h2 id="32-promql语法以及实验使用示例">3.2 PromQL语法以及实验使用示例</h2>
-<p>Prometheus内置的数据查询语言，其提供对时间序列数据丰富的查询，聚合以及逻辑运算能力的支持。并且被广泛应用在Prometheus的日常应用当中，包括对数据查询、可视化、告警处理当中。<br>
-<a href="https://yunlzheng.gitbook.io/prometheus-book/parti-prometheus-ji-chu/promql/prometheus-query-language">https://yunlzheng.gitbook.io/prometheus-book/parti-prometheus-ji-chu/promql/prometheus-query-language</a><br>
-</br></br></p>
-<h1 id="4-实验">4. 实验</h1>
-<h2 id="41-控制变量-相关性">4.1 控制变量 &amp; 相关性</h2>
-<h2 id="42-压力测试">4.2 压力测试</h2>
-<h2 id="43-冷热启动">4.3 冷热启动</h2>
-<p></br></br></p>
-<h1 id="5-其他">5. 其他</h1>
-<h2 id="51-vpc对等连接涉及计网相关知识">5.1 VPC对等连接(涉及计网相关知识)</h2>
-<p>对等连接(peer-to-peer，简写为 P2P)是指两个主机在通信时并不区分哪一个是服务请求方还是服务提供方。<br>
-只要两个主机都运行了对等连接软件（P2P 软件），它们就可以进行平等的、对等连接通信。<br>
-<a href="https://support.huaweicloud.com/usermanual-vpc/vpc_peering_0000.html">https://support.huaweicloud.com/usermanual-vpc/vpc_peering_0000.html</a><br>
-<a href="https://www.cnblogs.com/liuawen/p/11930142.html#2_134">https://www.cnblogs.com/liuawen/p/11930142.html#2_134</a><br>
-<a href="https://www.nowcoder.com/questionTerminal/f14684caf72042a2a747f5d7df32670b">https://www.nowcoder.com/questionTerminal/f14684caf72042a2a747f5d7df32670b</a><br>
-</br></br></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[可信计算]]></title>
-        <id>https://Czardas42.github.io/post/Trusted_Computing/</id>
-        <link href="https://Czardas42.github.io/post/Trusted_Computing/">
-        </link>
-        <updated>2021-04-29T02:29:43.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="安全含义">安全含义</h1>
-<p>CIA：机密， 完整，可用<br>
-在信息安全等级保护工作中，根据信息系统的机密性（Confidentiality）、完整性（Integrity）、可用性（Availability）来划分信息系统的安全等级，三个性质简称CIA</p>
-<h1 id="信息安全五性">信息安全五性：</h1>
-<p>事前可验证性<br>
-事后不可否认性<br>
-CIA</p>
-<h1 id="可信-约等于-安全-可靠">可信 约等于 安全 + 可靠</h1>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[2021.04.27：K8s 性能测试]]></title>
-        <id>https://Czardas42.github.io/post/20210427_ks8_openfaas_test/</id>
-        <link href="https://Czardas42.github.io/post/20210427_ks8_openfaas_test/">
-        </link>
-        <updated>2021-04-27T12:50:07.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="1-分布式负载测试web测试应用的pod负载变化">1. 分布式负载测试：web测试应用的pod负载变化</h2>
-<p><strong>准备</strong></p>
-<h3 id="a-部署web应用">a. 部署Web应用</h3>
-<h3 id="b-部署locust测试工具">b. 部署Locust（测试工具）</h3>
-<h3 id="c-配置traefik监控-可用prometheus">c. 配置Traefik（监控） 可用Prometheus</h3>
-<p></br></br><br>
-<strong>测试方法</strong><br>
-打开<a href="http://traefik.locust.io">http://traefik.locust.io</a>页面，点击Edit输入伪造的用户数和用户每秒发送的请求个数，点击Start Swarming就可以开始测试了。</p>
-<p>在测试过程中调整sample-webapp的pod个数（默认设置了1个pod），观察pod的负载变化情况。<br>
-从一段时间的观察中可以看到负载被平均分配给了3个pod.<br>
-在locust的页面中可以实时观察也可以下载测试结果。</p>
-<p></br></br><br>
-<strong>【参考】</strong><br>
-<a href="https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/distributed-load-test.html">https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/distributed-load-test.html</a><br>
-</br></br></p>
-<h2 id="2-网络延迟测试通过不同方式访问web测试应用">2. 网络延迟测试：通过不同方式访问web测试应用</h2>
-<p><strong>测试场景</strong><br>
-场景一、 Kubernetes集群node节点上通过Cluster IP访问sample-webapp<br>
-场景二、Kubernetes集群内部通过service访问sample-webapp<br>
-场景三、在公网上通过traefik ingress访问sample-webapp<br>
-</br></br><br>
-<strong>测试结果</strong><br>
-在这三种场景下的响应时间测试结果如下：<br>
-Kubernetes集群node节点上通过Cluster IP方式访问：2ms<br>
-Kubernetes集群内部通过service访问：6ms<br>
-Kubernetes集群外部通过traefik ingress暴露的地址访问：110ms<br>
-注意：执行测试的node节点/Pod与serivce所在的pod的距离（是否在同一台主机上），对前两个场景可以能会有一定影响。<br>
-</br></br><br>
-<strong>【参考】</strong><br>
-<a href="https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html">https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html</a><br>
-</br></br></p>
-<h2 id="3-网络性能测试暂时不考虑">3. 网络性能测试(暂时不考虑)</h2>
-<p>网络使用flannel的vxlan模式。<br>
-使用iperf进行测试。</p>
-<p>使用Flannel的vxlan模式实现每个pod一个IP的方式，会比宿主机直接互联的网络性能损耗30%～40%，符合网上流传的测试结论。而flannel的host-gw模式比起宿主机互连的网络性能损耗大约是10%。</p>
-<p>Vxlan会有一个封包解包的过程，所以会对网络性能造成较大的损耗，而host-gw模式是直接使用路由信息，网络损耗小。<br>
-<strong>【参考】</strong><br>
-<a href="https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html">https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html</a><br>
-</br></br></p>
-<h2 id="4-不同type的资源类型api请求耗时分布测试暂时不考虑">4. 不同type的资源类型API请求耗时分布测试(暂时不考虑)</h2>
-</br>
-**【参考】**
-<https://www.ctolib.com/docs/sfile/kubernetes-handbook/practice/network-and-cluster-perfermance-test.html>
-<https://supereagle.github.io/2017/03/09/kubemark/>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[2021.04.27：Grafana监控平台部署（对于K8s集群各节点）]]></title>
-        <id>https://Czardas42.github.io/post/20210427_grafana/</id>
-        <link href="https://Czardas42.github.io/post/20210427_grafana/">
-        </link>
-        <updated>2021-04-27T03:26:39.000Z</updated>
-        <content type="html"><![CDATA[<p><strong>监控内容：各节点CPU使用率、磁盘、内存、磁盘IO读写、网络IO速率</strong><br>
-</br></br><br>
-<strong>监控平台截图：</strong><br>
-<img src="https://Czardas42.github.io//post-images/1619580572559.jpg" alt="" loading="lazy"></p>
-<figure data-type="image" tabindex="1"><img src="https://Czardas42.github.io//post-images/1619580593621.jpg" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="2"><img src="https://Czardas42.github.io//post-images/1619580606902.jpg" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="3"><img src="https://Czardas42.github.io//post-images/1619580616167.jpg" alt="" loading="lazy"></figure>
-<p><img src="https://Czardas42.github.io//post-images/1619580630042.jpg" alt="" loading="lazy"><br>
-</br></br><br>
-<strong>对应JSON文件如下：</strong></p>
-<pre><code>{
-  &quot;__inputs&quot;: [
-    {
-      &quot;name&quot;: &quot;DS_FAAS&quot;,
-      &quot;label&quot;: &quot;faas&quot;,
-      &quot;description&quot;: &quot;&quot;,
-      &quot;type&quot;: &quot;datasource&quot;,
-      &quot;pluginId&quot;: &quot;prometheus&quot;,
-      &quot;pluginName&quot;: &quot;Prometheus&quot;
-    }
-  ],
-  &quot;__requires&quot;: [
-    {
-      &quot;type&quot;: &quot;grafana&quot;,
-      &quot;id&quot;: &quot;grafana&quot;,
-      &quot;name&quot;: &quot;Grafana&quot;,
-      &quot;version&quot;: &quot;4.6.3&quot;
-    },
-    {
-      &quot;type&quot;: &quot;panel&quot;,
-      &quot;id&quot;: &quot;graph&quot;,
-      &quot;name&quot;: &quot;Graph&quot;,
-      &quot;version&quot;: &quot;&quot;
-    },
-    {
-      &quot;type&quot;: &quot;datasource&quot;,
-      &quot;id&quot;: &quot;prometheus&quot;,
-      &quot;name&quot;: &quot;Prometheus&quot;,
-      &quot;version&quot;: &quot;1.0.0&quot;
-    }
-  ],
-  &quot;annotations&quot;: {
-    &quot;list&quot;: [
-      {
-        &quot;builtIn&quot;: 1,
-        &quot;datasource&quot;: &quot;-- Grafana --&quot;,
-        &quot;enable&quot;: true,
-        &quot;hide&quot;: true,
-        &quot;iconColor&quot;: &quot;rgba(0, 211, 255, 1)&quot;,
-        &quot;name&quot;: &quot;Annotations &amp; Alerts&quot;,
-        &quot;type&quot;: &quot;dashboard&quot;
-      }
-    ]
-  },
-  &quot;editable&quot;: true,
-  &quot;gnetId&quot;: null,
-  &quot;graphTooltip&quot;: 0,
-  &quot;hideControls&quot;: false,
-  &quot;id&quot;: null,
-  &quot;links&quot;: [],
-  &quot;rows&quot;: [
-    {
-      &quot;collapse&quot;: false,
-      &quot;height&quot;: &quot;250px&quot;,
-      &quot;panels&quot;: [
-        {
-          &quot;aliasColors&quot;: {},
-          &quot;bars&quot;: true,
-          &quot;dashLength&quot;: 10,
-          &quot;dashes&quot;: false,
-          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
-          &quot;fill&quot;: 1,
-          &quot;id&quot;: 11,
-          &quot;legend&quot;: {
-            &quot;alignAsTable&quot;: true,
-            &quot;avg&quot;: false,
-            &quot;current&quot;: false,
-            &quot;max&quot;: false,
-            &quot;min&quot;: false,
-            &quot;show&quot;: true,
-            &quot;total&quot;: false,
-            &quot;values&quot;: false
-          },
-          &quot;lines&quot;: true,
-          &quot;linewidth&quot;: 1,
-          &quot;links&quot;: [],
-          &quot;nullPointMode&quot;: &quot;null&quot;,
-          &quot;percentage&quot;: false,
-          &quot;pointradius&quot;: 5,
-          &quot;points&quot;: false,
-          &quot;renderer&quot;: &quot;flot&quot;,
-          &quot;seriesOverrides&quot;: [],
-          &quot;spaceLength&quot;: 10,
-          &quot;span&quot;: 4,
-          &quot;stack&quot;: false,
-          &quot;steppedLine&quot;: false,
-          &quot;targets&quot;: [
-            {
-              &quot;expr&quot;: &quot;100 - (avg by(instance) (irate(node_cpu_seconds_total{mode=\&quot;idle\&quot;, job=\&quot;master_node_exporter_metrics\&quot;}[5m])) * 100) &quot;,
-              &quot;format&quot;: &quot;time_series&quot;,
-              &quot;intervalFactor&quot;: 2,
-              &quot;refId&quot;: &quot;A&quot;
-            }
-          ],
-          &quot;thresholds&quot;: [],
-          &quot;timeFrom&quot;: &quot;1h&quot;,
-          &quot;timeShift&quot;: null,
-          &quot;title&quot;: &quot;Master CPU使用率&quot;,
-          &quot;tooltip&quot;: {
-            &quot;shared&quot;: true,
-            &quot;sort&quot;: 0,
-            &quot;value_type&quot;: &quot;individual&quot;
-          },
-          &quot;type&quot;: &quot;graph&quot;,
-          &quot;xaxis&quot;: {
-            &quot;buckets&quot;: null,
-            &quot;mode&quot;: &quot;time&quot;,
-            &quot;name&quot;: null,
-            &quot;show&quot;: true,
-            &quot;values&quot;: []
-          },
-          &quot;yaxes&quot;: [
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            },
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            }
-          ]
-        },
-        {
-          &quot;aliasColors&quot;: {},
-          &quot;bars&quot;: true,
-          &quot;dashLength&quot;: 10,
-          &quot;dashes&quot;: false,
-          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
-          &quot;fill&quot;: 1,
-          &quot;id&quot;: 13,
-          &quot;legend&quot;: {
-            &quot;alignAsTable&quot;: true,
-            &quot;avg&quot;: false,
-            &quot;current&quot;: false,
-            &quot;max&quot;: false,
-            &quot;min&quot;: false,
-            &quot;show&quot;: true,
-            &quot;total&quot;: false,
-            &quot;values&quot;: false
-          },
-          &quot;lines&quot;: true,
-          &quot;linewidth&quot;: 1,
-          &quot;links&quot;: [],
-          &quot;nullPointMode&quot;: &quot;null&quot;,
-          &quot;percentage&quot;: false,
-          &quot;pointradius&quot;: 5,
-          &quot;points&quot;: false,
-          &quot;renderer&quot;: &quot;flot&quot;,
-          &quot;seriesOverrides&quot;: [],
-          &quot;spaceLength&quot;: 10,
-          &quot;span&quot;: 4,
-          &quot;stack&quot;: false,
-          &quot;steppedLine&quot;: false,
-          &quot;targets&quot;: [
-            {
-              &quot;expr&quot;: &quot;100 - (avg by(instance) (irate(node_cpu_seconds_total{mode=\&quot;idle\&quot;, job=\&quot;slave-0001_node_exporter_metrics\&quot;}[5m])) * 100) &quot;,
-              &quot;format&quot;: &quot;time_series&quot;,
-              &quot;intervalFactor&quot;: 2,
-              &quot;refId&quot;: &quot;A&quot;
-            }
-          ],
-          &quot;thresholds&quot;: [],
-          &quot;timeFrom&quot;: &quot;1h&quot;,
-          &quot;timeShift&quot;: null,
-          &quot;title&quot;: &quot;Slave-0001 CPU使用率&quot;,
-          &quot;tooltip&quot;: {
-            &quot;shared&quot;: true,
-            &quot;sort&quot;: 0,
-            &quot;value_type&quot;: &quot;individual&quot;
-          },
-          &quot;type&quot;: &quot;graph&quot;,
-          &quot;xaxis&quot;: {
-            &quot;buckets&quot;: null,
-            &quot;mode&quot;: &quot;time&quot;,
-            &quot;name&quot;: null,
-            &quot;show&quot;: true,
-            &quot;values&quot;: []
-          },
-          &quot;yaxes&quot;: [
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            },
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            }
-          ]
-        },
-        {
-          &quot;aliasColors&quot;: {},
-          &quot;bars&quot;: true,
-          &quot;dashLength&quot;: 10,
-          &quot;dashes&quot;: false,
-          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
-          &quot;fill&quot;: 1,
-          &quot;id&quot;: 14,
-          &quot;legend&quot;: {
-            &quot;alignAsTable&quot;: true,
-            &quot;avg&quot;: false,
-            &quot;current&quot;: false,
-            &quot;max&quot;: false,
-            &quot;min&quot;: false,
-            &quot;show&quot;: true,
-            &quot;total&quot;: false,
-            &quot;values&quot;: false
-          },
-          &quot;lines&quot;: true,
-          &quot;linewidth&quot;: 1,
-          &quot;links&quot;: [],
-          &quot;nullPointMode&quot;: &quot;null&quot;,
-          &quot;percentage&quot;: false,
-          &quot;pointradius&quot;: 5,
-          &quot;points&quot;: false,
-          &quot;renderer&quot;: &quot;flot&quot;,
-          &quot;seriesOverrides&quot;: [],
-          &quot;spaceLength&quot;: 10,
-          &quot;span&quot;: 4,
-          &quot;stack&quot;: false,
-          &quot;steppedLine&quot;: false,
-          &quot;targets&quot;: [
-            {
-              &quot;expr&quot;: &quot;100 - (avg by(instance) (irate(node_cpu_seconds_total{mode=\&quot;idle\&quot;, job=\&quot;slave-0002_node_exporter_metrics\&quot;}[5m])) * 100) &quot;,
-              &quot;format&quot;: &quot;time_series&quot;,
-              &quot;intervalFactor&quot;: 2,
-              &quot;refId&quot;: &quot;A&quot;
-            }
-          ],
-          &quot;thresholds&quot;: [],
-          &quot;timeFrom&quot;: &quot;1h&quot;,
-          &quot;timeShift&quot;: null,
-          &quot;title&quot;: &quot;Slave-0002 CPU使用率&quot;,
-          &quot;tooltip&quot;: {
-            &quot;shared&quot;: true,
-            &quot;sort&quot;: 0,
-            &quot;value_type&quot;: &quot;individual&quot;
-          },
-          &quot;type&quot;: &quot;graph&quot;,
-          &quot;xaxis&quot;: {
-            &quot;buckets&quot;: null,
-            &quot;mode&quot;: &quot;time&quot;,
-            &quot;name&quot;: null,
-            &quot;show&quot;: true,
-            &quot;values&quot;: []
-          },
-          &quot;yaxes&quot;: [
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            },
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            }
-          ]
-        }
-      ],
-      &quot;repeat&quot;: null,
-      &quot;repeatIteration&quot;: null,
-      &quot;repeatRowId&quot;: null,
-      &quot;showTitle&quot;: false,
-      &quot;title&quot;: &quot;Dashboard Row&quot;,
-      &quot;titleSize&quot;: &quot;h6&quot;
-    },
-    {
-      &quot;collapse&quot;: false,
-      &quot;height&quot;: 250,
-      &quot;panels&quot;: [
-        {
-          &quot;aliasColors&quot;: {},
-          &quot;bars&quot;: false,
-          &quot;dashLength&quot;: 10,
-          &quot;dashes&quot;: false,
-          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
-          &quot;fill&quot;: 1,
-          &quot;id&quot;: 2,
-          &quot;legend&quot;: {
-            &quot;alignAsTable&quot;: true,
-            &quot;avg&quot;: false,
-            &quot;current&quot;: false,
-            &quot;max&quot;: false,
-            &quot;min&quot;: false,
-            &quot;show&quot;: true,
-            &quot;total&quot;: false,
-            &quot;values&quot;: false
-          },
-          &quot;lines&quot;: true,
-          &quot;linewidth&quot;: 1,
-          &quot;links&quot;: [],
-          &quot;nullPointMode&quot;: &quot;null&quot;,
-          &quot;percentage&quot;: false,
-          &quot;pointradius&quot;: 5,
-          &quot;points&quot;: false,
-          &quot;renderer&quot;: &quot;flot&quot;,
-          &quot;seriesOverrides&quot;: [],
-          &quot;spaceLength&quot;: 10,
-          &quot;span&quot;: 6,
-          &quot;stack&quot;: false,
-          &quot;steppedLine&quot;: false,
-          &quot;targets&quot;: [
-            {
-              &quot;expr&quot;: &quot;(node_filesystem_size_bytes{fstype=~\&quot;xfs|ext4\&quot;} - node_filesystem_free_bytes) / node_filesystem_size_bytes&quot;,
-              &quot;format&quot;: &quot;time_series&quot;,
-              &quot;intervalFactor&quot;: 2,
-              &quot;refId&quot;: &quot;A&quot;
-            }
-          ],
-          &quot;thresholds&quot;: [],
-          &quot;timeFrom&quot;: &quot;1h&quot;,
-          &quot;timeShift&quot;: null,
-          &quot;title&quot;: &quot;各节点磁盘使用率&quot;,
-          &quot;tooltip&quot;: {
-            &quot;shared&quot;: true,
-            &quot;sort&quot;: 0,
-            &quot;value_type&quot;: &quot;individual&quot;
-          },
-          &quot;transparent&quot;: false,
-          &quot;type&quot;: &quot;graph&quot;,
-          &quot;xaxis&quot;: {
-            &quot;buckets&quot;: null,
-            &quot;mode&quot;: &quot;time&quot;,
-            &quot;name&quot;: null,
-            &quot;show&quot;: true,
-            &quot;values&quot;: []
-          },
-          &quot;yaxes&quot;: [
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            },
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            }
-          ]
-        },
-        {
-          &quot;aliasColors&quot;: {},
-          &quot;bars&quot;: false,
-          &quot;dashLength&quot;: 10,
-          &quot;dashes&quot;: false,
-          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
-          &quot;fill&quot;: 1,
-          &quot;hideTimeOverride&quot;: false,
-          &quot;id&quot;: 1,
-          &quot;legend&quot;: {
-            &quot;alignAsTable&quot;: true,
-            &quot;avg&quot;: false,
-            &quot;current&quot;: false,
-            &quot;max&quot;: false,
-            &quot;min&quot;: false,
-            &quot;rightSide&quot;: false,
-            &quot;show&quot;: true,
-            &quot;total&quot;: false,
-            &quot;values&quot;: false
-          },
-          &quot;lines&quot;: true,
-          &quot;linewidth&quot;: 1,
-          &quot;links&quot;: [],
-          &quot;nullPointMode&quot;: &quot;null&quot;,
-          &quot;percentage&quot;: false,
-          &quot;pointradius&quot;: 5,
-          &quot;points&quot;: false,
-          &quot;renderer&quot;: &quot;flot&quot;,
-          &quot;seriesOverrides&quot;: [],
-          &quot;spaceLength&quot;: 10,
-          &quot;span&quot;: 6,
-          &quot;stack&quot;: false,
-          &quot;steppedLine&quot;: false,
-          &quot;targets&quot;: [
-            {
-              &quot;expr&quot;: &quot;(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes&quot;,
-              &quot;format&quot;: &quot;time_series&quot;,
-              &quot;intervalFactor&quot;: 2,
-              &quot;refId&quot;: &quot;A&quot;
-            }
-          ],
-          &quot;thresholds&quot;: [],
-          &quot;timeFrom&quot;: &quot;1h&quot;,
-          &quot;timeShift&quot;: null,
-          &quot;title&quot;: &quot;各节点内存使用率&quot;,
-          &quot;tooltip&quot;: {
-            &quot;shared&quot;: true,
-            &quot;sort&quot;: 0,
-            &quot;value_type&quot;: &quot;individual&quot;
-          },
-          &quot;type&quot;: &quot;graph&quot;,
-          &quot;xaxis&quot;: {
-            &quot;buckets&quot;: null,
-            &quot;mode&quot;: &quot;time&quot;,
-            &quot;name&quot;: null,
-            &quot;show&quot;: true,
-            &quot;values&quot;: []
-          },
-          &quot;yaxes&quot;: [
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            },
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            }
-          ]
-        }
-      ],
-      &quot;repeat&quot;: null,
-      &quot;repeatIteration&quot;: null,
-      &quot;repeatRowId&quot;: null,
-      &quot;showTitle&quot;: false,
-      &quot;title&quot;: &quot;Dashboard Row&quot;,
-      &quot;titleSize&quot;: &quot;h6&quot;
-    },
-    {
-      &quot;collapse&quot;: false,
-      &quot;height&quot;: 278,
-      &quot;panels&quot;: [
-        {
-          &quot;aliasColors&quot;: {},
-          &quot;bars&quot;: false,
-          &quot;dashLength&quot;: 10,
-          &quot;dashes&quot;: false,
-          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
-          &quot;fill&quot;: 1,
-          &quot;id&quot;: 4,
-          &quot;legend&quot;: {
-            &quot;alignAsTable&quot;: true,
-            &quot;avg&quot;: false,
-            &quot;current&quot;: false,
-            &quot;max&quot;: false,
-            &quot;min&quot;: false,
-            &quot;show&quot;: true,
-            &quot;total&quot;: false,
-            &quot;values&quot;: false
-          },
-          &quot;lines&quot;: true,
-          &quot;linewidth&quot;: 2,
-          &quot;links&quot;: [],
-          &quot;nullPointMode&quot;: &quot;null&quot;,
-          &quot;percentage&quot;: false,
-          &quot;pointradius&quot;: 5,
-          &quot;points&quot;: false,
-          &quot;renderer&quot;: &quot;flot&quot;,
-          &quot;seriesOverrides&quot;: [],
-          &quot;spaceLength&quot;: 10,
-          &quot;span&quot;: 6,
-          &quot;stack&quot;: false,
-          &quot;steppedLine&quot;: false,
-          &quot;targets&quot;: [
-            {
-              &quot;expr&quot;: &quot;irate(node_disk_read_bytes_total{}[5m]) / 1024 / 1024&quot;,
-              &quot;format&quot;: &quot;time_series&quot;,
-              &quot;intervalFactor&quot;: 2,
-              &quot;refId&quot;: &quot;A&quot;
-            }
-          ],
-          &quot;thresholds&quot;: [],
-          &quot;timeFrom&quot;: &quot;1h&quot;,
-          &quot;timeShift&quot;: null,
-          &quot;title&quot;: &quot;各节点磁盘IO读速率(MiB/s)&quot;,
-          &quot;tooltip&quot;: {
-            &quot;shared&quot;: true,
-            &quot;sort&quot;: 0,
-            &quot;value_type&quot;: &quot;individual&quot;
-          },
-          &quot;type&quot;: &quot;graph&quot;,
-          &quot;xaxis&quot;: {
-            &quot;buckets&quot;: null,
-            &quot;mode&quot;: &quot;time&quot;,
-            &quot;name&quot;: null,
-            &quot;show&quot;: true,
-            &quot;values&quot;: []
-          },
-          &quot;yaxes&quot;: [
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            },
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            }
-          ]
-        },
-        {
-          &quot;aliasColors&quot;: {},
-          &quot;bars&quot;: false,
-          &quot;dashLength&quot;: 10,
-          &quot;dashes&quot;: false,
-          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
-          &quot;fill&quot;: 1,
-          &quot;id&quot;: 3,
-          &quot;legend&quot;: {
-            &quot;alignAsTable&quot;: true,
-            &quot;avg&quot;: false,
-            &quot;current&quot;: false,
-            &quot;max&quot;: false,
-            &quot;min&quot;: false,
-            &quot;show&quot;: true,
-            &quot;total&quot;: false,
-            &quot;values&quot;: false
-          },
-          &quot;lines&quot;: true,
-          &quot;linewidth&quot;: 1,
-          &quot;links&quot;: [],
-          &quot;nullPointMode&quot;: &quot;null&quot;,
-          &quot;percentage&quot;: false,
-          &quot;pointradius&quot;: 5,
-          &quot;points&quot;: false,
-          &quot;renderer&quot;: &quot;flot&quot;,
-          &quot;seriesOverrides&quot;: [],
-          &quot;spaceLength&quot;: 10,
-          &quot;span&quot;: 6,
-          &quot;stack&quot;: false,
-          &quot;steppedLine&quot;: false,
-          &quot;targets&quot;: [
-            {
-              &quot;expr&quot;: &quot;irate(node_disk_written_bytes_total{}[5m]) / 1024 / 1024&quot;,
-              &quot;format&quot;: &quot;time_series&quot;,
-              &quot;intervalFactor&quot;: 2,
-              &quot;refId&quot;: &quot;A&quot;
-            }
-          ],
-          &quot;thresholds&quot;: [],
-          &quot;timeFrom&quot;: &quot;1h&quot;,
-          &quot;timeShift&quot;: null,
-          &quot;title&quot;: &quot;各节点磁盘IO写速率(MiB/s)&quot;,
-          &quot;tooltip&quot;: {
-            &quot;shared&quot;: true,
-            &quot;sort&quot;: 0,
-            &quot;value_type&quot;: &quot;individual&quot;
-          },
-          &quot;type&quot;: &quot;graph&quot;,
-          &quot;xaxis&quot;: {
-            &quot;buckets&quot;: null,
-            &quot;mode&quot;: &quot;time&quot;,
-            &quot;name&quot;: null,
-            &quot;show&quot;: true,
-            &quot;values&quot;: []
-          },
-          &quot;yaxes&quot;: [
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            },
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            }
-          ]
-        }
-      ],
-      &quot;repeat&quot;: null,
-      &quot;repeatIteration&quot;: null,
-      &quot;repeatRowId&quot;: null,
-      &quot;showTitle&quot;: false,
-      &quot;title&quot;: &quot;Dashboard Row&quot;,
-      &quot;titleSize&quot;: &quot;h6&quot;
-    },
-    {
-      &quot;collapse&quot;: false,
-      &quot;height&quot;: 250,
-      &quot;panels&quot;: [
-        {
-          &quot;aliasColors&quot;: {},
-          &quot;bars&quot;: false,
-          &quot;dashLength&quot;: 10,
-          &quot;dashes&quot;: false,
-          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
-          &quot;fill&quot;: 1,
-          &quot;id&quot;: 6,
-          &quot;legend&quot;: {
-            &quot;alignAsTable&quot;: true,
-            &quot;avg&quot;: false,
-            &quot;current&quot;: false,
-            &quot;max&quot;: false,
-            &quot;min&quot;: false,
-            &quot;rightSide&quot;: true,
-            &quot;show&quot;: true,
-            &quot;total&quot;: false,
-            &quot;values&quot;: false
-          },
-          &quot;lines&quot;: true,
-          &quot;linewidth&quot;: 1,
-          &quot;links&quot;: [],
-          &quot;nullPointMode&quot;: &quot;null&quot;,
-          &quot;percentage&quot;: false,
-          &quot;pointradius&quot;: 5,
-          &quot;points&quot;: false,
-          &quot;renderer&quot;: &quot;flot&quot;,
-          &quot;seriesOverrides&quot;: [],
-          &quot;spaceLength&quot;: 10,
-          &quot;span&quot;: 12,
-          &quot;stack&quot;: false,
-          &quot;steppedLine&quot;: false,
-          &quot;targets&quot;: [
-            {
-              &quot;expr&quot;: &quot;irate(node_network_transmit_bytes_total{job=\&quot;master_node_exporter_metrics\&quot;}[5m]) / 1024 / 1024&quot;,
-              &quot;format&quot;: &quot;time_series&quot;,
-              &quot;intervalFactor&quot;: 2,
-              &quot;refId&quot;: &quot;A&quot;
-            }
-          ],
-          &quot;thresholds&quot;: [],
-          &quot;timeFrom&quot;: &quot;1h&quot;,
-          &quot;timeShift&quot;: null,
-          &quot;title&quot;: &quot;Master 网络IO速率:出速率(MiB/s)&quot;,
-          &quot;tooltip&quot;: {
-            &quot;shared&quot;: true,
-            &quot;sort&quot;: 0,
-            &quot;value_type&quot;: &quot;individual&quot;
-          },
-          &quot;type&quot;: &quot;graph&quot;,
-          &quot;xaxis&quot;: {
-            &quot;buckets&quot;: null,
-            &quot;mode&quot;: &quot;time&quot;,
-            &quot;name&quot;: null,
-            &quot;show&quot;: true,
-            &quot;values&quot;: []
-          },
-          &quot;yaxes&quot;: [
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            },
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            }
-          ]
-        }
-      ],
-      &quot;repeat&quot;: null,
-      &quot;repeatIteration&quot;: null,
-      &quot;repeatRowId&quot;: null,
-      &quot;showTitle&quot;: false,
-      &quot;title&quot;: &quot;Dashboard Row&quot;,
-      &quot;titleSize&quot;: &quot;h6&quot;
-    },
-    {
-      &quot;collapse&quot;: false,
-      &quot;height&quot;: 250,
-      &quot;panels&quot;: [
-        {
-          &quot;aliasColors&quot;: {},
-          &quot;bars&quot;: false,
-          &quot;dashLength&quot;: 10,
-          &quot;dashes&quot;: false,
-          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
-          &quot;fill&quot;: 1,
-          &quot;id&quot;: 5,
-          &quot;legend&quot;: {
-            &quot;alignAsTable&quot;: true,
-            &quot;avg&quot;: false,
-            &quot;current&quot;: false,
-            &quot;max&quot;: false,
-            &quot;min&quot;: false,
-            &quot;rightSide&quot;: true,
-            &quot;show&quot;: true,
-            &quot;total&quot;: false,
-            &quot;values&quot;: false
-          },
-          &quot;lines&quot;: true,
-          &quot;linewidth&quot;: 1,
-          &quot;links&quot;: [],
-          &quot;nullPointMode&quot;: &quot;null&quot;,
-          &quot;percentage&quot;: false,
-          &quot;pointradius&quot;: 5,
-          &quot;points&quot;: false,
-          &quot;renderer&quot;: &quot;flot&quot;,
-          &quot;seriesOverrides&quot;: [],
-          &quot;spaceLength&quot;: 10,
-          &quot;span&quot;: 12,
-          &quot;stack&quot;: false,
-          &quot;steppedLine&quot;: false,
-          &quot;targets&quot;: [
-            {
-              &quot;expr&quot;: &quot;irate(node_network_receive_bytes_total{job=\&quot;master_node_exporter_metrics\&quot;}[5m]) / 1024 / 1024&quot;,
-              &quot;format&quot;: &quot;time_series&quot;,
-              &quot;intervalFactor&quot;: 2,
-              &quot;refId&quot;: &quot;A&quot;
-            }
-          ],
-          &quot;thresholds&quot;: [],
-          &quot;timeFrom&quot;: &quot;1h&quot;,
-          &quot;timeShift&quot;: null,
-          &quot;title&quot;: &quot;Master 网络IO速率:入速率(MiB/s)&quot;,
-          &quot;tooltip&quot;: {
-            &quot;shared&quot;: true,
-            &quot;sort&quot;: 0,
-            &quot;value_type&quot;: &quot;individual&quot;
-          },
-          &quot;type&quot;: &quot;graph&quot;,
-          &quot;xaxis&quot;: {
-            &quot;buckets&quot;: null,
-            &quot;mode&quot;: &quot;time&quot;,
-            &quot;name&quot;: null,
-            &quot;show&quot;: true,
-            &quot;values&quot;: []
-          },
-          &quot;yaxes&quot;: [
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            },
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            }
-          ]
-        }
-      ],
-      &quot;repeat&quot;: null,
-      &quot;repeatIteration&quot;: null,
-      &quot;repeatRowId&quot;: null,
-      &quot;showTitle&quot;: false,
-      &quot;title&quot;: &quot;Dashboard Row&quot;,
-      &quot;titleSize&quot;: &quot;h6&quot;
-    },
-    {
-      &quot;collapse&quot;: false,
-      &quot;height&quot;: 250,
-      &quot;panels&quot;: [
-        {
-          &quot;aliasColors&quot;: {},
-          &quot;bars&quot;: false,
-          &quot;dashLength&quot;: 10,
-          &quot;dashes&quot;: false,
-          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
-          &quot;fill&quot;: 1,
-          &quot;id&quot;: 7,
-          &quot;legend&quot;: {
-            &quot;alignAsTable&quot;: true,
-            &quot;avg&quot;: false,
-            &quot;current&quot;: false,
-            &quot;max&quot;: false,
-            &quot;min&quot;: false,
-            &quot;rightSide&quot;: true,
-            &quot;show&quot;: true,
-            &quot;total&quot;: false,
-            &quot;values&quot;: false
-          },
-          &quot;lines&quot;: true,
-          &quot;linewidth&quot;: 1,
-          &quot;links&quot;: [],
-          &quot;nullPointMode&quot;: &quot;null&quot;,
-          &quot;percentage&quot;: false,
-          &quot;pointradius&quot;: 5,
-          &quot;points&quot;: false,
-          &quot;renderer&quot;: &quot;flot&quot;,
-          &quot;seriesOverrides&quot;: [],
-          &quot;spaceLength&quot;: 10,
-          &quot;span&quot;: 12,
-          &quot;stack&quot;: false,
-          &quot;steppedLine&quot;: false,
-          &quot;targets&quot;: [
-            {
-              &quot;expr&quot;: &quot;irate(node_network_receive_bytes_total{job=\&quot;slave-0001_node_exporter_metrics\&quot;}[5m]) / 1024 / 1024&quot;,
-              &quot;format&quot;: &quot;time_series&quot;,
-              &quot;intervalFactor&quot;: 2,
-              &quot;refId&quot;: &quot;A&quot;
-            }
-          ],
-          &quot;thresholds&quot;: [],
-          &quot;timeFrom&quot;: &quot;1h&quot;,
-          &quot;timeShift&quot;: null,
-          &quot;title&quot;: &quot;Slave-0001 网络IO速率:入速率(MiB/s)&quot;,
-          &quot;tooltip&quot;: {
-            &quot;shared&quot;: true,
-            &quot;sort&quot;: 0,
-            &quot;value_type&quot;: &quot;individual&quot;
-          },
-          &quot;type&quot;: &quot;graph&quot;,
-          &quot;xaxis&quot;: {
-            &quot;buckets&quot;: null,
-            &quot;mode&quot;: &quot;time&quot;,
-            &quot;name&quot;: null,
-            &quot;show&quot;: true,
-            &quot;values&quot;: []
-          },
-          &quot;yaxes&quot;: [
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            },
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            }
-          ]
-        }
-      ],
-      &quot;repeat&quot;: null,
-      &quot;repeatIteration&quot;: null,
-      &quot;repeatRowId&quot;: null,
-      &quot;showTitle&quot;: false,
-      &quot;title&quot;: &quot;Dashboard Row&quot;,
-      &quot;titleSize&quot;: &quot;h6&quot;
-    },
-    {
-      &quot;collapse&quot;: false,
-      &quot;height&quot;: 250,
-      &quot;panels&quot;: [
-        {
-          &quot;aliasColors&quot;: {},
-          &quot;bars&quot;: false,
-          &quot;dashLength&quot;: 10,
-          &quot;dashes&quot;: false,
-          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
-          &quot;fill&quot;: 1,
-          &quot;id&quot;: 8,
-          &quot;legend&quot;: {
-            &quot;alignAsTable&quot;: true,
-            &quot;avg&quot;: false,
-            &quot;current&quot;: false,
-            &quot;max&quot;: false,
-            &quot;min&quot;: false,
-            &quot;rightSide&quot;: true,
-            &quot;show&quot;: true,
-            &quot;total&quot;: false,
-            &quot;values&quot;: false
-          },
-          &quot;lines&quot;: true,
-          &quot;linewidth&quot;: 1,
-          &quot;links&quot;: [],
-          &quot;nullPointMode&quot;: &quot;null&quot;,
-          &quot;percentage&quot;: false,
-          &quot;pointradius&quot;: 5,
-          &quot;points&quot;: false,
-          &quot;renderer&quot;: &quot;flot&quot;,
-          &quot;seriesOverrides&quot;: [],
-          &quot;spaceLength&quot;: 10,
-          &quot;span&quot;: 12,
-          &quot;stack&quot;: false,
-          &quot;steppedLine&quot;: false,
-          &quot;targets&quot;: [
-            {
-              &quot;expr&quot;: &quot;irate(node_network_transmit_bytes_total{job=\&quot;slave-0001_node_exporter_metrics\&quot;}[5m]) / 1024 / 1024&quot;,
-              &quot;format&quot;: &quot;time_series&quot;,
-              &quot;intervalFactor&quot;: 2,
-              &quot;refId&quot;: &quot;A&quot;
-            }
-          ],
-          &quot;thresholds&quot;: [],
-          &quot;timeFrom&quot;: &quot;1h&quot;,
-          &quot;timeShift&quot;: null,
-          &quot;title&quot;: &quot;Slave-0001 网络IO速率:出速率(MiB/s)&quot;,
-          &quot;tooltip&quot;: {
-            &quot;shared&quot;: true,
-            &quot;sort&quot;: 0,
-            &quot;value_type&quot;: &quot;individual&quot;
-          },
-          &quot;type&quot;: &quot;graph&quot;,
-          &quot;xaxis&quot;: {
-            &quot;buckets&quot;: null,
-            &quot;mode&quot;: &quot;time&quot;,
-            &quot;name&quot;: null,
-            &quot;show&quot;: true,
-            &quot;values&quot;: []
-          },
-          &quot;yaxes&quot;: [
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            },
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            }
-          ]
-        }
-      ],
-      &quot;repeat&quot;: null,
-      &quot;repeatIteration&quot;: null,
-      &quot;repeatRowId&quot;: null,
-      &quot;showTitle&quot;: false,
-      &quot;title&quot;: &quot;Dashboard Row&quot;,
-      &quot;titleSize&quot;: &quot;h6&quot;
-    },
-    {
-      &quot;collapse&quot;: false,
-      &quot;height&quot;: 250,
-      &quot;panels&quot;: [
-        {
-          &quot;aliasColors&quot;: {},
-          &quot;bars&quot;: false,
-          &quot;dashLength&quot;: 10,
-          &quot;dashes&quot;: false,
-          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
-          &quot;fill&quot;: 1,
-          &quot;id&quot;: 9,
-          &quot;legend&quot;: {
-            &quot;alignAsTable&quot;: true,
-            &quot;avg&quot;: false,
-            &quot;current&quot;: false,
-            &quot;max&quot;: false,
-            &quot;min&quot;: false,
-            &quot;rightSide&quot;: true,
-            &quot;show&quot;: true,
-            &quot;total&quot;: false,
-            &quot;values&quot;: false
-          },
-          &quot;lines&quot;: true,
-          &quot;linewidth&quot;: 1,
-          &quot;links&quot;: [],
-          &quot;nullPointMode&quot;: &quot;null&quot;,
-          &quot;percentage&quot;: false,
-          &quot;pointradius&quot;: 5,
-          &quot;points&quot;: false,
-          &quot;renderer&quot;: &quot;flot&quot;,
-          &quot;seriesOverrides&quot;: [],
-          &quot;spaceLength&quot;: 10,
-          &quot;span&quot;: 12,
-          &quot;stack&quot;: false,
-          &quot;steppedLine&quot;: false,
-          &quot;targets&quot;: [
-            {
-              &quot;expr&quot;: &quot;irate(node_network_receive_bytes_total{job=\&quot;slave-0002_node_exporter_metrics\&quot;}[5m]) / 1024 / 1024&quot;,
-              &quot;format&quot;: &quot;time_series&quot;,
-              &quot;intervalFactor&quot;: 2,
-              &quot;refId&quot;: &quot;A&quot;
-            }
-          ],
-          &quot;thresholds&quot;: [],
-          &quot;timeFrom&quot;: &quot;1h&quot;,
-          &quot;timeShift&quot;: null,
-          &quot;title&quot;: &quot;Slave-0002 网络IO速率:入速率(MiB/s)&quot;,
-          &quot;tooltip&quot;: {
-            &quot;shared&quot;: true,
-            &quot;sort&quot;: 0,
-            &quot;value_type&quot;: &quot;individual&quot;
-          },
-          &quot;type&quot;: &quot;graph&quot;,
-          &quot;xaxis&quot;: {
-            &quot;buckets&quot;: null,
-            &quot;mode&quot;: &quot;time&quot;,
-            &quot;name&quot;: null,
-            &quot;show&quot;: true,
-            &quot;values&quot;: []
-          },
-          &quot;yaxes&quot;: [
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            },
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            }
-          ]
-        }
-      ],
-      &quot;repeat&quot;: null,
-      &quot;repeatIteration&quot;: null,
-      &quot;repeatRowId&quot;: null,
-      &quot;showTitle&quot;: false,
-      &quot;title&quot;: &quot;Dashboard Row&quot;,
-      &quot;titleSize&quot;: &quot;h6&quot;
-    },
-    {
-      &quot;collapse&quot;: false,
-      &quot;height&quot;: 250,
-      &quot;panels&quot;: [
-        {
-          &quot;aliasColors&quot;: {},
-          &quot;bars&quot;: false,
-          &quot;dashLength&quot;: 10,
-          &quot;dashes&quot;: false,
-          &quot;datasource&quot;: &quot;${DS_FAAS}&quot;,
-          &quot;fill&quot;: 1,
-          &quot;id&quot;: 10,
-          &quot;legend&quot;: {
-            &quot;alignAsTable&quot;: true,
-            &quot;avg&quot;: false,
-            &quot;current&quot;: false,
-            &quot;max&quot;: false,
-            &quot;min&quot;: false,
-            &quot;rightSide&quot;: true,
-            &quot;show&quot;: true,
-            &quot;total&quot;: false,
-            &quot;values&quot;: false
-          },
-          &quot;lines&quot;: true,
-          &quot;linewidth&quot;: 1,
-          &quot;links&quot;: [],
-          &quot;nullPointMode&quot;: &quot;null&quot;,
-          &quot;percentage&quot;: false,
-          &quot;pointradius&quot;: 5,
-          &quot;points&quot;: false,
-          &quot;renderer&quot;: &quot;flot&quot;,
-          &quot;seriesOverrides&quot;: [],
-          &quot;spaceLength&quot;: 10,
-          &quot;span&quot;: 12,
-          &quot;stack&quot;: false,
-          &quot;steppedLine&quot;: false,
-          &quot;targets&quot;: [
-            {
-              &quot;expr&quot;: &quot;irate(node_network_transmit_bytes_total{job=\&quot;slave-0002_node_exporter_metrics\&quot;}[5m]) / 1024 / 1024&quot;,
-              &quot;format&quot;: &quot;time_series&quot;,
-              &quot;intervalFactor&quot;: 2,
-              &quot;refId&quot;: &quot;A&quot;
-            }
-          ],
-          &quot;thresholds&quot;: [],
-          &quot;timeFrom&quot;: &quot;1h&quot;,
-          &quot;timeShift&quot;: null,
-          &quot;title&quot;: &quot;Slave-0002 网络IO速率:出速率(MiB/s)&quot;,
-          &quot;tooltip&quot;: {
-            &quot;shared&quot;: true,
-            &quot;sort&quot;: 0,
-            &quot;value_type&quot;: &quot;individual&quot;
-          },
-          &quot;type&quot;: &quot;graph&quot;,
-          &quot;xaxis&quot;: {
-            &quot;buckets&quot;: null,
-            &quot;mode&quot;: &quot;time&quot;,
-            &quot;name&quot;: null,
-            &quot;show&quot;: true,
-            &quot;values&quot;: []
-          },
-          &quot;yaxes&quot;: [
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            },
-            {
-              &quot;format&quot;: &quot;short&quot;,
-              &quot;label&quot;: null,
-              &quot;logBase&quot;: 1,
-              &quot;max&quot;: null,
-              &quot;min&quot;: null,
-              &quot;show&quot;: true
-            }
-          ]
-        }
-      ],
-      &quot;repeat&quot;: null,
-      &quot;repeatIteration&quot;: null,
-      &quot;repeatRowId&quot;: null,
-      &quot;showTitle&quot;: false,
-      &quot;title&quot;: &quot;Dashboard Row&quot;,
-      &quot;titleSize&quot;: &quot;h6&quot;
-    },
-    {
-      &quot;collapse&quot;: false,
-      &quot;height&quot;: 250,
-      &quot;panels&quot;: [],
-      &quot;repeat&quot;: null,
-      &quot;repeatIteration&quot;: null,
-      &quot;repeatRowId&quot;: null,
-      &quot;showTitle&quot;: false,
-      &quot;title&quot;: &quot;Dashboard Row&quot;,
-      &quot;titleSize&quot;: &quot;h6&quot;
-    },
-    {
-      &quot;collapse&quot;: false,
-      &quot;height&quot;: 250,
-      &quot;panels&quot;: [],
-      &quot;repeat&quot;: null,
-      &quot;repeatIteration&quot;: null,
-      &quot;repeatRowId&quot;: null,
-      &quot;showTitle&quot;: false,
-      &quot;title&quot;: &quot;Dashboard Row&quot;,
-      &quot;titleSize&quot;: &quot;h6&quot;
-    },
-    {
-      &quot;collapse&quot;: false,
-      &quot;height&quot;: 250,
-      &quot;panels&quot;: [],
-      &quot;repeat&quot;: null,
-      &quot;repeatIteration&quot;: null,
-      &quot;repeatRowId&quot;: null,
-      &quot;showTitle&quot;: false,
-      &quot;title&quot;: &quot;Dashboard Row&quot;,
-      &quot;titleSize&quot;: &quot;h6&quot;
-    }
-  ],
-  &quot;schemaVersion&quot;: 14,
-  &quot;style&quot;: &quot;dark&quot;,
-  &quot;tags&quot;: [],
-  &quot;templating&quot;: {
-    &quot;list&quot;: []
-  },
-  &quot;time&quot;: {
-    &quot;from&quot;: &quot;now-6h&quot;,
-    &quot;to&quot;: &quot;now&quot;
-  },
-  &quot;timepicker&quot;: {
-    &quot;refresh_intervals&quot;: [
-      &quot;5s&quot;,
-      &quot;10s&quot;,
-      &quot;30s&quot;,
-      &quot;1m&quot;,
-      &quot;5m&quot;,
-      &quot;15m&quot;,
-      &quot;30m&quot;,
-      &quot;1h&quot;,
-      &quot;2h&quot;,
-      &quot;1d&quot;
-    ],
-    &quot;time_options&quot;: [
-      &quot;5m&quot;,
-      &quot;15m&quot;,
-      &quot;1h&quot;,
-      &quot;6h&quot;,
-      &quot;12h&quot;,
-      &quot;24h&quot;,
-      &quot;2d&quot;,
-      &quot;7d&quot;,
-      &quot;30d&quot;
-    ]
-  },
-  &quot;timezone&quot;: &quot;&quot;,
-  &quot;title&quot;: &quot;Kubernetes&quot;,
-  &quot;version&quot;: 7
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[2021.04.26：Kubernetes安装踩坑记录]]></title>
-        <id>https://Czardas42.github.io/post/20210426_kubernetes/</id>
-        <link href="https://Czardas42.github.io/post/20210426_kubernetes/">
-        </link>
-        <updated>2021-04-26T08:30:35.000Z</updated>
-        <content type="html"><![CDATA[<p>🤡🤡🤡🤡🤡🤡</p>
-<h3 id="1-error-kubeletversionthe-kubelet-version-is-higher-than-the-control-plane-version-this-is-not-a-supportted-version-skew-and-may-lead-to-a-malfunctional-cluster">1. 【ERROR KubeletVersion】：the kubelet version is higher than the control plane version. This is not a supportted version skew and may lead to a malfunctional cluster.</h3>
-<figure data-type="image" tabindex="1"><img src="https://Czardas42.github.io//post-images/1619426268228.jpg" alt="" loading="lazy"></figure>
-<p>版本不匹配的问题，需要重新安装 kubelet kubeadm kubectl(与Kubernetes版本一致)</p>
-<p>Kubernetes版本：<br>
-<img src="https://Czardas42.github.io//post-images/1619426325673.png" alt="" loading="lazy"></p>
-<p><strong>【解决方法】</strong></p>
-<pre><code>yum -y remove kubelet kubeadm kubectl
-yum -y install kubelet-1.20.5 kubeadm-1.20.5 kubectl-1.20.5
-</code></pre>
-<p>【参考】<br>
-<a href="https://www.cnblogs.com/siren27/p/10211920.html">https://www.cnblogs.com/siren27/p/10211920.html</a></p>
-<p><br/><br/></p>
-<h3 id="2-解决安装k8s时flannel镜像拉取失败的问题">2. 解决安装K8S时flannel镜像拉取失败的问题</h3>
-<figure data-type="image" tabindex="2"><img src="https://Czardas42.github.io//post-images/1619425933210.jpg" alt="" loading="lazy"></figure>
-<p><strong>【解决方法】</strong></p>
-<pre><code>curl -O https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-sed -i 's/quay.io\/coreos/registry.cn-beijing.aliyuncs.com\/imcto/g' kube-flannel.yml
-docker pull registry.cn-hangzhou.aliyuncs.com/k8sos/flannel:v0.13.1-rc2
-</code></pre>
-<pre><code>vim kube-flannel.yml
-</code></pre>
-<p><strong>修改kube-flannel.yml将里面使用的官方镜像的名字改为自己拉取的镜像名称</strong><br>
-即：image: registry.cn-hangzhou.aliyuncs.com/k8sos/flannel:v0.13.1-rc2</p>
-<p><strong>安装flannel</strong></p>
-<pre><code>kubectl apply -f kube-flannel.yml
-</code></pre>
-<p>【参考】<br>
-<a href="https://blog.csdn.net/telundusiji/article/details/114033799">https://blog.csdn.net/telundusiji/article/details/114033799</a></p>
-<p><br/><br/></p>
-<h3 id="3-unable-to-connect-to-the-server-x509-certificate-signed-by-unknown-authority">3. Unable to connect to the server: x509: certificate signed by unknown authority</h3>
-<p><strong>【解决方法】</strong></p>
-<p>原因在于<code>kubeadm init</code>命令之后的执行三条命令：</p>
-<pre><code>mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-</code></pre>
-<p>这几个命令会创建一个目录，并复制几个配置文件，重新创建集群时，<strong>这个目录还是存在的</strong>，需要在执行这几个命令前先执行<code>rm -rf $HOME/.kube</code>命令删除这个目录，最后解决了这个问题</p>
-<p><strong>正确操作：</strong></p>
-<pre><code>kubeadm reset
-rm -rf $HOME/.kube
-</code></pre>
-<p><strong>然后再进行init：</strong><br>
-<code>kubeadm init --config kubeadm.yaml --ignore-preflight-errors=Swap</code><br>
-或者<br>
-<code>kubeadm init --kubernetes-version=v1.20.5 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --ignore-preflight-errors=Swap</code></p>
-<p>【参考】<br>
-<a href="https://blog.csdn.net/woay2008/article/details/93250137">https://blog.csdn.net/woay2008/article/details/93250137</a><br>
-<a href="https://blog.csdn.net/curry10086/article/details/107579113?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;spm=1001.2101.3001.4242">https://blog.csdn.net/curry10086/article/details/107579113?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;spm=1001.2101.3001.4242</a></p>
-<p><br/><br/></p>
 ]]></content>
     </entry>
 </feed>

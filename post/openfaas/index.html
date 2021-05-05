@@ -9,7 +9,7 @@
 <meta name="description" content="世界那么大，我想去看看">
 <meta name="theme-color" content="#343a40">
 <title>OpenFaaS | Czardas</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1620200214997">
+<link rel="shortcut icon" href="/favicon.ico?v=1620201250503">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -276,7 +276,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">11</span>
+        <span class="site-item-stat-count">18</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1179,6 +1179,969 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter6_6.3/"" data-c="
+          &lt;h2 id=&#34;判断记录质数的方法&#34;&gt;判断/记录质数的方法&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;sqrt(n)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;素数筛法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;1-素数判定&#34;&gt;1.  素数判定&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;给定一个数n，要求判断其是否为素数（0,1，负数都是非素数）。&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;对于负数、0、1要特别处理&lt;/p&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/5fd9c28b1ce746dd99287a04d8fa9002?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/5fd9c28b1ce746dd99287a04d8fa9002?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cmath&amp;gt;
+using namespace std;
+
+int main()
+{
+    int num;
+    while (cin &amp;gt;&amp;gt; num)
+    {
+        if (num&amp;lt;=1)
+        {
+            cout &amp;lt;&amp;lt; &amp;quot;no&amp;quot; &amp;lt;&amp;lt; endl;
+            continue;
+        }
+        
+        bool flag = true;
+        for (int i=num-1; i&amp;gt;=sqrt(num); i--)
+        {
+            if (num % i ==0)
+            {
+                flag = false;
+                break;
+            }
+        }
+        
+        if (flag == true)
+        {
+            cout &amp;lt;&amp;lt; &amp;quot;yes&amp;quot; &amp;lt;&amp;lt; endl;
+        }
+        else
+        {
+            cout &amp;lt;&amp;lt; &amp;quot;no&amp;quot; &amp;lt;&amp;lt; endl;
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-素数&#34;&gt;2.  素数&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;输入一个整数n(2&amp;lt;=n&amp;lt;=10000)，要求输出所有从1到这个整数之间(不包括1和这个整数)个位为1的素数，如果没有则输出-1。&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;方法一：穷举&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;方法二【素数筛法】：找到一个素数，就要标记其所有倍数为非负数无需再针对每个数字进行判断&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（实际操作中，只需从平方开始标记即可）&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/7f4be54b37a04fdaa4ee545819151114?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/7f4be54b37a04fdaa4ee545819151114?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码穷举&#34;&gt;代码（穷举）&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cmath&amp;gt;
+
+using namespace std;
+
+int main()
+{
+    int range;
+    while (cin &amp;gt;&amp;gt; range)
+    {
+        if (range &amp;lt;= 11)
+        {
+            cout &amp;lt;&amp;lt; &amp;quot;-1&amp;quot; &amp;lt;&amp;lt; endl;
+            continue;
+        }
+        
+        for (int num =11; num&amp;lt;range; num++)
+        {
+            bool flag = true;
+            for (int i=num-1; i&amp;gt;=sqrt(num); i--)
+            {
+                if (num % i == 0)
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            
+            if ((flag == true) &amp;amp;&amp;amp; (num%10 == 1))
+            {
+                if (num == 11)
+                    cout &amp;lt;&amp;lt; num;
+                else
+                    cout &amp;lt;&amp;lt; &amp;quot; &amp;quot; &amp;lt;&amp;lt; num ;
+            }
+        }
+        cout &amp;lt;&amp;lt; endl;
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;代码素数筛法&#34;&gt;代码（素数筛法）&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cmath&amp;gt;
+#include &amp;lt;vector&amp;gt;
+
+using namespace std;
+
+int main()
+{
+    int range;
+    while (cin &amp;gt;&amp;gt; range)
+    {
+        if (range &amp;lt;=11)
+        {
+            cout &amp;lt;&amp;lt; &amp;quot;-1\n&amp;quot;;
+            break;
+        }
+        
+        bool num[10000];
+        vector&amp;lt;int&amp;gt; prime;
+        //初始化
+        num[0] = false;
+        num[1] = false;
+        for (int i=2; i&amp;lt;10000; i++)
+            num[i] = true;
+        
+        for (int temp=2; temp&amp;lt;range; temp++)
+        {           
+            if (num[temp] == true)
+            {
+                prime.push_back(temp);//加入素数组
+                //标记之后temp的倍数不是素数
+                for (int j=temp*temp; j&amp;lt;range; j=j+temp)
+                    num[j] = false;
+            }
+        }
+        
+        //输出
+        for (int i=0; i&amp;lt;prime.size(); i++)
+        {
+            if(prime[i] % 10 == 1)
+            {
+                if (prime[i] == 11)
+                    cout &amp;lt;&amp;lt; prime[i];
+                else                
+                    cout &amp;lt;&amp;lt; &amp;quot; &amp;quot; &amp;lt;&amp;lt; prime[i];
+            }
+        }
+        cout &amp;lt;&amp;lt; endl;        
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;3-prime-number&#34;&gt;3.  Prime Number&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-3&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Output the k-th prime number.&lt;/p&gt;
+&lt;h3 id=&#34;要点-3&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;素数筛法&lt;/li&gt;
+&lt;li&gt;提前存好10000个素数：范围开到1000000就够用，或者可以记录素数个数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适当可以使用void函数，让main函数看起来更加简洁&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-3&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/c5f8688cea8a4a9a88edbd67d1358415?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/c5f8688cea8a4a9a88edbd67d1358415?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;vector&amp;gt;
+
+using namespace std;
+
+int order;
+vector&amp;lt;int&amp;gt; prime;
+const int range = 1000000;
+
+void Initial()
+{
+    bool num[range];
+    for (int i=0; i&amp;lt;range; i++)
+        num[i] = true;
+    num[0] = false;
+    num[1] = false;
+    
+    for (int temp=0; temp&amp;lt;range; temp++)
+    {
+        if (num[temp] == true)
+        {
+            prime.push_back(temp);
+            
+            for (int j=temp*temp; j&amp;lt;range; j=j+temp)
+                num[j] = false;
+        }
+    }
+};
+
+int main()
+{
+    Initial();      
+    while (cin &amp;gt;&amp;gt; order)
+    {
+        cout &amp;lt;&amp;lt; prime[order-1] &amp;lt;&amp;lt; endl;
+    }
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter6数学问题：6.3质数</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter6_6.2/"" data-c="
+          &lt;h2 id=&#34;辗转相除法&#34;&gt;辗转相除法&lt;/h2&gt;
+&lt;h2 id=&#34;1-最大公约数&#34;&gt;1.  最大公约数&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;输入两个正整数，求其最大公约数。&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;递归实现辗转相除法GCD&lt;/p&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/20216f2c84bc438eb5ef05e382536fd3?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/20216f2c84bc438eb5ef05e382536fd3?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+
+using namespace std;
+
+int GCD(int a, int b)
+{
+    if(a%b == 0) //a可以整除b：b是最大公约数
+    {
+        return b;
+    }
+    else
+    {
+        return GCD(b, a%b);
+    }
+}
+
+int main()
+{
+    int num1, num2;
+    while(cin &amp;gt;&amp;gt; num1 &amp;gt;&amp;gt; num2)
+    {
+        cout &amp;lt;&amp;lt; GCD(num1, num2) &amp;lt;&amp;lt; endl;
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-最小公倍数&#34;&gt;2.  最小公倍数&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;输入两个正整数，求其最小公约数。&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;最小公倍数 = 两数乘积 / 最大公约数&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;递归实现辗转相除法&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/22948c2cad484e0291350abad86136c3?tpId=37&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/22948c2cad484e0291350abad86136c3?tpId=37&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+
+using namespace std;
+
+int GCD(int a, int b)
+{
+    if(a%b == 0)
+    {
+        return b;
+    }
+    else
+    {
+        return GCD(b, a%b);
+    }
+}
+
+int main()
+{
+    int num1, num2;
+    while (cin &amp;gt;&amp;gt; num1 &amp;gt;&amp;gt; num2)
+    {
+        int temp = num1 * num2;
+        int result = temp / GCD(num1, num2);
+        cout &amp;lt;&amp;lt; result &amp;lt;&amp;lt; endl;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;3-最简真分数&#34;&gt;3.  最简真分数&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-3&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;给出n个正整数，任取两个数分别作为分子和分母组成最简真分数，编程求共有几个这样的组合。&lt;/p&gt;
+&lt;h3 id=&#34;要点-3&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;最简真分数：分子&amp;lt;分母；分子分母最大公约数为1&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;因为真分数的要求，最终结果/2&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-3&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/1f1db273eeb745c6ac83e91ff14d2ec9?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/1f1db273eeb745c6ac83e91ff14d2ec9?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码-3&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;vector&amp;gt;
+
+using namespace std;
+
+int GCD(int a, int b)
+{
+    if(a%b == 0)
+        return b;
+    else
+        return GCD(b, a%b);
+};
+
+int main()
+{
+    int count;
+    while(cin &amp;gt;&amp;gt; count)
+    {
+        if (count == 0)
+            break;
+        //存入数据
+        vector&amp;lt;int&amp;gt; number;
+        int num;
+        for (int i=0; i&amp;lt;count; i++)
+        {
+            cin &amp;gt;&amp;gt; num;
+            number.push_back(num);
+        }
+        //遍历
+        int result = 0;
+        for (int i=0; i&amp;lt;number.size(); i++)
+        {
+            for (int j=0; j&amp;lt;number.size(); j++)
+            {
+                int temp = GCD(number[i], number[j]);
+                if (temp==1)
+                {//两数最大公约数是1
+                    result++;
+                }
+            }
+        }
+        cout &amp;lt;&amp;lt; result/2 &amp;lt;&amp;lt; endl;  //真分数&amp;lt;1,所以结果/2         
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter6数学问题：6.2 最大公约数和最小公倍数</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter6_6.1/"" data-c="
+          &lt;h2 id=&#34;进制转换原理&#34;&gt;进制转换原理&lt;/h2&gt;
+&lt;h2 id=&#34;1-二进制数&#34;&gt;1.  二进制数&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;大家都知道，数据在计算机里中存储是以二进制的形式存储的。 有一天，小明学了C语言之后，他想知道一个类型为unsigned int 类型的数字，存储在计算机中的二进制串是什么样子的。 你能帮帮小明吗？并且，小明不想要二进制串中前面的没有意义的0串，即要去掉前导0。&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;进制转换标准公式&lt;/li&gt;
+&lt;li&gt;以及while循环判断条件&lt;code&gt;while (num != 0)&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/103dd589fed14457a673c613d8de3841?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/103dd589fed14457a673c613d8de3841?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;string&amp;gt;
+
+using namespace std;
+
+int main()
+{
+    int num;
+    while (cin &amp;gt;&amp;gt; num)
+    {
+        string result = &amp;quot;&amp;quot;;
+        
+        while (num != 0)
+        {
+            int temp = num % 2;
+            char num_now = char(&#39;0&#39;+temp);
+            result = num_now + result;
+            num = num / 2;
+        }
+        
+        cout  &amp;lt;&amp;lt; result &amp;lt;&amp;lt; endl;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-进制转换&#34;&gt;2. &lt;strong&gt;进制转换&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;将一个长度最多为30位数字的十进制非负整数转换为二进制数输出。&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;数字长度：https://www.runoob.com/cplusplus/cpp-data-types.html&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;unsigned long int&lt;/th&gt;
+&lt;th&gt;0 到 18,446,744,073,709,551,615（20位）&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;超过20位的数字运算就只能通过字符串实现&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;字符串类型计算乘除法的方法：模仿手动计算&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;从第一个非0位开始输出：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;设置flag，在第一次遇到非0时将其变为true；&lt;/p&gt;
+&lt;p&gt;提前获得非0位的编号&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;string&amp;gt;
+
+using namespace std;
+
+char GetTemp(string num)//取得字符串num的%2结果
+{   //num%2结果 = num最后一位%2的结果
+    int temp0 = int(num[num.size()-1] - &#39;0&#39;) % 2;
+    char temp = char(temp0 + &#39;0&#39;);
+    return temp;
+};
+
+string GetNum(string num)//取得字符串num的/2结果
+{
+    int m = 0;
+    string result = num;
+    for (int i=0; i&amp;lt;num.size(); i++)
+    {   //模仿手动计算除法的过程
+        int num_now = int(num[i] - &#39;0&#39;) + m*10;
+        result[i] = char(num_now / 2 + &#39;0&#39;);
+        m = num_now % 2;
+    }
+    
+    return result;
+};
+
+int main()
+{
+    string num;
+    while (cin &amp;gt;&amp;gt; num)
+    {
+        string result = &amp;quot;&amp;quot;;
+        
+        //flag：和num位数相同的全零串
+        string flag = num;
+        for (int i=0; i&amp;lt;flag.size(); i++)
+            flag[i] = &#39;0&#39;;
+        
+        while(num != flag)
+        {
+            result = GetTemp(num) + result;
+            num = GetNum(num);
+        }
+
+        //输出：从首个非零位开始
+        bool flag2 = false;
+        for (int j=0; j&amp;lt;result.size(); j++)
+        {
+            if (result[j] != &#39;0&#39;)
+                flag2 = true;
+            
+            if (flag2 == true)
+                cout &amp;lt;&amp;lt; result[j];
+        }
+        cout &amp;lt;&amp;lt; endl;        
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;3-十进制vs二进制&#34;&gt;3. &lt;strong&gt;十进制VS二进制&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-3&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;对于一个十进制数A，将A转换为二进制数，然后按位逆序排列，再转换为十进制数B，我们称B为A的二进制逆序数。   例如对于十进制数173，它的二进制形式为10101101，逆序排列得到10110101，其十进制数为181，181即为173的二进制逆序数。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：一个1000位(即10^999)以内的十进制数。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;要点-3&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;法一：字符串类型的加法，乘法，除法，取余&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;法二：大数进制转换&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;参考：&lt;a href=&#34;https://blog.csdn.net/StrongerL/article/details/92702052&#34;&gt;https://blog.csdn.net/StrongerL/article/details/92702052&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-3&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码-3&#34;&gt;代码&lt;/h3&gt;
+">Chapter6数学问题：6.1 进制转换</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter5-5.3/"" data-c="
+          &lt;h2 id=&#34;栈的基本操作&#34;&gt;栈的基本操作&lt;/h2&gt;
+&lt;p&gt;只能在栈顶进行操作&lt;/p&gt;
+&lt;p&gt;重点用于处理逆序问题&lt;/p&gt;
+&lt;h2 id=&#34;1-zero-complexity-transposition逆序输出&#34;&gt;1.  Zero-complexity Transposition（逆序输出）&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;You are given a sequence of integer numbers. Zero-complexity transposition of the sequence is the reverse of this sequence. Your task is to write a program that prints zero-complexity transposition of the given sequence.&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;利用栈的结构完成逆序输出&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/c54775799f634c72b447ef31eb36e975?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/c54775799f634c72b447ef31eb36e975?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;stack&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+
+using namespace std;
+
+int main()
+{
+    int count;
+    stack&amp;lt;int&amp;gt; record;
+    
+    while(cin &amp;gt;&amp;gt; count)
+    {
+        int num;
+        for (int i=0; i&amp;lt;count; i++)
+        {
+            cin &amp;gt;&amp;gt; num;
+            record.push(num);
+        }
+        
+        for (int i=0; i&amp;lt;count; i++)
+        {
+            if (record.empty())
+            {
+                cout &amp;lt;&amp;lt; record.top() &amp;lt;&amp;lt; endl;
+                record.pop();
+            }
+            else
+            {
+                cout &amp;lt;&amp;lt; record.top() &amp;lt;&amp;lt; &amp;quot; &amp;quot;;
+                record.pop();
+            }          
+        }    
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-括号序列&#34;&gt;2. &lt;strong&gt;括号序列&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;给出一个仅包含字符&#39;(&#39;,&#39;)&#39;,&#39;{&#39;,&#39;}&#39;,&#39;[&#39;和&#39;]&#39;,的字符串，判断给出的字符串是否是合法的括号序列&lt;br&gt;
+括号必须以正确的顺序关闭，&amp;quot;()&amp;quot;和&amp;quot;()[]{}&amp;quot;都是合法的括号序列，但&amp;quot;(]&amp;quot;和&amp;quot;([)]&amp;quot;不合法。&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;利用栈的结构完成序号匹配（思想参考编译原理）&lt;/li&gt;
+&lt;li&gt;若符合规则，就将一对符号弹出&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/6235a76b1e404f748f7c820583125c50?tpId=8&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/6235a76b1e404f748f7c820583125c50?tpId=8&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;class Solution {
+public:
+    /**
+     * 
+     * @param s string字符串 
+     * @return bool布尔型
+     */
+    bool isValid(string s) {
+        // write code here
+        stack&amp;lt;char&amp;gt; record;
+        for (int i=0; i&amp;lt;s.size(); i++)
+        {
+            int temp = s[i];
+            if (!record.empty())
+            {                
+                int symbol = record.top();
+                if (  (temp==&#39;)&#39; &amp;amp;&amp;amp; symbol==&#39;(&#39;)
+                    ||(temp==&#39;]&#39; &amp;amp;&amp;amp; symbol==&#39;[&#39;)
+                    ||(temp==&#39;}&#39; &amp;amp;&amp;amp; symbol==&#39;{&#39;)
+                   )
+                {
+                    record.pop();
+                }
+                else
+                {
+                    record.push(temp);
+                }
+                   
+            }
+            else
+            {
+                record.push(temp);
+            }           
+        }
+        
+        if (record.empty())
+            return true;
+        else
+            return false;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter5数据结构一：5.3 栈</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter5_5.2/"" data-c="
+          &lt;h2 id=&#34;队列基本操作&#34;&gt;队列基本操作&lt;/h2&gt;
+&lt;h2 id=&#34;1-约瑟夫问题&#34;&gt;1. &lt;strong&gt;约瑟夫问题&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;编号为 1 到 n的 n个人围成一圈。从编号为 11 的人开始报数，报到 m的人离开。&lt;/p&gt;
+&lt;p&gt;下一个人继续从 11 开始报数。&lt;/p&gt;
+&lt;p&gt;n-1轮结束以后，只剩下一个人，问最后留下的这个人编号是多少？&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;利用队列模拟的思想&lt;/li&gt;
+&lt;li&gt;不需循环列表也可以完成&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/41c399fdb6004b31a6cbb047c641ed8a?tpId=196&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/41c399fdb6004b31a6cbb047c641ed8a?tpId=196&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;class Solution {
+public:
+    /**
+     * @param n int整型 
+     * @param m int整型 
+     * @return int整型
+     */
+    int ysf(int n, int m) {
+        // write code here
+        queue&amp;lt;int&amp;gt; line;
+        //全部入队
+        for (int i=1; i&amp;lt;=n; i++)
+        {
+            line.push(i);
+        }
+        //开始模拟
+        for (int j=1; j&amp;lt;n; j++)//n-1轮游戏
+        {
+            for (int i=1; i&amp;lt;m; i++)
+            {
+                int temp = line.front();
+                line.pop();
+                line.push(temp);
+            }
+            line.pop();
+        }
+        
+        return line.front();
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-猫狗收容所&#34;&gt;2. &lt;strong&gt;猫狗收容所&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;有家动物收容所只收留猫和狗，但有特殊的收养规则，收养人有两种收养方式，第一种为直接收养所有动物中最早进入收容所的，第二种为选择收养的动物类型（猫或狗），并收养该种动物中最早进入收容所的。&lt;/p&gt;
+&lt;p&gt;给定一个操作序列int[][2] ope(C++中为vector&lt;vector&gt;)代表所有事件。若第一个元素为1，则代表有动物进入收容所，第二个元素为动物的编号，正数代表狗，负数代表猫；若第一个元素为2，则代表有人收养动物，第二个元素若为0，则采取第一种收养方式，若为1，则指定收养狗，若为-1则指定收养猫。请按顺序返回收养的序列。若出现不合法的操作，即没有可以符合领养要求的动物，则将这次领养操作忽略。&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;利用两个队列分别记录猫狗&lt;/li&gt;
+&lt;li&gt;animal结构体：&lt;strong&gt;记录type和时间tag&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;注意讨论收养时猫狗列表可能为空的情况&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/6235a76b1e404f748f7c820583125c50?tpId=8&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/6235a76b1e404f748f7c820583125c50?tpId=8&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;class CatDogAsylum {
+public:
+    struct animal
+    {
+        int type;
+        int order;
+        animal(int t, int o)
+        {
+            type = t;
+            order = o;
+        }
+    };
+    vector&amp;lt;int&amp;gt; asylum(vector&amp;lt;vector&amp;lt;int&amp;gt; &amp;gt; ope) 
+    {
+        // write code here
+        queue&amp;lt;animal&amp;gt; cats, dogs;
+        int order = 0;
+        vector&amp;lt;int&amp;gt; result;
+        for (int i=0; i&amp;lt;ope.size(); i++)
+        {
+            vector&amp;lt;int&amp;gt; item = ope[i];
+            int method = item[0];
+            int type = item[1];
+            
+            if (method == 1) //有动物进入
+            {
+                if (type &amp;gt; 0) //狗
+                {
+                    order++;
+                    dogs.push(animal(type, order));
+                }
+                else if (type &amp;lt; 0) //猫
+                {
+                    order++;
+                    cats.push(animal(type, order));
+                }
+            }
+            else if (method == 2) //有人收养
+            {
+                animal dog = dogs.front();
+                animal cat = cats.front();
+                
+                if (type == 0) //直接收养最早进入的
+                {
+                    if (dog.order&amp;lt;cat.order &amp;amp;&amp;amp; !dogs.empty() &amp;amp;&amp;amp; !cats.empty())
+                    {
+                        result.push_back(dog.type);
+                        dogs.pop();
+                    }
+                    else if (dog.order&amp;gt;cat.order &amp;amp;&amp;amp; !dogs.empty() &amp;amp;&amp;amp; !cats.empty())
+                    {
+                        result.push_back(cat.type);
+                        cats.pop();
+                    }
+                    else if (dogs.empty())
+                    {
+                        result.push_back(cat.type);
+                        cats.pop();
+                    }
+                    else if (cats.empty())
+                    {
+                        result.push_back(dog.type);
+                        dogs.pop();
+                    }
+                }
+                else if (type == 1 &amp;amp;&amp;amp; !dogs.empty()) //指定收养狗
+                {
+                    result.push_back(dog.type);
+                    dogs.pop();
+                }
+                else if (type == -1 &amp;amp;&amp;amp; !cats.empty()) //指定收养猫
+                {
+                    result.push_back(cat.type);
+                    cats.pop();
+                }
+            }
+        }
+        return result;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter5数据结构一：5.2 队列</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter5_5.1/"" data-c="
+          &lt;h2 id=&#34;向量基本操作&#34;&gt;向量基本操作&lt;/h2&gt;
+&lt;h2 id=&#34;完数与盈数&#34;&gt;&lt;strong&gt;完数与盈数&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;一个数如果恰好等于它的各因子（该数本身除外）子和，如：6=3+2+1，则称其为“完数”；若因子之和大于该数，则称其为“盈数”。求出2 到60 之间所有“完数”和“盈数”，并以如下形式输出： E: e1 e2 e3 ......(ei 为完数) G: g1 g2 g3 ......(gi 为盈数)&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;vector.pop_back()&lt;/code&gt;是弹出最后一个元素&lt;/li&gt;
+&lt;li&gt;vector遍历方法：&lt;code&gt;vector.size()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;求因子的方法：&lt;code&gt;num % i == 0&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/df0d850e41894d06a165bf445ec8a8b4?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/df0d850e41894d06a165bf445ec8a8b4?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;vector&amp;gt;
+
+using namespace std;
+
+int Sum(int num)
+{
+    int sum = 0;
+    for (int i=1; i&amp;lt;num; i++)
+    {
+        if (num % i == 0)
+        {
+            sum += i;
+        }
+    }
+    return sum;
+};
+
+int main()
+{
+    vector&amp;lt;int&amp;gt; E, G;
+    for (int i=2; i&amp;lt;=60; i++)
+    {
+        int sum = Sum(i);
+        if (i == sum)
+        {   
+            E.push_back(i);
+        }
+        else if (i &amp;lt; sum)
+        {
+            G.push_back(i);
+        }
+    }
+    //输出E
+    cout &amp;lt;&amp;lt; &amp;quot;E:&amp;quot;;
+    for (int j=0; j&amp;lt;E.size(); j++)
+    {
+        cout &amp;lt;&amp;lt; &amp;quot; &amp;quot; &amp;lt;&amp;lt; E[j];
+    }
+    //输出G
+    cout &amp;lt;&amp;lt; &amp;quot; G:&amp;quot;;
+    for (int j=0; j&amp;lt;G.size(); j++)
+    {
+        cout &amp;lt;&amp;lt; &amp;quot; &amp;quot; &amp;lt;&amp;lt; G[j];
+    }
+    cout &amp;lt;&amp;lt; endl;
+}
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter5数据结构一：5.1 向量</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter4_4.3/"" data-c="
+          &lt;h2 id=&#34;kmp算法&#34;&gt;KMP算法&lt;/h2&gt;
+&lt;h2 id=&#34;1-string-matching&#34;&gt;&lt;strong&gt;1. String Matching&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Finding all occurrences of a pattern in a text is a problem that arises frequently in text-editing programs.   Typically,the text is a document being edited,and the pattern searched for is a particular word supplied by the user.    We assume that the text is an array T[1..n] of length n and that the pattern is an array P[1..m] of length m&amp;lt;=n.We further assume that the elements of P and T are all alphabets(∑={a,b...,z}).The character arrays P and T are often called strings of characters.    We say that pattern P occurs with shift s in the text T if 0&amp;lt;=s&amp;lt;=n and T[s+1..s+m] = P[1..m](that is if T[s+j]=P[j],for 1&amp;lt;=j&amp;lt;=m).    If P occurs with shift s in T,then we call s a valid shift;otherwise,we calls a invalid shift.   Your task is to calculate the number of vald shifts for the given text T and p attern P.&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;KMP算法&lt;/strong&gt;，nextTable构建方式 &lt;strong&gt;（两个函数）&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;返回第一个匹配子串/返回全部匹配子串个数&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/00438b0bc9384ceeb65613346b42e88a?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/00438b0bc9384ceeb65613346b42e88a?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;string&amp;gt;
+
+using namespace std;
+
+int text[1000000];
+int pattern[1000000];
+int nextTable[1000000];
+
+void getNextTable(string pattern)
+{
+    int m = pattern.size();
+    nextTable[0] = -1;
+    int i=0, j=-1;
+    while(i &amp;lt; m)
+    {
+        if (j == -1 || pattern[i] == pattern[j])
+        {
+            i++;
+            j++;
+            nextTable[i] = j;
+        }
+        else
+        {
+            j = nextTable[j];
+        }
+    }
+};
+
+int kmp(string text, string pattern)
+{
+    int m = text.size();
+    int n = pattern.size();
+    getNextTable(pattern);
+    
+    int count = 0;
+    int i = 0;
+    int j = 0;
+
+    while(i &amp;lt; m)
+    {
+        //匹配
+        if ((j == -1) || (text[i] == pattern[j]))
+        {
+            i++;
+            j++;
+        }
+        else
+        {
+            j = nextTable[j];
+        }
+        
+        //判断
+        if(j == n)
+        {
+            count++;
+            j = nextTable[j];
+        }
+    }
+    
+    return count;
+};
+
+int main()
+{
+    string text, pattern;
+    while(cin &amp;gt;&amp;gt; text &amp;gt;&amp;gt; pattern)
+    {
+        int count = kmp(text,pattern);
+        cout &amp;lt;&amp;lt; count &amp;lt;&amp;lt; endl;
+    }
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-字符串匹配&#34;&gt;2. 字符串匹配&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;读入数据string[ ]，然后读入一个短字符串。要求查找string[ ]中和短字符串的所有匹配，输出行号、匹配字符串。匹配时不区分大小写，并且可以有一个用中括号表示的模式匹配。如“aa[123]bb”，就是说aa1bb、aa2bb、aa3bb都算匹配。&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;注意：题目要求的是完全匹配，即长度完全一样，忽略大小写&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可以使用&lt;strong&gt;正则表达式&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;#include &amp;lt;regex&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;regex r(st[0], regex::icase); // regex::icase 不区分大小写,建立正则表达式&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;regex_match(st[i], r)&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/fbdc522ef958455687654b38a4ca01e0?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&#34;&gt;https://www.nowcoder.com/practice/fbdc522ef958455687654b38a4ca01e0?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-C++&#34;&gt;#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;string&amp;gt;
+#include &amp;lt;regex&amp;gt;
+
+using namespace std;
+string st[1001];
+
+int main () {
+    int n;
+    scanf(&amp;quot;%d &amp;quot;, &amp;amp;n);
+    for (int i=1; i&amp;lt;=n; ++i)
+        getline(cin, st[i]);
+    getline(cin, st[0]);
+    regex r(st[0], regex::icase);  // regex::icase 不区分大小写
+    for (int i=1; i&amp;lt;=n; ++i)
+        if (regex_match(st[i], r))  // 这是完全匹配，部分匹配用regex_search
+            cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &#39; &#39; &amp;lt;&amp;lt; st[i] &amp;lt;&amp;lt; endl;
+}
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter4字符串：4.3 字符串匹配</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/vpc_p2p/"" data-c="
           &lt;h4 id=&#34;概念&#34;&gt;概念&lt;/h4&gt;
 &lt;p&gt;对等连接是指两个VPC之间的网络连接。可以使用私有IP地址在两个VPC之间进行通信，就像两个VPC在同一个网络中一样。同一区域内，可以在自己的VPC之间创建对等连接，也可以在自己的VPC与其他帐户的VPC之间创建对等连接。不同区域间的VPC之间不能创建对等连接。&lt;/p&gt;
@@ -1582,7 +2545,7 @@
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter4/"" data-c="
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter4_4.2/"" data-c="
           &lt;h2 id=&#34;1-特殊乘法&#34;&gt;&lt;strong&gt;1. 特殊乘法&lt;/strong&gt;&lt;/h2&gt;
 &lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
 &lt;p&gt;写个算法，对2个小于1000000000的输入，求结果。 特殊乘法举例：123 * &lt;em&gt;45 = 1&lt;strong&gt;4 +1&lt;/strong&gt;5 +2&lt;strong&gt;4 +2&lt;/strong&gt;5 +3**4+3&lt;/em&gt;5&lt;/p&gt;
