@@ -9,7 +9,7 @@
 <meta name="description" content="世界那么大，我想去看看">
 <meta name="theme-color" content="#343a40">
 <title>Czardas</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1620201250503">
+<link rel="shortcut icon" href="/favicon.ico?v=1620302416336">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -258,7 +258,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">18</span>
+        <span class="site-item-stat-count">19</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -309,6 +309,12 @@
           <small class="language" data-lan="tag">标签</small>
         </h2>
       </div>
+      
+      
+      
+      
+      
+      
       
       
       
@@ -639,6 +645,155 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/prometheus/"" data-c="
+          &lt;h4 id=&#34;集群监控策略&#34;&gt;集群监控策略：&lt;/h4&gt;
+&lt;p&gt;Prometheus监控Kubernetes集群监控的各个维度以及策略：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;目标&lt;/th&gt;
+&lt;th&gt;服务发现模式&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;监控方法&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;数据源&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;从集群各节点kubelet组件中获取节点kubelet的基本运行状态的监控指标&lt;/td&gt;
+&lt;td&gt;node&lt;/td&gt;
+&lt;td&gt;白盒监控&lt;/td&gt;
+&lt;td&gt;kubelet&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;从集群各节点kubelet内置的cAdvisor中获取，节点中运行的容器的监控指标&lt;/td&gt;
+&lt;td&gt;node&lt;/td&gt;
+&lt;td&gt;白盒监控&lt;/td&gt;
+&lt;td&gt;kubelet&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;从部署到各个节点的Node Exporter中采集主机资源相关的运行资源&lt;/strong&gt;（本次实验使用方法）&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;node&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;白盒监控&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;node exporter&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;对于内置了Promthues支持的应用，需要从Pod实例中采集其自定义监控指标&lt;/td&gt;
+&lt;td&gt;pod&lt;/td&gt;
+&lt;td&gt;白盒监控&lt;/td&gt;
+&lt;td&gt;custom pod&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;获取API Server组件的访问地址，并从中获取Kubernetes集群相关的运行监控指标&lt;/td&gt;
+&lt;td&gt;endpoints&lt;/td&gt;
+&lt;td&gt;白盒监控&lt;/td&gt;
+&lt;td&gt;api server&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;获取集群中Service&lt;u&gt;的访问地址&lt;/u&gt;，并通过Blackbox Exporter获取网络探测指标&lt;/td&gt;
+&lt;td&gt;service&lt;/td&gt;
+&lt;td&gt;黑盒监控&lt;/td&gt;
+&lt;td&gt;blackbox exporter&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;获取集群中Ingress的访问信息，并通过Blackbox Exporter获取网络探测指标&lt;/td&gt;
+&lt;td&gt;ingress&lt;/td&gt;
+&lt;td&gt;黑盒监控&lt;/td&gt;
+&lt;td&gt;blackbox exporter&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;prometheus部署&#34;&gt;Prometheus部署&lt;/h4&gt;
+&lt;p&gt;&lt;u&gt;&lt;em&gt;详细说一说，因为直接动了系统自带的配置文件&lt;/em&gt;&lt;/u&gt;&lt;/p&gt;
+&lt;h4 id=&#34;node-exporter部署&#34;&gt;Node Exporter部署&lt;/h4&gt;
+&lt;h5 id=&#34;方法&#34;&gt;方法：&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;创建自定义的Node Exporter服务，然后将服务器配置为Prometheus上的Target（本次实验使用方法）&lt;/p&gt;
+&lt;p&gt;【参考】&lt;a href=&#34;https://devopscube.com/monitor-linux-servers-prometheus-node-exporter/&#34;&gt;https://devopscube.com/monitor-linux-servers-prometheus-node-exporter/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;还可以使用Daemonset控制器部署Node Exporter&lt;/p&gt;
+&lt;p&gt;为了能够采集集群中各个节点的资源使用情况，需要在各节点中部署一个Node Exporter实例。在部署Prometheus时，我们使用了Kubernetes内置的控制器之一Deployment。Deployment能够确保Prometheus的Pod能够按照预期的状态在集群中运行，而Pod实例可能随机运行在任意节点上。&lt;/p&gt;
+&lt;p&gt;而与Prometheus的部署不同的是，&lt;strong&gt;对于Node Exporter而言每个节点只需要运行一个唯一的实例&lt;/strong&gt;，所以需要使用Kubernetes的另外一种控制器Daemonset。Daemonset的管理方式类似于操作系统中的守护进程。Daemonset会确保在集群中所有（也可以指定）节点上运行一个唯一的Pod实例。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;daemonset-与-deployment-的区别&#34;&gt;DaemonSet 与 Deployment 的区别&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Deployment&lt;/strong&gt; 部署的副本 &lt;strong&gt;Pod&lt;/strong&gt; 会分布在各个 &lt;strong&gt;Node&lt;/strong&gt; 上，每个 &lt;strong&gt;Node&lt;/strong&gt; 都可能运行好几个副本。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DaemonSet&lt;/strong&gt; 的不同之处在于：每个 &lt;strong&gt;Node&lt;/strong&gt; 上最多只能运行一个副本。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;daemonset-的典型应用场景&#34;&gt;DaemonSet 的典型应用场景&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;在集群的每个节点上运行存储 &lt;strong&gt;Daemon&lt;/strong&gt;，比如：&lt;strong&gt;glusterd&lt;/strong&gt; 或 &lt;strong&gt;ceph&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在每个节点上运行日志收集 &lt;strong&gt;Daemon&lt;/strong&gt;，比如：&lt;strong&gt;flunentd&lt;/strong&gt; 或 &lt;strong&gt;logstash&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在每个节点上运行监控 &lt;strong&gt;Daemon&lt;/strong&gt;，比如：&lt;strong&gt;Prometheus Node Exporter&lt;/strong&gt; 或 &lt;strong&gt;collectd&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;查看k8s-的-daemonset&#34;&gt;查看k8s 的 DaemonSet&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;Kubernetes&lt;/strong&gt; 自己就在用 &lt;strong&gt;DaemonSet&lt;/strong&gt; 运行系统组件。执行如下命令查看：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get daemonset --``namespace``=kube-system&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;u&gt;(配一张截图)&lt;/u&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;promql概念应用实例&#34;&gt;PromQL概念&amp;amp;应用实例&lt;/h4&gt;
+&lt;h5 id=&#34;概念&#34;&gt;概念&lt;/h5&gt;
+&lt;p&gt;Prometheus通过指标名称（metrics name）以及对应的一组标签（labelset）唯一定义一条时间序列。指标名称反映了监控样本的基本标识，而label则在这个基本特征上为采集到的数据提供了多种特征维度。用户可以基于这些特征维度过滤，聚合，统计从而产生新的计算后的一条时间序列。&lt;/p&gt;
+&lt;h5 id=&#34;应用实例&#34;&gt;应用实例&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;各节点磁盘使用率&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;node_filesystem_size_bytes{fstype=~\&amp;quot;xfs|ext4\&amp;quot;} - node_filesystem_free_bytes) / node_filesystem_size_bytes&lt;/code&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;各节点内存使用率&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes&lt;/code&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;各节点磁盘IO读速率(MiB/s)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;irate(node_disk_read_bytes_total{}[5m]) / 1024 / 1024&lt;/code&gt;&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;各节点磁盘IO写速率(MiB/s)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;irate(node_disk_written_bytes_total{}[5m]) / 1024 / 1024&lt;/code&gt;&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;某节点网络IO速率:入速率(MiB/s)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;irate(node_network_receive_bytes_total{job=\&amp;quot;节点名称_node_exporter_metrics\&amp;quot;}[5m]) / 1024 / 1024&lt;/code&gt;&lt;/p&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;某节点网络IO速率:出速率(MiB/s)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;irate(node_network_transmit_bytes_total{job=\&amp;quot;节点名称_node_exporter_metrics\&amp;quot;}[5m]) / 1024 / 1024&lt;/code&gt;&lt;/p&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;&lt;strong&gt;某节点CPU使用率&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;100 - (avg by(instance) (irate(node_cpu_seconds_total{mode=\&amp;quot;idle\&amp;quot;, job=\&amp;quot;节点名称_node_exporter_metrics\&amp;quot;}[5m])) * 100)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CPU使用率的计算公式：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;CPU0在5分钟内处于空闲状态的时间：&lt;code&gt;increase(node_cpu_seconds_total{cpu=&amp;quot;0&amp;quot;,mode=&amp;quot;idle&amp;quot;}[5m])&lt;/code&gt;，increase 的意思是表示增量，刚才说了 &lt;code&gt;node_cpu_seconds_total&lt;/code&gt;是单调递增的，这个公式的结果是当前时点的 &lt;code&gt;node_cpu_seconds_total&lt;/code&gt; 减去5分钟之前的 &lt;code&gt;node_cpu_seconds_total&lt;/code&gt;，也就是这5分钟之内处于&lt;code&gt;idle&lt;/code&gt;状态的 CPU时间。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CPU0在5分钟内处于空闲状态的时间占比：&lt;code&gt;increase(node_cpu_seconds_total{cpu=&amp;quot;0&amp;quot;,mode=&amp;quot;idle&amp;quot;}[5m]) / increase(node_cpu_seconds_total{cpu=&amp;quot;0&amp;quot;}[5m])&lt;/code&gt;，分母其实就是5分钟=300秒。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;一台主机所有CPU在5分钟内处于空闲状态的时间占比&lt;/p&gt;
+&lt;p&gt;用 &lt;code&gt;sum()&lt;/code&gt;函数累加各核数值：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sum (increase(node_cpu_seconds_total{mode=&amp;quot;idle&amp;quot;}[5m])) / sum (increase(node_cpu_seconds_total{mode=&amp;quot;idle&amp;quot;}[5m]))&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果 Prometheus 监控多台主机，要根据每台主机做 sum：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sum by (instance)(increase(node_cpu_seconds_total{mode=&amp;quot;idle&amp;quot;}[5m])) / sum by (instance)(increase(node_cpu_seconds_total[5m]))&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CPU使用率 = 1 - CPU空闲率：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;100 * (1 - sum by (instance)(increase(node_cpu_seconds_total{mode=&amp;quot;idle&amp;quot;}[5m])) / sum by (instance)(increase(node_cpu_seconds_total[5m])))&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PromQL 有计算比率的函数：&lt;code&gt;rate()&lt;/code&gt; 和 &lt;code&gt;irate()&lt;/code&gt;，可以简化计算公式为:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;100 - (avg by(instance) (irate(node_cpu_seconds_total{mode=&amp;quot;idle&amp;quot;}[5m])) * 100)&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+">Prometheus</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter6_6.3/"" data-c="
@@ -1656,7 +1811,7 @@ int main () {
 &lt;p&gt;从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。&lt;/p&gt;
 &lt;p&gt;Gateway是OpenFaaS最为重要的一个组件。Gateway本质上就是一个rest转发服务，一个一个的handler，每个模块之间的耦合性不是很高，可以很容易的去拆卸，自定义实现相应的模块。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;源码解读：https://zhuanlan.zhihu.com/p/41056766&lt;/p&gt;
+&lt;p&gt;源码解读：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/41056766&#34;&gt;https://zhuanlan.zhihu.com/p/41056766&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h4 id=&#34;watchdog&#34;&gt;watchdog&lt;/h4&gt;
 &lt;p&gt;watchdog提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从API网关来的HTTP请求，然后调用程序。watchdog是一个小型的Golang服务&lt;/p&gt;
@@ -1678,8 +1833,267 @@ int main () {
 &lt;li&gt;第三，建好的数据库连接可以反复使用；&lt;/li&gt;
 &lt;li&gt;第四，容器操作系统的临时文件夹(/tmp/目录)，是所有请求共用的，例如可以做临时缓存用&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;函数调用流程&#34;&gt;函数调用流程&lt;/h4&gt;
+&lt;h4 id=&#34;函数请求处理流程感觉写好了很亮眼&#34;&gt;函数请求处理流程（感觉写好了很亮眼）&lt;/h4&gt;
+&lt;p&gt;【参考】&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_38616705/article/details/107385293&#34;&gt;https://blog.csdn.net/weixin_38616705/article/details/107385293&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/41056766&#34;&gt;https://zhuanlan.zhihu.com/p/41056766&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;访问openfaas的gateway的service。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对于一个函数请求而言，其由一个客户端发出，首先访问的是openfaas的gateway的service，通过iptables将对于Service的访问路由到pod所连接的网卡。&lt;/p&gt;
+&lt;p&gt;iptables中的处理流程：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;u&gt;需要真实操作的真实截图&lt;/u&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;该流程画成图就是如下图所示的过程*&lt;u&gt;（图需要自己重新画）&lt;/u&gt;*&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620302159529.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;pod的连接&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在多节点集群中，请求进行DNAT之后会被转发到flannel网卡上，然后由一个flanneld的程序进行处理（也就是路由，flanneld通过etcd储存了一个集群的网络信息，通过此进行路由），接着flanneld会根据路由选择的结果将请求转发到目的pod所在机器上，而在目的pod所在机器上，请求先是被转发到flannel网卡上。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;u&gt;（下图需要自己重新画）&lt;/u&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;7&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620302193199.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;找到了相应的pod，接下来需要发送给具体的容器。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;8&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620302206521.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;在每个pod之中，都有一个pause容器，这是kubernetes创建的系统容器，pause容器会创建网络命名空间并将直接的网络桥接到cni0网桥（通过veth pair），然后所有的用户容器都会共享这个网络命名空间，即共享一块网卡。那么请求转发的流程就是直接在cni0通过veth pair传向了pod内的eth0，接着容器就可以直接接收网卡eth0上的信息了。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Gateway中的请求处理&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在gateway中存在处理函数请求的handler&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;代理转发&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Gateway本身不做任何和部署发布函数的事情，它只是作为一个代理，把请求转发给相应的Provider去处理，所有的请求都要通过这个网关。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4.1 同步函数转发&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;主要转发的API有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RoutelessProxy&lt;/li&gt;
+&lt;li&gt;ListFunctions&lt;/li&gt;
+&lt;li&gt;DeployFunction&lt;/li&gt;
+&lt;li&gt;DeleteFunction&lt;/li&gt;
+&lt;li&gt;UpdateFunction&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;faasHandlers.RoutelessProxy = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+    faasHandlers.ListFunctions = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+    faasHandlers.DeployFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+    faasHandlers.DeleteFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+    faasHandlers.UpdateFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;MakeForwardingProxyHandler()有三个参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;proxy&lt;br&gt;
+这是一个http的客户端，作者把这个客户端抽成一个类，然后使用该类的NewHTTPClientReverseProxy方法创建实例，这样就简化了代码，不用每次都得写一堆相同的配置。&lt;/li&gt;
+&lt;li&gt;notifiers&lt;br&gt;
+这个其实是要打印的日志，这里是一个HTTPNotifier的接口。而在这个MakeForwardingProxyHandler中其实有两个实现类，一个是LoggingNotifier，一个是PrometheusFunctionNotifier，分别用来打印和函数http请求相关的日志以及和Prometheus监控相关的日志。&lt;/li&gt;
+&lt;li&gt;baseURLResolver&lt;br&gt;
+这个就是Provider的url地址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;MakeForwardingProxyHandler中主要做了三件事儿：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;解析要转发的url&lt;/li&gt;
+&lt;li&gt;调用forwardRequest方法转发请求，&lt;/li&gt;
+&lt;li&gt;打印日志&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;// MakeForwardingProxyHandler create a handler which forwards HTTP requests
+func MakeForwardingProxyHandler(proxy *types.HTTPClientReverseProxy, notifiers []HTTPNotifier, baseURLResolver BaseURLResolver) http.HandlerFunc {
+    return func(w http.ResponseWriter, r *http.Request) {
+        baseURL := baseURLResolver.Resolve(r)
+        requestURL := r.URL.Path
+        start := time.Now()
+        statusCode, err := forwardRequest(w, r, proxy.Client, baseURL, requestURL, proxy.Timeout)
+        seconds := time.Since(start)
+        if err != nil {
+            log.Printf(&amp;quot;error with upstream request to: %s, %s\n&amp;quot;, requestURL, err.Error())
+        }
+        for _, notifier := range notifiers {
+            notifier.Notify(r.Method, requestURL, statusCode, seconds)
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;4.2 异步函数转发&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果是异步函数，Gateway就作为一个发布者，将函数放到队列里。MakeQueuedProxy方法就是做这件事的：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;读取请求体&lt;/li&gt;
+&lt;li&gt;将&lt;code&gt;X-Callback-Url&lt;/code&gt;参数从参数中http的header中读出来&lt;/li&gt;
+&lt;li&gt;实例化用于异步处理的Request对象&lt;/li&gt;
+&lt;li&gt;调用canQueueRequests.Queue(req)，将请求发布到队列中&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;// MakeQueuedProxy accepts work onto a queue
+func MakeQueuedProxy(metrics metrics.MetricOptions, wildcard bool, canQueueRequests queue.CanQueueRequests) http.HandlerFunc {
+    return func(w http.ResponseWriter, r *http.Request) {
+        defer r.Body.Close()
+        body, err := ioutil.ReadAll(r.Body)
+        // 省略错误处理代码
+        vars := mux.Vars(r)
+        name := vars[&amp;quot;name&amp;quot;]
+​
+        callbackURLHeader := r.Header.Get(&amp;quot;X-Callback-Url&amp;quot;)
+        var callbackURL *url.URL
+        if len(callbackURLHeader) &amp;gt; 0 {
+            urlVal, urlErr := url.Parse(callbackURLHeader)
+            // 省略错误处理代码
+            callbackURL = urlVal
+        }
+        req := &amp;amp;queue.Request{
+            Function:    name,
+            Body:        body,
+            Method:      r.Method,
+            QueryString: r.URL.RawQuery,
+            Header:      r.Header,
+            CallbackURL: callbackURL,
+        }
+        err = canQueueRequests.Queue(req)
+        // 省略错误处理代码
+        w.WriteHeader(http.StatusAccepted)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;函数pod内部的请求处理&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;接下来gateway就会把请求转发给具体的function所对应的Service，这里Service的访问流程如前所述，但是也有一点需要注意，因为每个function都会对应多个pod副本，那么Service在进行iptables处理的时候就需要选择一个具体的pod来转发请求，这个时候就会有一个负载均衡的问题，而Kubernetes在这里的处理是随机选择一个pod进行转发。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;目前，对于openfaas，如前文所述，函数的部署是通过of-watchdog。&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;9&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1620199965913.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;在Http的方式下当这个watchdog启动时，父进程会fork一个子进程（也就是用户提交的函数程序），这个函数程序不是简单的函数逻辑，也要包含一个Http服务器用来处理Http请求，且这个函数程序会一直运行，监听容器网卡上的端口以获得请求。&lt;/p&gt;
+&lt;h4 id=&#34;自动伸缩&#34;&gt;&lt;strong&gt;自动伸缩&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;【参考】&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/41056766&#34;&gt;https://zhuanlan.zhihu.com/p/41056766&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;伸缩性其实有两种，一种是可以通过调用API接口，来将函数进行缩放。另外一种就是通过AlertHandler。&lt;/p&gt;
+&lt;p&gt;自动伸缩是OpenFaaS的一大特点，触发自动伸缩主要是根据不同的指标需求。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;根据每秒请求数来做伸缩&lt;br&gt;
+OpenFaaS附带了一个自动伸缩的规则，这个规则是在AlertManager配置文件中定义。AlertManager从Prometheus中读取使用情况（每秒请求数），然后在满足一定条件时向Gateway发送警报。&lt;br&gt;
+可以通过删除AlertManager，或者将部署扩展的环境变量设置为0，来禁用此方式。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;最小/最大副本数&lt;br&gt;
+通过向函数添加标签, 可以在部署时设置最小 (初始) 和最大副本数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;com.openfaas.scale.min&lt;/code&gt; 默认是 &lt;code&gt;1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;com.openfaas.scale.max&lt;/code&gt; 默认是 &lt;code&gt;20&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;com.openfaas.scale.factor&lt;/code&gt; 默认是 &lt;code&gt;20%&lt;/code&gt; ，在0-100之间，这是每次扩容的时候，新增实例的百分比，若是100的话，会瞬间飙升到副本数的最大值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;com.openfaas.scale.min&lt;/code&gt; 和 &lt;code&gt;com.openfaas.scale.max&lt;/code&gt;值一样的时候，可以关闭自动伸缩。&lt;br&gt;
+&lt;code&gt;com.openfaas.scale.factor&lt;/code&gt;是0时，也会关闭自动伸缩。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;scaleService&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Gateway的源码中，&lt;code&gt;scaleService&lt;/code&gt;是真正处理伸缩服务的函数：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;func scaleService(alert requests.PrometheusInnerAlert, service ServiceQuery) error {
+    var err error
+    serviceName := alert.Labels.FunctionName
+​
+    if len(serviceName) &amp;gt; 0 {
+        queryResponse, getErr := service.GetReplicas(serviceName)
+        if getErr == nil {
+            status := alert.Status
+​
+            newReplicas := CalculateReplicas(status, queryResponse.Replicas, uint64(queryResponse.MaxReplicas), queryResponse.MinReplicas, queryResponse.ScalingFactor)
+​
+            log.Printf(&amp;quot;[Scale] function=%s %d =&amp;gt; %d.\n&amp;quot;, serviceName, queryResponse.Replicas, newReplicas)
+            if newReplicas == queryResponse.Replicas {
+                return nil
+            }
+​
+            updateErr := service.SetReplicas(serviceName, newReplicas)
+            if updateErr != nil {
+                err = updateErr
+            }
+        }
+    }
+    return err
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;从代码z中可以看到，scaleService做了三件事：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;获取现在的副本数&lt;/li&gt;
+&lt;li&gt;计算新的副本数&lt;br&gt;
+新副本数的计算方法是根据&lt;code&gt;com.openfaas.scale.factor&lt;/code&gt;计算步长：&lt;br&gt;
+&lt;code&gt;step := uint64((float64(maxReplicas) / 100) * float64(scalingFactor))&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;设置为新的副本数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;MakeScalingHandler&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在调用函数的时候，用的路由是：&lt;code&gt;/function/:name&lt;/code&gt;。如果环境变量里有配置&lt;code&gt;scale_from_zero&lt;/code&gt;为true，先用&lt;code&gt;MakeScalingHandler()&lt;/code&gt;方法对proxyHandler进行一次包装。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;MakeScalingHandler&lt;/code&gt;接受参数主要是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;next：就是下一个httpHandlerFunc，中间件都会有这样一个参数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;config：&lt;code&gt;ScalingConfig&lt;/code&gt;的对象：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;// ScalingConfig for scaling behaviours
+type ScalingConfig struct {
+MaxPollCount uint // 查到的最大数量
+FunctionPollInterval time.Duration // 函数调用时间间隔
+CacheExpiry time.Duration // 缓存过期时间
+ServiceQuery ServiceQuery // 外部服务调用的一个接口
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这个&lt;code&gt;MakeScalingHandler&lt;/code&gt;中间件主要做了如下的事情：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;先从FunctionCache缓存中获取该函数的基本信息，从这个缓存可以拿到每个函数的副本数量。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为了加快函数的启动速度，如果缓存中可以获该得函数，且函数的副本数大于0，满足条件，return即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果不满足上一步，就会调用&lt;code&gt;SetReplicas&lt;/code&gt;方法设置副本数，并更新FunctionCache的缓存。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;// MakeScalingHandler creates handler which can scale a function from
+// zero to 1 replica(s).
+func MakeScalingHandler(next http.HandlerFunc, upstream http.HandlerFunc, config ScalingConfig) http.HandlerFunc {
+    cache := FunctionCache{
+        Cache:  make(map[string]*FunctionMeta),
+        Expiry: config.CacheExpiry,
+    }
+    return func(w http.ResponseWriter, r *http.Request) {
+        functionName := getServiceName(r.URL.String())
+        if serviceQueryResponse, hit := cache.Get(functionName); hit &amp;amp;&amp;amp; serviceQueryResponse.AvailableReplicas &amp;gt; 0 {
+            next.ServeHTTP(w, r)
+            return
+        } 
+        queryResponse, err := config.ServiceQuery.GetReplicas(functionName)
+        cache.Set(functionName, queryResponse)
+        // 省略错误处理
+        if queryResponse.AvailableReplicas == 0 {
+            minReplicas := uint64(1)
+            if queryResponse.MinReplicas &amp;gt; 0 {
+                minReplicas = queryResponse.MinReplicas
+            }
+            err := config.ServiceQuery.SetReplicas(functionName, minReplicas)
+            // 省略错误处理代码
+            for i := 0; i &amp;lt; int(config.MaxPollCount); i++ {
+                queryResponse, err := config.ServiceQuery.GetReplicas(functionName)
+                cache.Set(functionName, queryResponse)
+                // 省略错误处理
+                time.Sleep(config.FunctionPollInterval)
+            }
+        }
+        next.ServeHTTP(w, r)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;GetReplicas&lt;/code&gt;方法&lt;br&gt;
+从&lt;code&gt;system/function/:name&lt;/code&gt;接口获取到函数的信息，组装一个&lt;code&gt;ServiceQueryResponse&lt;/code&gt;对象即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;SetReplicas&lt;/code&gt;方法&lt;br&gt;
+调用&lt;code&gt;system/scale-function/:name&lt;/code&gt;接口，设置副本数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 ">OpenFaaS</a>
       </div>
       
