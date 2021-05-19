@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="世界那么大，我想去看看">
 <meta name="theme-color" content="#343a40">
-<title>Chapter4字符串：4.3 字符串匹配 | Czardas</title>
+<title>Chapter8递归与分治：8.2分治 | Czardas</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1621394911329">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Chapter4字符串：4.3 字符串匹配" />
+  <meta name="description" content="Chapter8递归与分治：8.2分治" />
   <meta name="keywords" content="机试准备" />
 </head>
 
@@ -309,21 +309,29 @@
     <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#kmp%E7%AE%97%E6%B3%95">KMP算法</a></li>
-<li><a href="#1-string-matching"><strong>1. String Matching</strong></a>
+<li><a href="#%E5%88%86%E6%B2%BB%E6%B3%95">分治法</a></li>
+<li><a href="#1-%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E9%A2%9D%E6%95%B0%E5%88%97">1.  斐波那契额数列</a>
 <ul>
 <li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><strong>题目描述</strong></a></li>
-<li><a href="#%E8%A6%81%E7%82%B9"><strong>要点</strong></a></li>
+<li><a href="#%E8%A6%81%E7%82%B9">要点</a></li>
 <li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80">提交地址</a></li>
 <li><a href="#%E4%BB%A3%E7%A0%81">代码</a></li>
 </ul>
 </li>
-<li><a href="#2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D">2. 字符串匹配</a>
+<li><a href="#2-%E4%BA%8C%E5%8F%89%E6%A0%91">2.  二叉树</a>
 <ul>
 <li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><strong>题目描述</strong></a></li>
 <li><a href="#%E8%A6%81%E7%82%B9-2"><strong>要点</strong></a></li>
 <li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80-2">提交地址</a></li>
 <li><a href="#%E4%BB%A3%E7%A0%81-2">代码</a></li>
+</ul>
+</li>
+<li><a href="#3-2%E7%9A%84%E5%B9%82%E6%AC%A1%E6%96%B9">3.  2的幂次方</a>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-3"><strong>题目描述</strong></a></li>
+<li><a href="#%E8%A6%81%E7%82%B9-3"><strong>要点</strong></a></li>
+<li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80-3">提交地址</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-3">代码</a></li>
 </ul>
 </li>
 </ul>
@@ -593,8 +601,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://Czardas42.github.io/post/chapter4_4.3/">
-      Chapter4字符串：4.3 字符串匹配
+    <a class="post-title-link" href="https://Czardas42.github.io/post/chapter8_8.2/">
+      Chapter8递归与分治：8.2分治
     </a>
   </h1>
   <div class="post-meta">
@@ -602,7 +610,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-05-05 15:40:00">2021-05-05</span>
+      <span class="publish-time" data-t="2021-05-19 11:23:06">2021-05-19</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -626,140 +634,161 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>667<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>688<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h2 id="kmp算法">KMP算法</h2>
-<h2 id="1-string-matching"><strong>1. String Matching</strong></h2>
+              <h2 id="分治法">分治法</h2>
+<p>不断把问题分为规模更小的问题</p>
+<h2 id="1-斐波那契额数列">1.  斐波那契额数列</h2>
 <h3 id="题目描述"><strong>题目描述</strong></h3>
-<p>Finding all occurrences of a pattern in a text is a problem that arises frequently in text-editing programs.   Typically,the text is a document being edited,and the pattern searched for is a particular word supplied by the user.    We assume that the text is an array T[1..n] of length n and that the pattern is an array P[1..m] of length m&lt;=n.We further assume that the elements of P and T are all alphabets(∑={a,b...,z}).The character arrays P and T are often called strings of characters.    We say that pattern P occurs with shift s in the text T if 0&lt;=s&lt;=n and T[s+1..s+m] = P[1..m](that is if T[s+j]=P[j],for 1&lt;=j&lt;=m).    If P occurs with shift s in T,then we call s a valid shift;otherwise,we calls a invalid shift.   Your task is to calculate the number of vald shifts for the given text T and p attern P.</p>
-<h3 id="要点"><strong>要点</strong></h3>
-<ol>
-<li>
-<p><strong>KMP算法</strong>，nextTable构建方式 <strong>（两个函数）</strong></p>
-</li>
-<li>
-<p>返回第一个匹配子串/返回全部匹配子串个数</p>
-</li>
-</ol>
+<p>The Fibonacci Numbers{0,1,1,2,3,5,8,13,21,34,55...} are defined by the recurrence:   F0=0 F1=1 Fn=Fn-1+Fn-2,n&gt;=2   Write a program to calculate the Fibonacci Numbers.</p>
+<h3 id="要点">要点</h3>
+<p>递归的写法</p>
 <h3 id="提交地址">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/00438b0bc9384ceeb65613346b42e88a?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/00438b0bc9384ceeb65613346b42e88a?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<p>https://www.nowcoder.com/practice/17ad6908e36a49f4b06ea96936e8bb25?tpId=40&amp;tab=answerKey</p>
 <h3 id="代码">代码</h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;string&gt;
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
 
 using namespace std;
 
-int text[1000000];
-int pattern[1000000];
-int nextTable[1000000];
-
-void getNextTable(string pattern)
+int Fibonacci(int i)
 {
-    int m = pattern.size();
-    nextTable[0] = -1;
-    int i=0, j=-1;
-    while(i &lt; m)
-    {
-        if (j == -1 || pattern[i] == pattern[j])
-        {
-            i++;
-            j++;
-            nextTable[i] = j;
-        }
-        else
-        {
-            j = nextTable[j];
-        }
-    }
-};
-
-int kmp(string text, string pattern)
-{
-    int m = text.size();
-    int n = pattern.size();
-    getNextTable(pattern);
+    if (i == 0)
+        return 0;
+    else if (i == 1)
+        return 1;
+    else
+        return Fibonacci(i-1) + Fibonacci(i-2);
     
-    int count = 0;
-    int i = 0;
-    int j = 0;
-
-    while(i &lt; m)
-    {
-        //匹配
-        if ((j == -1) || (text[i] == pattern[j]))
-        {
-            i++;
-            j++;
-        }
-        else
-        {
-            j = nextTable[j];
-        }
-        
-        //判断
-        if(j == n)
-        {
-            count++;
-            j = nextTable[j];
-        }
-    }
-    
-    return count;
-};
+}
 
 int main()
 {
-    string text, pattern;
-    while(cin &gt;&gt; text &gt;&gt; pattern)
+    int num;
+    while (cin &gt;&gt; num)
     {
-        int count = kmp(text,pattern);
-        cout &lt;&lt; count &lt;&lt; endl;
+        cout &lt;&lt; Fibonacci(num) &lt;&lt; endl;
     }
     return 0;
 }
+
 </code></pre>
-<h2 id="2-字符串匹配">2. 字符串匹配</h2>
+<h2 id="2-二叉树">2.  二叉树</h2>
 <h3 id="题目描述-2"><strong>题目描述</strong></h3>
-<p>读入数据string[ ]，然后读入一个短字符串。要求查找string[ ]中和短字符串的所有匹配，输出行号、匹配字符串。匹配时不区分大小写，并且可以有一个用中括号表示的模式匹配。如“aa[123]bb”，就是说aa1bb、aa2bb、aa3bb都算匹配。</p>
+<figure data-type="image" tabindex="1"><img src="https://Czardas42.github.io//post-images/1621394733656.png" alt="" loading="lazy"></figure>
+<p>如上所示，由正整数1，2，3……组成了一颗特殊二叉树。我们已知这个二叉树的最后一个结点是n。现在的问题是，结点m所在的子树中一共包括多少个结点。   比如，n = 12，m = 3那么上图中的结点13，14，15以及后面的结点都是不存在的，结点m所在子树中包括的结点有3，6，7，12，因此结点m的所在子树中共有4个结点。</p>
 <h3 id="要点-2"><strong>要点</strong></h3>
 <ol>
-<li>
-<p>注意：题目要求的是完全匹配，即长度完全一样，忽略大小写</p>
-</li>
-<li>
-<p>可以使用<strong>正则表达式</strong></p>
-<p><code>#include &lt;regex&gt;</code></p>
-<p><code>regex r(st[0], regex::icase); // regex::icase 不区分大小写,建立正则表达式</code></p>
-<p><code>regex_match(st[i], r)</code></p>
-</li>
+<li>二叉树的规律：左子节点id = 父节点id*2</li>
+<li>递归的终止条件：<code>m &gt; n</code></li>
 </ol>
 <h3 id="提交地址-2">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/fbdc522ef958455687654b38a4ca01e0?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/fbdc522ef958455687654b38a4ca01e0?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<p>https://www.nowcoder.com/practice/f74c7506538b44399f2849eba2f050b5?tpId=40&amp;tab=answerKey</p>
 <h3 id="代码-2">代码</h3>
-<pre><code class="language-C++">#include &lt;cstdio&gt;
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;regex&gt;
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
 
 using namespace std;
-string st[1001];
 
-int main () {
-    int n;
-    scanf(&quot;%d &quot;, &amp;n);
-    for (int i=1; i&lt;=n; ++i)
-        getline(cin, st[i]);
-    getline(cin, st[0]);
-    regex r(st[0], regex::icase);  // regex::icase 不区分大小写
-    for (int i=1; i&lt;=n; ++i)
-        if (regex_match(st[i], r))  // 这是完全匹配，部分匹配用regex_search
-            cout &lt;&lt; i &lt;&lt; ' ' &lt;&lt; st[i] &lt;&lt; endl;
+int nodeCount(int m, int n)
+{
+    if (m &gt; n)
+        return 0;
+    else
+        return nodeCount(2*m, n) + nodeCount(2*m+1, n) + 1;
 }
+
+int main()
+{
+    int m, n;
+    while (cin &gt;&gt; m &gt;&gt;n)
+    {
+        if (m==0)
+            break;        
+        cout &lt;&lt; nodeCount(m, n) &lt;&lt; endl;
+    }
+    
+    return 0;
+}
+</code></pre>
+<h2 id="3-2的幂次方">3.  2的幂次方</h2>
+<h3 id="题目描述-3"><strong>题目描述</strong></h3>
+<p>Every positive number can be presented by the exponential form.For example, 137 = 2^7 + 2^3 + 2^0。   Let's present a^b by the form a(b).Then 137 is presented by 2(7)+2(3)+2(0). Since 7 = 2^2 + 2 + 2^0 and 3 = 2 + 2^0 , 137 is finally presented by 2(2(2)+2 +2(0))+2(2+2(0))+2(0).    Given a positive number n,your task is to present n with the exponential form which only contains the digits 0 and 2.</p>
+<h3 id="要点-3"><strong>要点</strong></h3>
+<ol>
+<li>
+<p>十进制到二进制的转换</p>
+<p>停止条件<code>num == 0</code>, 不是<code>num / 2 == 0</code></p>
+</li>
+<li>
+<p>递归的思想：</p>
+<p>输入，转换为二进制，有效位+位置序号判断</p>
+</li>
+<li>
+<p>“+”位置的出现</p>
+</li>
+</ol>
+<h3 id="提交地址-3">提交地址</h3>
+<p>https://www.nowcoder.com/practice/7cf7b0706d7e4b439481f53e5fdac6e7?tpId=40&amp;tab=answerKey</p>
+<h3 id="代码-3">代码</h3>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+vector&lt;int&gt; convert(int num)
+{
+    vector&lt;int&gt; res;
+    while(num != 0)
+    {
+        res.push_back(num % 2);
+        num = num / 2;
+    }
+    
+    return res;
+}
+
+void print(int num)
+{
+    vector&lt;int&gt; res = convert(num);
+    bool begin = true;
+    for(int i=res.size()-1; i&gt;=0; i--)
+    {
+        if (res[i] == 1)//有效位
+        {
+            if (begin == true)
+                begin = false;
+            else
+                cout &lt;&lt; &quot;+&quot;;
+            
+            if (i == 0)
+                cout &lt;&lt; &quot;2(0)&quot;;
+            else if (i == 1)
+                cout &lt;&lt; &quot;2&quot;;
+            else if (i == 2)
+                cout &lt;&lt; &quot;2(2)&quot;;
+            else
+            {
+                cout &lt;&lt; &quot;2(&quot;;
+                print(i);
+                cout &lt;&lt; &quot;)&quot;;
+            }
+        }
+    }
+}
+
+int main()
+{
+    int num;
+    while (cin &gt;&gt; num)
+    {
+        print(num);
+        cout &lt;&lt; endl;
+    }
+    return 0;  
+}
+    
 </code></pre>
 
             </div>
@@ -773,7 +802,7 @@ int main () {
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://Czardas42.github.io/post/chapter4_4.3/" title="Chapter4字符串：4.3 字符串匹配">https://Czardas42.github.io/post/chapter4_4.3/</a>
+      <a href="https://Czardas42.github.io/post/chapter8_8.2/" title="Chapter8递归与分治：8.2分治">https://Czardas42.github.io/post/chapter8_8.2/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -788,15 +817,11 @@ int main () {
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Chapter5数据结构一：5.1 向量" href="https://Czardas42.github.io/post/chapter5_5.1/">Chapter5数据结构一：5.1 向量</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Chapter5数据结构一：5.1 向量" href="https://Czardas42.github.io/post/chapter5_5.1/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="VPC对等连接" href="https://Czardas42.github.io/post/vpc_p2p/">VPC对等连接</a>
-        <a class="nav-mobile-next" title="VPC对等连接" href="https://Czardas42.github.io/post/vpc_p2p/">下一篇</a>
+        <a class="nav-pc-next" title="Chapter8递归与分治：8.1递归" href="https://Czardas42.github.io/post/chapter8_8.1/">Chapter8递归与分治：8.1递归</a>
+        <a class="nav-mobile-next" title="Chapter8递归与分治：8.1递归" href="https://Czardas42.github.io/post/chapter8_8.1/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

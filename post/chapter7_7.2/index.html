@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="世界那么大，我想去看看">
 <meta name="theme-color" content="#343a40">
-<title>Chapter4字符串：4.3 字符串匹配 | Czardas</title>
+<title>Chapter7贪心算法：7.2区间贪心 | Czardas</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1621394911329">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Chapter4字符串：4.3 字符串匹配" />
+  <meta name="description" content="Chapter7贪心算法：7.2区间贪心" />
   <meta name="keywords" content="机试准备" />
 </head>
 
@@ -309,8 +309,8 @@
     <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#kmp%E7%AE%97%E6%B3%95">KMP算法</a></li>
-<li><a href="#1-string-matching"><strong>1. String Matching</strong></a>
+<li><a href="#%E8%B4%AA%E5%BF%83%E7%AD%96%E7%95%A5">贪心策略</a></li>
+<li><a href="#1-%E4%BB%8A%E5%B9%B4%E6%9A%91%E5%81%87%E4%B8%8Dac">1.  今年暑假不AC</a>
 <ul>
 <li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><strong>题目描述</strong></a></li>
 <li><a href="#%E8%A6%81%E7%82%B9"><strong>要点</strong></a></li>
@@ -318,12 +318,20 @@
 <li><a href="#%E4%BB%A3%E7%A0%81">代码</a></li>
 </ul>
 </li>
-<li><a href="#2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D">2. 字符串匹配</a>
+<li><a href="#2-to-fill-or-not-to-fill">2.  To Fill or Not to Fill</a>
 <ul>
 <li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><strong>题目描述</strong></a></li>
 <li><a href="#%E8%A6%81%E7%82%B9-2"><strong>要点</strong></a></li>
 <li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80-2">提交地址</a></li>
 <li><a href="#%E4%BB%A3%E7%A0%81-2">代码</a></li>
+</ul>
+</li>
+<li><a href="#2-%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8">2.  代理服务器</a>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-3"><strong>题目描述</strong></a></li>
+<li><a href="#%E8%A6%81%E7%82%B9-3"><strong>要点</strong></a></li>
+<li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80-3">提交地址</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-3">代码</a></li>
 </ul>
 </li>
 </ul>
@@ -593,8 +601,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://Czardas42.github.io/post/chapter4_4.3/">
-      Chapter4字符串：4.3 字符串匹配
+    <a class="post-title-link" href="https://Czardas42.github.io/post/chapter7_7.2/">
+      Chapter7贪心算法：7.2区间贪心
     </a>
   </h1>
   <div class="post-meta">
@@ -602,7 +610,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-05-05 15:40:00">2021-05-05</span>
+      <span class="publish-time" data-t="2021-05-19 11:21:09">2021-05-19</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -621,144 +629,197 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>4<span class="language" data-lan="minute">分钟</span></span>
+      <span>7<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>667<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>1385<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h2 id="kmp算法">KMP算法</h2>
-<h2 id="1-string-matching"><strong>1. String Matching</strong></h2>
+              <h2 id="贪心策略">贪心策略</h2>
+<h2 id="1-今年暑假不ac">1.  今年暑假不AC</h2>
 <h3 id="题目描述"><strong>题目描述</strong></h3>
-<p>Finding all occurrences of a pattern in a text is a problem that arises frequently in text-editing programs.   Typically,the text is a document being edited,and the pattern searched for is a particular word supplied by the user.    We assume that the text is an array T[1..n] of length n and that the pattern is an array P[1..m] of length m&lt;=n.We further assume that the elements of P and T are all alphabets(∑={a,b...,z}).The character arrays P and T are often called strings of characters.    We say that pattern P occurs with shift s in the text T if 0&lt;=s&lt;=n and T[s+1..s+m] = P[1..m](that is if T[s+j]=P[j],for 1&lt;=j&lt;=m).    If P occurs with shift s in T,then we call s a valid shift;otherwise,we calls a invalid shift.   Your task is to calculate the number of vald shifts for the given text T and p attern P.</p>
+<p>“今年暑假不AC？”<br>
+“是的。”<br>
+“那你干什么呢？”<br>
+“看世界杯呀，笨蛋！”<br>
+“@#$%^&amp;*%...”</p>
+<p>确实如此，世界杯来了，球迷的节日也来了，估计很多ACMer也会抛开电脑，奔向电视了。<br>
+作为球迷，一定想看尽量多的完整的比赛，当然，作为新时代的好青年，你一定还会看一些其它的节目，比如新闻联播（永远不要忘记关心国家大事）、非常6+7、超级女生，以及王小丫的《开心辞典》等等，假设你已经知道了所有你喜欢看的电视节目的转播时间表，你会合理安排吗？（目标是能看尽量多的完整节目）</p>
+<p>输入数据包含多个测试实例，每个测试实例的第一行只有一个整数n(n&lt;=100)，表示你喜欢看的节目的总数，然后是n行数据，每行包括两个数据Ti_s,Ti_e (1&lt;=i&lt;=n)，分别表示第i个节目的开始和结束时间，为了简化问题，每个时间都用一个正整数表示。n=0表示输入结束，不做处理。</p>
 <h3 id="要点"><strong>要点</strong></h3>
 <ol>
-<li>
-<p><strong>KMP算法</strong>，nextTable构建方式 <strong>（两个函数）</strong></p>
-</li>
-<li>
-<p>返回第一个匹配子串/返回全部匹配子串个数</p>
-</li>
+<li>贪心策略：以节目结束时间为标准</li>
+<li>排序的写法</li>
+<li>判断条件：该节目开始时间晚于或<strong>等于</strong>标记时间</li>
 </ol>
 <h3 id="提交地址">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/00438b0bc9384ceeb65613346b42e88a?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/00438b0bc9384ceeb65613346b42e88a?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<p>http://acm.hdu.edu.cn/showproblem.php?pid=2037</p>
 <h3 id="代码">代码</h3>
 <pre><code class="language-c++">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
-#include &lt;string&gt;
+#include &lt;algorithm&gt;
 
 using namespace std;
 
-int text[1000000];
-int pattern[1000000];
-int nextTable[1000000];
-
-void getNextTable(string pattern)
+struct program
 {
-    int m = pattern.size();
-    nextTable[0] = -1;
-    int i=0, j=-1;
-    while(i &lt; m)
-    {
-        if (j == -1 || pattern[i] == pattern[j])
-        {
-            i++;
-            j++;
-            nextTable[i] = j;
-        }
-        else
-        {
-            j = nextTable[j];
-        }
-    }
+	int begin;
+	int end;
 };
 
-int kmp(string text, string pattern)
-{
-    int m = text.size();
-    int n = pattern.size();
-    getNextTable(pattern);
-    
-    int count = 0;
-    int i = 0;
-    int j = 0;
+program list[100];
 
-    while(i &lt; m)
-    {
-        //匹配
-        if ((j == -1) || (text[i] == pattern[j]))
-        {
-            i++;
-            j++;
-        }
-        else
-        {
-            j = nextTable[j];
-        }
-        
-        //判断
-        if(j == n)
-        {
-            count++;
-            j = nextTable[j];
-        }
-    }
-    
-    return count;
+bool Compare(program a, program b)
+{
+	return a.end &lt; b.end;
 };
 
 int main()
 {
-    string text, pattern;
-    while(cin &gt;&gt; text &gt;&gt; pattern)
-    {
-        int count = kmp(text,pattern);
-        cout &lt;&lt; count &lt;&lt; endl;
+	int count;
+	while (cin &gt;&gt; count)
+	{
+		if (count == 0)
+			break;
+
+		for (int i = 0; i &lt; count; i++)
+		{
+			cin &gt;&gt; list[i].begin &gt;&gt; list[i].end;
+		}
+		//完成输入
+
+		//排序
+		sort(list, list + count, Compare);
+
+		//判断
+		int time = 0; //当前标记时间
+		int result = 0; //结果记录
+		for (int i = 0; i &lt; count; i++)
+		{
+			if (list[i].begin &gt;= time) //若该节目开始时间晚于或等于标记时间
+			{
+				result++; //观看节目+1
+				time = list[i].end; //标记时间变为该节目的结束时间
+			}
+		}
+		cout &lt;&lt; result &lt;&lt; endl;	
+	}
+	return 0;
+}
+
+</code></pre>
+<h2 id="2-to-fill-or-not-to-fill">2.  To Fill or Not to Fill</h2>
+<h3 id="题目描述-2"><strong>题目描述</strong></h3>
+<p>With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.</p>
+<h3 id="要点-2"><strong>要点</strong></h3>
+<p>倦了，一个下午没通过。。。。。。</p>
+<h3 id="提交地址-2">提交地址</h3>
+<p>https://www.nowcoder.com/practice/f7eba38f7cd24c45982831e0f38518f9?tpId=40&amp;tab=answerKey</p>
+<h3 id="代码-2">代码</h3>
+<pre><code class="language-c++">/*
+核心思路:利用贪心策略,从最便宜的加油站开始,每个加油站加的油最多能走cmax*davg路程.
+利用一个30000大小的flag数组记录是否有重合区域
+*/
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+
+struct sta{
+    double pi;
+    int di;
+    bool operator &lt; (const sta&amp; b) const{
+        return pi&lt;b.pi;
+    }
+}a[501];
+
+int main(){
+    int cmax, d, davg, n;
+    double sum;
+    while(scanf(&quot;%d %d %d %d&quot;, &amp;cmax, &amp;d, &amp;davg, &amp;n)!=EOF){
+        for(int i=0; i&lt;n; i++) scanf(&quot;%lf %d&quot;, &amp;a[i].pi, &amp;a[i].di);
+        sort(a, a+n);
+        //
+        sum = 0;//记录花费
+        int flag[30001]={0}, max = cmax*davg, tmp, cnt;
+        for(int i=0; i&lt;n; i++){
+            tmp = (a[i].di+max&lt;d?max:d-a[i].di);    //如果到终点距离&lt;max,只需加上足够走到终点的油
+            cnt = 0;    //记录有多长距离需要该加油站的油
+            for(int j=a[i].di; j&lt;a[i].di+tmp; j++){
+                if(flag[j]==0){
+                    flag[j] = 1;
+                    cnt++;
+                }
+            }
+            sum += cnt/(davg*1.0)*a[i].pi;    //加上在该加油站的花销
+        }
+        //check
+        int i;
+        for(i=0; i&lt;d; i++){
+            //有的路程没有被覆盖到说明走不到这里
+            if(flag[i]==0){
+                printf(&quot;The maximum travel distance = %.2lf\n&quot;, (double)i);
+                break;
+            }
+        }
+        if(i==d){
+            printf(&quot;%.2lf\n&quot;,sum);
+        }
     }
     return 0;
 }
+
 </code></pre>
-<h2 id="2-字符串匹配">2. 字符串匹配</h2>
-<h3 id="题目描述-2"><strong>题目描述</strong></h3>
-<p>读入数据string[ ]，然后读入一个短字符串。要求查找string[ ]中和短字符串的所有匹配，输出行号、匹配字符串。匹配时不区分大小写，并且可以有一个用中括号表示的模式匹配。如“aa[123]bb”，就是说aa1bb、aa2bb、aa3bb都算匹配。</p>
-<h3 id="要点-2"><strong>要点</strong></h3>
+<h2 id="2-代理服务器">2.  代理服务器</h2>
+<h3 id="题目描述-3"><strong>题目描述</strong></h3>
+<p>使用代理服务器能够在一定程度上隐藏客户端信息，从而保护用户在互联网上的隐私。我们知道n个代理服务器的IP地址，现在要用它们去访问m个服务器。这 m 个服务器的 IP 地址和访问顺序也已经给出。系统在同一时刻只能使用一个代理服务器，并要求不能用代理服务器去访问和它 IP地址相同的服务器（不然客户端信息很有可能就会被泄露）。在这样的条件下，找到一种使用代理服务器的方案，使得代理服务器切换的次数尽可能得少。</p>
+<h3 id="要点-3"><strong>要点</strong></h3>
 <ol>
-<li>
-<p>注意：题目要求的是完全匹配，即长度完全一样，忽略大小写</p>
-</li>
-<li>
-<p>可以使用<strong>正则表达式</strong></p>
-<p><code>#include &lt;regex&gt;</code></p>
-<p><code>regex r(st[0], regex::icase); // regex::icase 不区分大小写,建立正则表达式</code></p>
-<p><code>regex_match(st[i], r)</code></p>
-</li>
+<li><code>#include&lt;bits/stdc++.h&gt;</code></li>
+<li><code>strcmp(proxy[i], server[j])</code></li>
 </ol>
-<h3 id="提交地址-2">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/fbdc522ef958455687654b38a4ca01e0?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/fbdc522ef958455687654b38a4ca01e0?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-2">代码</h3>
-<pre><code class="language-C++">#include &lt;cstdio&gt;
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;regex&gt;
-
+<h3 id="提交地址-3">提交地址</h3>
+<p>https://www.nowcoder.com/practice/1284469ee94a4762848816a42281a9e0?tpId=40&amp;tab=answerKey</p>
+<h3 id="代码-3">代码</h3>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
-string st[1001];
 
-int main () {
+int main(){
     int n;
-    scanf(&quot;%d &quot;, &amp;n);
-    for (int i=1; i&lt;=n; ++i)
-        getline(cin, st[i]);
-    getline(cin, st[0]);
-    regex r(st[0], regex::icase);  // regex::icase 不区分大小写
-    for (int i=1; i&lt;=n; ++i)
-        if (regex_match(st[i], r))  // 这是完全匹配，部分匹配用regex_search
-            cout &lt;&lt; i &lt;&lt; ' ' &lt;&lt; st[i] &lt;&lt; endl;
+    while(cin &gt;&gt; n){
+        char proxy[n][16];  // proxy服务器
+        for(int i = 0; i &lt; n; i++)
+            cin &gt;&gt; proxy[i];
+        int m;
+        cin &gt;&gt; m;
+        char server[m][16];
+        for(int i = 0; i &lt; m; i++)
+            cin &gt;&gt; server[i];  // 被访问的服务器
+        //以上都是输入的内容
+        int index=0, count=0, flag=1;  //flag用来标志代li失败的状况
+        while(flag &amp;&amp; index != m)
+        {  //当游标index遍历到m时表示遍历结束
+            int max = 0;
+            for(int i = 0; i &lt; n; i++){  //这个for是让每个proxy服务器尽可能大的遍历服务器
+                int j = index;  //每次从游标开始遍历服务器
+                while(strcmp(proxy[i], server[j]) &amp;&amp; j &lt; m)  //尽可能的访问服务器
+                    j++;
+                if(j - index &gt; max)
+                    max = j - index;  //最大访问服务器个数
+            }
+            if(max == 0)  //遍历失败
+                flag = 0;
+            count++;
+            index += max;
+        }
+        if(flag)
+            cout &lt;&lt; count - 1 &lt;&lt; endl;  //因为第一次不算转换
+        else cout &lt;&lt; &quot;-1&quot; &lt;&lt; endl;
+    }
 }
 </code></pre>
 
@@ -773,7 +834,7 @@ int main () {
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://Czardas42.github.io/post/chapter4_4.3/" title="Chapter4字符串：4.3 字符串匹配">https://Czardas42.github.io/post/chapter4_4.3/</a>
+      <a href="https://Czardas42.github.io/post/chapter7_7.2/" title="Chapter7贪心算法：7.2区间贪心">https://Czardas42.github.io/post/chapter7_7.2/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -789,14 +850,14 @@ int main () {
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Chapter5数据结构一：5.1 向量" href="https://Czardas42.github.io/post/chapter5_5.1/">Chapter5数据结构一：5.1 向量</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Chapter5数据结构一：5.1 向量" href="https://Czardas42.github.io/post/chapter5_5.1/">上一篇</a>
+        <a class="nav-pc-next" title="Chapter8递归与分治：8.1递归" href="https://Czardas42.github.io/post/chapter8_8.1/">Chapter8递归与分治：8.1递归</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="Chapter8递归与分治：8.1递归" href="https://Czardas42.github.io/post/chapter8_8.1/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="VPC对等连接" href="https://Czardas42.github.io/post/vpc_p2p/">VPC对等连接</a>
-        <a class="nav-mobile-next" title="VPC对等连接" href="https://Czardas42.github.io/post/vpc_p2p/">下一篇</a>
+        <a class="nav-pc-next" title="Chapter7贪心算法：7.1简单贪心" href="https://Czardas42.github.io/post/chapter7_7.1/">Chapter7贪心算法：7.1简单贪心</a>
+        <a class="nav-mobile-next" title="Chapter7贪心算法：7.1简单贪心" href="https://Czardas42.github.io/post/chapter7_7.1/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

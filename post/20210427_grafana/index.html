@@ -9,7 +9,7 @@
 <meta name="description" content="世界那么大，我想去看看">
 <meta name="theme-color" content="#343a40">
 <title>2021.04.27：Grafana监控平台部署（对于K8s集群各节点） | Czardas</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1620302416336">
+<link rel="shortcut icon" href="/favicon.ico?v=1621394911329">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -275,7 +275,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">19</span>
+        <span class="site-item-stat-count">24</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -2154,6 +2154,772 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter8_8.2/"" data-c="
+          &lt;h2 id=&#34;分治法&#34;&gt;分治法&lt;/h2&gt;
+&lt;p&gt;不断把问题分为规模更小的问题&lt;/p&gt;
+&lt;h2 id=&#34;1-斐波那契额数列&#34;&gt;1.  斐波那契额数列&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;The Fibonacci Numbers{0,1,1,2,3,5,8,13,21,34,55...} are defined by the recurrence:   F0=0 F1=1 Fn=Fn-1+Fn-2,n&amp;gt;=2   Write a program to calculate the Fibonacci Numbers.&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;要点&lt;/h3&gt;
+&lt;p&gt;递归的写法&lt;/p&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/17ad6908e36a49f4b06ea96936e8bb25?tpId=40&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+using namespace std;
+
+int Fibonacci(int i)
+{
+    if (i == 0)
+        return 0;
+    else if (i == 1)
+        return 1;
+    else
+        return Fibonacci(i-1) + Fibonacci(i-2);
+    
+}
+
+int main()
+{
+    int num;
+    while (cin &amp;gt;&amp;gt; num)
+    {
+        cout &amp;lt;&amp;lt; Fibonacci(num) &amp;lt;&amp;lt; endl;
+    }
+    return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-二叉树&#34;&gt;2.  二叉树&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1621394733656.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;如上所示，由正整数1，2，3……组成了一颗特殊二叉树。我们已知这个二叉树的最后一个结点是n。现在的问题是，结点m所在的子树中一共包括多少个结点。   比如，n = 12，m = 3那么上图中的结点13，14，15以及后面的结点都是不存在的，结点m所在子树中包括的结点有3，6，7，12，因此结点m的所在子树中共有4个结点。&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;二叉树的规律：左子节点id = 父节点id*2&lt;/li&gt;
+&lt;li&gt;递归的终止条件：&lt;code&gt;m &amp;gt; n&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/f74c7506538b44399f2849eba2f050b5?tpId=40&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+using namespace std;
+
+int nodeCount(int m, int n)
+{
+    if (m &amp;gt; n)
+        return 0;
+    else
+        return nodeCount(2*m, n) + nodeCount(2*m+1, n) + 1;
+}
+
+int main()
+{
+    int m, n;
+    while (cin &amp;gt;&amp;gt; m &amp;gt;&amp;gt;n)
+    {
+        if (m==0)
+            break;        
+        cout &amp;lt;&amp;lt; nodeCount(m, n) &amp;lt;&amp;lt; endl;
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;3-2的幂次方&#34;&gt;3.  2的幂次方&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-3&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Every positive number can be presented by the exponential form.For example, 137 = 2^7 + 2^3 + 2^0。   Let&#39;s present a^b by the form a(b).Then 137 is presented by 2(7)+2(3)+2(0). Since 7 = 2^2 + 2 + 2^0 and 3 = 2 + 2^0 , 137 is finally presented by 2(2(2)+2 +2(0))+2(2+2(0))+2(0).    Given a positive number n,your task is to present n with the exponential form which only contains the digits 0 and 2.&lt;/p&gt;
+&lt;h3 id=&#34;要点-3&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;十进制到二进制的转换&lt;/p&gt;
+&lt;p&gt;停止条件&lt;code&gt;num == 0&lt;/code&gt;, 不是&lt;code&gt;num / 2 == 0&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;递归的思想：&lt;/p&gt;
+&lt;p&gt;输入，转换为二进制，有效位+位置序号判断&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;“+”位置的出现&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-3&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/7cf7b0706d7e4b439481f53e5fdac6e7?tpId=40&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-3&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+using namespace std;
+
+vector&amp;lt;int&amp;gt; convert(int num)
+{
+    vector&amp;lt;int&amp;gt; res;
+    while(num != 0)
+    {
+        res.push_back(num % 2);
+        num = num / 2;
+    }
+    
+    return res;
+}
+
+void print(int num)
+{
+    vector&amp;lt;int&amp;gt; res = convert(num);
+    bool begin = true;
+    for(int i=res.size()-1; i&amp;gt;=0; i--)
+    {
+        if (res[i] == 1)//有效位
+        {
+            if (begin == true)
+                begin = false;
+            else
+                cout &amp;lt;&amp;lt; &amp;quot;+&amp;quot;;
+            
+            if (i == 0)
+                cout &amp;lt;&amp;lt; &amp;quot;2(0)&amp;quot;;
+            else if (i == 1)
+                cout &amp;lt;&amp;lt; &amp;quot;2&amp;quot;;
+            else if (i == 2)
+                cout &amp;lt;&amp;lt; &amp;quot;2(2)&amp;quot;;
+            else
+            {
+                cout &amp;lt;&amp;lt; &amp;quot;2(&amp;quot;;
+                print(i);
+                cout &amp;lt;&amp;lt; &amp;quot;)&amp;quot;;
+            }
+        }
+    }
+}
+
+int main()
+{
+    int num;
+    while (cin &amp;gt;&amp;gt; num)
+    {
+        print(num);
+        cout &amp;lt;&amp;lt; endl;
+    }
+    return 0;  
+}
+    
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter8递归与分治：8.2分治</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter8_8.1/"" data-c="
+          &lt;h2 id=&#34;递归策略&#34;&gt;递归策略&lt;/h2&gt;
+&lt;h2 id=&#34;1-n的阶乘&#34;&gt;1.  n的阶乘&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;输入一个整数n，输出n的阶乘（每组测试用例可能包含多组数据，请注意处理）&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;递归思想&lt;/li&gt;
+&lt;li&gt;结果的数据范围：&lt;code&gt;long long&lt;/code&gt;类型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/97be22ee50b14cccad2787998ca628c8?tpId=40&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+using namespace std;
+
+long long Factorial(int n)
+{
+    if (n == 1)
+        return 1;
+    else
+    {
+        return n * Factorial(n-1);
+    }
+}
+int main()
+{
+    int num;
+    while(cin &amp;gt;&amp;gt; num)
+    {
+        cout &amp;lt;&amp;lt; Factorial(num) &amp;lt;&amp;lt; endl;
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-汉诺塔问题&#34;&gt;2.  汉诺塔问题&lt;/h2&gt;
+&lt;p&gt;移动规律：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;F(n) = F(n-1) + 1 + F(n-1) + 1 + F(n-1)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;F(n) = 3 * F(n-1) + 2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;终止条件：&lt;code&gt;n=1&lt;/code&gt;时，的移动次数&lt;/p&gt;
+&lt;h2 id=&#34;3-杨辉三角形&#34;&gt;3.  杨辉三角形&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;使用代理服务器能够在一定程度上隐藏客户端信息，从而保护用户在互联网上的隐私。我们知道n个代理服务器的IP地址，现在要用它们去访问m个服务器。这 m 个服务器的 IP 地址和访问顺序也已经给出。系统在同一时刻只能使用一个代理服务器，并要求不能用代理服务器去访问和它 IP地址相同的服务器（不然客户端信息很有可能就会被泄露）。在这样的条件下，找到一种使用代理服务器的方案，使得代理服务器切换的次数尽可能得少。&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;杨辉三角性质：&lt;code&gt;func(m, n) = func(m-1, n-1) + func(m-1, n);&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;递归函数：返回杨辉三角指定行列的值&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/1284469ee94a4762848816a42281a9e0?tpId=40&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+using namespace std;
+
+int func(int m, int n)
+{
+    if(n==0)
+        return 1;
+    else if(m==n)
+        return 1;
+    else
+        return func(m-1, n-1) + func(m-1, n);
+}
+
+int main()
+{
+    int num;
+    while (cin &amp;gt;&amp;gt; num)
+    {
+        for(int i=0; i&amp;lt;num; i++)
+        {
+            for (int j=0; j&amp;lt;=i; j++)
+            {
+                if(j==i)
+                    cout &amp;lt;&amp;lt; func(i, j) &amp;lt;&amp;lt; endl;
+                else
+                    cout &amp;lt;&amp;lt; func(i, j) &amp;lt;&amp;lt; &amp;quot; &amp;quot;;
+            }
+        }
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;3-全排列&#34;&gt;3.  全排列&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-3&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;给定一个由不同的小写字母组成的字符串，输出这个字符串的所有全排列。 我们假设对于小写字母有&#39;a&#39; &amp;lt; &#39;b&#39; &amp;lt; ... &amp;lt; &#39;y&#39; &amp;lt; &#39;z&#39;，而且给定的字符串中的字母已经按照从小到大的顺序排列。&lt;/p&gt;
+&lt;h3 id=&#34;要点-3&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;STL库的使用：&lt;code&gt;next_permutation(str.begin(),str.end())&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;do while&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-3&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/5632c23d0d654aecbc9315d1720421c1?tpId=40&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-3&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+using namespace std;
+
+int main ()
+{
+    string str;
+    while(cin &amp;gt;&amp;gt; str)
+    {
+        sort(str.begin(), str.end());
+        do{
+            cout &amp;lt;&amp;lt; str &amp;lt;&amp;lt; endl;
+        }
+        while(next_permutation(str.begin(),str.end()));
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter8递归与分治：8.1递归</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter7_7.2/"" data-c="
+          &lt;h2 id=&#34;贪心策略&#34;&gt;贪心策略&lt;/h2&gt;
+&lt;h2 id=&#34;1-今年暑假不ac&#34;&gt;1.  今年暑假不AC&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;“今年暑假不AC？”&lt;br&gt;
+“是的。”&lt;br&gt;
+“那你干什么呢？”&lt;br&gt;
+“看世界杯呀，笨蛋！”&lt;br&gt;
+“@#$%^&amp;amp;*%...”&lt;/p&gt;
+&lt;p&gt;确实如此，世界杯来了，球迷的节日也来了，估计很多ACMer也会抛开电脑，奔向电视了。&lt;br&gt;
+作为球迷，一定想看尽量多的完整的比赛，当然，作为新时代的好青年，你一定还会看一些其它的节目，比如新闻联播（永远不要忘记关心国家大事）、非常6+7、超级女生，以及王小丫的《开心辞典》等等，假设你已经知道了所有你喜欢看的电视节目的转播时间表，你会合理安排吗？（目标是能看尽量多的完整节目）&lt;/p&gt;
+&lt;p&gt;输入数据包含多个测试实例，每个测试实例的第一行只有一个整数n(n&amp;lt;=100)，表示你喜欢看的节目的总数，然后是n行数据，每行包括两个数据Ti_s,Ti_e (1&amp;lt;=i&amp;lt;=n)，分别表示第i个节目的开始和结束时间，为了简化问题，每个时间都用一个正整数表示。n=0表示输入结束，不做处理。&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;贪心策略：以节目结束时间为标准&lt;/li&gt;
+&lt;li&gt;排序的写法&lt;/li&gt;
+&lt;li&gt;判断条件：该节目开始时间晚于或&lt;strong&gt;等于&lt;/strong&gt;标记时间&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;http://acm.hdu.edu.cn/showproblem.php?pid=2037&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+struct program
+{
+	int begin;
+	int end;
+};
+
+program list[100];
+
+bool Compare(program a, program b)
+{
+	return a.end &amp;lt; b.end;
+};
+
+int main()
+{
+	int count;
+	while (cin &amp;gt;&amp;gt; count)
+	{
+		if (count == 0)
+			break;
+
+		for (int i = 0; i &amp;lt; count; i++)
+		{
+			cin &amp;gt;&amp;gt; list[i].begin &amp;gt;&amp;gt; list[i].end;
+		}
+		//完成输入
+
+		//排序
+		sort(list, list + count, Compare);
+
+		//判断
+		int time = 0; //当前标记时间
+		int result = 0; //结果记录
+		for (int i = 0; i &amp;lt; count; i++)
+		{
+			if (list[i].begin &amp;gt;= time) //若该节目开始时间晚于或等于标记时间
+			{
+				result++; //观看节目+1
+				time = list[i].end; //标记时间变为该节目的结束时间
+			}
+		}
+		cout &amp;lt;&amp;lt; result &amp;lt;&amp;lt; endl;	
+	}
+	return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-to-fill-or-not-to-fill&#34;&gt;2.  To Fill or Not to Fill&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;倦了，一个下午没通过。。。。。。&lt;/p&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/f7eba38f7cd24c45982831e0f38518f9?tpId=40&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;/*
+核心思路:利用贪心策略,从最便宜的加油站开始,每个加油站加的油最多能走cmax*davg路程.
+利用一个30000大小的flag数组记录是否有重合区域
+*/
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+
+struct sta{
+    double pi;
+    int di;
+    bool operator &amp;lt; (const sta&amp;amp; b) const{
+        return pi&amp;lt;b.pi;
+    }
+}a[501];
+
+int main(){
+    int cmax, d, davg, n;
+    double sum;
+    while(scanf(&amp;quot;%d %d %d %d&amp;quot;, &amp;amp;cmax, &amp;amp;d, &amp;amp;davg, &amp;amp;n)!=EOF){
+        for(int i=0; i&amp;lt;n; i++) scanf(&amp;quot;%lf %d&amp;quot;, &amp;amp;a[i].pi, &amp;amp;a[i].di);
+        sort(a, a+n);
+        //
+        sum = 0;//记录花费
+        int flag[30001]={0}, max = cmax*davg, tmp, cnt;
+        for(int i=0; i&amp;lt;n; i++){
+            tmp = (a[i].di+max&amp;lt;d?max:d-a[i].di);    //如果到终点距离&amp;lt;max,只需加上足够走到终点的油
+            cnt = 0;    //记录有多长距离需要该加油站的油
+            for(int j=a[i].di; j&amp;lt;a[i].di+tmp; j++){
+                if(flag[j]==0){
+                    flag[j] = 1;
+                    cnt++;
+                }
+            }
+            sum += cnt/(davg*1.0)*a[i].pi;    //加上在该加油站的花销
+        }
+        //check
+        int i;
+        for(i=0; i&amp;lt;d; i++){
+            //有的路程没有被覆盖到说明走不到这里
+            if(flag[i]==0){
+                printf(&amp;quot;The maximum travel distance = %.2lf\n&amp;quot;, (double)i);
+                break;
+            }
+        }
+        if(i==d){
+            printf(&amp;quot;%.2lf\n&amp;quot;,sum);
+        }
+    }
+    return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-代理服务器&#34;&gt;2.  代理服务器&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-3&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;使用代理服务器能够在一定程度上隐藏客户端信息，从而保护用户在互联网上的隐私。我们知道n个代理服务器的IP地址，现在要用它们去访问m个服务器。这 m 个服务器的 IP 地址和访问顺序也已经给出。系统在同一时刻只能使用一个代理服务器，并要求不能用代理服务器去访问和它 IP地址相同的服务器（不然客户端信息很有可能就会被泄露）。在这样的条件下，找到一种使用代理服务器的方案，使得代理服务器切换的次数尽可能得少。&lt;/p&gt;
+&lt;h3 id=&#34;要点-3&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;#include&amp;lt;bits/stdc++.h&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;strcmp(proxy[i], server[j])&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-3&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/1284469ee94a4762848816a42281a9e0?tpId=40&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-3&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include&amp;lt;bits/stdc++.h&amp;gt;
+using namespace std;
+
+int main(){
+    int n;
+    while(cin &amp;gt;&amp;gt; n){
+        char proxy[n][16];  // proxy服务器
+        for(int i = 0; i &amp;lt; n; i++)
+            cin &amp;gt;&amp;gt; proxy[i];
+        int m;
+        cin &amp;gt;&amp;gt; m;
+        char server[m][16];
+        for(int i = 0; i &amp;lt; m; i++)
+            cin &amp;gt;&amp;gt; server[i];  // 被访问的服务器
+        //以上都是输入的内容
+        int index=0, count=0, flag=1;  //flag用来标志代li失败的状况
+        while(flag &amp;amp;&amp;amp; index != m)
+        {  //当游标index遍历到m时表示遍历结束
+            int max = 0;
+            for(int i = 0; i &amp;lt; n; i++){  //这个for是让每个proxy服务器尽可能大的遍历服务器
+                int j = index;  //每次从游标开始遍历服务器
+                while(strcmp(proxy[i], server[j]) &amp;amp;&amp;amp; j &amp;lt; m)  //尽可能的访问服务器
+                    j++;
+                if(j - index &amp;gt; max)
+                    max = j - index;  //最大访问服务器个数
+            }
+            if(max == 0)  //遍历失败
+                flag = 0;
+            count++;
+            index += max;
+        }
+        if(flag)
+            cout &amp;lt;&amp;lt; count - 1 &amp;lt;&amp;lt; endl;  //因为第一次不算转换
+        else cout &amp;lt;&amp;lt; &amp;quot;-1&amp;quot; &amp;lt;&amp;lt; endl;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter7贪心算法：7.2区间贪心</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter7_7.1/"" data-c="
+          &lt;h2 id=&#34;贪心策略&#34;&gt;贪心策略&lt;/h2&gt;
+&lt;h2 id=&#34;1-鸡兔同笼&#34;&gt;1.  鸡兔同笼&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;一个笼子里面关了鸡和兔子（鸡有2只脚，兔子有4只脚，没有例外）。已经知道了笼子里面脚的总数a，问笼子里面至少有多少只动物，至多有多少只动物。&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;只有偶数脚时，答案才不是0 0&lt;/p&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/fda725b4d9a14010bb145272cababef1?tpId=40&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+
+using namespace std;
+
+int Find_least(int num)
+{
+    int rabbit, chicken;
+    rabbit = num / 4;
+    int temp = num % 4;
+    if (temp != 0)
+        chicken = temp / 2;
+    
+    return rabbit + chicken;
+};
+
+int Find_most(int num)
+{
+    int rabbit = 0, chicken = 0;
+    chicken = num / 2;
+    
+    return rabbit + chicken;
+};
+
+int main()
+{
+
+    int num;
+    while (cin &amp;gt;&amp;gt; num)
+    {
+        if (num % 2 != 0)
+        {
+            cout &amp;lt;&amp;lt; &amp;quot;0 0&amp;quot; &amp;lt;&amp;lt; endl;
+            continue;
+        }
+        else
+        {
+            int most = Find_most(num);
+            int least = Find_least(num);
+            cout &amp;lt;&amp;lt; least &amp;lt;&amp;lt; &amp;quot; &amp;quot; &amp;lt;&amp;lt; most &amp;lt;&amp;lt; endl;
+        }
+           
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-fatmouse-trade&#34;&gt;2.  FatMouse&#39; Trade&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;FatMouse prepared M pounds of cat food, ready to trade with the cats guarding the warehouse containing his favorite food, JavaBean.&lt;br&gt;
+The warehouse has N rooms. The i-th room contains J[i] pounds of JavaBeans and requires F[i] pounds of cat food. FatMouse does not have to trade for all the JavaBeans in the room, instead, he may get J[i]* a% pounds of JavaBeans if he pays F[i]* a% pounds of cat food. Here a is a real number. Now he is assigning this homework to you: tell him the maximum amount of JavaBeans he can obtain.&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;计算性价比&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;排序&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;sort(arr, srr+n, Compare);
+bool Compare(a, b) //降序
+{
+	return a &amp;gt; b;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;暂无&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-代理服务器&#34;&gt;2.  代理服务器&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-3&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;使用代理服务器能够在一定程度上隐藏客户端信息，从而保护用户在互联网上的隐私。我们知道n个代理服务器的IP地址，现在要用它们去访问m个服务器。这 m 个服务器的 IP 地址和访问顺序也已经给出。系统在同一时刻只能使用一个代理服务器，并要求不能用代理服务器去访问和它 IP地址相同的服务器（不然客户端信息很有可能就会被泄露）。在这样的条件下，找到一种使用代理服务器的方案，使得代理服务器切换的次数尽可能得少。&lt;/p&gt;
+&lt;h3 id=&#34;要点-3&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;#include&amp;lt;bits/stdc++.h&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;strcmp(proxy[i], server[j])&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-3&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/1284469ee94a4762848816a42281a9e0?tpId=40&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-3&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include&amp;lt;bits/stdc++.h&amp;gt;
+using namespace std;
+
+int main(){
+    int n;
+    while(cin &amp;gt;&amp;gt; n){
+        char proxy[n][16];  // proxy服务器
+        for(int i = 0; i &amp;lt; n; i++)
+            cin &amp;gt;&amp;gt; proxy[i];
+        int m;
+        cin &amp;gt;&amp;gt; m;
+        char server[m][16];
+        for(int i = 0; i &amp;lt; m; i++)
+            cin &amp;gt;&amp;gt; server[i];  // 被访问的服务器
+        //以上都是输入的内容
+        int index=0, count=0, flag=1;  //flag用来标志代li失败的状况
+        while(flag &amp;amp;&amp;amp; index != m)
+        {  //当游标index遍历到m时表示遍历结束
+            int max = 0;
+            for(int i = 0; i &amp;lt; n; i++){  //这个for是让每个proxy服务器尽可能大的遍历服务器
+                int j = index;  //每次从游标开始遍历服务器
+                while(strcmp(proxy[i], server[j]) &amp;amp;&amp;amp; j &amp;lt; m)  //尽可能的访问服务器
+                    j++;
+                if(j - index &amp;gt; max)
+                    max = j - index;  //最大访问服务器个数
+            }
+            if(max == 0)  //遍历失败
+                flag = 0;
+            count++;
+            index += max;
+        }
+        if(flag)
+            cout &amp;lt;&amp;lt; count - 1 &amp;lt;&amp;lt; endl;  //因为第一次不算转换
+        else cout &amp;lt;&amp;lt; &amp;quot;-1&amp;quot; &amp;lt;&amp;lt; endl;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter7贪心算法：7.1简单贪心</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter6_6.4/"" data-c="
+          &lt;h2 id=&#34;质因数分解&#34;&gt;质因数分解&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;把一个合数用质因数相乘的形式表示出来，叫做分解质因数&lt;/strong&gt;。&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;msubsup&gt;&lt;mi&gt;p&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mrow&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;/msubsup&gt;&lt;mo&gt;∗&lt;/mo&gt;&lt;msubsup&gt;&lt;mi&gt;p&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mrow&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;/msubsup&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;.&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;.&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;.&lt;/mi&gt;&lt;msubsup&gt;&lt;mi&gt;p&lt;/mi&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/mrow&gt;&lt;/msubsup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;x = p_1^{e1} * p_2^{e2} ...p_n^{en}
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.43056em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.1111079999999998em;vertical-align:-0.247em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8641079999999999em;&#34;&gt;&lt;span style=&#34;top:-2.4530000000000003em;margin-left:0em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.113em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mtight&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.247em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;∗&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.1111079999999998em;vertical-align:-0.247em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8641079999999999em;&#34;&gt;&lt;span style=&#34;top:-2.4530000000000003em;margin-left:0em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.113em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.247em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.7143919999999999em;&#34;&gt;&lt;span style=&#34;top:-2.4530000000000003em;margin-left:0em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;n&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.113em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;n&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.247em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;1-质因数个数&#34;&gt;1.  质因数个数&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;求正整数N(N&amp;gt;1)的质因数的个数。 相同的质因数需要重复计算。如120=2&lt;em&gt;2&lt;/em&gt;2&lt;em&gt;3&lt;/em&gt;5，共有5个质因数。&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;算法步骤：（输入1&amp;lt;N&amp;lt;M）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;MAXN = sqrt(M) + 1&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;素数筛法求出0-MAXN所有素数，存好；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（N至多只存在一个大于MAXN的质因数，否则两个相乘会大于N）&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;输入N；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;依次遍历素数组，判断是否能整除；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不断用该素数除N，直到不能被整除为止，记录幂次；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;遍历完成之后，若N&amp;gt;1，则证明存在一个大于MAXN且幂次为1的质因数&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/20426b85f7fc4ba8b0844cc04807fbd9?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cmath&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;vector&amp;gt;
+
+using namespace std;
+
+const int MAXN = 31623; // sqrt(1e9) + 1
+
+bool isPrime[MAXN];
+vector&amp;lt;int&amp;gt; prime;
+
+void Initial() //素数筛法
+{
+    for(int i=0; i&amp;lt;MAXN; i++)
+        isPrime[i] = true;
+    isPrime[0] = false;
+    isPrime[1] = false;
+    
+    for (int i=0; i&amp;lt;MAXN; i++)
+    {
+        if (isPrime[i] == true)
+        {
+            prime.push_back(i);
+            for (int j=i*i; j&amp;lt;MAXN; j=j+i)
+                isPrime[j] = false;
+        }
+    }
+};
+
+int main()
+{
+    Initial();
+    
+    int num;
+    while (cin &amp;gt;&amp;gt; num)
+    {
+        int result = 0;
+        for (int i=0; i&amp;lt;prime.size(); i++)
+        {
+            int temp = prime[i];
+            while (num % temp == 0)
+            {
+                result++;
+                num = num / temp;
+            }
+            
+            if (num == 1) //除尽就跳出循环
+                break;
+        }
+        
+        if (num &amp;gt; 1) //存在一个大于sqrt(1e9) + 1的素因数，且幂次为1
+            result++;
+        
+        cout &amp;lt;&amp;lt; result &amp;lt;&amp;lt; endl;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-约数的个数&#34;&gt;2.  约数的个数&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;输入n个整数,依次输出每个数的约数的个数&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;D:%5CTJU%5C%E4%BF%9D%E7%A0%94%5C%E6%9C%BA%E8%AF%95%5Cimage-20210506133135936.png&#34; alt=&#34;image-20210506133135936&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;也就是求出质因数之后前面的组合乘上现在的因子加1&lt;/p&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/04c8a5ea209d41798d23b59f053fa4d6?tpId=40&amp;amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cmath&amp;gt;
+#include &amp;lt;vector&amp;gt;
+
+using namespace std;
+
+vector&amp;lt;bool&amp;gt; isPrime;
+vector&amp;lt;int&amp;gt; prime;
+const int MAXN = sqrt(1e9) + 1;
+
+void Initial()
+{
+    for (int i=0; i&amp;lt;MAXN; i++)
+        isPrime.push_back(true);
+    isPrime[0] = false;
+    isPrime[1] = false;
+    
+    for (int i=0; i&amp;lt;MAXN; i++)
+    {
+        if (isPrime[i] == true)
+        {
+            prime.push_back(i);
+            for (int j = i*i; j&amp;lt;MAXN; j+=i)
+                isPrime[j] = false;
+        }
+    }
+};
+
+int main()
+{
+    int count;
+    Initial();
+    while (cin &amp;gt;&amp;gt; count)
+    {
+        int num;
+        for (int i=0; i&amp;lt;count; i++)
+        {
+            cin &amp;gt;&amp;gt; num;           
+            int answer = 1;           
+
+            for (int i=0; i&amp;lt;prime.size(); i++)
+            {
+                int temp = prime[i];
+                int result = 0;
+                                
+                while (num % temp == 0)
+                {
+                    num = num / temp;
+                    result++;
+                }
+                
+                answer = (result+1) * answer;
+                
+                if (num == 1)
+                    break;
+            }
+            
+            if (num &amp;gt; 1)
+                answer *= 2;
+            
+            cout &amp;lt;&amp;lt; answer &amp;lt;&amp;lt; endl;                  
+        }
+    }
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter6数学问题：6.4分解质因数</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/prometheus/"" data-c="
