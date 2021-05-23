@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Czardas42.github.io/</id>
     <title>Czardas</title>
-    <updated>2021-05-23T07:52:32.135Z</updated>
+    <updated>2021-05-23T08:00:11.709Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Czardas42.github.io/"/>
     <link rel="self" href="https://Czardas42.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://Czardas42.github.io/images/avatar.png</logo>
     <icon>https://Czardas42.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Czardas</rights>
+    <entry>
+        <title type="html"><![CDATA[2020-Rank-Emotion-Cause]]></title>
+        <id>https://Czardas42.github.io/post/2020-rank-emotion-cause/</id>
+        <link href="https://Czardas42.github.io/post/2020-rank-emotion-cause/">
+        </link>
+        <updated>2021-05-23T07:59:30.000Z</updated>
+        <content type="html"><![CDATA[<p>阅读笔记：</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Chapter8递归与分治：8.2分治]]></title>
         <id>https://Czardas42.github.io/post/chapter8_8.2/</id>
@@ -1460,117 +1469,6 @@ int main()
 <h3 id="提交地址-3">提交地址</h3>
 <p><a href="https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
 <h3 id="代码-3">代码</h3>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Chapter5数据结构一：5.3 栈]]></title>
-        <id>https://Czardas42.github.io/post/chapter5-5.3/</id>
-        <link href="https://Czardas42.github.io/post/chapter5-5.3/">
-        </link>
-        <updated>2021-05-05T07:45:56.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="栈的基本操作">栈的基本操作</h2>
-<p>只能在栈顶进行操作</p>
-<p>重点用于处理逆序问题</p>
-<h2 id="1-zero-complexity-transposition逆序输出">1.  Zero-complexity Transposition（逆序输出）</h2>
-<h3 id="题目描述"><strong>题目描述</strong></h3>
-<p>You are given a sequence of integer numbers. Zero-complexity transposition of the sequence is the reverse of this sequence. Your task is to write a program that prints zero-complexity transposition of the given sequence.</p>
-<h3 id="要点"><strong>要点</strong></h3>
-<ol>
-<li>利用栈的结构完成逆序输出</li>
-</ol>
-<h3 id="提交地址">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/c54775799f634c72b447ef31eb36e975?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/c54775799f634c72b447ef31eb36e975?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码">代码</h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;stack&gt;
-#include &lt;cstdio&gt;
-
-using namespace std;
-
-int main()
-{
-    int count;
-    stack&lt;int&gt; record;
-    
-    while(cin &gt;&gt; count)
-    {
-        int num;
-        for (int i=0; i&lt;count; i++)
-        {
-            cin &gt;&gt; num;
-            record.push(num);
-        }
-        
-        for (int i=0; i&lt;count; i++)
-        {
-            if (record.empty())
-            {
-                cout &lt;&lt; record.top() &lt;&lt; endl;
-                record.pop();
-            }
-            else
-            {
-                cout &lt;&lt; record.top() &lt;&lt; &quot; &quot;;
-                record.pop();
-            }          
-        }    
-    }
-}
-</code></pre>
-<h2 id="2-括号序列">2. <strong>括号序列</strong></h2>
-<h3 id="题目描述-2"><strong>题目描述</strong></h3>
-<p>给出一个仅包含字符'(',')','{','}','['和']',的字符串，判断给出的字符串是否是合法的括号序列<br>
-括号必须以正确的顺序关闭，&quot;()&quot;和&quot;()[]{}&quot;都是合法的括号序列，但&quot;(]&quot;和&quot;([)]&quot;不合法。</p>
-<h3 id="要点-2"><strong>要点</strong></h3>
-<ol>
-<li>利用栈的结构完成序号匹配（思想参考编译原理）</li>
-<li>若符合规则，就将一对符号弹出</li>
-</ol>
-<h3 id="提交地址-2">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/6235a76b1e404f748f7c820583125c50?tpId=8&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/6235a76b1e404f748f7c820583125c50?tpId=8&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-2">代码</h3>
-<pre><code class="language-c++">class Solution {
-public:
-    /**
-     * 
-     * @param s string字符串 
-     * @return bool布尔型
-     */
-    bool isValid(string s) {
-        // write code here
-        stack&lt;char&gt; record;
-        for (int i=0; i&lt;s.size(); i++)
-        {
-            int temp = s[i];
-            if (!record.empty())
-            {                
-                int symbol = record.top();
-                if (  (temp==')' &amp;&amp; symbol=='(')
-                    ||(temp==']' &amp;&amp; symbol=='[')
-                    ||(temp=='}' &amp;&amp; symbol=='{')
-                   )
-                {
-                    record.pop();
-                }
-                else
-                {
-                    record.push(temp);
-                }
-                   
-            }
-            else
-            {
-                record.push(temp);
-            }           
-        }
-        
-        if (record.empty())
-            return true;
-        else
-            return false;
-    }
-};
-</code></pre>
 ]]></content>
     </entry>
 </feed>
