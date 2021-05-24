@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="世界那么大，我想去看看">
 <meta name="theme-color" content="#343a40">
-<title>Chapter6数学问题：6.4分解质因数 | Czardas</title>
+<title>【翻译】2020-Rank-Emotion-Cause | Czardas</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1621819709336">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="Chapter6数学问题：6.4分解质因数" />
-  <meta name="keywords" content="机试准备" />
+  <meta name="description" content="【翻译】2020-Rank-Emotion-Cause" />
+  <meta name="keywords" content="论文阅读" />
 </head>
 
 <body>
@@ -307,27 +307,8 @@
   <div class="toc-wrapper auto-number auto"
     id="toc_wrapper">
     <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E8%B4%A8%E5%9B%A0%E6%95%B0%E5%88%86%E8%A7%A3">质因数分解</a></li>
-<li><a href="#1-%E8%B4%A8%E5%9B%A0%E6%95%B0%E4%B8%AA%E6%95%B0">1.  质因数个数</a>
-<ul>
-<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><strong>题目描述</strong></a></li>
-<li><a href="#%E8%A6%81%E7%82%B9"><strong>要点</strong></a></li>
-<li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80">提交地址</a></li>
-<li><a href="#%E4%BB%A3%E7%A0%81">代码</a></li>
-</ul>
-</li>
-<li><a href="#2-%E7%BA%A6%E6%95%B0%E7%9A%84%E4%B8%AA%E6%95%B0">2.  约数的个数</a>
-<ul>
-<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><strong>题目描述</strong></a></li>
-<li><a href="#%E8%A6%81%E7%82%B9-2"><strong>要点</strong></a></li>
-<li><a href="#%E6%8F%90%E4%BA%A4%E5%9C%B0%E5%9D%80-2">提交地址</a></li>
-<li><a href="#%E4%BB%A3%E7%A0%81-2">代码</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="#effective-inter-clause-modeling-for-end-to-end-emotion-cause-pair-extraction">Effective Inter-Clause Modeling for End-to-End Emotion-Cause Pair Extraction.</a></li>
+<li><a href="#2020acl%E7%9A%84%E4%B8%80%E7%AF%87%E8%AE%BA%E6%96%87%E6%9D%A5%E8%87%AA%E4%B8%AD%E7%A7%91%E9%99%A2%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%80%E5%9B%A2%E9%98%9F">2020ACL的一篇论文，来自中科院自动化所团队</a></li>
 </ul>
 
   </div>
@@ -593,8 +574,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://Czardas42.github.io/post/chapter6_6.4/">
-      Chapter6数学问题：6.4分解质因数
+    <a class="post-title-link" href="https://Czardas42.github.io/post/rank-emotion-cause-2020-translate/">
+      【翻译】2020-Rank-Emotion-Cause
     </a>
   </h1>
   <div class="post-meta">
@@ -602,7 +583,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-05-19 11:18:29">2021-05-19</span>
+      <span class="publish-time" data-t="2020-11-23 09:23:51">2020-11-23</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -611,8 +592,8 @@
       <span class="pc-show language" data-lan="category-in">分类于</span>
       
       
-      <a href="https://Czardas42.github.io/tag/programming_tests/">
-        <span>机试准备</span>
+      <a href="https://Czardas42.github.io/tag/paper_reading/">
+        <span>论文阅读</span>
       </a>
       
       
@@ -621,182 +602,22 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>4<span class="language" data-lan="minute">分钟</span></span>
+      <span>1<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>632<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>68<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h2 id="质因数分解">质因数分解</h2>
-<p><strong>把一个合数用质因数相乘的形式表示出来，叫做分解质因数</strong>。</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>=</mo><msubsup><mi>p</mi><mn>1</mn><mrow><mi>e</mi><mn>1</mn></mrow></msubsup><mo>∗</mo><msubsup><mi>p</mi><mn>2</mn><mrow><mi>e</mi><mn>2</mn></mrow></msubsup><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><msubsup><mi>p</mi><mi>n</mi><mrow><mi>e</mi><mi>n</mi></mrow></msubsup></mrow><annotation encoding="application/x-tex">x = p_1^{e1} * p_2^{e2} ...p_n^{en}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.1111079999999998em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-2.4530000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">e</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.1111079999999998em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-2.4530000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">e</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-2.4530000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-<h2 id="1-质因数个数">1.  质因数个数</h2>
-<h3 id="题目描述"><strong>题目描述</strong></h3>
-<p>求正整数N(N&gt;1)的质因数的个数。 相同的质因数需要重复计算。如120=2<em>2</em>2<em>3</em>5，共有5个质因数。</p>
-<h3 id="要点"><strong>要点</strong></h3>
-<p>算法步骤：（输入1&lt;N&lt;M）</p>
-<p><code>MAXN = sqrt(M) + 1</code></p>
-<ol>
-<li>
-<p>素数筛法求出0-MAXN所有素数，存好；</p>
-<p><strong>（N至多只存在一个大于MAXN的质因数，否则两个相乘会大于N）</strong></p>
-</li>
-<li>
-<p>输入N；</p>
-</li>
-<li>
-<p>依次遍历素数组，判断是否能整除；</p>
-</li>
-<li>
-<p>不断用该素数除N，直到不能被整除为止，记录幂次；</p>
-</li>
-<li>
-<p>遍历完成之后，若N&gt;1，则证明存在一个大于MAXN且幂次为1的质因数</p>
-</li>
-</ol>
-<h3 id="提交地址">提交地址</h3>
-<p>https://www.nowcoder.com/practice/20426b85f7fc4ba8b0844cc04807fbd9?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</p>
-<h3 id="代码">代码</h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cmath&gt;
-#include &lt;cstdio&gt;
-#include &lt;vector&gt;
-
-using namespace std;
-
-const int MAXN = 31623; // sqrt(1e9) + 1
-
-bool isPrime[MAXN];
-vector&lt;int&gt; prime;
-
-void Initial() //素数筛法
-{
-    for(int i=0; i&lt;MAXN; i++)
-        isPrime[i] = true;
-    isPrime[0] = false;
-    isPrime[1] = false;
-    
-    for (int i=0; i&lt;MAXN; i++)
-    {
-        if (isPrime[i] == true)
-        {
-            prime.push_back(i);
-            for (int j=i*i; j&lt;MAXN; j=j+i)
-                isPrime[j] = false;
-        }
-    }
-};
-
-int main()
-{
-    Initial();
-    
-    int num;
-    while (cin &gt;&gt; num)
-    {
-        int result = 0;
-        for (int i=0; i&lt;prime.size(); i++)
-        {
-            int temp = prime[i];
-            while (num % temp == 0)
-            {
-                result++;
-                num = num / temp;
-            }
-            
-            if (num == 1) //除尽就跳出循环
-                break;
-        }
-        
-        if (num &gt; 1) //存在一个大于sqrt(1e9) + 1的素因数，且幂次为1
-            result++;
-        
-        cout &lt;&lt; result &lt;&lt; endl;
-    }
-}
-</code></pre>
-<h2 id="2-约数的个数">2.  约数的个数</h2>
-<h3 id="题目描述-2"><strong>题目描述</strong></h3>
-<p>输入n个整数,依次输出每个数的约数的个数</p>
-<h3 id="要点-2"><strong>要点</strong></h3>
-<figure data-type="image" tabindex="1"><img src="D:%5CTJU%5C%E4%BF%9D%E7%A0%94%5C%E6%9C%BA%E8%AF%95%5Cimage-20210506133135936.png" alt="image-20210506133135936" loading="lazy"></figure>
-<p>也就是求出质因数之后前面的组合乘上现在的因子加1</p>
-<h3 id="提交地址-2">提交地址</h3>
-<p>https://www.nowcoder.com/practice/04c8a5ea209d41798d23b59f053fa4d6?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</p>
-<h3 id="代码-2">代码</h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cmath&gt;
-#include &lt;vector&gt;
-
-using namespace std;
-
-vector&lt;bool&gt; isPrime;
-vector&lt;int&gt; prime;
-const int MAXN = sqrt(1e9) + 1;
-
-void Initial()
-{
-    for (int i=0; i&lt;MAXN; i++)
-        isPrime.push_back(true);
-    isPrime[0] = false;
-    isPrime[1] = false;
-    
-    for (int i=0; i&lt;MAXN; i++)
-    {
-        if (isPrime[i] == true)
-        {
-            prime.push_back(i);
-            for (int j = i*i; j&lt;MAXN; j+=i)
-                isPrime[j] = false;
-        }
-    }
-};
-
-int main()
-{
-    int count;
-    Initial();
-    while (cin &gt;&gt; count)
-    {
-        int num;
-        for (int i=0; i&lt;count; i++)
-        {
-            cin &gt;&gt; num;           
-            int answer = 1;           
-
-            for (int i=0; i&lt;prime.size(); i++)
-            {
-                int temp = prime[i];
-                int result = 0;
-                                
-                while (num % temp == 0)
-                {
-                    num = num / temp;
-                    result++;
-                }
-                
-                answer = (result+1) * answer;
-                
-                if (num == 1)
-                    break;
-            }
-            
-            if (num &gt; 1)
-                answer *= 2;
-            
-            cout &lt;&lt; answer &lt;&lt; endl;                  
-        }
-    }
-    return 0;
-}
-</code></pre>
+              <h1 id="effective-inter-clause-modeling-for-end-to-end-emotion-cause-pair-extraction">Effective Inter-Clause Modeling for End-to-End Emotion-Cause Pair Extraction.</h1>
+<p>In Proc. of ACL 2020: The 58th Annual Meeting of the Association for Computational Linguistics, pages 3171--3181</p>
+<h1 id="2020acl的一篇论文来自中科院自动化所团队">2020ACL的一篇论文，来自中科院自动化所团队</h1>
+<p>论文地址：<a href="https://www.aclweb.org/anthology/2020.acl-main.289/">https://www.aclweb.org/anthology/2020.acl-main.289/</a><br>
+代码地址：<a href="https://github.com/Determined22">https://github.com/Determined22</a></p>
 
             </div>
             
@@ -809,7 +630,7 @@ int main()
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://Czardas42.github.io/post/chapter6_6.4/" title="Chapter6数学问题：6.4分解质因数">https://Czardas42.github.io/post/chapter6_6.4/</a>
+      <a href="https://Czardas42.github.io/post/rank-emotion-cause-2020-translate/" title="【翻译】2020-Rank-Emotion-Cause">https://Czardas42.github.io/post/rank-emotion-cause-2020-translate/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -818,22 +639,18 @@ int main()
   </ul>
   <div class="tags">
     
-      <a href="https://Czardas42.github.io/tag/programming_tests/"># 机试准备</a>
+      <a href="https://Czardas42.github.io/tag/paper_reading/"># 论文阅读</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Chapter7贪心算法：7.1简单贪心" href="https://Czardas42.github.io/post/chapter7_7.1/">Chapter7贪心算法：7.1简单贪心</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Chapter7贪心算法：7.1简单贪心" href="https://Czardas42.github.io/post/chapter7_7.1/">上一篇</a>
+        <a class="nav-pc-next" title="【阅读笔记】2020-Rank-Emotion-Cause" href="https://Czardas42.github.io/post/rank-emotion-cause-2020-note/">【阅读笔记】2020-Rank-Emotion-Cause</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="【阅读笔记】2020-Rank-Emotion-Cause" href="https://Czardas42.github.io/post/rank-emotion-cause-2020-note/">上一篇</a>
       
     </div>
     <div class="nav-next">
-      
-        <a class="nav-pc-next" title="Prometheus" href="https://Czardas42.github.io/post/prometheus/">Prometheus</a>
-        <a class="nav-mobile-next" title="Prometheus" href="https://Czardas42.github.io/post/prometheus/">下一篇</a>
-        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>

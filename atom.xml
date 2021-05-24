@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Czardas42.github.io/</id>
     <title>Czardas</title>
-    <updated>2021-05-24T01:21:15.813Z</updated>
+    <updated>2021-05-24T01:28:36.896Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Czardas42.github.io/"/>
     <link rel="self" href="https://Czardas42.github.io/atom.xml"/>
@@ -644,15 +644,6 @@ int main()
     return 0;
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rank-Emotion-Cause]]></title>
-        <id>https://Czardas42.github.io/post/rank-emotion-cause-2020/</id>
-        <link href="https://Czardas42.github.io/post/rank-emotion-cause-2020/">
-        </link>
-        <updated>2021-05-23T07:59:30.000Z</updated>
-        <content type="html"><![CDATA[<p>阅读笔记：</p>
 ]]></content>
     </entry>
     <entry>
@@ -1800,6 +1791,157 @@ int main()
     {
         cout &lt;&lt; prime[order-1] &lt;&lt; endl;
     }
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Chapter6数学问题：6.2 最大公约数和最小公倍数]]></title>
+        <id>https://Czardas42.github.io/post/chapter6_6.2/</id>
+        <link href="https://Czardas42.github.io/post/chapter6_6.2/">
+        </link>
+        <updated>2021-05-05T07:51:36.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="辗转相除法">辗转相除法</h2>
+<h2 id="1-最大公约数">1.  最大公约数</h2>
+<h3 id="题目描述"><strong>题目描述</strong></h3>
+<p>输入两个正整数，求其最大公约数。</p>
+<h3 id="要点"><strong>要点</strong></h3>
+<p>递归实现辗转相除法GCD</p>
+<h3 id="提交地址">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/20216f2c84bc438eb5ef05e382536fd3?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/20216f2c84bc438eb5ef05e382536fd3?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int GCD(int a, int b)
+{
+    if(a%b == 0) //a可以整除b：b是最大公约数
+    {
+        return b;
+    }
+    else
+    {
+        return GCD(b, a%b);
+    }
+}
+
+int main()
+{
+    int num1, num2;
+    while(cin &gt;&gt; num1 &gt;&gt; num2)
+    {
+        cout &lt;&lt; GCD(num1, num2) &lt;&lt; endl;
+    }
+    
+    return 0;
+}
+</code></pre>
+<h2 id="2-最小公倍数">2.  最小公倍数</h2>
+<h3 id="题目描述-2"><strong>题目描述</strong></h3>
+<p>输入两个正整数，求其最小公约数。</p>
+<h3 id="要点-2"><strong>要点</strong></h3>
+<ol>
+<li>
+<p><strong>最小公倍数 = 两数乘积 / 最大公约数</strong></p>
+</li>
+<li>
+<p>递归实现辗转相除法</p>
+</li>
+</ol>
+<h3 id="提交地址-2">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/22948c2cad484e0291350abad86136c3?tpId=37&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/22948c2cad484e0291350abad86136c3?tpId=37&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-2">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int GCD(int a, int b)
+{
+    if(a%b == 0)
+    {
+        return b;
+    }
+    else
+    {
+        return GCD(b, a%b);
+    }
+}
+
+int main()
+{
+    int num1, num2;
+    while (cin &gt;&gt; num1 &gt;&gt; num2)
+    {
+        int temp = num1 * num2;
+        int result = temp / GCD(num1, num2);
+        cout &lt;&lt; result &lt;&lt; endl;
+    }
+}
+</code></pre>
+<h2 id="3-最简真分数">3.  最简真分数</h2>
+<h3 id="题目描述-3"><strong>题目描述</strong></h3>
+<p>给出n个正整数，任取两个数分别作为分子和分母组成最简真分数，编程求共有几个这样的组合。</p>
+<h3 id="要点-3"><strong>要点</strong></h3>
+<ol>
+<li>
+<p><strong>最简真分数：分子&lt;分母；分子分母最大公约数为1</strong></p>
+</li>
+<li>
+<p>因为真分数的要求，最终结果/2</p>
+</li>
+</ol>
+<h3 id="提交地址-3">提交地址</h3>
+<p><a href="https://www.nowcoder.com/practice/1f1db273eeb745c6ac83e91ff14d2ec9?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/1f1db273eeb745c6ac83e91ff14d2ec9?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
+<h3 id="代码-3">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int GCD(int a, int b)
+{
+    if(a%b == 0)
+        return b;
+    else
+        return GCD(b, a%b);
+};
+
+int main()
+{
+    int count;
+    while(cin &gt;&gt; count)
+    {
+        if (count == 0)
+            break;
+        //存入数据
+        vector&lt;int&gt; number;
+        int num;
+        for (int i=0; i&lt;count; i++)
+        {
+            cin &gt;&gt; num;
+            number.push_back(num);
+        }
+        //遍历
+        int result = 0;
+        for (int i=0; i&lt;number.size(); i++)
+        {
+            for (int j=0; j&lt;number.size(); j++)
+            {
+                int temp = GCD(number[i], number[j]);
+                if (temp==1)
+                {//两数最大公约数是1
+                    result++;
+                }
+            }
+        }
+        cout &lt;&lt; result/2 &lt;&lt; endl;  //真分数&lt;1,所以结果/2         
+    }
+    
     return 0;
 }
 </code></pre>
