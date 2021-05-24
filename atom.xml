@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Czardas42.github.io/</id>
     <title>Czardas</title>
-    <updated>2021-05-23T12:15:01.689Z</updated>
+    <updated>2021-05-24T01:21:15.813Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Czardas42.github.io/"/>
     <link rel="self" href="https://Czardas42.github.io/atom.xml"/>
@@ -10,6 +10,642 @@
     <logo>https://Czardas42.github.io/images/avatar.png</logo>
     <icon>https://Czardas42.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Czardas</rights>
+    <entry>
+        <title type="html"><![CDATA[Chapter9搜索：9.2DFS]]></title>
+        <id>https://Czardas42.github.io/post/chapter9_9.2/</id>
+        <link href="https://Czardas42.github.io/post/chapter9_9.2/">
+        </link>
+        <updated>2021-05-24T01:20:14.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="dfs">DFS</h2>
+<p>常用于搜索存在问题</p>
+<p>形式化表示问题，设计合适的状态表示</p>
+<p>将搜索问题转化为针对状态的搜索</p>
+<p>适当的标记，避免重复搜索</p>
+<h2 id="1-a-knights-journey">1.  <strong>A Knight's Journey</strong></h2>
+<h3 id="题目描述"><strong>题目描述</strong></h3>
+<p>The knight is getting bored of seeing the same black and white squares again and again and has decided to make a journey<br>
+around the world. Whenever a knight moves, it is two squares in one direction and one square perpendicular to this. The world of a knight is the chessboard he is living on. Our knight lives on a chessboard that has a smaller area than a regular 8 * 8 board, but it is still rectangular. Can you help this adventurous knight to make travel plans?</p>
+<h3 id="要点">要点</h3>
+<ol>
+<li>
+<p><code>memset</code>头文件是<code>&lt;cstring&gt;</code></p>
+</li>
+<li>
+<p>DFS用递归即可,使用<code>bool</code>型函数</p>
+</li>
+<li>
+<p>基本步骤：</p>
+<p>初始化，判断终止输出结果 / 计算子节点+合法判断+递归    外部返回</p>
+</li>
+<li>
+<p>visit标记数组，应用递归的前后需要标记、取消标记</p>
+</li>
+</ol>
+<h3 id="提交地址">提交地址</h3>
+<p>http://poj.org/problem?id=2488</p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+
+using namespace std;
+
+int p, q; //size
+bool visit[30][30]; //record
+
+
+bool DFS(int x, int y, int step, string ans)
+{
+	int move[8][2] = {
+	{-1, -2}, {1, -2}, {-2, -1}, {2, -1}, {-2, 1}, {2, 1}, {-1, 2}, {1, 2}
+	};
+
+	//cout judge
+	if (step == p * q)
+	{
+		cout &lt;&lt; ans &lt;&lt; endl &lt;&lt; endl;
+		return true;
+	}
+	else
+	{
+		for (int i = 0; i &lt; 8; i++)
+		{
+			int nx = x + move[i][0];
+			int ny = y + move[i][1];
+			char col = char(ny + 'A');
+			char row = char(nx + '1');
+
+			if (nx &lt; 0 || nx &gt;= p || ny &lt; 0 || ny &gt;= q || visit[nx][ny]) {
+				continue;
+			}
+			visit[nx][ny] = true;
+			//这里不可以用ans=ans + col + row！！！
+			if (DFS(nx, ny, step + 1, ans + col + row))
+			{
+				return true;
+			}
+
+			visit[nx][ny] = false;
+
+			/*
+			if (0 &lt;= nx &amp;&amp; nx &lt; p &amp;&amp; 0 &lt;= ny &amp;&amp; ny &lt; q &amp;&amp; !visit[nx][ny])
+			{
+
+			}*/
+		}
+	}
+
+	return false;
+}
+
+int main()
+{
+	int count = 0;
+	cin &gt;&gt; count;
+	for (int i=1; i&lt;=count; i++)
+	{
+		cin &gt;&gt; p &gt;&gt; q;
+
+		memset(visit, false, sizeof(visit));
+		string ans = &quot;A1&quot;;
+		visit[0][0] = true;
+
+		cout &lt;&lt; &quot;Scenario #&quot; &lt;&lt; i &lt;&lt; &quot;:&quot; &lt;&lt;endl;
+		if (!DFS(0, 0, 1, ans))
+			cout &lt;&lt; &quot;impossible&quot; &lt;&lt; endl &lt;&lt; endl;
+
+	}
+	return 0;
+}
+</code></pre>
+<h2 id="2-square">2.  **<strong>Square</strong></h2>
+<h3 id="题目描述-2"><strong>题目描述</strong></h3>
+<p>Given a set of sticks of various lengths, is it possible to join them end-to-end to form a square?</p>
+<h3 id="要点-2"><strong>要点</strong></h3>
+<ol>
+<li>DFS函数过程</li>
+<li>问题状态的三元组表示（现有长度，已完成边数，当前根数）</li>
+<li>优化条件：总长度整除四、单根长度小于边长、降序排列......</li>
+<li>注意递归的参数，每完成一条边要从0开始重新遍历</li>
+</ol>
+<h3 id="提交地址-2">提交地址</h3>
+<p>http://poj.org/problem?id=2362</p>
+<h3 id="代码-2">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+int sticks[20];
+int side_length;
+int num;
+bool visit[20];
+
+bool Compare(int a, int b)
+{
+	return a &gt; b;
+}
+
+bool DFS(int length_now, int side_complete, int stick_now)
+{
+	if (side_complete == 3)
+		return true;
+	else
+	{
+		int sample = 0;
+		for (int i = stick_now; i &lt; num; i++)
+		{
+			int length_stick = sticks[i];
+			int length_temp = length_now + length_stick;
+
+			if (!visit[i] &amp;&amp; length_temp &lt;= side_length &amp;&amp; sticks[i] != sample)
+			{
+				visit[i] = true;
+
+				if (length_temp == side_length)
+				{
+					if (DFS(0, side_complete + 1, 0)) //从0开始重新遍历
+						return true;
+					else
+						sample = sticks[i];
+				}
+				else if (length_temp &lt; side_length)
+				{
+					if (DFS(length_temp, side_complete, i + 1))
+						return true;
+					else
+						sample = sticks[i];
+				}
+
+				visit[i] = false;
+			}
+		}
+	}
+	return false;
+
+}
+
+int main()
+{
+	int count = 0;
+	cin &gt;&gt; count;
+	while (count--)
+	{
+		memset(sticks, 0, sizeof(sticks));
+		memset(visit, false, sizeof(visit));
+		int sum=0;
+		cin &gt;&gt; num;
+		for (int i = 0; i &lt; num; i++)
+		{
+			cin &gt;&gt; sticks[i];
+			sum += sticks[i];
+		}
+
+		side_length = sum / 4;
+
+		if (sum % 4 != 0)
+		{
+			cout &lt;&lt; &quot;no\n&quot;;
+			continue;
+		}
+
+		sort(sticks, sticks + num, Compare);
+		if (sticks[0] &gt; side_length)
+		{
+			cout &lt;&lt; &quot;no\n&quot;;
+			continue;
+		}
+
+
+		if (DFS(0, 0, 0))
+			cout &lt;&lt; &quot;yes\n&quot;;
+		else
+			cout &lt;&lt; &quot;no\n&quot;;
+	}
+	return 0;
+}
+</code></pre>
+<h2 id="3-神奇的口袋">3.  神奇的口袋</h2>
+<h3 id="题目描述-3"><strong>题目描述</strong></h3>
+<p>有一个神奇的口袋，总的容积是40，用这个口袋可以变出一些物品，这些物品的总体积必须是40。John现在有n个想要得到的物品，每个物品的体积分别是a1，a2……an。John可以从这些物品中选择一些，如果选出的物体的总体积是40，那么利用这个神奇的口袋，John就可以得到这些物品。现在的问题是，John有多少种不同的选择物品的方式。</p>
+<h3 id="要点-3"><strong>要点</strong></h3>
+<p>此题求解的个数</p>
+<p>把<code>if return</code>结构换为直接的递归求解即可</p>
+<h3 id="提交地址-3">提交地址</h3>
+<p>https://www.nowcoder.com/practice/9aaea0b82623466a8b29a9f1a00b5d35?tpId=40&amp;tqId=21390&amp;rp=1&amp;ru=%2Fta%2Fkaoyan&amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;tab=answerKey</p>
+<h3 id="代码-3">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int total;
+bool visit[20];
+int volume[20];
+int ans;
+
+bool Compare(int a, int b)
+{
+    return a &gt; b;
+}
+
+bool DFS(int leave, int id)
+{
+    if (leave == 0)
+    {
+        ans++;
+        return true;
+    }
+    else
+    {
+        for (int i=id; i&lt;total; i++)
+        {
+            if (!visit[i] &amp;&amp; volume[i] &lt;= leave)
+            {
+                visit[i]  = true;
+                DFS(leave-volume[i], i); //此处注意，是遍历，不是找到解就返回
+                visit[i] = false;
+            }
+        }
+    }
+    
+    return false;
+}
+
+int main()
+{
+    while (cin &gt;&gt; total)
+    {
+        for (int i=0; i&lt;total; i++)
+            cin &gt;&gt; volume[i];
+        
+        sort(volume, volume+total, Compare);
+        memset(visit, false, sizeof(visit));
+        ans = 0;
+        
+        DFS(40, 0); 
+        cout &lt;&lt; ans &lt;&lt; endl;
+    }
+        
+    return 0;
+}
+</code></pre>
+<h2 id="4-八皇后">4.  八皇后</h2>
+<h3 id="题目描述-4"><strong>题目描述</strong></h3>
+<p>会下国际象棋的人都很清楚：皇后可以在横、竖、斜线上不限步数地吃掉其他棋子。如何将8个皇后放在棋盘上（有8 * 8个方格），使它们谁也不能被吃掉！这就是著名的八皇后问题。<br>
+对于某个满足要求的8皇后的摆放方法，定义一个皇后串a与之对应，即a=b1b2...b8，其中bi为相应摆法中第i行皇后所处的列数。已经知道8皇后问题一共有92组解（即92个不同的皇后串）。<br>
+给出一个数b，要求输出第b个串。串的比较是这样的：皇后串x置于皇后串y之前，当且仅当将x视为整数时比y小。</p>
+<h3 id="要点-4"><strong>要点</strong></h3>
+<ol>
+<li>
+<p>本质为八皇后求解问题</p>
+</li>
+<li>
+<p><code>check()函数</code></p>
+</li>
+</ol>
+<h3 id="提交地址-4">提交地址</h3>
+<p>http://bailian.openjudge.cn/practice/2754</p>
+<h3 id="代码-4">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+int ans[100][10];
+int a[10];
+int times = 1;
+
+bool check(int n)
+{
+    for (int i = 1; i&lt;n; i++)
+    {
+        if ((abs(a[i] - a[n]) == n-i) || (a[i] == a[n])) //对角线或者同一列
+            return false;  
+    }   
+    return true;
+}
+
+bool DFS(int n) //求解八皇后问题
+{
+    if (n &gt; 8)
+    {
+        for (int i=1; i&lt;=8; i++)
+            ans[times][i] = a[i];
+        
+        times++;
+        return true;
+    }
+    else
+    {
+        for (int i=1; i&lt;=8; i++)
+        {
+            a[n] = i;
+            if(check(n))
+            {
+                DFS(n+1);
+            }
+        }
+    }
+    
+}
+
+int main()
+{
+    int num;
+    while (cin &gt;&gt; num)
+    {
+        times = 1;
+        DFS(1);
+        for (int i=1; i&lt;=8; i++)
+            cout &lt;&lt; ans[num][i];
+        cout &lt;&lt; endl;
+    }
+    
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Chapter9搜索：9.1BFS]]></title>
+        <id>https://Czardas42.github.io/post/chapter9_9.1/</id>
+        <link href="https://Czardas42.github.io/post/chapter9_9.1/">
+        </link>
+        <updated>2021-05-24T01:18:37.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="bfs">BFS</h2>
+<p>常用于搜索最优值问题，关键字“最短”“最优”“最小”</p>
+<p>形式化表示问题，设计合适的状态表示</p>
+<p>将搜索问题转化为针对状态的搜索</p>
+<p>适当的标记，避免重复搜索</p>
+<h2 id="1-catch-that-cow">1.  <strong>Catch That Cow</strong></h2>
+<h3 id="题目描述"><strong>题目描述</strong></h3>
+<p>Farmer John has been informed of the location of a fugitive cow and wants to catch her immediately. He starts at a point <em>N</em> (0 ≤ <em>N</em> ≤ 100,000) on a number line and the cow is at a point <em>K</em> (0 ≤ <em>K</em> ≤ 100,000) on the same number line. Farmer John has two modes of transportation: walking and teleporting.</p>
+<p>* Walking: FJ can move from any point <em>X</em> to the points <em>X</em> - 1 or <em>X</em> + 1 in a single minute<br>
+* Teleporting: FJ can move from any point <em>X</em> to the point 2 × <em>X</em> in a single minute.</p>
+<p>If the cow, unaware of its pursuit, does not move at all, how long does it take for Farmer John to retrieve it?</p>
+<h3 id="要点">要点</h3>
+<ol>
+<li>
+<p>BFS用queue即可</p>
+</li>
+<li>
+<p>基本步骤：</p>
+<p>初始化，循环（pop，判断终止输出结果/加入子节点+合法判断）</p>
+</li>
+<li>
+<p>数组初始化：</p>
+<p><code>memset(visit, false, sizeof(visit));</code></p>
+</li>
+<li>
+<p>visit标记数组提高运行效率</p>
+</li>
+</ol>
+<h3 id="提交地址">提交地址</h3>
+<p>http://poj.org/problem?id=3278</p>
+<h3 id="代码">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;queue&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+struct status
+{
+	int n;//位置
+	int t;//时间
+
+	//构造函数
+	status(int position, int time)
+	{
+		n = position;
+		t = time;
+	}
+};
+
+int BFS(int n, int k) //返回花费时间
+{
+	queue&lt;status&gt; Q;//搜索队列
+
+	bool visit[100001];//标记数组
+	memset(visit, false, sizeof(visit));
+
+	//初始化起点
+	status start = status(n, 0);
+	Q.push(start);
+	visit[start.n] = true; //标记已到达
+
+	while (!Q.empty())
+	{
+		status now = Q.front();
+		Q.pop();
+		visit[now.n] = true;
+
+		if (now.n == k) //已经到达终点
+		{
+			return now.t;
+		}
+		else
+		{
+			for (int i = 0; i &lt; 3; i++) //子节点入列
+			{
+				status next = status(0, 0);
+				if (i == 0)
+				{
+					next = status(now.n - 1, now.t + 1);
+				}
+				else if (i == 1)
+				{
+					next = status(now.n + 1, now.t + 1);
+				}
+				else
+				{
+					next = status(now.n * 2, now.t + 1);
+				}
+
+				//判断是否合法
+				if (next.n &gt;= 0 &amp;&amp; next.n &lt;= 100000 &amp;&amp; !visit[next.n])
+				{
+					Q.push(next);
+					visit[next.n] = true;
+				}			
+			}
+		}
+	}
+};
+
+int main()
+{
+	int n, k;
+	while (cin &gt;&gt; n &gt;&gt; k)
+	{
+		cout &lt;&lt; BFS(n, k) &lt;&lt; endl;
+	}
+	return 0;
+}
+</code></pre>
+<h2 id="2-find-the-multiple">2.  <strong>Find The Multiple</strong></h2>
+<h3 id="题目描述-2"><strong>题目描述</strong></h3>
+<p>Given a positive integer n, write a program to find out a nonzero multiple m of n whose decimal representation contains only the digits 0 and 1. You may assume that n is not greater than 200 and there is a corresponding m containing no more than 100 decimal digits.</p>
+<h3 id="要点-2"><strong>要点</strong></h3>
+<ol>
+<li>不是遍历倍数，而是遍历0/1组成的数</li>
+<li>不是为啥BFS里直接<code>cout</code>就AC，return就报错？？？</li>
+</ol>
+<h3 id="提交地址-2">提交地址</h3>
+<p>http://poj.org/problem?id=1426</p>
+<h3 id="代码-2">代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;queue&gt;
+
+using namespace std;
+
+void BFS(int num)
+{
+	queue&lt;long long&gt; Q;
+	long long start = 1;
+	Q.push(start);
+
+	while (!Q.empty())
+	{
+		long long now = Q.front();
+		Q.pop();
+
+		if (now % num == 0)
+		{
+			cout &lt;&lt; now &lt;&lt; endl;
+			return;
+		}
+
+		Q.push(now * 10);
+		Q.push(now * 10 + 1);
+
+	}
+}
+
+int main()
+{
+	int num;
+	while (cin &gt;&gt; num)
+	{
+		if (num == 0)
+			break;
+
+		BFS(num);
+	}
+	return 0;
+}
+</code></pre>
+<h2 id="3-玛雅人的密码">3.  玛雅人的密码</h2>
+<h3 id="题目描述-3"><strong>题目描述</strong></h3>
+<p>玛雅人有一种密码，如果字符串中出现连续的2012四个数字就能解开密码。给一个长度为N的字符串，（2=&lt;N&lt;=13）该字符串中只含有0,1,2三种数字，问这个字符串要移位几次才能解开密码，每次只能移动相邻的两个数字。例如02120经过一次移位，可以得到20120,01220,02210,02102，其中20120符合要求，因此输出为1.如果无论移位多少次都解不开密码，输出-1。</p>
+<h3 id="要点-3"><strong>要点</strong></h3>
+<ol>
+<li>
+<p>使用一个vector来记录已遍历的字符串</p>
+</li>
+<li>
+<p><strong>移动次数相当于BFS树的层数，而不是遍历次数</strong></p>
+<p>解决方法：构建结构体Status，储存对应层数</p>
+</li>
+<li>
+<p>判断是否包含子串：</p>
+<p><code>now.s.find(&quot;2012&quot;) != string::npos</code></p>
+</li>
+</ol>
+<h3 id="提交地址-3">提交地址</h3>
+<p>https://www.nowcoder.com/practice/761fc1e2f03742c2aa929c19ba96dbb0?tpId=40&amp;tab=answerKey</p>
+<h3 id="代码-3">代码</h3>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+struct Status
+{
+    string s;
+    int t;
+    Status(string str, int count)
+    {
+        s = str;
+        t = count;
+    }
+};
+
+void BFS(int length, string str)
+{
+    queue&lt;Status&gt; Q;
+    vector&lt;Status&gt; visit;
+    //初始化
+    Status start = Status(str, 0);
+    Q.push(start);
+    visit.push_back(start);
+
+    //循环
+    while (!Q.empty())
+    {
+        //pop
+        Status now = Q.front();
+        Q.pop();
+        visit.push_back(now);
+        //判断输出
+        if (now.s.find(&quot;2012&quot;) != string::npos)
+        {
+            cout &lt;&lt; now.t &lt;&lt; endl;
+            return;
+        }
+
+        //加入子节点+避免重复
+        for (int i=0; i&lt;length-1; i++)
+        {
+            Status next =now;
+            next.s[i] = now.s[i+1];
+            next.s[i+1] = now.s[i];
+            next.t++;
+        
+            //判断是否已出现
+            bool flag = false;
+            for (int i=0; i&lt;sizeof(visit); i++)
+            {
+                if (visit[i].s == next.s)
+                {
+                    flag = true;
+                    break;
+                }
+            }
+            
+            //合法就加入
+            if(flag == false)
+            {
+                Q.push(next);
+            }
+        }
+    }
+    
+    cout &lt;&lt; -1 &lt;&lt; endl;
+    return;    
+};
+
+int main()
+{
+    int length;
+    string str;
+    while(cin &gt;&gt; length)
+    {
+        cin &gt;&gt; str;
+        BFS(length, str);
+    }
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rank-Emotion-Cause]]></title>
         <id>https://Czardas42.github.io/post/rank-emotion-cause-2020/</id>
@@ -441,7 +1077,7 @@ int main(){
 }
 
 </code></pre>
-<h2 id="2-代理服务器">2.  代理服务器</h2>
+<h2 id="3-代理服务器">3.  代理服务器</h2>
 <h3 id="题目描述-3"><strong>题目描述</strong></h3>
 <p>使用代理服务器能够在一定程度上隐藏客户端信息，从而保护用户在互联网上的隐私。我们知道n个代理服务器的IP地址，现在要用它们去访问m个服务器。这 m 个服务器的 IP 地址和访问顺序也已经给出。系统在同一时刻只能使用一个代理服务器，并要求不能用代理服务器去访问和它 IP地址相同的服务器（不然客户端信息很有可能就会被泄露）。在这样的条件下，找到一种使用代理服务器的方案，使得代理服务器切换的次数尽可能得少。</p>
 <h3 id="要点-3"><strong>要点</strong></h3>
@@ -1167,308 +1803,6 @@ int main()
     return 0;
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Chapter6数学问题：6.2 最大公约数和最小公倍数]]></title>
-        <id>https://Czardas42.github.io/post/chapter6_6.2/</id>
-        <link href="https://Czardas42.github.io/post/chapter6_6.2/">
-        </link>
-        <updated>2021-05-05T07:51:36.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="辗转相除法">辗转相除法</h2>
-<h2 id="1-最大公约数">1.  最大公约数</h2>
-<h3 id="题目描述"><strong>题目描述</strong></h3>
-<p>输入两个正整数，求其最大公约数。</p>
-<h3 id="要点"><strong>要点</strong></h3>
-<p>递归实现辗转相除法GCD</p>
-<h3 id="提交地址">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/20216f2c84bc438eb5ef05e382536fd3?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/20216f2c84bc438eb5ef05e382536fd3?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码">代码</h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-
-using namespace std;
-
-int GCD(int a, int b)
-{
-    if(a%b == 0) //a可以整除b：b是最大公约数
-    {
-        return b;
-    }
-    else
-    {
-        return GCD(b, a%b);
-    }
-}
-
-int main()
-{
-    int num1, num2;
-    while(cin &gt;&gt; num1 &gt;&gt; num2)
-    {
-        cout &lt;&lt; GCD(num1, num2) &lt;&lt; endl;
-    }
-    
-    return 0;
-}
-</code></pre>
-<h2 id="2-最小公倍数">2.  最小公倍数</h2>
-<h3 id="题目描述-2"><strong>题目描述</strong></h3>
-<p>输入两个正整数，求其最小公约数。</p>
-<h3 id="要点-2"><strong>要点</strong></h3>
-<ol>
-<li>
-<p><strong>最小公倍数 = 两数乘积 / 最大公约数</strong></p>
-</li>
-<li>
-<p>递归实现辗转相除法</p>
-</li>
-</ol>
-<h3 id="提交地址-2">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/22948c2cad484e0291350abad86136c3?tpId=37&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/22948c2cad484e0291350abad86136c3?tpId=37&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-2">代码</h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-
-using namespace std;
-
-int GCD(int a, int b)
-{
-    if(a%b == 0)
-    {
-        return b;
-    }
-    else
-    {
-        return GCD(b, a%b);
-    }
-}
-
-int main()
-{
-    int num1, num2;
-    while (cin &gt;&gt; num1 &gt;&gt; num2)
-    {
-        int temp = num1 * num2;
-        int result = temp / GCD(num1, num2);
-        cout &lt;&lt; result &lt;&lt; endl;
-    }
-}
-</code></pre>
-<h2 id="3-最简真分数">3.  最简真分数</h2>
-<h3 id="题目描述-3"><strong>题目描述</strong></h3>
-<p>给出n个正整数，任取两个数分别作为分子和分母组成最简真分数，编程求共有几个这样的组合。</p>
-<h3 id="要点-3"><strong>要点</strong></h3>
-<ol>
-<li>
-<p><strong>最简真分数：分子&lt;分母；分子分母最大公约数为1</strong></p>
-</li>
-<li>
-<p>因为真分数的要求，最终结果/2</p>
-</li>
-</ol>
-<h3 id="提交地址-3">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/1f1db273eeb745c6ac83e91ff14d2ec9?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/1f1db273eeb745c6ac83e91ff14d2ec9?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-3">代码</h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;vector&gt;
-
-using namespace std;
-
-int GCD(int a, int b)
-{
-    if(a%b == 0)
-        return b;
-    else
-        return GCD(b, a%b);
-};
-
-int main()
-{
-    int count;
-    while(cin &gt;&gt; count)
-    {
-        if (count == 0)
-            break;
-        //存入数据
-        vector&lt;int&gt; number;
-        int num;
-        for (int i=0; i&lt;count; i++)
-        {
-            cin &gt;&gt; num;
-            number.push_back(num);
-        }
-        //遍历
-        int result = 0;
-        for (int i=0; i&lt;number.size(); i++)
-        {
-            for (int j=0; j&lt;number.size(); j++)
-            {
-                int temp = GCD(number[i], number[j]);
-                if (temp==1)
-                {//两数最大公约数是1
-                    result++;
-                }
-            }
-        }
-        cout &lt;&lt; result/2 &lt;&lt; endl;  //真分数&lt;1,所以结果/2         
-    }
-    
-    return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Chapter6数学问题：6.1 进制转换]]></title>
-        <id>https://Czardas42.github.io/post/chapter6_6.1/</id>
-        <link href="https://Czardas42.github.io/post/chapter6_6.1/">
-        </link>
-        <updated>2021-05-05T07:48:49.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="进制转换原理">进制转换原理</h2>
-<h2 id="1-二进制数">1.  二进制数</h2>
-<h3 id="题目描述"><strong>题目描述</strong></h3>
-<p>大家都知道，数据在计算机里中存储是以二进制的形式存储的。 有一天，小明学了C语言之后，他想知道一个类型为unsigned int 类型的数字，存储在计算机中的二进制串是什么样子的。 你能帮帮小明吗？并且，小明不想要二进制串中前面的没有意义的0串，即要去掉前导0。</p>
-<h3 id="要点"><strong>要点</strong></h3>
-<ol>
-<li>进制转换标准公式</li>
-<li>以及while循环判断条件<code>while (num != 0)</code></li>
-</ol>
-<h3 id="提交地址">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/103dd589fed14457a673c613d8de3841?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/103dd589fed14457a673c613d8de3841?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码">代码</h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;string&gt;
-
-using namespace std;
-
-int main()
-{
-    int num;
-    while (cin &gt;&gt; num)
-    {
-        string result = &quot;&quot;;
-        
-        while (num != 0)
-        {
-            int temp = num % 2;
-            char num_now = char('0'+temp);
-            result = num_now + result;
-            num = num / 2;
-        }
-        
-        cout  &lt;&lt; result &lt;&lt; endl;
-    }
-}
-</code></pre>
-<h2 id="2-进制转换">2. <strong>进制转换</strong></h2>
-<h3 id="题目描述-2"><strong>题目描述</strong></h3>
-<p>将一个长度最多为30位数字的十进制非负整数转换为二进制数输出。</p>
-<h3 id="要点-2"><strong>要点</strong></h3>
-<ol>
-<li>
-<p>数字长度：https://www.runoob.com/cplusplus/cpp-data-types.html</p>
-<table>
-<thead>
-<tr>
-<th>unsigned long int</th>
-<th>0 到 18,446,744,073,709,551,615（20位）</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-<p><strong>超过20位的数字运算就只能通过字符串实现</strong></p>
-</li>
-<li>
-<p>字符串类型计算乘除法的方法：模仿手动计算</p>
-</li>
-<li>
-<p><strong>从第一个非0位开始输出：</strong></p>
-<p>设置flag，在第一次遇到非0时将其变为true；</p>
-<p>提前获得非0位的编号</p>
-</li>
-</ol>
-<h3 id="提交地址-2">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-2">代码</h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;string&gt;
-
-using namespace std;
-
-char GetTemp(string num)//取得字符串num的%2结果
-{   //num%2结果 = num最后一位%2的结果
-    int temp0 = int(num[num.size()-1] - '0') % 2;
-    char temp = char(temp0 + '0');
-    return temp;
-};
-
-string GetNum(string num)//取得字符串num的/2结果
-{
-    int m = 0;
-    string result = num;
-    for (int i=0; i&lt;num.size(); i++)
-    {   //模仿手动计算除法的过程
-        int num_now = int(num[i] - '0') + m*10;
-        result[i] = char(num_now / 2 + '0');
-        m = num_now % 2;
-    }
-    
-    return result;
-};
-
-int main()
-{
-    string num;
-    while (cin &gt;&gt; num)
-    {
-        string result = &quot;&quot;;
-        
-        //flag：和num位数相同的全零串
-        string flag = num;
-        for (int i=0; i&lt;flag.size(); i++)
-            flag[i] = '0';
-        
-        while(num != flag)
-        {
-            result = GetTemp(num) + result;
-            num = GetNum(num);
-        }
-
-        //输出：从首个非零位开始
-        bool flag2 = false;
-        for (int j=0; j&lt;result.size(); j++)
-        {
-            if (result[j] != '0')
-                flag2 = true;
-            
-            if (flag2 == true)
-                cout &lt;&lt; result[j];
-        }
-        cout &lt;&lt; endl;        
-    }
-}
-</code></pre>
-<h2 id="3-十进制vs二进制">3. <strong>十进制VS二进制</strong></h2>
-<h3 id="题目描述-3"><strong>题目描述</strong></h3>
-<p>对于一个十进制数A，将A转换为二进制数，然后按位逆序排列，再转换为十进制数B，我们称B为A的二进制逆序数。   例如对于十进制数173，它的二进制形式为10101101，逆序排列得到10110101，其十进制数为181，181即为173的二进制逆序数。</p>
-<p><strong>注意：一个1000位(即10^999)以内的十进制数。</strong></p>
-<h3 id="要点-3"><strong>要点</strong></h3>
-<ol>
-<li>
-<p><strong>法一：字符串类型的加法，乘法，除法，取余</strong></p>
-</li>
-<li>
-<p><strong>法二：大数进制转换</strong></p>
-<p>参考：<a href="https://blog.csdn.net/StrongerL/article/details/92702052">https://blog.csdn.net/StrongerL/article/details/92702052</a></p>
-</li>
-</ol>
-<h3 id="提交地址-3">提交地址</h3>
-<p><a href="https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/53447aa04f32460aa20ee11d02416e3b?tpId=40&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
-<h3 id="代码-3">代码</h3>
 ]]></content>
     </entry>
 </feed>

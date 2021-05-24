@@ -9,7 +9,7 @@
 <meta name="description" content="世界那么大，我想去看看">
 <meta name="theme-color" content="#343a40">
 <title>Chapter4 字符串：4.2 字符串处理 | Czardas</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1621772093709">
+<link rel="shortcut icon" href="/favicon.ico?v=1621819271686">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -276,7 +276,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">25</span>
+        <span class="site-item-stat-count">27</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1835,6 +1835,636 @@ int main()
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter9_9.2/"" data-c="
+          &lt;h2 id=&#34;dfs&#34;&gt;DFS&lt;/h2&gt;
+&lt;p&gt;常用于搜索存在问题&lt;/p&gt;
+&lt;p&gt;形式化表示问题，设计合适的状态表示&lt;/p&gt;
+&lt;p&gt;将搜索问题转化为针对状态的搜索&lt;/p&gt;
+&lt;p&gt;适当的标记，避免重复搜索&lt;/p&gt;
+&lt;h2 id=&#34;1-a-knights-journey&#34;&gt;1.  &lt;strong&gt;A Knight&#39;s Journey&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;The knight is getting bored of seeing the same black and white squares again and again and has decided to make a journey&lt;br&gt;
+around the world. Whenever a knight moves, it is two squares in one direction and one square perpendicular to this. The world of a knight is the chessboard he is living on. Our knight lives on a chessboard that has a smaller area than a regular 8 * 8 board, but it is still rectangular. Can you help this adventurous knight to make travel plans?&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;要点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;memset&lt;/code&gt;头文件是&lt;code&gt;&amp;lt;cstring&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;DFS用递归即可,使用&lt;code&gt;bool&lt;/code&gt;型函数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;基本步骤：&lt;/p&gt;
+&lt;p&gt;初始化，判断终止输出结果 / 计算子节点+合法判断+递归    外部返回&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;visit标记数组，应用递归的前后需要标记、取消标记&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;http://poj.org/problem?id=2488&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;string&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+
+using namespace std;
+
+int p, q; //size
+bool visit[30][30]; //record
+
+
+bool DFS(int x, int y, int step, string ans)
+{
+	int move[8][2] = {
+	{-1, -2}, {1, -2}, {-2, -1}, {2, -1}, {-2, 1}, {2, 1}, {-1, 2}, {1, 2}
+	};
+
+	//cout judge
+	if (step == p * q)
+	{
+		cout &amp;lt;&amp;lt; ans &amp;lt;&amp;lt; endl &amp;lt;&amp;lt; endl;
+		return true;
+	}
+	else
+	{
+		for (int i = 0; i &amp;lt; 8; i++)
+		{
+			int nx = x + move[i][0];
+			int ny = y + move[i][1];
+			char col = char(ny + &#39;A&#39;);
+			char row = char(nx + &#39;1&#39;);
+
+			if (nx &amp;lt; 0 || nx &amp;gt;= p || ny &amp;lt; 0 || ny &amp;gt;= q || visit[nx][ny]) {
+				continue;
+			}
+			visit[nx][ny] = true;
+			//这里不可以用ans=ans + col + row！！！
+			if (DFS(nx, ny, step + 1, ans + col + row))
+			{
+				return true;
+			}
+
+			visit[nx][ny] = false;
+
+			/*
+			if (0 &amp;lt;= nx &amp;amp;&amp;amp; nx &amp;lt; p &amp;amp;&amp;amp; 0 &amp;lt;= ny &amp;amp;&amp;amp; ny &amp;lt; q &amp;amp;&amp;amp; !visit[nx][ny])
+			{
+
+			}*/
+		}
+	}
+
+	return false;
+}
+
+int main()
+{
+	int count = 0;
+	cin &amp;gt;&amp;gt; count;
+	for (int i=1; i&amp;lt;=count; i++)
+	{
+		cin &amp;gt;&amp;gt; p &amp;gt;&amp;gt; q;
+
+		memset(visit, false, sizeof(visit));
+		string ans = &amp;quot;A1&amp;quot;;
+		visit[0][0] = true;
+
+		cout &amp;lt;&amp;lt; &amp;quot;Scenario #&amp;quot; &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &amp;quot;:&amp;quot; &amp;lt;&amp;lt;endl;
+		if (!DFS(0, 0, 1, ans))
+			cout &amp;lt;&amp;lt; &amp;quot;impossible&amp;quot; &amp;lt;&amp;lt; endl &amp;lt;&amp;lt; endl;
+
+	}
+	return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-square&#34;&gt;2.  **&lt;strong&gt;Square&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Given a set of sticks of various lengths, is it possible to join them end-to-end to form a square?&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;DFS函数过程&lt;/li&gt;
+&lt;li&gt;问题状态的三元组表示（现有长度，已完成边数，当前根数）&lt;/li&gt;
+&lt;li&gt;优化条件：总长度整除四、单根长度小于边长、降序排列......&lt;/li&gt;
+&lt;li&gt;注意递归的参数，每完成一条边要从0开始重新遍历&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;http://poj.org/problem?id=2362&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;string&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+int sticks[20];
+int side_length;
+int num;
+bool visit[20];
+
+bool Compare(int a, int b)
+{
+	return a &amp;gt; b;
+}
+
+bool DFS(int length_now, int side_complete, int stick_now)
+{
+	if (side_complete == 3)
+		return true;
+	else
+	{
+		int sample = 0;
+		for (int i = stick_now; i &amp;lt; num; i++)
+		{
+			int length_stick = sticks[i];
+			int length_temp = length_now + length_stick;
+
+			if (!visit[i] &amp;amp;&amp;amp; length_temp &amp;lt;= side_length &amp;amp;&amp;amp; sticks[i] != sample)
+			{
+				visit[i] = true;
+
+				if (length_temp == side_length)
+				{
+					if (DFS(0, side_complete + 1, 0)) //从0开始重新遍历
+						return true;
+					else
+						sample = sticks[i];
+				}
+				else if (length_temp &amp;lt; side_length)
+				{
+					if (DFS(length_temp, side_complete, i + 1))
+						return true;
+					else
+						sample = sticks[i];
+				}
+
+				visit[i] = false;
+			}
+		}
+	}
+	return false;
+
+}
+
+int main()
+{
+	int count = 0;
+	cin &amp;gt;&amp;gt; count;
+	while (count--)
+	{
+		memset(sticks, 0, sizeof(sticks));
+		memset(visit, false, sizeof(visit));
+		int sum=0;
+		cin &amp;gt;&amp;gt; num;
+		for (int i = 0; i &amp;lt; num; i++)
+		{
+			cin &amp;gt;&amp;gt; sticks[i];
+			sum += sticks[i];
+		}
+
+		side_length = sum / 4;
+
+		if (sum % 4 != 0)
+		{
+			cout &amp;lt;&amp;lt; &amp;quot;no\n&amp;quot;;
+			continue;
+		}
+
+		sort(sticks, sticks + num, Compare);
+		if (sticks[0] &amp;gt; side_length)
+		{
+			cout &amp;lt;&amp;lt; &amp;quot;no\n&amp;quot;;
+			continue;
+		}
+
+
+		if (DFS(0, 0, 0))
+			cout &amp;lt;&amp;lt; &amp;quot;yes\n&amp;quot;;
+		else
+			cout &amp;lt;&amp;lt; &amp;quot;no\n&amp;quot;;
+	}
+	return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;3-神奇的口袋&#34;&gt;3.  神奇的口袋&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-3&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;有一个神奇的口袋，总的容积是40，用这个口袋可以变出一些物品，这些物品的总体积必须是40。John现在有n个想要得到的物品，每个物品的体积分别是a1，a2……an。John可以从这些物品中选择一些，如果选出的物体的总体积是40，那么利用这个神奇的口袋，John就可以得到这些物品。现在的问题是，John有多少种不同的选择物品的方式。&lt;/p&gt;
+&lt;h3 id=&#34;要点-3&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;此题求解的个数&lt;/p&gt;
+&lt;p&gt;把&lt;code&gt;if return&lt;/code&gt;结构换为直接的递归求解即可&lt;/p&gt;
+&lt;h3 id=&#34;提交地址-3&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/9aaea0b82623466a8b29a9f1a00b5d35?tpId=40&amp;amp;tqId=21390&amp;amp;rp=1&amp;amp;ru=%2Fta%2Fkaoyan&amp;amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-3&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+using namespace std;
+
+int total;
+bool visit[20];
+int volume[20];
+int ans;
+
+bool Compare(int a, int b)
+{
+    return a &amp;gt; b;
+}
+
+bool DFS(int leave, int id)
+{
+    if (leave == 0)
+    {
+        ans++;
+        return true;
+    }
+    else
+    {
+        for (int i=id; i&amp;lt;total; i++)
+        {
+            if (!visit[i] &amp;amp;&amp;amp; volume[i] &amp;lt;= leave)
+            {
+                visit[i]  = true;
+                DFS(leave-volume[i], i); //此处注意，是遍历，不是找到解就返回
+                visit[i] = false;
+            }
+        }
+    }
+    
+    return false;
+}
+
+int main()
+{
+    while (cin &amp;gt;&amp;gt; total)
+    {
+        for (int i=0; i&amp;lt;total; i++)
+            cin &amp;gt;&amp;gt; volume[i];
+        
+        sort(volume, volume+total, Compare);
+        memset(visit, false, sizeof(visit));
+        ans = 0;
+        
+        DFS(40, 0); 
+        cout &amp;lt;&amp;lt; ans &amp;lt;&amp;lt; endl;
+    }
+        
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;4-八皇后&#34;&gt;4.  八皇后&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-4&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;会下国际象棋的人都很清楚：皇后可以在横、竖、斜线上不限步数地吃掉其他棋子。如何将8个皇后放在棋盘上（有8 * 8个方格），使它们谁也不能被吃掉！这就是著名的八皇后问题。&lt;br&gt;
+对于某个满足要求的8皇后的摆放方法，定义一个皇后串a与之对应，即a=b1b2...b8，其中bi为相应摆法中第i行皇后所处的列数。已经知道8皇后问题一共有92组解（即92个不同的皇后串）。&lt;br&gt;
+给出一个数b，要求输出第b个串。串的比较是这样的：皇后串x置于皇后串y之前，当且仅当将x视为整数时比y小。&lt;/p&gt;
+&lt;h3 id=&#34;要点-4&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;本质为八皇后求解问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;check()函数&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-4&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;http://bailian.openjudge.cn/practice/2754&lt;/p&gt;
+&lt;h3 id=&#34;代码-4&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+using namespace std;
+
+int ans[100][10];
+int a[10];
+int times = 1;
+
+bool check(int n)
+{
+    for (int i = 1; i&amp;lt;n; i++)
+    {
+        if ((abs(a[i] - a[n]) == n-i) || (a[i] == a[n])) //对角线或者同一列
+            return false;  
+    }   
+    return true;
+}
+
+bool DFS(int n) //求解八皇后问题
+{
+    if (n &amp;gt; 8)
+    {
+        for (int i=1; i&amp;lt;=8; i++)
+            ans[times][i] = a[i];
+        
+        times++;
+        return true;
+    }
+    else
+    {
+        for (int i=1; i&amp;lt;=8; i++)
+        {
+            a[n] = i;
+            if(check(n))
+            {
+                DFS(n+1);
+            }
+        }
+    }
+    
+}
+
+int main()
+{
+    int num;
+    while (cin &amp;gt;&amp;gt; num)
+    {
+        times = 1;
+        DFS(1);
+        for (int i=1; i&amp;lt;=8; i++)
+            cout &amp;lt;&amp;lt; ans[num][i];
+        cout &amp;lt;&amp;lt; endl;
+    }
+    
+}
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter9搜索：9.2DFS</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter9_9.1/"" data-c="
+          &lt;h2 id=&#34;bfs&#34;&gt;BFS&lt;/h2&gt;
+&lt;p&gt;常用于搜索最优值问题，关键字“最短”“最优”“最小”&lt;/p&gt;
+&lt;p&gt;形式化表示问题，设计合适的状态表示&lt;/p&gt;
+&lt;p&gt;将搜索问题转化为针对状态的搜索&lt;/p&gt;
+&lt;p&gt;适当的标记，避免重复搜索&lt;/p&gt;
+&lt;h2 id=&#34;1-catch-that-cow&#34;&gt;1.  &lt;strong&gt;Catch That Cow&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Farmer John has been informed of the location of a fugitive cow and wants to catch her immediately. He starts at a point &lt;em&gt;N&lt;/em&gt; (0 ≤ &lt;em&gt;N&lt;/em&gt; ≤ 100,000) on a number line and the cow is at a point &lt;em&gt;K&lt;/em&gt; (0 ≤ &lt;em&gt;K&lt;/em&gt; ≤ 100,000) on the same number line. Farmer John has two modes of transportation: walking and teleporting.&lt;/p&gt;
+&lt;p&gt;* Walking: FJ can move from any point &lt;em&gt;X&lt;/em&gt; to the points &lt;em&gt;X&lt;/em&gt; - 1 or &lt;em&gt;X&lt;/em&gt; + 1 in a single minute&lt;br&gt;
+* Teleporting: FJ can move from any point &lt;em&gt;X&lt;/em&gt; to the point 2 × &lt;em&gt;X&lt;/em&gt; in a single minute.&lt;/p&gt;
+&lt;p&gt;If the cow, unaware of its pursuit, does not move at all, how long does it take for Farmer John to retrieve it?&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;要点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;BFS用queue即可&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;基本步骤：&lt;/p&gt;
+&lt;p&gt;初始化，循环（pop，判断终止输出结果/加入子节点+合法判断）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数组初始化：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;memset(visit, false, sizeof(visit));&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;visit标记数组提高运行效率&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;http://poj.org/problem?id=3278&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;queue&amp;gt;
+#include &amp;lt;string&amp;gt;
+
+using namespace std;
+
+struct status
+{
+	int n;//位置
+	int t;//时间
+
+	//构造函数
+	status(int position, int time)
+	{
+		n = position;
+		t = time;
+	}
+};
+
+int BFS(int n, int k) //返回花费时间
+{
+	queue&amp;lt;status&amp;gt; Q;//搜索队列
+
+	bool visit[100001];//标记数组
+	memset(visit, false, sizeof(visit));
+
+	//初始化起点
+	status start = status(n, 0);
+	Q.push(start);
+	visit[start.n] = true; //标记已到达
+
+	while (!Q.empty())
+	{
+		status now = Q.front();
+		Q.pop();
+		visit[now.n] = true;
+
+		if (now.n == k) //已经到达终点
+		{
+			return now.t;
+		}
+		else
+		{
+			for (int i = 0; i &amp;lt; 3; i++) //子节点入列
+			{
+				status next = status(0, 0);
+				if (i == 0)
+				{
+					next = status(now.n - 1, now.t + 1);
+				}
+				else if (i == 1)
+				{
+					next = status(now.n + 1, now.t + 1);
+				}
+				else
+				{
+					next = status(now.n * 2, now.t + 1);
+				}
+
+				//判断是否合法
+				if (next.n &amp;gt;= 0 &amp;amp;&amp;amp; next.n &amp;lt;= 100000 &amp;amp;&amp;amp; !visit[next.n])
+				{
+					Q.push(next);
+					visit[next.n] = true;
+				}			
+			}
+		}
+	}
+};
+
+int main()
+{
+	int n, k;
+	while (cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; k)
+	{
+		cout &amp;lt;&amp;lt; BFS(n, k) &amp;lt;&amp;lt; endl;
+	}
+	return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-find-the-multiple&#34;&gt;2.  &lt;strong&gt;Find The Multiple&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Given a positive integer n, write a program to find out a nonzero multiple m of n whose decimal representation contains only the digits 0 and 1. You may assume that n is not greater than 200 and there is a corresponding m containing no more than 100 decimal digits.&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;不是遍历倍数，而是遍历0/1组成的数&lt;/li&gt;
+&lt;li&gt;不是为啥BFS里直接&lt;code&gt;cout&lt;/code&gt;就AC，return就报错？？？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;http://poj.org/problem?id=1426&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;queue&amp;gt;
+
+using namespace std;
+
+void BFS(int num)
+{
+	queue&amp;lt;long long&amp;gt; Q;
+	long long start = 1;
+	Q.push(start);
+
+	while (!Q.empty())
+	{
+		long long now = Q.front();
+		Q.pop();
+
+		if (now % num == 0)
+		{
+			cout &amp;lt;&amp;lt; now &amp;lt;&amp;lt; endl;
+			return;
+		}
+
+		Q.push(now * 10);
+		Q.push(now * 10 + 1);
+
+	}
+}
+
+int main()
+{
+	int num;
+	while (cin &amp;gt;&amp;gt; num)
+	{
+		if (num == 0)
+			break;
+
+		BFS(num);
+	}
+	return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;3-玛雅人的密码&#34;&gt;3.  玛雅人的密码&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-3&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;玛雅人有一种密码，如果字符串中出现连续的2012四个数字就能解开密码。给一个长度为N的字符串，（2=&amp;lt;N&amp;lt;=13）该字符串中只含有0,1,2三种数字，问这个字符串要移位几次才能解开密码，每次只能移动相邻的两个数字。例如02120经过一次移位，可以得到20120,01220,02210,02102，其中20120符合要求，因此输出为1.如果无论移位多少次都解不开密码，输出-1。&lt;/p&gt;
+&lt;h3 id=&#34;要点-3&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;使用一个vector来记录已遍历的字符串&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;移动次数相当于BFS树的层数，而不是遍历次数&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;解决方法：构建结构体Status，储存对应层数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;判断是否包含子串：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;now.s.find(&amp;quot;2012&amp;quot;) != string::npos&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-3&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/761fc1e2f03742c2aa929c19ba96dbb0?tpId=40&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-3&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+using namespace std;
+
+struct Status
+{
+    string s;
+    int t;
+    Status(string str, int count)
+    {
+        s = str;
+        t = count;
+    }
+};
+
+void BFS(int length, string str)
+{
+    queue&amp;lt;Status&amp;gt; Q;
+    vector&amp;lt;Status&amp;gt; visit;
+    //初始化
+    Status start = Status(str, 0);
+    Q.push(start);
+    visit.push_back(start);
+
+    //循环
+    while (!Q.empty())
+    {
+        //pop
+        Status now = Q.front();
+        Q.pop();
+        visit.push_back(now);
+        //判断输出
+        if (now.s.find(&amp;quot;2012&amp;quot;) != string::npos)
+        {
+            cout &amp;lt;&amp;lt; now.t &amp;lt;&amp;lt; endl;
+            return;
+        }
+
+        //加入子节点+避免重复
+        for (int i=0; i&amp;lt;length-1; i++)
+        {
+            Status next =now;
+            next.s[i] = now.s[i+1];
+            next.s[i+1] = now.s[i];
+            next.t++;
+        
+            //判断是否已出现
+            bool flag = false;
+            for (int i=0; i&amp;lt;sizeof(visit); i++)
+            {
+                if (visit[i].s == next.s)
+                {
+                    flag = true;
+                    break;
+                }
+            }
+            
+            //合法就加入
+            if(flag == false)
+            {
+                Q.push(next);
+            }
+        }
+    }
+    
+    cout &amp;lt;&amp;lt; -1 &amp;lt;&amp;lt; endl;
+    return;    
+};
+
+int main()
+{
+    int length;
+    string str;
+    while(cin &amp;gt;&amp;gt; length)
+    {
+        cin &amp;gt;&amp;gt; str;
+        BFS(length, str);
+    }
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter9搜索：9.1BFS</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/rank-emotion-cause-2020/"" data-c="
           &lt;p&gt;阅读笔记：&lt;/p&gt;
 ">Rank-Emotion-Cause</a>
@@ -2252,7 +2882,7 @@ int main(){
 }
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;2-代理服务器&#34;&gt;2.  代理服务器&lt;/h2&gt;
+&lt;h2 id=&#34;3-代理服务器&#34;&gt;3.  代理服务器&lt;/h2&gt;
 &lt;h3 id=&#34;题目描述-3&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
 &lt;p&gt;使用代理服务器能够在一定程度上隐藏客户端信息，从而保护用户在互联网上的隐私。我们知道n个代理服务器的IP地址，现在要用它们去访问m个服务器。这 m 个服务器的 IP 地址和访问顺序也已经给出。系统在同一时刻只能使用一个代理服务器，并要求不能用代理服务器去访问和它 IP地址相同的服务器（不然客户端信息很有可能就会被泄露）。在这样的条件下，找到一种使用代理服务器的方案，使得代理服务器切换的次数尽可能得少。&lt;/p&gt;
 &lt;h3 id=&#34;要点-3&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
