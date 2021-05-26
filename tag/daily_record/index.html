@@ -9,7 +9,7 @@
 <meta name="description" content="世界那么大，我想去看看">
 <meta name="theme-color" content="#343a40">
 <title>Czardas</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1621949841853">
+<link rel="shortcut icon" href="/favicon.ico?v=1622032066064">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -258,7 +258,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">32</span>
+        <span class="site-item-stat-count">39</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -309,6 +309,18 @@
           <small class="language" data-lan="tag">标签</small>
         </h2>
       </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
       
       
@@ -543,6 +555,35 @@
       
       
       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://Czardas42.github.io/post/nlp_law/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-21
+              <small>NLP与法律风险管理</small>
+            </h1>
+          </div>
+        </div>
+      </a>
       
       
       
@@ -798,6 +839,696 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter10_10.3/"" data-c="
+          &lt;h2 id=&#34;优先队列&#34;&gt;优先队列&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;#include &amp;lt;queue&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;priority_queue&amp;lt;type&amp;gt; name&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;每个元素赋予了优先级，pop优先级最高的元素&lt;/p&gt;
+&lt;h2 id=&#34;复数集合&#34;&gt;&lt;strong&gt;复数集合&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;一个复数（x+iy）集合，两种操作作用在该集合上：   1、Pop 表示读出集合中复数模值最大的那个复数，如集合为空 输出 empty ，不为空就输出最大的那个复数并且从集合中删除那个复数，再输出集合的大小SIZE；   2 Insert a+ib 指令（a，b表示实部和虚部），将a+ib加入到集合中 ，输出集合的大小SIZE；   最开始要读入一个int n，表示接下来的n行每一行都是一条命令。&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;要点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;运算符重载&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-C++&#34;&gt;//重载运算符
+    bool operator&amp;lt; (Complex c) const
+    {
+        return (x*x + y*y) &amp;lt; (c.x*c.x + c.y*c.y);
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;scanf(&amp;quot;%d+i%d&amp;quot;, &amp;amp;a. &amp;amp;b);&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;用于从输入中提取所需数字时&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/abdd24fa839c414a9b83aa9c4ecd05cc?tpId=40&amp;amp;rp=1&amp;amp;ru=%2Fta%2Fkaoyan&amp;amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;string&amp;gt;
+#include &amp;lt;queue&amp;gt;
+
+using namespace std;
+
+struct Complex
+{
+    int x;
+    int y;
+    Complex(int a, int b)
+    {
+        x = a;
+        y = b;
+    }
+    //重载运算符
+    bool operator&amp;lt; (Complex c) const
+    {
+        return (x*x + y*y) &amp;lt; (c.x*c.x + c.y*c.y);
+    }
+};
+
+int main()
+{
+    int cases;
+    priority_queue&amp;lt;Complex&amp;gt; Q;
+    
+    cin &amp;gt;&amp;gt; cases;
+    for (int i=0; i&amp;lt;cases; i++)
+    {
+        string command;
+        cin &amp;gt;&amp;gt; command;
+        if (command == &amp;quot;Pop&amp;quot;)
+        {
+            if (Q.empty())
+                cout &amp;lt;&amp;lt; &amp;quot;empty\n&amp;quot;;
+            else
+            {
+                Complex c = Q.top();
+                Q.pop();
+                cout &amp;lt;&amp;lt; c.x &amp;lt;&amp;lt; &amp;quot;+i&amp;quot; &amp;lt;&amp;lt; c.y &amp;lt;&amp;lt; endl;
+                cout &amp;lt;&amp;lt; &amp;quot;SIZE = &amp;quot; &amp;lt;&amp;lt; Q.size() &amp;lt;&amp;lt; endl;
+            }
+        }
+        else if (command == &amp;quot;Insert&amp;quot;)
+        {
+            int a, b;
+            scanf(&amp;quot;%d+i%d&amp;quot;, &amp;amp;a, &amp;amp;b);
+            Complex c = Complex(a, b);
+            Q.push(c);
+            cout &amp;lt;&amp;lt; &amp;quot;SIZE = &amp;quot; &amp;lt;&amp;lt; Q.size() &amp;lt;&amp;lt; endl;
+        }
+    }
+    
+    return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;哈夫曼树&#34;&gt;哈夫曼树&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;哈夫曼树，第一行输入一个数n，表示叶结点的个数。需要用这些叶结点生成哈夫曼树，根据哈夫曼树的概念，这些结点有权值，即weight，题目需要输出所有结点的值与权值的乘积之和的最小值。&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;要点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;WSL（所有叶子结点的带权路径长度之和）等于 所有中间节点的权值和&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;优先队列（优先级低的先输出）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;priority_queue &amp;lt; int, vector&amp;lt;int&amp;gt;, greater&amp;lt;int&amp;gt; &amp;gt; Q;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;实现过程：不断从优先队列中pop最小的两个节点，相加后再push入列&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/162753046d5f47c7aac01a5b2fcda155?tpId=40&amp;amp;rp=1&amp;amp;ru=%2Fta%2Fkaoyan&amp;amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;queue&amp;gt;
+
+using namespace std;
+
+
+
+int main()
+{
+    int num, point;
+    priority_queue &amp;lt; int, vector&amp;lt;int&amp;gt;, greater&amp;lt;int&amp;gt; &amp;gt; Q;
+    cin &amp;gt;&amp;gt; num;
+    for (int i=0; i&amp;lt;num; i++)
+    {
+        cin &amp;gt;&amp;gt; point;
+        Q.push(point);        
+    }
+    
+    int answer = 0;
+    while(Q.size() != 1)
+    {
+        int n1 = Q.top();
+        Q.pop();
+        int n2 = Q.top();
+        Q.pop();
+        int temp = n1 + n2;
+        answer += temp;
+        Q.push(temp);
+    }
+    
+    cout &amp;lt;&amp;lt; answer &amp;lt;&amp;lt; endl;
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;查找第k小数&#34;&gt;&lt;strong&gt;查找第K小数&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-3&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;查找一个数组的第K小的数，注意同样大小算一样大。 如 2 1 3 4 5 2 第三小数为3。&lt;/p&gt;
+&lt;h3 id=&#34;要点-3&#34;&gt;要点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;优先队列（优先级低的先输出）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;priority_queue &amp;lt; int, vector&amp;lt;int&amp;gt;, greater&amp;lt;int&amp;gt; &amp;gt; Q;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Q.pop()&lt;/code&gt;导致Q的size发生变化，在循环条件里需要注意&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;vector的push条件为&lt;code&gt;if (temp != answer.back())&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;而不是&lt;code&gt;if (temp != answer[i-1]&lt;/code&gt;, 因为不是每一次循环vector都会增加元素，应该根据vector内的最后一个元素进行判断&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-3&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/204dfa6fcbc8478f993d23f693189ffd?tpId=40&amp;amp;rp=1&amp;amp;ru=%2Fta%2Fkaoyan&amp;amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-3&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;queue&amp;gt;
+#include &amp;lt;vector&amp;gt;
+
+using namespace std;
+
+int main()
+{
+    int count;
+    while(cin &amp;gt;&amp;gt; count)
+    {
+        int num;
+        priority_queue&amp;lt;int, vector&amp;lt;int&amp;gt;, greater&amp;lt;int&amp;gt;&amp;gt; Q;
+        for(int i=0; i&amp;lt;count; i++)
+        {
+            cin &amp;gt;&amp;gt; num;
+            Q.push(num);
+        }
+        
+        int order;
+        cin &amp;gt;&amp;gt; order;
+        
+        vector&amp;lt;int&amp;gt; answer;
+        answer.push_back(Q.top());
+        Q.pop();
+        int size = Q.size();
+        for (int i=1; i&amp;lt;=size; i++)
+        {
+            int temp = Q.top();
+            Q.pop();
+            if (temp != answer.back())
+            {
+                answer.push_back(temp);
+            }  
+        }
+        
+        cout &amp;lt;&amp;lt; answer[order-1] &amp;lt;&amp;lt; endl;
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;搬水果&#34;&gt;&lt;strong&gt;搬水果&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-4&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;在一个果园里，小明已经将所有的水果打了下来，并按水果的不同种类分成了若干堆，小明决定把所有的水果合成一堆。每一次合并，小明可以把两堆水果合并到一起，消耗的体力等于两堆水果的重量之和。当然经过 n‐1 次合并之后，就变成一堆了。小明在合并水果时总共消耗的体力等于每次合并所耗体力之和。   假定每个水果重量都为 1，并且已知水果的种类数和每种水果的数目，你的任务是设计出合并的次序方案，使小明耗费的体力最少，并输出这个最小的体力耗费值。例如有 3 种水果，数目依次为 1，2，9。可以先将 1，2 堆合并，新堆数目为3，耗费体力为 3。然后将新堆与原先的第三堆合并得到新的堆，耗费体力为 12。所以小明总共耗费体力=3+12=15，可以证明 15 为最小的体力耗费值。&lt;/p&gt;
+&lt;h3 id=&#34;要点-4&#34;&gt;要点&lt;/h3&gt;
+&lt;p&gt;优先队列（优先级低的先输出）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;priority_queue &amp;lt; int, vector&amp;lt;int&amp;gt;, greater&amp;lt;int&amp;gt; &amp;gt; Q;&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;提交地址-4&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/e4c775b0f3ee42a4bb72c26d2e1eef8a?tpId=40&amp;amp;rp=1&amp;amp;ru=%2Fta%2Fkaoyan&amp;amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-4&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;queue&amp;gt;
+
+using namespace std;
+
+int main()
+{
+    int count;
+    while(cin &amp;gt;&amp;gt; count)
+    {
+        if (count == 0)
+            break;
+        
+        priority_queue&amp;lt;int, vector&amp;lt;int&amp;gt;, greater&amp;lt;int&amp;gt;&amp;gt; Q;
+        
+        for (int i=0; i&amp;lt;count; i++)
+        {
+            int item;
+            cin &amp;gt;&amp;gt; item;
+            Q.push(item);
+        }
+        
+        int answer  = 0;
+        while (Q.size() != 1)
+        {
+            int n1 = Q.top();
+            Q.pop();
+            int n2 = Q.top();
+            Q.pop();
+            int temp = n1 + n2;
+            answer += temp;
+            Q.push(temp);
+        }
+        
+        cout &amp;lt;&amp;lt; answer &amp;lt;&amp;lt; endl;
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter10数据结构二：10.3优先队列</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter10_10.2/"" data-c="
+          &lt;h2 id=&#34;二叉排序树&#34;&gt;二叉排序树&lt;/h2&gt;
+&lt;p&gt;左子树节点值 &amp;lt; 根节点值 &amp;lt; 右子树节点值&lt;/p&gt;
+&lt;p&gt;对于元素不同的二叉排序树来说，前序遍历即唯一&lt;/p&gt;
+&lt;h2 id=&#34;二叉排序树-2&#34;&gt;&lt;strong&gt;二叉排序树&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;二叉排序树，也称为二叉查找树。可以是一颗空树，也可以是一颗具有如下特性的非空二叉树： 1. 若左子树非空，则左子树上所有节点关键字值均不大于根节点的关键字值； 2. 若右子树非空，则右子树上所有节点关键字值均不小于根节点的关键字值； 3. 左、右子树本身也是一颗二叉排序树。 现在给你N个关键字值各不相同的节点，要求你按顺序插入一个初始为空树的二叉排序树中，每次插入后成功后，求相应的父亲节点的关键字值，如果没有父亲节点，则输出-1。&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;要点&lt;/h3&gt;
+&lt;p&gt;递归方式按照输入顺序建立二叉排序树:&lt;code&gt;insert()&lt;/code&gt;函数&lt;/p&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/30a0153649304645935c949df7599602?tpId=40&amp;amp;rp=1&amp;amp;ru=%2Fta%2Fkaoyan&amp;amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+
+using namespace std;
+
+struct TreeNode
+{
+    int data;
+    TreeNode *left, *right;
+    TreeNode(int d)
+    {
+        data = d;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+TreeNode* insert(TreeNode* root, int x, int father)
+{
+    if (root == NULL)
+    {
+        root = new TreeNode(x);
+        cout &amp;lt;&amp;lt; father &amp;lt;&amp;lt; endl;
+    }
+    else if(root-&amp;gt;data &amp;gt; x) //左子树
+    {
+        root-&amp;gt;left = insert(root-&amp;gt;left, x, root-&amp;gt;data);
+    }
+    else //右子树
+    {
+         root-&amp;gt;right = insert(root-&amp;gt;right, x, root-&amp;gt;data);
+    }
+    
+    return root;
+}
+
+int main()
+{
+    int num;
+    while (cin &amp;gt;&amp;gt; num)
+    {
+        TreeNode* root = NULL;
+        for (int i=0; i&amp;lt;num; i++)
+        {
+            int x;
+            cin &amp;gt;&amp;gt; x;
+            root = insert(root, x, -1);
+        }
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;二叉树排序&#34;&gt;二叉树排序&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;输入一系列整数，建立二叉排序树，并进行前序，中序，后序遍历。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;输入中有重复元素，但输出二叉树遍历序列中重复元素不用输出。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;要点&lt;/h3&gt;
+&lt;p&gt;重复元素的去除只在于&lt;code&gt;insert()&lt;/code&gt;函数的else判断条件&lt;/p&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/b42cfd38923c4b72bde19b795e78bcb3?tpId=40&amp;amp;rp=1&amp;amp;ru=%2Fta%2Fkaoyan&amp;amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+using namespace std;
+
+
+struct TreeNode
+{
+    int data;
+    TreeNode* left, *right;
+    TreeNode(int d)
+    {
+        data = d;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+TreeNode* insert(TreeNode* root, int x)
+{
+    if (root == NULL)
+    {
+        root = new TreeNode(x);
+    }
+    else if (x &amp;lt; root-&amp;gt;data)
+    {
+        root-&amp;gt;left = insert(root-&amp;gt;left, x);
+    }
+    else if (x &amp;gt; root-&amp;gt;data)
+    {
+        root-&amp;gt;right = insert(root-&amp;gt;right, x);
+    }
+    
+    return root;
+}
+
+void NLR(TreeNode* root)
+{
+    if (root == NULL)
+        return;
+    
+    cout &amp;lt;&amp;lt; root-&amp;gt;data &amp;lt;&amp;lt; &amp;quot; &amp;quot;;
+    NLR(root-&amp;gt;left);
+    NLR(root-&amp;gt;right);
+    
+    return;
+}
+
+void LNR(TreeNode* root)
+{
+    if (root == NULL)
+        return;
+    
+    LNR(root-&amp;gt;left);
+    cout &amp;lt;&amp;lt; root-&amp;gt;data &amp;lt;&amp;lt; &amp;quot; &amp;quot;;
+    LNR(root-&amp;gt;right);
+    
+    return;
+}
+
+void LRN(TreeNode* root)
+{
+    if (root == NULL)
+        return;
+    
+    LRN(root-&amp;gt;left);
+    LRN(root-&amp;gt;right);
+    cout &amp;lt;&amp;lt; root-&amp;gt;data &amp;lt;&amp;lt; &amp;quot; &amp;quot;;
+    
+    return;
+}
+
+int main()
+{
+    int num;
+    while (cin &amp;gt;&amp;gt; num)
+    {
+        int x;
+        TreeNode* root = NULL;
+        for (int i=0; i&amp;lt;num; i++)
+        {
+            cin &amp;gt;&amp;gt; x;
+            root = insert(root, x);
+        }
+        
+        NLR(root);
+        cout &amp;lt;&amp;lt; endl;
+        LNR(root);
+        cout &amp;lt;&amp;lt; endl;
+        LRN(root);
+        cout &amp;lt;&amp;lt; endl;
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;二叉搜索树&#34;&gt;二叉搜索树&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-3&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;判断两序列是否为同一二叉搜索树序列&lt;/p&gt;
+&lt;h3 id=&#34;要点-3&#34;&gt;要点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;先构建，再判断&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前序+中序确定唯一二叉树；&lt;/p&gt;
+&lt;p&gt;对于一个确定的线性序列，按顺序插入序列可以确定一棵唯一的二叉搜索树，但是。一棵二叉搜索树却可以有多种插入序列得到。&lt;/p&gt;
+&lt;p&gt;而对二叉排序树而言，只需要遍历两个二叉树，比较一下就可以判断.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;比较函数的返回return递归&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;return compare(root1-&amp;gt;left, root2-&amp;gt;left) &amp;amp;&amp;amp; compare(root1-&amp;gt;right, root2-&amp;gt;right);&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-3&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/3d6dd9a58d5246f29f71683346bb8f1b?tpId=40&amp;amp;rp=1&amp;amp;ru=%2Fta%2Fkaoyan&amp;amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-3&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;string&amp;gt;
+
+using namespace std;
+
+struct TreeNode
+{
+    char data;
+    TreeNode *left, *right;
+    TreeNode(char d)
+    {
+        data = d;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+TreeNode* build(TreeNode* root, char d)
+{
+    if (root == NULL)
+    {
+        root = new TreeNode(d);
+        //cout &amp;lt;&amp;lt;root-&amp;gt;data &amp;lt;&amp;lt; endl;
+    }
+    else if (d &amp;lt; root-&amp;gt;data) //左子树
+    {
+        root-&amp;gt;left = build(root-&amp;gt;left, d);
+    }
+    else if (d &amp;gt; root-&amp;gt;data) //右子树
+    {
+        root-&amp;gt;right = build(root-&amp;gt;right, d);
+    }
+    
+    return root;
+}
+
+bool compare(TreeNode* root1, TreeNode* root2)
+{
+    if (root1 == NULL &amp;amp;&amp;amp; root2 == NULL)
+        return true;
+    else if ((root1==NULL &amp;amp;&amp;amp; root2!=NULL) || (root1!=NULL &amp;amp;&amp;amp; root2==NULL) )
+        return false;   
+    else if (root1-&amp;gt;data != root2-&amp;gt;data)
+        return false;
+    
+    return compare(root1-&amp;gt;left, root2-&amp;gt;left) &amp;amp;&amp;amp; compare(root1-&amp;gt;right, root2-&amp;gt;right);
+
+}
+
+int main()
+{
+    int cases = 0;
+    string str1, str2;
+    cin &amp;gt;&amp;gt; cases;
+    cin &amp;gt;&amp;gt; str1;
+    for (int i=0; i&amp;lt;cases; i++)
+    {       
+        cin &amp;gt;&amp;gt; str2;
+        TreeNode *root1 = NULL, *root2 = NULL;
+        for (int j=0; j&amp;lt;str1.size(); j++)
+        {
+            root1 = build(root1, str1[j]);
+            root2 = build(root2, str2[j]);   
+        }
+        
+        if (compare(root1, root2))
+            cout &amp;lt;&amp;lt; &amp;quot;YES\n&amp;quot;;
+        else
+            cout &amp;lt;&amp;lt; &amp;quot;NO\n&amp;quot;;
+    }    
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter10数据结构二：10.2二叉排序树</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/chapter10_10.1/"" data-c="
+          &lt;h2 id=&#34;二叉树&#34;&gt;二叉树&lt;/h2&gt;
+&lt;p&gt;NLR，LNR，LRN三种遍历方式&lt;/p&gt;
+&lt;h2 id=&#34;二叉树遍历&#34;&gt;&lt;strong&gt;二叉树遍历&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;编一个程序，读入用户输入的一串先序遍历字符串，根据此字符串建立一个二叉树（以指针方式存储）。 例如如下的先序遍历字符串： ABC##DE#G##F### 其中“#”表示的是空格，空格字符代表空树。建立起此二叉树以后，再对二叉树进行中序遍历，输出遍历结果。&lt;/p&gt;
+&lt;h3 id=&#34;要点&#34;&gt;要点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;二叉树的建立&lt;/li&gt;
+&lt;li&gt;二叉树的遍历&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/4b91205483694f449f94c179883c1fef?tpId=40&amp;amp;rp=1&amp;amp;ru=%2Fta%2Fkaoyan&amp;amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+using namespace std;
+
+int position;
+string str;
+
+struct TreeNode
+{
+    char data;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(char c)
+    {
+        data = c;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+TreeNode* build()
+{
+    char c = str[position];
+    position++;
+    
+    if (c == &#39;#&#39;)
+        return NULL;
+    
+    TreeNode* root = new TreeNode(c);
+    root-&amp;gt;left = build();
+    root-&amp;gt;right = build();
+    
+    return root;   
+}
+
+void LNR(TreeNode* root)
+{
+    if(root == NULL)
+        return;
+    
+    LNR(root-&amp;gt;left);
+    cout &amp;lt;&amp;lt; root-&amp;gt;data &amp;lt;&amp;lt; &amp;quot; &amp;quot;;
+    LNR(root-&amp;gt;right);
+}
+
+int main()
+{
+    while (cin &amp;gt;&amp;gt; str)
+    {
+        position = 0;
+        //前序建立二叉树
+        TreeNode* root = build();
+        //中序遍历二叉树
+        LNR(root);
+        cout &amp;lt;&amp;lt; endl;
+    }
+} 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;二叉树遍历-2&#34;&gt;二叉树遍历&lt;/h2&gt;
+&lt;h3 id=&#34;题目描述-2&#34;&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;二叉树的前序、中序、后序遍历的定义： 前序遍历：对任一子树，先访问跟，然后遍历其左子树，最后遍历其右子树； 中序遍历：对任一子树，先遍历其左子树，然后访问根，最后遍历其右子树； 后序遍历：对任一子树，先遍历其左子树，然后遍历其右子树，最后访问根。 给定一棵二叉树的前序遍历和中序遍历，求其后序遍历（提示：给定前序遍历与中序遍历能够唯一确定后序遍历）。&lt;/p&gt;
+&lt;h3 id=&#34;要点-2&#34;&gt;&lt;strong&gt;要点&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;前序和中序可唯一确定二叉树，后序和中序可唯一确定二叉树&lt;/p&gt;
+&lt;p&gt;前序和后续+满二叉树可唯一确定&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过中序确定左右子树的序列&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-C++&#34;&gt;//左子树
+root-&amp;gt;left = build(str1.substr(1, position), str2.substr(0, position));
+//右子树
+root-&amp;gt;right = build(str1.substr(position + 1), str2.substr(position + 1));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;构建函数最后不要忘记return root&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;注意&lt;code&gt;str1.size()&lt;/code&gt;和&lt;code&gt;sizeof()&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;提交地址-2&#34;&gt;提交地址&lt;/h3&gt;
+&lt;p&gt;https://www.nowcoder.com/practice/6e732a9632bc4d12b442469aed7fe9ce?tpId=40&amp;amp;rp=1&amp;amp;ru=%2Fta%2Fkaoyan&amp;amp;qru=%2Fta%2Fkaoyan%2Fquestion-ranking&amp;amp;tab=answerKey&lt;/p&gt;
+&lt;h3 id=&#34;代码-2&#34;&gt;代码&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;string&amp;gt;
+
+using namespace std;
+
+struct TreeNode
+{
+    char data;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(char c)
+    {
+        data = c;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+TreeNode* build(string str1, string str2)
+{
+    if (str1.size() == 0)
+        return NULL;
+
+    char c = str1[0];
+    int position = str2.find(c);
+    TreeNode* root = new TreeNode(c);
+    //左子树
+    root-&amp;gt;left = build(str1.substr(1, position), str2.substr(0, position));
+    //右子树
+    root-&amp;gt;right = build(str1.substr(position + 1), str2.substr(position + 1));
+
+    return root;
+}
+
+void LRN(TreeNode* root)
+{
+    if (root == NULL)
+        return;
+
+    LRN(root-&amp;gt;left);
+    LRN(root-&amp;gt;right);
+    cout &amp;lt;&amp;lt; root-&amp;gt;data;
+    return;
+}
+
+int main()
+{
+    //前序和中序可唯一确定二叉树
+    string str1, str2;
+    while (cin &amp;gt;&amp;gt; str1 &amp;gt;&amp;gt; str2)
+    {
+        TreeNode* root = build(str1, str2);
+        LRN(root);
+        cout &amp;lt;&amp;lt; endl;
+    }
+
+    return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+">Chapter10数据结构二：10.1二叉树</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/visual_BoW/"" data-c="
@@ -6047,9 +6778,20 @@ rm -rf $HOME/.kube
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/at_first/"" data-c="
-          &lt;h1 id=&#34;have-a-try&#34;&gt;have a try😀😀😀&lt;/h1&gt;
-">写在最前面</a>
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/ECPE/"" data-c="
+          &lt;h3 id=&#34;背景及意义&#34;&gt;背景及意义&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1622026920788.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;功能页面可视化展示&#34;&gt;功能页面&amp;amp;可视化展示&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1622027146381.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://Czardas42.github.io//post-images/1622027570086.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;小组成员&#34;&gt;小组成员&lt;/h3&gt;
+&lt;p&gt;李佳禧  丁若萌  何深   齐春宇   张飞&lt;/p&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;github地址&#34;&gt;Github地址&lt;/h3&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;具体内容&#34;&gt;具体内容&lt;/h3&gt;
+">基于文本的情感-原因对抽取(ECPE)与抑郁情绪原因识别系统</a>
       </div>
       
       <div class="item">
@@ -6113,6 +6855,37 @@ Trump推文分析、Trump社交网络分析、Trump粉丝分布分析、Trump粉
       </div>
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/nlp_law/"" data-c="
+          &lt;p&gt;人类语言是法律领域的重要工具。计算机NLP学习过程和法律人学习法律的过程是非常相似的——从法律概念（词汇）入手，基于固定的语法和逻辑规则（算法程序），识别出法律/文句背后的深层语义。法律行业的相关文档（如判决书、合同等）与金融、医疗等其他领域相比，语言使用更加规范，积累了大量格式统一的法律文本，更适合NLP技术的深度应用。&lt;/p&gt;
+&lt;/br&gt;
+&lt;p&gt;目前AI辅助的司法审判已经在尝试投入使用，比如上海的《刑事案件智能辅助办案系统》（206工程），2020年浙江法院全面上线人工智能系统辅助审判……&lt;/p&gt;
+&lt;/br&gt;
+&lt;p&gt;与此同时，NLP相关技术在公司法务领域、法律风险管理的应用场景同样十分广阔。比如线下已经在尝试使用的格式合同审查，通过语料标注和算法优化，可以快速得到文字审核结果并提示出法律风险，准确率不低于律师。&lt;/p&gt;
+&lt;/br&gt;
+&lt;p&gt;进一步地，我们可以使用NLP相关技术，结合一家公司“人、财、物”资源，去衡量分析法律风险方案的可操作性，为该公司找到最合适的规划路径。&lt;/p&gt;
+&lt;/br&gt;
+&lt;p&gt;可利用的数据主要是工商、法院、媒体等企业公开数据。对这些文本性数据进行NLP事件抽取等任务，将数据结构化，提取核心信息，同时结合数据降维算法进行法律风险识别。&lt;/p&gt;
+&lt;/br&gt;
+&lt;p&gt;NLP在法律风险管理的应用流程大致可以为：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建相关文档/数据集全集（事件、异常、事故、判决结果）；&lt;/li&gt;
+&lt;li&gt;使用全集数据建立词嵌入向量模型；&lt;/li&gt;
+&lt;li&gt;两维主成分分析（PCA）转换映射；&lt;/li&gt;
+&lt;li&gt;分析聚类和线性子结构从而识别潜在风险及其模式；&lt;/li&gt;
+&lt;li&gt;通过Nshort等算法计算后，在词图中找到最优化的，权值最小（概率最大）的词义匹配路径，从而实现实时跟踪+智能量化分析。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/br&gt;
+&lt;p&gt;随着人类技术的高速发展和社会活动的不断深入和扩展，计算机NLP相关技术与法律的结合势在必行。清华大学也已于2018年发起了计算法学方向全日制法律硕士学位项目，我们需要更好的利用计算机技术、NLP技术来协助我们进行相关法律工作。&lt;/p&gt;
+&lt;/br&gt;
+&lt;p&gt;我认为，代码是规则，法律本质亦是一种规则。未来，应该会殊途同归。&lt;/p&gt;
+&lt;/br&gt;
+&lt;p&gt;&lt;strong&gt;参考&lt;/strong&gt;&lt;br&gt;
+[1]亿欧智库——《2018人工智能助力法律服务研究报告》&lt;br&gt;
+[2]申卫星,刘云.法学研究新范式:计算法学的内涵、范畴与方法[J].法学研究,2020,42(05):3-23.&lt;/p&gt;
+">NLP与法律风险管理</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/bigdata_fromMyView/"" data-c="
           &lt;p&gt;从古至今，数据从被刻在石头上，到被记录在纸张上，再到被储存在硬盘里。从形式上看没有质的变化，只是可以存储更多的信息、搜索更容易、复制更容易、分享更容易、处理更容易，并且可重复利用数据。数据的存储密度急剧增加，迅速传播。而质的变化在于，现在数据的形式已经从“保存”变成了“流动”。从静态的变为动态的，&lt;strong&gt;数据具有了流动性&lt;/strong&gt;。今天的数据不是大，真正有意思的是数据变得在线了，而这个恰恰是互联网的特点。&lt;/p&gt;
  &lt;/br&gt;
@@ -6145,6 +6918,123 @@ Trump推文分析、Trump社交网络分析、Trump粉丝分布分析、Trump粉
         <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/bigdata_report/"" data-c="
           &lt;p&gt;有关舆情大数据意义、研究方法、数据来源与发展方向的调研&lt;/p&gt;
 ">舆情分析行业大数据相关调查报告</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/RMRN/"" data-c="
+          &lt;p&gt;【论文】&lt;a href=&#34;http://www.qizhang.info/paper/wsdm500-fuA.pdf&#34;&gt;http://www.qizhang.info/paper/wsdm500-fuA.pdf&lt;/a&gt;&lt;br&gt;
+【参考】&lt;a href=&#34;http://shomy.top/2020/07/29/cqa1-rmrn/&#34;&gt;http://shomy.top/2020/07/29/cqa1-rmrn/&lt;/a&gt;&lt;br&gt;
+（自己要讲的第一篇论文，感谢HT师兄和他的论文笔记🙂🙂🙂）&lt;/p&gt;
+&lt;/br&gt;
+&lt;h2 id=&#34;问题cqa&#34;&gt;问题（CQA）&lt;/h2&gt;
+&lt;p&gt;社区问答(Community Question Answering)  ，在一些问答社区网站上（Stackoverflow, 知乎等），把用户提出的问题推荐给潜在熟悉该问题的回答者(answerer)，从而能够使得用户快速地获得更专业的答案。&lt;/p&gt;
+&lt;p&gt;本质：question与answerer的匹配问题，为问题寻找回答者。&lt;/p&gt;
+&lt;/br&gt;
+&lt;h2 id=&#34;动机&#34;&gt;动机&lt;/h2&gt;
+&lt;p&gt;之前的CQA工作均基于文本内容相关性，即将问题与回答者回答过的历史问题集合进行相似度进行简单匹配，但是这样的方法存在一个弊端，即当一个回答者的回答过的问题与提问的问题没有直接显式联系，却包含隐式相关性，那么当前已有的模型就无法做出很好的推荐。&lt;/p&gt;
+&lt;p&gt;已有的CQA工作仅仅从单纯文本的表层相似度匹配来处理，我们需要模型能够挖掘问题与用户历史记录之间的深度关联。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1622029337687.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+如上图，提问者的问题是关于如何写一篇学术论文，下面的一个候选用户并没有直接回答过类似写论文的问题；然而从该用户的历史回答问题集合中可以看出该用户其实在撰写学术论文方面还是有足够的专业知识的，因此是有能力回答该问题的。&lt;/p&gt;
+&lt;/br&gt;
+&lt;h2 id=&#34;模型&#34;&gt;模型&lt;/h2&gt;
+&lt;h3 id=&#34;编码层&#34;&gt;编码层&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1622029533049.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;rmc&#34;&gt;RMC&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1622029594799.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://Czardas42.github.io//post-images/1622029635130.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;预测层&#34;&gt;预测层&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1622029694049.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/br&gt;
+&lt;h2 id=&#34;实验&#34;&gt;实验&lt;/h2&gt;
+&lt;h3 id=&#34;数据集&#34;&gt;数据集&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Dataset 1：Stack Overflow&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;采用2011.1.1-2011.12.31数据集的子集（selected tags）&lt;a href=&#34;https://archive.org/details/stackexchange&#34;&gt;https://archive.org/details/stackexchange&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;至少包含1个selected tags&lt;/li&gt;
+&lt;li&gt;是已解决问题，有一个best answer，至少有两个answer&lt;/li&gt;
+&lt;li&gt;去掉停用词后，至少两个词&lt;/li&gt;
+&lt;li&gt;获得&amp;gt;=40个best answers的用户有1,717个，占全体的2.7%；&lt;/li&gt;
+&lt;li&gt;针对这1,717个用户，选取每个用户2011年最后的50条回答记录：Question Title + Question Body + Answer Content；&lt;/li&gt;
+&lt;li&gt;问题结构： Question Title + Question Body&lt;/li&gt;
+&lt;li&gt;128,217Questions + 1,717Answerers(*50 Records)&lt;/li&gt;
+&lt;li&gt;随机按3:1:1划分为训练，开发和测试数据&lt;br&gt;
+&lt;img src=&#34;https://Czardas42.github.io//post-images/1622030327199.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Dataset 2： Yahoo! Answers&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;去掉停用词，至少两个词&lt;/li&gt;
+&lt;li&gt;有一个得分最高的answer，以及两个其他answer&lt;/li&gt;
+&lt;li&gt;有&amp;gt;=20个answers的用户有1,512个；&lt;/li&gt;
+&lt;li&gt;针对这1,512个用户，选取每个用户最近的50条回答记录：Question Title + Answer Content；&lt;/li&gt;
+&lt;li&gt;问题结构： Question Title&lt;br&gt;
+100,336Questions + 1,512Answerers(*50 Records)&lt;/li&gt;
+&lt;li&gt;随机按3:1:1划分为训练，开发和测试数据&lt;br&gt;
+&lt;img src=&#34;https://Czardas42.github.io//post-images/1622030344606.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;候选回答者&#34;&gt;候选回答者&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;考虑时间成本，预先产生候选回答者列表（test的candidate？）&lt;/li&gt;
+&lt;li&gt;BM25：一种用来评价搜索词和文档之间相关性的算法&lt;br&gt;
+&lt;img src=&#34;https://Czardas42.github.io//post-images/1622030437484.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;评价标准参数&#34;&gt;评价标准&amp;amp;参数&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;实验使用S@N (Successful@N) ，也就是recall@N作为评价指标，即预测出的TopN中出现了best answerer 即可；&lt;/li&gt;
+&lt;li&gt;使用50维预训练的GloVe词向量来初始化词嵌入，并在训练过程中修正嵌入；&lt;/li&gt;
+&lt;li&gt;对于Stack Overflow数据集，将最大问题长度设置为70，将最大历史记录数量设置为50，将最大历史记录长度设置为100；&lt;/li&gt;
+&lt;li&gt;对于Yahoo! Answers数据集，将最大问题长度设置为24，最大历史记录数设置为50，最大历史记录长度设置为100；&lt;/li&gt;
+&lt;li&gt;使用Adam优化。&lt;/li&gt;
+&lt;li&gt;模型其他超参数，如下图所示：&lt;br&gt;
+&lt;img src=&#34;https://Czardas42.github.io//post-images/1622030527785.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;baseline&#34;&gt;Baseline&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1622030590567.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;消融实验&#34;&gt;消融实验&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1622030632583.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/br&gt;
+&lt;h2 id=&#34;数据处理流程&#34;&gt;数据处理流程&lt;/h2&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1622030700871.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;这篇文章使用的RMC模块能够在一定程度上刻画问题与候选用户的深度联系。RMC的每个Step中，control unit可以学习到问题中的一个词重要性分布，read unit 可以根据当前的词重要分布，学习(Reasoning)出候选用户的哪些历史回答更相关。write unit 更新全局信息。 这样多个step进行recurrent，模型就可以学到更多的关联信息。本文的模型描述非常详细，完全可以根据模型复现。&lt;/p&gt;
+&lt;/br&gt;
+&lt;p&gt;此外，本文使用多粒度的词特征，缓解OOV的问题，实验证明效果得到了显著提升。不过稍显不足的是，作为核心的RMC带来的效果提升并没有那么明显，另一方面就是缺少Case Study，来直观的表明RMC的几个地方，是否匹配到了真正相关的词和历史记录，不同step是否有递进的reasoning能力。&lt;/p&gt;
+">Recurrent Memory Reasoning Network for Expert Finding in Community Question Answering</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/SPNdetect_AI/"" data-c="
+          &lt;h3 id=&#34;项目意义&#34;&gt;项目意义&lt;/h3&gt;
+&lt;p&gt;本项目结合目前全球发病率最高的肺癌早期诊断方法开展研究，运用先进的人工智能方&lt;br&gt;
+法进行基于肺部 CT 图像的自动识别技术及诊断技术，确定早期肺癌的病灶，为患者提供早&lt;br&gt;
+期治愈的机会。&lt;/p&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;检测系统工作流程&#34;&gt;检测系统工作流程&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1622028244048.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;工作界面&#34;&gt;工作界面&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1622028326255.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;小组成员&#34;&gt;小组成员&lt;/h3&gt;
+&lt;p&gt;赵为，李喆，丁若萌&lt;/p&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;具体内容&#34;&gt;具体内容&lt;/h3&gt;
+">基于人工智能的医学图像处理关键技术</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/at_first/"" data-c="
+          &lt;h1 id=&#34;have-a-try&#34;&gt;have a try😀😀😀&lt;/h1&gt;
+">写在最前面</a>
       </div>
       
     </div>
