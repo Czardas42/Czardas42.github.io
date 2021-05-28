@@ -9,7 +9,7 @@
 <meta name="description" content="世界那么大，我想去看看">
 <meta name="theme-color" content="#343a40">
 <title>Czardas</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1622032066064">
+<link rel="shortcut icon" href="/favicon.ico?v=1622200495579">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -258,19 +258,19 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">39</span>
+        <span class="site-item-stat-count">48</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="">
-        <span class="site-item-stat-count">8</span>
+        <span class="site-item-stat-count">9</span>
         <span class="site-item-stat-name language" data-lan="category">分类</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="/tags/">
-        <span class="site-item-stat-count">8</span>
+        <span class="site-item-stat-count">9</span>
         <span class="site-item-stat-name language" data-lan="tag">标签</span>
       </a>
     </div>
@@ -462,6 +462,12 @@
       
       
       
+      
+      
+      
+      
+      
+      
       <a href="https://Czardas42.github.io/post/nlp_law/">
         <div class="motion-warpper">
           <div class="tag-post-node">
@@ -479,6 +485,24 @@
       
       
       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       <a href="https://Czardas42.github.io/post/bigdata_fromMyView/">
         <div class="motion-warpper">
           <div class="tag-post-node">
@@ -489,6 +513,36 @@
           </div>
         </div>
       </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
       
       
@@ -2994,6 +3048,27 @@ int main()
 &lt;/li&gt;
 &lt;/ol&gt;
 ">Prometheus</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/OpenFaaS_Kubernetes_Prometheus/"" data-c="
+          &lt;h2 id=&#34;研究目的&#34;&gt;研究目的&lt;/h2&gt;
+&lt;p&gt;为通过实际搭建过程，学习OpenFaaS概念及相关原理，并对系统各项性能指标进行测试，以得到符合对应原理的实验结论。&lt;/p&gt;
+&lt;/br&gt;
+&lt;h2 id=&#34;步骤与方法&#34;&gt;步骤与方法&lt;/h2&gt;
+&lt;p&gt;在实验过程中，使用若干台华为云ECS云服务器搭建Kubernetes集群；并在此K8s集群的基础之上，搭建OpenFaaS平台；为了给后续实验提供监控手段，继续在已有实验环境的基础之上，配置Node Exporter + Prometheus + Grafana集群监控平台，完成对各节点CPU使用率、磁盘使用率、内存使用率、磁盘IO读写、网络IO速率等指标的实时监控；在此基础上，我们编写了Float-Operation和Matmul函数，对系统各项性能指标进行了压力测试，并借助Prometheus + Grafana监控平台观察记录了各节点硬件资源的使用情况。&lt;br&gt;
+为了进一步探究实例数量、资源限制情况对于集群负载情况和OpenFaaS函数服务的性能影响和原理，我们自主设计了OpenFaaS资源限制实验，探究单个实例条件下资源限制对于函数性能的影响，以及多个实例条件下资源限制、负载均衡等条件对于函数性能的影响。在此之上，我们详细记录了实验数据，绘制关系曲线和加速比曲线进行了分析，分析结果符合理论预期。&lt;/p&gt;
+&lt;h2 id=&#34;实验结论&#34;&gt;实验结论&lt;/h2&gt;
+&lt;p&gt;从我们的实验数据可知，适当增加实例数可以降低并发访问延迟，提高加速比，提升集群处理计算密集型任务的性能。然而要想最高效地利用CPU，还必须适当地进行资源限制、调整负载均衡情况，以达到更高的计算效率。&lt;/p&gt;
+&lt;/br&gt;
+&lt;h2 id=&#34;关键词&#34;&gt;关键词&lt;/h2&gt;
+&lt;p&gt;OpenFaaS，Kubernetes，Prometheus，压力测试，资源限制，负载均衡&lt;/p&gt;
+&lt;/br&gt;
+&lt;h2 id=&#34;小组成员&#34;&gt;小组成员&lt;/h2&gt;
+&lt;p&gt;张庆阳，董威龙，丁若萌&lt;/p&gt;
+&lt;/br&gt;
+&lt;h2 id=&#34;具体内容&#34;&gt;具体内容&lt;/h2&gt;
+">OpenFaaS 平台搭建与性能测试</a>
       </div>
       
       <div class="item">
@@ -6787,6 +6862,103 @@ Trump推文分析、Trump社交网络分析、Trump粉丝分布分析、Trump粉
       </div>
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/pytorch_exercise/"" data-c="
+          &lt;ol&gt;
+&lt;li&gt;线性回归实现&lt;/li&gt;
+&lt;li&gt;softmax回归实现（图像分类）&lt;/li&gt;
+&lt;li&gt;多层感知机MLP&lt;/li&gt;
+&lt;li&gt;Validation验证数据集，欠拟合&amp;amp;过拟合（多项式函数拟合实验：模型复杂度&amp;amp;训练集大小）&lt;/li&gt;
+&lt;li&gt;regularization正则化（权重衰减weight decay）应用：带惩罚项的新loss function，解决过拟合&lt;/li&gt;
+&lt;li&gt;丢弃法dropout应用：只在训练模型时随机丢弃隐藏层单元，解决过拟合&lt;/li&gt;
+&lt;/ol&gt;
+">Pytorch动手实现</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/ML2020.9/"" data-c="
+          &lt;h2 id=&#34;1027-周二&#34;&gt;10.27 周二&lt;/h2&gt;
+&lt;h3 id=&#34;transformer&#34;&gt;transformer&lt;/h3&gt;
+&lt;p&gt;【图解】&lt;br&gt;
+&lt;a href=&#34;http://jalammar.github.io/illustrated-transformer/&#34;&gt;http://jalammar.github.io/illustrated-transformer/&lt;/a&gt;&lt;br&gt;
+【参考】&lt;br&gt;
+&lt;a href=&#34;https://zhuanlan.zhihu.com/p/105493618&#34;&gt;https://zhuanlan.zhihu.com/p/105493618&lt;/a&gt;&lt;br&gt;
+【每一层代码详解】&lt;br&gt;
+&lt;a href=&#34;https://nlp.seas.harvard.edu/2018/04/03/attention.html&#34;&gt;https://nlp.seas.harvard.edu/2018/04/03/attention.html&lt;/a&gt;&lt;br&gt;
+【参考】&lt;br&gt;
+&lt;a href=&#34;https://www.zhihu.com/column/c_1209049773980073984&#34;&gt;https://www.zhihu.com/column/c_1209049773980073984&lt;/a&gt;&lt;br&gt;
+【pytorch实现】&lt;br&gt;
+&lt;a href=&#34;https://pytorch.org/tutorials/beginner/transformer_tutorial.html&#34;&gt;https://pytorch.org/tutorials/beginner/transformer_tutorial.html&lt;/a&gt;&lt;br&gt;
+【mask】处理非定长序列，防止标签泄露&lt;br&gt;
+&lt;a href=&#34;https://blog.csdn.net/qq_35169059/article/details/101678207&#34;&gt;https://blog.csdn.net/qq_35169059/article/details/101678207&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Czardas42.github.io//post-images/1622200313943.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://Czardas42.github.io//post-images/1622200327888.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;汇总&#34;&gt;汇总&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;CNN&lt;/li&gt;
+&lt;li&gt;RNN: GRU, LSTM, BRNN, BiLSTM, DeepRNNs&lt;/li&gt;
+&lt;li&gt;Sequence to Sequence Model&lt;/li&gt;
+&lt;li&gt;Transformer：&lt;br&gt;
+Self-Attention, Multi-head Self-attention, Positional Encoding, Seq2seq with Attention&lt;/li&gt;
+&lt;li&gt;Word2vec&lt;br&gt;
+Word Embeding&lt;br&gt;
+One word Model, CBOW Model, SkipGram Model&lt;br&gt;
+Hierarchical SoftMax&lt;br&gt;
+Negative Sampling&lt;/li&gt;
+&lt;/ol&gt;
+">【ML笔记】2020年第一学期第9周</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/ML2020.8/"" data-c="
+          &lt;h2 id=&#34;1019-周一&#34;&gt;10.19 周一&lt;/h2&gt;
+&lt;h3 id=&#34;林轩田机器学习技法lec13-深度学习&#34;&gt;林轩田机器学习技法LEC13 深度学习&lt;/h3&gt;
+&lt;p&gt;【笔记】&lt;br&gt;
+&lt;a href=&#34;https://blog.csdn.net/weixin_43860935/article/details/109166828&#34;&gt;https://blog.csdn.net/weixin_43860935/article/details/109166828&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;吴恩达-序列模型1gru-lstm-brnn-deeprnns&#34;&gt;吴恩达 序列模型1：GRU、LSTM、BRNN、DeepRNNs&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/av73509708/&#34;&gt;https://www.bilibili.com/video/av73509708/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;1020-周二&#34;&gt;10.20 周二&lt;/h2&gt;
+&lt;h3 id=&#34;吴恩达-序列模型2word-embeding-word2vec-负采样-情绪分类&#34;&gt;吴恩达 序列模型2：Word Embeding、Word2vec、负采样、情绪分类&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/av73509708/&#34;&gt;https://www.bilibili.com/video/av73509708/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;pytorch-lstm实现&#34;&gt;pytorch : LSTM实现&lt;/h3&gt;
+&lt;h2 id=&#34;1022-周四&#34;&gt;10.22 周四&lt;/h2&gt;
+&lt;h2 id=&#34;林轩田机器学习技法lec15-矩阵分解可应用于推荐系统&#34;&gt;林轩田机器学习技法LEC15 矩阵分解：可应用于推荐系统&lt;/h2&gt;
+&lt;p&gt;【笔记】&lt;br&gt;
+&lt;a href=&#34;https://blog.csdn.net/weixin_43860935/article/details/109231950&#34;&gt;https://blog.csdn.net/weixin_43860935/article/details/109231950&lt;/a&gt;&lt;br&gt;
+【参考笔记】&lt;br&gt;
+&lt;a href=&#34;https://blog.csdn.net/GZHermit/article/details/73920755?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&amp;amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&#34;&gt;https://blog.csdn.net/GZHermit/article/details/73920755?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&amp;amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;1023-周五&#34;&gt;10.23 周五&lt;/h2&gt;
+&lt;h2 id=&#34;李宏毅-transformer&#34;&gt;李宏毅 Transformer&lt;/h2&gt;
+&lt;p&gt;&amp;lt; https://www.bilibili.com/video/av56239558/&amp;gt;&lt;br&gt;
+【参考笔记】&lt;br&gt;
+&lt;a href=&#34;https://blog.csdn.net/oldmao_2001/article/details/105486080&#34;&gt;https://blog.csdn.net/oldmao_2001/article/details/105486080&lt;/a&gt;&lt;br&gt;
+• Sequence to Sequence  【参考资料】https://www.jianshu.com/p/b2b95f945a98&lt;br&gt;
+• Self-Attention&lt;br&gt;
+Attention计算：求两个向量相关性&lt;br&gt;
+生成过程&lt;br&gt;
+并行过程&lt;br&gt;
+• Multi-head Self-attention（2 heads as example）&lt;br&gt;
+• Positional Encoding&lt;br&gt;
+• Seq2seq with Attention&lt;br&gt;
+• Transformer（Layer Norm均一化）&lt;br&gt;
+• 应用&lt;/p&gt;
+&lt;h2 id=&#34;word2vec-parameter-learning-explained原理&#34;&gt;word2vec Parameter Learning Explained（原理）&lt;/h2&gt;
+&lt;h3 id=&#34;model&#34;&gt;Model&lt;/h3&gt;
+&lt;p&gt;【参考】&lt;br&gt;
+&lt;a href=&#34;http://shomy.top/2017/07/28/word2vec-all/&#34;&gt;http://shomy.top/2017/07/28/word2vec-all/&lt;/a&gt;&lt;br&gt;
+One word Model&lt;br&gt;
+CBOW Model&lt;br&gt;
+SkipGram Model&lt;br&gt;
+Optimizing Computational Eﬃciency   注：训练的两个目的：词向量和对应模型参数&lt;/p&gt;
+&lt;h3 id=&#34;hierarchical-softmax&#34;&gt;Hierarchical SoftMax&lt;/h3&gt;
+&lt;p&gt;【参考笔记】&lt;br&gt;
+&lt;a href=&#34;https://www.cnblogs.com/pinard/p/7243513.html&#34;&gt;https://www.cnblogs.com/pinard/p/7243513.html&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;negative-sampling&#34;&gt;Negative Sampling&lt;/h3&gt;
+&lt;p&gt;【参考笔记】&lt;br&gt;
+&lt;a href=&#34;https://www.cnblogs.com/pinard/p/7249903.html&#34;&gt;https://www.cnblogs.com/pinard/p/7249903.html&lt;/a&gt;&lt;/p&gt;
+">【ML笔记】2020年第一学期第8周</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/bigdata_fromMyView/"" data-c="
           &lt;p&gt;从古至今，数据从被刻在石头上，到被记录在纸张上，再到被储存在硬盘里。从形式上看没有质的变化，只是可以存储更多的信息、搜索更容易、复制更容易、分享更容易、处理更容易，并且可重复利用数据。数据的存储密度急剧增加，迅速传播。而质的变化在于，现在数据的形式已经从“保存”变成了“流动”。从静态的变为动态的，&lt;strong&gt;数据具有了流动性&lt;/strong&gt;。今天的数据不是大，真正有意思的是数据变得在线了，而这个恰恰是互联网的特点。&lt;/p&gt;
  &lt;/br&gt;
@@ -6819,6 +6991,31 @@ Trump推文分析、Trump社交网络分析、Trump粉丝分布分析、Trump粉
         <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/bigdata_report/"" data-c="
           &lt;p&gt;有关舆情大数据意义、研究方法、数据来源与发展方向的调研&lt;/p&gt;
 ">舆情分析行业大数据相关调查报告</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/ML2020.7/"" data-c="
+          &lt;h2 id=&#34;1014-周三&#34;&gt;10.14 周三&lt;/h2&gt;
+&lt;p&gt;林轩田机器学习技法LEC12 神经网络&lt;br&gt;
+【笔记】&lt;a href=&#34;https://blog.csdn.net/weixin_43860935/article/details/109142667&#34;&gt;https://blog.csdn.net/weixin_43860935/article/details/109142667&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;1015-周四&#34;&gt;10.15 周四&lt;/h2&gt;
+&lt;p&gt;卷积神经网络 李宏毅&lt;br&gt;
+【视频】https://www.bilibili.com/video/av44989461/&lt;br&gt;
+【参考笔记】https://datawhalechina.github.io/leeml-notes/#/chapter21/chapter21&lt;/p&gt;
+&lt;h2 id=&#34;1016-周五&#34;&gt;10.16 周五&lt;/h2&gt;
+&lt;p&gt;循环神经网络Part1 李宏毅&lt;br&gt;
+【视频】https://www.bilibili.com/video/av19803495/&lt;br&gt;
+【参考笔记】https://datawhalechina.github.io/leeml-notes/#/chapter36/chapter36&lt;/p&gt;
+&lt;h2 id=&#34;1017-周六&#34;&gt;10.17 周六&lt;/h2&gt;
+&lt;p&gt;循环神经网络Part2 李宏毅&lt;br&gt;
+【视频】https://www.bilibili.com/video/BV15W411778r&lt;br&gt;
+【参考笔记】https://datawhalechina.github.io/leeml-notes/#/chapter36/chapter36&lt;/p&gt;
+&lt;p&gt;（这三部分感觉纸质笔记理解效果比较好，所以CNN、RNN部分做的纸质笔记）&lt;/p&gt;
+&lt;h2 id=&#34;1011-周日&#34;&gt;10.11 周日&lt;/h2&gt;
+&lt;p&gt;实现字符级循环神经网络&lt;br&gt;
+【参考资料】&lt;br&gt;
+&lt;a href=&#34;https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter06_RNN/6.4_rnn-scratch&#34;&gt;https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter06_RNN/6.4_rnn-scratch&lt;/a&gt;&lt;/p&gt;
+">【ML笔记】2020年第一学期第7周</a>
       </div>
       
       <div class="item">
@@ -6910,6 +7107,164 @@ Trump推文分析、Trump社交网络分析、Trump粉丝分布分析、Trump粉
 &lt;/br&gt;
 &lt;p&gt;此外，本文使用多粒度的词特征，缓解OOV的问题，实验证明效果得到了显著提升。不过稍显不足的是，作为核心的RMC带来的效果提升并没有那么明显，另一方面就是缺少Case Study，来直观的表明RMC的几个地方，是否匹配到了真正相关的词和历史记录，不同step是否有递进的reasoning能力。&lt;/p&gt;
 ">Recurrent Memory Reasoning Network for Expert Finding in Community Question Answering</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/ML2020.6/"" data-c="
+          &lt;h1 id=&#34;学习记录&#34;&gt;学习记录&lt;/h1&gt;
+&lt;h2 id=&#34;105-周一-lecture-11linear-models-for-classification&#34;&gt;10.5 周一    Lecture 11：Linear Models for Classification&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;分类问题的三种线性模型：linear classification、linear regression和logistic regression。这三种linear models都可以来做binary classification&lt;/li&gt;
+&lt;li&gt;比梯度下降算法更加高效的SGD算法来进行logistic regression分析；&lt;/li&gt;
+&lt;li&gt;两种多分类方法，一种是OVA（一对多算概率Logistic Regression），另一种是OVO（两两比较Binary   Classification）。这两种方法各有优缺点，当类别数量k不多的时候， 建议选择OVA，以减少分类次数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;106-周二-lecture-12-nonlinear-transformation&#34;&gt;10.6 周二    Lecture 12 ： Nonlinear Transformation&lt;/h2&gt;
+&lt;p&gt;主要介绍了非线性分类模型：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通过非线性变换，将非线性模型映射到另一个空间，转换为线性模型，再来进行线性分类；&lt;/li&gt;
+&lt;li&gt;非线性变换的整体流程（特征转换+线性模型训练）。得到一个好的二次hypothesis来达到良好的分类效果的目标就是在z域中设计一个最佳的分类线；&lt;/li&gt;
+&lt;li&gt;非线性变换可能会带来的一些问题：时间复杂度和空间复杂度的增加；&lt;/li&gt;
+&lt;li&gt;在要付出代价的情况下，使用非线性变换的最安全的做法，尽可能使用简单的模型，而不是模型越复杂越好。避免tempting sin（Ein很小，但Eout过大）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;107-周三-lecture-13-hazard-of-overfitting&#34;&gt;10.7 周三    Lecture 13 : Hazard of Overfitting&lt;/h2&gt;
+&lt;h3 id=&#34;一过拟合overfitting的概念即当ein很小eout很大的时候会出现overfitting&#34;&gt;（一）过拟合overfitting的概念：即当Ein很小，Eout很大的时候，会出现overfitting。&lt;/h3&gt;
+&lt;h3 id=&#34;二详细介绍了overfitting发生的四个常见原因&#34;&gt;（二）详细介绍了overfitting发生的四个常见原因:&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;样本数量N：数据集太小，没几个可以学。&lt;/li&gt;
+&lt;li&gt;噪声水平：数据的noise太大（stochastic noise，随机噪声）&lt;/li&gt;
+&lt;li&gt;目标函数阶数：使用的模型太复杂（这也是一种noise，叫做deterministic noise）&lt;/li&gt;
+&lt;li&gt;模型相对数据来说太复杂：excessive power&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;三解决overfitting的方法&#34;&gt;（三）解决overfitting的方法&lt;/h3&gt;
+&lt;p&gt;data cleaning/pruning和data hinting两种简单的方法&lt;br&gt;
+之后的课程将会详细介绍regularization和validataion两种更重要的方法。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;data cleaning/pruning就是对训练数据集里label明显错误的样本进行修正（data cleaning），或者对错误的样本看成是noise，进行剔除（data pruning）。&lt;/li&gt;
+&lt;li&gt;data hinting是针对N不够大的情况，如果没有办法获得更多的训练集，那么data hinting就可以对已知的样本进行简单的处理、变换，从而获得更多的样本。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;1010-周六-lecture-14-regularization&#34;&gt;10.10 周六   Lecture 14 ：Regularization&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;首先，原来的hypothesis set加上一些限制条件，就成了Regularized Hypothesis Set。&lt;/li&gt;
+&lt;li&gt;加上限制条件之后，我们就可以把问题转化为Eaug最小化问题，即把w的平方加进去。&lt;/li&gt;
+&lt;li&gt;这种过程，实际上回降低VC Dimension。&lt;/li&gt;
+&lt;li&gt;最后，介绍regularization是通用的机器学习工具，设计方法通常包括target-dependent，plausible，friendly等等。&lt;br&gt;
+下节课将介绍如何选取合适的lambda来建立最佳拟合模型。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;1010-周六-lecture-15-validation&#34;&gt;10.10 周六   Lecture 15 ：Validation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;先从如何选择一个好的模型开始切入，例如使用Ein、Etest都是不太好的，最终使用Eval来进行模型选择。&lt;/li&gt;
+&lt;li&gt;然后详细介绍了Validation的过程。&lt;/li&gt;
+&lt;li&gt;最后，介绍了Leave-One-Out和V-Fold Cross两种验证方法，比较它们各自的优点和缺点，实际情况下，V-Fold Cross更加常用。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;1011-周日-lecture-16-three-learning-principles&#34;&gt;10.11 周日   Lecture 16 ：Three Learning Principles&lt;/h2&gt;
+&lt;p&gt;机器学习三个重要的锦囊妙计：Occam’s Razor, Sampling Bias, Data Snooping&lt;/p&gt;
+&lt;h1 id=&#34;学习笔记&#34;&gt;学习笔记&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_43860935/category_10411992.html&#34;&gt;https://blog.csdn.net/weixin_43860935/category_10411992.html&lt;/a&gt;&lt;/p&gt;
+">【ML笔记】2020年第一学期第6周</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/ML2020.5/"" data-c="
+          &lt;h1 id=&#34;学习记录&#34;&gt;学习记录&lt;/h1&gt;
+&lt;h2 id=&#34;928-周一-lecture-7vc-dimension&#34;&gt;9.28 周一    Lecture 7：VC Dimension&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;VC Dimension的概念就是最大的non-break point；&lt;/li&gt;
+&lt;li&gt;Perceptrons在d维度下的VC Dimension是d+1；&lt;/li&gt;
+&lt;li&gt;在物理意义上，将VC Dimension与自由度联系起来；&lt;/li&gt;
+&lt;li&gt;VC Dimension不能过大也不能过小。选取合适的值，才能让Eout足够小，使假设空间H具有良好的泛化能力。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;929-周二-lecture-8-noise-and-error&#34;&gt;9.29 周二    Lecture 8 ：Noise and Error&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;在有Noise的情况下，即数据集按照概率分布，那么VC Dimension仍然成立，机器学习算法推导仍然有效；&lt;/li&gt;
+&lt;li&gt;机器学习cost function常用的Error有0/1 error和squared error两类；&lt;/li&gt;
+&lt;li&gt;实际问题中，对false accept和false reject应该选择不同的权重。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;930-周三-lecture-9-linear-regression&#34;&gt;9.30 周三 Lecture 9: Linear Regression&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;从问题出发，想要找到一条直线拟合实际数据值；&lt;/li&gt;
+&lt;li&gt;利用最小二乘法，用解析形式推导了权重w的closed-form解；&lt;/li&gt;
+&lt;li&gt;用图形的形式证明了linear regression是可以进行机器学习的；&lt;/li&gt;
+&lt;li&gt;证明linear regressin这种方法可以用在binary classification上。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;104-周日-lecture-10-logistic-regression&#34;&gt;10.4 周日 Lecture 10 : Logistic Regression&lt;/h2&gt;
+&lt;p&gt;（部分计算过程还需要手动推导一遍来巩固理解）&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;确定逻辑回归问题的target function和hypothesis；&lt;/li&gt;
+&lt;li&gt;定义逻辑回归问题的err function：cross-entropy error交叉熵误差；&lt;/li&gt;
+&lt;li&gt;计算logistic regression error的梯度；&lt;/li&gt;
+&lt;li&gt;通过梯度下降算法，计算梯度最小时对应的w值。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/br&gt;
+&lt;h1 id=&#34;学习笔记&#34;&gt;学习笔记&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_43860935/category_10411992.html&#34;&gt;https://blog.csdn.net/weixin_43860935/category_10411992.html&lt;/a&gt;&lt;/p&gt;
+">【ML笔记】2020年第一学期第5周</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/ML2020.4/"" data-c="
+          &lt;h1 id=&#34;学习记录&#34;&gt;学习记录&lt;/h1&gt;
+&lt;h2 id=&#34;922-周二-lecture-1the-learning-problem&#34;&gt;9.22 周二   Lecture 1：The Learning Problem&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;ML简明流程&lt;/li&gt;
+&lt;li&gt;决定是否使用ML 的三要素&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;923-周三-lecture-2-二分类问题相关&#34;&gt;9.23 周三   Lecture 2:   二分类问题相关&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;线性可分的二分类问题中，构造假设集（Hypothesis Set)，使用PLA（感知器学习算法），寻找final hypothesis函数g&lt;/li&gt;
+&lt;li&gt;不知是否线性可分：改进PLA，采用Pocket Algorithm(口袋演算法)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;925-周五-lecture-3机器学习分类&#34;&gt;9.25 周五    Lecture 3：机器学习分类&lt;/h2&gt;
+&lt;p&gt;分别从输出，数据标记（有无），数据输入方式，输入features类型对机器学习方式进行分类&lt;/p&gt;
+&lt;h2 id=&#34;925-周五-lecture-4探究机器学习的可行性&#34;&gt;9.25 周五    Lecture 4：探究机器学习的可行性&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;目前条件：假设集有限，资料数据量足够大&lt;/li&gt;
+&lt;li&gt;Hoffding不定式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;926-周六-lecture-5training-versus-testing&#34;&gt;9.26 周六   Lecture 5：Training versus Testing&lt;/h2&gt;
+&lt;p&gt;假设集趋于无穷-&amp;gt;Hoffding不定式中考虑应用增长函数以及break point替代M&lt;/p&gt;
+&lt;h2 id=&#34;927-周日-lecture-6theory-of-generalization&#34;&gt;9.27 周日   Lecture 6：Theory of generalization&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;在Hoffding不等式中，使用增长函数m替代M&lt;/li&gt;
+&lt;li&gt;增长函数-&amp;gt; 上限函数 -&amp;gt; 上限函数的上限 Bound Function&lt;/li&gt;
+&lt;li&gt;Hoffding不定式 -&amp;gt;  VC-bound&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/br&gt;
+&lt;h1 id=&#34;学习笔记&#34;&gt;学习笔记&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_43860935/category_10411992.html&#34;&gt;https://blog.csdn.net/weixin_43860935/category_10411992.html&lt;/a&gt;&lt;/p&gt;
+">【ML笔记】2020年第一学期第4周</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Czardas42.github.io/post/ML_outline/"" data-c="
+          &lt;h1 id=&#34;课程视频&#34;&gt;课程视频&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/av12463015/&#34;&gt;https://www.bilibili.com/video/av12463015/&lt;/a&gt;&lt;/p&gt;
+&lt;/br&gt;
+&lt;h1 id=&#34;资源汇总&#34;&gt;资源汇总&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/RedstoneWill/HsuanTienLin_MachineLearning&#34;&gt;https://github.com/RedstoneWill/HsuanTienLin_MachineLearning&lt;/a&gt;&lt;/p&gt;
+&lt;/br&gt;
+&lt;h1 id=&#34;课程内容&#34;&gt;课程内容&lt;/h1&gt;
+&lt;p&gt;每个方面包含4节课，总共有16节课。具体所有课程内容如下：&lt;/p&gt;
+&lt;h2 id=&#34;when-can-machine-learn&#34;&gt;When Can Machine Learn?&lt;/h2&gt;
+&lt;p&gt;• The Learning Problem&lt;br&gt;
+• Learning to Answer Yes/No&lt;br&gt;
+• Types of Learning&lt;br&gt;
+• Feasibility of Learning&lt;/p&gt;
+&lt;h2 id=&#34;why-can-machine-learn&#34;&gt;Why Can Machine Learn?&lt;/h2&gt;
+&lt;p&gt;• Training versus Testing&lt;br&gt;
+• Theory of Generalization&lt;br&gt;
+• The VC Dimension&lt;br&gt;
+• Noise and Error&lt;/p&gt;
+&lt;h2 id=&#34;how-can-machine-learn&#34;&gt;How Can Machine Learn?&lt;/h2&gt;
+&lt;p&gt;• Linear Regression&lt;br&gt;
+• Logistic Regression&lt;br&gt;
+• Logistic Regression&lt;br&gt;
+• Nonlinear Transformation&lt;/p&gt;
+&lt;h2 id=&#34;how-can-machine-learn-better&#34;&gt;How Can Machine Learn Better?&lt;/h2&gt;
+&lt;p&gt;• Hazard of Overfitting&lt;br&gt;
+• Regularization&lt;br&gt;
+• Validation&lt;br&gt;
+• Three Learning Principles&lt;/p&gt;
+">【ML笔记】机器学习基石-林轩田课程大纲</a>
       </div>
       
       <div class="item">
